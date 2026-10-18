@@ -149,28 +149,23 @@
   }
 }
 
+/* Components. Built from the design system's components/bundle.css: change a component there first, then here. */
+/* Components. Built from the design system's components/bundle.css: change a component there first, then here. */
 @layer components {
-  /* Button ------------------------------------------------------------------------------------- */
-  .pc-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    height: var(--pc-row); padding: 0 12px;
-    border: 1px solid transparent; border-radius: var(--pc-radius);
-    font: inherit; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
-  }
-  .pc-btn > svg { width: 16px; height: 16px; }
-  .pc-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
-  .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
-  .pc-btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
-  .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
-  .pc-btn-ghost { background: transparent; color: var(--foreground); }
-  .pc-btn-ghost:hover, .pc-btn-outline:hover { background: var(--accent); color: var(--foreground); }
-  .pc-btn-destructive { background: transparent; border-color: var(--destructive); color: var(--destructive); }
-  .pc-btn-destructive:hover { background: var(--destructive-soft); }
-  .pc-btn[aria-pressed="true"] { background: var(--foreground); border-color: var(--foreground); color: var(--background); }
-  .pc-btn:disabled, .pc-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-  .pc-btn-icon { width: var(--pc-row); padding: 0; }
+  .pc-page-title { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+  .pc-page-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
 
-  /* Sidebar item ------------------------------------------------------------------------------- */
+  /* Sidebar */
+  .pc-sidebar {
+    display: flex; flex-direction: column; gap: 2px;
+    width: 232px; flex-shrink: 0; padding: 10px 8px 10px 8px;
+    background: var(--sidebar); color: var(--foreground);
+    box-shadow: inset -1px 0 0 var(--border);
+    overflow-y: auto;
+  }
+  .pc-sidebar > *, .pc-sidebar-section > *, .pc-sidebar-sub > * { flex-shrink: 0; }
+  .pc-sidebar-section { display: flex; flex-direction: column; gap: 2px; margin-top: 10px; }
+  .pc-sidebar-sub { display: flex; flex-direction: column; gap: 2px; padding-left: 20px; }
   .pc-sidebar-item {
     display: flex; align-items: center; gap: 10px;
     width: 100%; height: var(--pc-row); padding: 0 8px;
@@ -186,22 +181,119 @@
   .pc-sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pc-sidebar-detail { margin-left: auto; font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; }
   .pc-sidebar-detail-alert { color: var(--destructive); font-weight: 600; }
-  /* A heading: bold, not clickable; the rows under it sit in .pc-sidebar-sub, together in a .pc-sidebar-section. */
-  .pc-sidebar-section { display: flex; flex-direction: column; gap: 2px; margin-top: 10px; }
-  .pc-sidebar-sub { display: flex; flex-direction: column; gap: 2px; padding-left: 20px; }
   .pc-sidebar-heading { font-weight: 600; cursor: default; }
   .pc-sidebar-item.pc-sidebar-heading:hover { background: none; }
   .pc-sidebar-mark { display: grid; place-items: center; width: 20px; height: 20px; flex-shrink: 0; border-radius: 6px; background: var(--foreground); color: var(--background); font-size: 10px; font-weight: 700; }
-  /* A detail on the right: a number or a word (.pc-sidebar-detail, red with -alert), a key (.pc-kbd) or an icon. */
-  .pc-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: 5px; background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; }
   .pc-sidebar-item > .pc-kbd { margin-left: auto; }
-
-  /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. --- */
-  .pc-sidebar-account { position: relative; }
-  .pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; }
-  .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
+  /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
+  .pc-sidebar-footer { position: sticky; bottom: -10px; z-index: 1; display: flex; flex-direction: column; gap: 2px; margin: auto -8px -10px; padding: 8px 8px 10px; border-top: 1px solid var(--border); background: var(--sidebar); box-shadow: inset -1px 0 0 var(--border); }
   .pc-avatar { display: grid; place-items: center; width: 22px; height: 22px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--foreground); font-size: 10px; font-weight: 600; }
+
+  /* Buttons */
+  .pc-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: var(--pc-row); padding: 0 12px;
+    border: 1px solid transparent; border-radius: var(--pc-radius);
+    font: inherit; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
+  }
+  .pc-btn > svg { width: 16px; height: 16px; }
+  .pc-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+  .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
+  .pc-btn-ghost { background: transparent; color: var(--foreground); }
+  .pc-btn-ghost:hover, .pc-btn-outline:hover { background: var(--accent); color: var(--foreground); }
+  .pc-btn-destructive { background: transparent; border-color: var(--destructive); color: var(--destructive); }
+  .pc-btn[aria-pressed="true"] { background: var(--foreground); border-color: var(--foreground); color: var(--background); }
+
+  /* Forms */
+  .pc-field { display: grid; gap: 6px; }
+  .pc-label { font-size: 12px; font-weight: 600; }
+  .pc-input {
+    width: 100%; height: var(--pc-row); padding: 0 10px;
+    border: 1px solid var(--input); border-radius: var(--pc-radius);
+    background: var(--card); color: var(--foreground); font: inherit;
+  }
+  .pc-input::placeholder { color: var(--muted-foreground); }
+  .pc-input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-checkbox {
+    appearance: none; display: grid; place-content: center;
+    width: 16px; height: 16px; margin: 0; flex-shrink: 0;
+    border: 1.5px solid var(--input); border-radius: var(--pc-radius-sm);
+    background: var(--card); cursor: pointer;
+  }
+  .pc-checkbox:checked { background: var(--primary); border-color: var(--primary); }
+  .pc-checkbox:checked::after { content: ""; width: 8px; height: 4px; border-left: 2px solid var(--primary-foreground); border-bottom: 2px solid var(--primary-foreground); transform: translateY(-1px) rotate(-45deg); }
+  .pc-checkbox:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+  /* Cards, badges, tables */
+  .pc-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
+  .pc-card-header { display: grid; gap: 2px; padding: 16px 16px 0; }
+  .pc-card-title { margin: 0; font-size: 15px; font-weight: 600; }
+  .pc-card-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
+  .pc-card-content { display: grid; gap: 12px; padding: 16px; }
+  .pc-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 1px var(--primary); }
+  .pc-table { width: 100%; border-collapse: collapse; }
+  .pc-table th { height: var(--pc-row); padding: 0 12px; border-bottom: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; font-weight: 600; text-align: left; }
+  .pc-table td { height: var(--pc-row); padding: 4px 12px; border-bottom: 1px solid var(--border); }
+  .pc-table tr:last-child td { border-bottom: 0; }
+  .pc-muted { color: var(--muted-foreground); }
+
+  /* Tasks */
+  .pc-task-list { display: flex; flex-direction: column; }
+  .pc-task { display: flex; align-items: center; gap: 10px; min-height: var(--pc-row); padding: 0 8px; border-radius: var(--pc-radius); }
+  .pc-task:hover { background: var(--accent); }
+  .pc-task-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-task-due { font-size: 12px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+  .pc-task-due-late { color: var(--destructive); font-weight: 600; }
+  .pc-task[data-done] .pc-task-title { color: var(--muted-foreground); text-decoration: line-through; }
+
+  /* States and extra variants */
+  .pc-btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .pc-btn-destructive:hover { background: var(--destructive-soft); }
+  .pc-btn:disabled, .pc-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  .pc-btn-icon { width: var(--pc-row); padding: 0; }
+  .pc-btn-icon > svg { width: 16px; height: 16px; }
+
+  .pc-textarea {
+    width: 100%; min-height: 96px; padding: 8px 10px;
+    border: 1px solid var(--input); border-radius: var(--pc-radius);
+    background: var(--card); color: var(--foreground); font: inherit; line-height: 1.45; resize: vertical;
+  }
+  .pc-textarea::placeholder { color: var(--muted-foreground); }
+  .pc-textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-input:disabled, .pc-textarea:disabled { opacity: 0.5; cursor: not-allowed; }
+  .pc-input[aria-invalid="true"], .pc-textarea[aria-invalid="true"] { border-color: var(--destructive); }
+  .pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: 12px; }
+  .pc-field-error { margin: 0; color: var(--destructive); font-size: 12px; font-weight: 500; }
+  .pc-check { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+  .pc-checkbox:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .pc-link { color: var(--primary); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .pc-link:hover { text-decoration-thickness: 2px; }
+  .pc-link:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 2px; }
+
+  .pc-badge-outline { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 1px var(--input); }
+  .pc-badge-destructive { background: var(--destructive-soft); color: var(--destructive); }
+
+  .pc-alert { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 10px 14px; border-radius: var(--pc-radius); font-size: 14px; }
+  .pc-alert > svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; }
+  .pc-alert-notice { background: var(--primary-soft); color: var(--foreground); }
+  .pc-alert-notice > svg { color: var(--primary); }
+  .pc-alert-error { background: var(--destructive-soft); color: var(--destructive); }
+
+  .pc-card-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+  .pc-table tbody tr:hover { background: var(--accent); }
+  .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
+  .pc-row-link { color: inherit; font-weight: 600; text-decoration: none; }
+  .pc-row-link::after { content: ""; position: absolute; inset: 0; }
+  .pc-row-link:focus-visible { outline: none; }
+  .pc-table tr:has(.pc-row-link:focus-visible) { background: var(--accent); outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-empty { display: grid; justify-items: center; gap: 4px; padding: 28px 16px; text-align: center; color: var(--muted-foreground); }
+  .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
+
   .pc-menu { display: flex; flex-direction: column; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
   .pc-menu-item { display: flex; align-items: center; gap: 10px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
   .pc-menu-item > svg { width: 16px; height: 16px; color: var(--muted-foreground); }
   .pc-menu-item:hover { background: var(--accent); }
@@ -209,46 +301,165 @@
   .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
   .pc-menu-separator { height: 1px; margin: 4px 6px; background: var(--border); }
 
-  /* Sidebar ------------------------------------------------------------------------------------ */
-  .pc-sidebar {
-    display: flex; flex-direction: column; gap: 2px;
-    width: 232px; flex-shrink: 0; padding: 10px 8px 10px 8px;
-    background: var(--sidebar); color: var(--foreground);
-    box-shadow: inset -1px 0 0 var(--border);
-    overflow-y: auto;
+  .pc-dialog { width: min(420px, calc(100% - 32px)); padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-dialog::backdrop { background: var(--overlay); }
+  .pc-dialog-body { display: grid; gap: 16px; }
+  .pc-dialog-title { margin: 0; font-size: 15px; font-weight: 600; }
+  .pc-dialog-description { margin: 4px 0 0; color: var(--muted-foreground); }
+  .pc-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+  [data-pc-tooltip] { position: relative; }
+  [data-pc-tooltip]::after {
+    content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; z-index: 20;
+    width: max-content; max-width: 240px; padding: 5px 9px; border-radius: 8px;
+    background: var(--foreground); color: var(--background); font-size: 12px; font-weight: 500; line-height: 1.35;
+    box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
   }
-  .pc-sidebar > *, .pc-sidebar-section > *, .pc-sidebar-sub > * { flex-shrink: 0; }
+  [data-pc-tooltip]:hover::after, [data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:focus-within::after { opacity: 1; }
+
   /* The sidebar head: the app's logo (optional). */
-  .pc-sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-height: var(--pc-row); padding: 0 0 0 8px; margin-bottom: 6px; }
   .pc-app-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
   .pc-app-logo-mark { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--primary); color: var(--primary-foreground); font-size: 12px; font-weight: 700; }
-  /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
-  .pc-sidebar-footer { position: sticky; bottom: -10px; z-index: 1; display: flex; flex-direction: column; gap: 2px; margin: auto -8px -10px; padding: 8px 8px 10px; border-top: 1px solid var(--border); background: var(--sidebar); box-shadow: inset -1px 0 0 var(--border); }
-  /* Open and closed: data-state="closed" on the sidebar. */
-  .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
-  .pc-sidebar[data-state="closed"] { margin-left: -232px; visibility: hidden; }
-  /* Phones: the sidebar opens over a dimmed page. */
+  .pc-sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-height: var(--pc-row); padding: 0 0 0 8px; margin-bottom: 6px; }
+  /* The sidebar toggle lives in the page's title row, left of the title; its icon lines up with the page's left edge. */
+  .pc-page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .pc-page-title-row > .pc-sidebar-toggle { margin-left: -10px; }
+  /* A description under a title row with the toggle lines up with the title, not the toggle. */
+  .pc-page-title-row:has(> .pc-sidebar-toggle) + .pc-page-description { padding-left: calc(var(--pc-row) - 4px); }
   .pc-sidebar-sheet { position: fixed; inset: 0; z-index: 40; display: flex; }
   .pc-sheet-backdrop { position: absolute; inset: 0; background: var(--overlay); }
-  .pc-sidebar-sheet > .pc-sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--pc-raise-lg); animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
+  .pc-sidebar-sheet > .pc-sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--pc-raise-lg); }
 
-  /* Page header -------------------------------------------------------------------------------- */
+  .pc-task-group { display: flex; align-items: baseline; gap: 8px; padding: 14px 8px 6px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+  .pc-task-group-late { color: var(--destructive); }
+  .pc-task[aria-current="true"] { background: var(--card); box-shadow: var(--pc-raise); }
+
+  /* Page header: title, description, actions on the right */
   .pc-page-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 16px; }
   .pc-page-header-text { display: grid; gap: 2px; min-width: 0; }
   .pc-page-header-actions { display: flex; align-items: center; gap: 8px; }
-  /* The sidebar toggle starts the title row, left of the title; its icon lines up with the page's left edge. */
-  .pc-page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
-  .pc-page-title-row > .pc-sidebar-toggle { margin-left: -10px; }
-  .pc-page-title { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
-  .pc-page-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
-  /* A description under a title row with the toggle lines up with the title, not the toggle. */
-  .pc-page-title-row:has(> .pc-sidebar-toggle) + .pc-page-description { padding-left: calc(var(--pc-row) - 4px); }
 
-  /* State changes (hover fills, focus rings, colours) use --pc-motion-fast. */
-  .pc-btn, .pc-sidebar-item, .pc-menu-item {
+  .pc-list-label { display: inline-flex; align-items: center; gap: 6px; min-width: 0; color: var(--muted-foreground); font-size: 12px; }
+  .pc-list-label > svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .pc-list-label > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Numbers and details */
+  .pc-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .pc-stat { display: grid; gap: 4px; padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); box-shadow: var(--pc-raise); }
+  .pc-stat-label { color: var(--muted-foreground); font-size: 12px; font-weight: 500; }
+  .pc-stat-value { font-size: 22px; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .pc-stat-value-alert { color: var(--destructive); }
+  .pc-details { display: grid; grid-template-columns: 160px 1fr; gap: 10px 16px; margin: 0; }
+  .pc-details dt { color: var(--muted-foreground); }
+  .pc-details dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+  @media (max-width: 640px) { .pc-details { grid-template-columns: 1fr; gap: 2px; } .pc-details dd { margin-bottom: 10px; } }
+  .pc-code { padding: 1px 6px; border-radius: 6px; background: var(--muted); box-shadow: inset 0 0 0 1px var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 0.9em; }
+  .pc-secret { display: flex; align-items: center; gap: 8px; padding: 5px 5px 5px 12px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--muted); }
+  .pc-secret-value { flex: 1; min-width: 0; font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; overflow-wrap: anywhere; }
+  .pc-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: 5px; background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; }
+
+  /* Fields with an icon, selects, radios, colour swatches, chips */
+  .pc-input-group { position: relative; display: flex; align-items: center; }
+  .pc-input-group > svg { position: absolute; left: 12px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
+  .pc-input-group > .pc-input { padding-left: 36px; }
+  .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
+  .pc-select { position: relative; display: flex; align-items: center; }
+  .pc-select > select { appearance: none; opacity: 1; width: 100%; height: var(--pc-row); padding: 0 34px 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; cursor: pointer; }
+  .pc-select > select:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-select:has(select:disabled) { opacity: 0.5; }
+  .pc-select > select:disabled { cursor: not-allowed; }
+  .pc-select > svg { position: absolute; right: 10px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
+  .pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
+  .pc-radio:checked { border-color: var(--primary); }
+  .pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
+  .pc-radio:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-radio:disabled { opacity: 0.5; cursor: not-allowed; }
+  .pc-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .pc-chip:has(.pc-chip-remove) { padding-right: 3px; }
+  .pc-chip > svg { width: 14px; height: 14px; color: var(--muted-foreground); }
+  .pc-chip-remove { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted-foreground); cursor: pointer; }
+  .pc-chip-remove > svg { width: 14px; height: 14px; }
+  .pc-chip-remove:hover { background: var(--accent); color: var(--foreground); }
+  .pc-chip-remove:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+  /* Alerts with an action, menus with checks and group labels */
+  .pc-alert-action { margin-left: auto; flex-shrink: 0; }
+  .pc-alert:has(.pc-alert-action) { align-items: center; padding-top: 6px; padding-bottom: 6px; }
+  .pc-alert:has(.pc-alert-action) > svg { margin-top: 0; }
+  .pc-menu-check { margin-left: auto; color: var(--primary); }
+  .pc-menu-item > .pc-menu-check { width: 16px; height: 16px; color: var(--primary); }
+  .pc-menu-item:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Popover and calendar */
+  .pc-popover { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-calendar { display: grid; gap: 6px; }
+  .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 600; }
+  .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, 36px); gap: 2px; }
+  .pc-calendar-weekday { display: grid; place-items: center; height: 26px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+  .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
+  .pc-calendar-day:hover { background: var(--accent); }
+  .pc-calendar-day:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-calendar-day[aria-current="date"] { color: var(--primary); font-weight: 700; }
+  .pc-calendar-day[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: 600; }
+  .pc-calendar-day-outside { color: var(--muted-foreground); }
+
+  /* Task details: meta on the right, a second line with the list on smart lists */
+  .pc-task-body { flex: 1; min-width: 0; padding: 7px 0; }
+  .pc-task-body > .pc-task-title { display: block; }
+  .pc-task-sub { display: flex; align-items: center; gap: 6px; margin-top: 1px; }
+  .pc-task-meta { display: flex; flex-shrink: 0; align-items: center; gap: 10px; color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc-task-meta > span { display: inline-flex; align-items: center; gap: 4px; }
+  .pc-task-meta svg { width: 14px; height: 14px; }
+  .pc-tally { color: var(--muted-foreground); font-weight: 400; font-variant-numeric: tabular-nums; }
+  .pc-empty-art { width: 120px; height: 90px; color: var(--muted-foreground); }
+
+  /* Task pane: the open task, beside the list */
+  .pc-pane { display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 16px; border-left: 1px solid var(--border); background: var(--card); }
+  .pc-pane-toolbar { display: flex; align-items: center; gap: 8px; }
+  .pc-pane-toolbar-end { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .pc-pane-title { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+  .pc-pane-notes { width: 100%; min-height: 72px; padding: 0; border: 0; background: none; color: var(--foreground); font: inherit; line-height: 1.5; resize: none; }
+  .pc-pane-notes::placeholder { color: var(--muted-foreground); }
+  .pc-pane-notes:focus-visible { outline: none; }
+  .pc-section-title { display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 14px; font-weight: 600; }
+  .pc-subtask { display: flex; align-items: center; gap: 10px; min-height: var(--pc-row); }
+  .pc-subtask[data-done] > span { color: var(--muted-foreground); text-decoration: line-through; }
+  .pc-btn-late { color: var(--destructive); }
+
+  /* Search: a dialog with the field on top and grouped results */
+  .pc-search { width: min(560px, calc(100% - 32px)); padding: 0; overflow: hidden; }
+  .pc-search-field { position: relative; display: flex; align-items: center; border-bottom: 1px solid var(--border); }
+  .pc-search-field > svg { position: absolute; left: 16px; width: 16px; height: 16px; color: var(--muted-foreground); }
+  .pc-search-field > input { width: 100%; height: 52px; padding: 0 16px 0 46px; border: 0; background: none; color: var(--foreground); font: inherit; }
+  .pc-search-field > input::placeholder { color: var(--muted-foreground); }
+  .pc-search-field > input:focus-visible { outline: none; }
+  .pc-search-results { display: grid; gap: 2px; max-height: 360px; padding: 4px; overflow: auto; }
+  .pc-search-result { display: flex; align-items: center; gap: 10px; height: var(--pc-row); padding: 0 10px; border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
+  .pc-search-result > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+  .pc-search-result > .pc-task-title { flex: 1; }
+  .pc-search-result > .pc-list-label { max-width: 45%; }
+  .pc-search-result:hover, .pc-search-result[aria-selected="true"] { background: var(--accent); }
+  .pc-search-result:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: 2px; }
+  .pc-search-result[data-done] > .pc-task-title { color: var(--muted-foreground); text-decoration: line-through; }
+  .pc-search-footer { display: flex; gap: 14px; padding: 8px 14px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; }
+  .pc-code-block { max-height: 360px; margin: 0; padding: 12px 16px; overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; line-height: 1.6; white-space: pre; }
+
+  /* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
+  .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
+  .pc-sidebar[data-state="closed"] { margin-left: -232px; visibility: hidden; }
+  .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
+
+  /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
+  .pc-btn, .pc-link, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-task, .pc-table tbody tr, .pc-search-result, .pc-calendar-day, .pc-chip-remove {
     transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
-      box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease);
+      box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
   }
+  [data-pc-tooltip]::after { transition: opacity var(--pc-motion-fast) var(--pc-motion-ease); }
+
+  /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. */
+  .pc-sidebar-account { position: relative; }
+  .pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; }
+  .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }

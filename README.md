@@ -17,7 +17,7 @@ That gives every app:
 
 - The colour tokens as CSS variables (`--primary`, `--sidebar`, …) and as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …). The shadcn names (`sidebar-accent`, `card-foreground`, `popover`, …) are kept as aliases.
 - Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-pc-title` (22), `text-pc-heading` (15), `text-pc-body` (14, the default), `text-pc-small` (12).
-- The components below, in Tailwind's `components` layer.
+- Every component of the design system, in Tailwind's `components` layer. The reviewed ones have full sections below; the rest are listed under Draft components.
 
 Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
 
@@ -207,3 +207,27 @@ The top of a page: its title, one line about it, and the page's main action on t
 - The toggle and the title never move: open, the toggle shows `text-outdent`; closed, `text-indent`.
 - Actions: at most one primary button. A page about one thing (a list, a client) can have its ⋯ menu here.
 - Phones: when the title and the actions don't fit on one line, the actions move under it.
+
+## Draft components
+
+In `pecaiet.css` and usable now, but not reviewed yet: their look or class names may still change. The design system card for each one shows every state; each gets a full section here once it's reviewed.
+
+- **Menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
+- **Tooltip**: `data-pc-tooltip="Text"` on any element; on a `<span tabindex="0">` around a disabled button.
+- **Dialog**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, `.pc-dialog-actions`.
+- **Date picker**: `.pc-popover` with a `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`; today `aria-current="date"`, chosen `aria-selected="true"`, `.pc-calendar-day-outside`).
+- **Search**: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `.pc-search-footer`.
+- **Link**: `.pc-link`.
+- **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
+- **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`.
+- **Select**: `.pc-select` around a native `<select>` and a caret `<svg>`.
+- **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">`.
+- **Badge and chip**: `.pc-badge` (`-primary`, `-outline`, `-destructive`); `.pc-chip` with an optional `.pc-chip-remove` button.
+- **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
+- **Stat tile**: `.pc-stats` holding `.pc-stat` (`.pc-stat-label`, `.pc-stat-value`, `.pc-stat-value-alert`).
+- **Detail list**: `<dl class="pc-details">`.
+- **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value`, `.pc-code-block` for output.
+- **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
+- **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-art`) when there's nothing; `.pc-muted` for quiet cells.
+- **Task row**: `.pc-task-list` of `.pc-task` (`.pc-task-title`, `.pc-task-due`, `.pc-task-due-late`, `.pc-task-body`, `.pc-task-sub`, `.pc-task-meta`, `.pc-list-label`), grouped by `.pc-task-group`; `.pc-tally` for counts.
+- **Task pane**: `.pc-pane` with `.pc-pane-toolbar` (`.pc-pane-toolbar-end`), `.pc-pane-title`, `.pc-pane-notes`, `.pc-section-title`, `.pc-subtask`.
