@@ -1,0 +1,246 @@
+/* Pecaiet shared design (Senin): tokens and components for every app in the suite.
+   Import it right after Tailwind:  @import "tailwindcss";  @import "<path>/pecaiet.css";
+   Dark mode: the .dark class on <html>. */
+
+/* dark: utilities follow the .dark class too. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tokens --------------------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+  --background: #f4f7fa;
+  --foreground: #1c2733;
+  --muted: #e9eef4;
+  --muted-foreground: #566577;
+  --card: #ffffff;
+  --border: #e0e6ee;
+  --input: #8795a6;
+  --primary: #0b7a75;
+  --primary-foreground: #ffffff;
+  --primary-hover: #086661;
+  --primary-soft: #e2f1ef;
+  --accent: #e8eef5;
+  --sidebar: #ebf0f6;
+  --sidebar-hover: #e0e7f0;
+  --sidebar-active: #ffffff;
+  --destructive: #bd372e;
+  --destructive-soft: #fbebe9;
+  --ring: #0b7a75;
+  --overlay: #1c273366;
+  --raise: 0 1px 2px #1c27331a, 0 2px 8px #1c27330f;
+  --raise-lg: 0 8px 24px #1c27331f, 0 2px 6px #1c27330f;
+
+  /* One row height for sidebar rows, buttons, menu items and inputs. */
+  --senin-row: 36px;
+  --senin-radius-sm: 5px;
+  --senin-radius: 10px;
+  --senin-radius-lg: 14px;
+
+  /* Motion: off for now, so everything is instant. Every transition and animation reads these values;
+     set them (for example 120ms and 200ms) to turn motion on in every app at once. */
+  --motion-fast: 0ms;
+  --motion-base: 0ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #131920;
+  --foreground: #e6ecf2;
+  --muted: #1d252e;
+  --muted-foreground: #97a5b5;
+  --card: #1a222b;
+  --border: #27313c;
+  --input: #5f6e7f;
+  --primary: #46c7ba;
+  --primary-foreground: #062421;
+  --primary-hover: #6fd6cb;
+  --primary-soft: #16302f;
+  --accent: #1f2832;
+  --sidebar: #0f141a;
+  --sidebar-hover: #1b232c;
+  --sidebar-active: #25313d;
+  --destructive: #ff8177;
+  --destructive-soft: #3b2023;
+  --ring: #46c7ba;
+  --overlay: #000000a6;
+  --raise: 0 1px 3px #000000a6;
+  --raise-lg: 0 8px 24px #00000099;
+}
+
+/* shadcn-style names, kept so existing utilities (bg-sidebar-accent, text-card-foreground, ...) still work.
+   Declared on .dark as well, so they follow a .dark set anywhere, not only on <html>. */
+:root, .dark {
+  --sidebar-active-foreground: var(--foreground);
+  --sidebar-foreground: var(--foreground);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --sidebar-accent: var(--sidebar-hover);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-ring: var(--ring);
+}
+
+/* Reduced motion always keeps 0. */
+@media (prefers-reduced-motion: reduce) { :root { --motion-fast: 0ms; --motion-base: 0ms; } }
+
+/* Tailwind utilities for the tokens: bg-primary, text-muted-foreground, border-border, text-small, ... */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Figtree for everything (Tailwind's base styles read --font-sans). Four type sizes: 24, 16, 15, 13. */
+@theme {
+  --font-sans: Figtree, ui-sans-serif, system-ui, sans-serif;
+  --text-title: 24px;
+  --text-title--line-height: 30px;
+  --text-heading: 16px;
+  --text-heading--line-height: 22px;
+  --text-body: 15px;
+  --text-body--line-height: 22px;
+  --text-small: 13px;
+  --text-small--line-height: 18px;
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 15px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Button ------------------------------------------------------------------------------------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: var(--senin-row); padding: 0 12px;
+    border: 1px solid transparent; border-radius: var(--senin-radius);
+    font: inherit; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
+  }
+  .btn > svg { width: 16px; height: 16px; }
+  .btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+  .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
+  .btn-ghost { background: transparent; color: var(--foreground); }
+  .btn-ghost:hover, .btn-outline:hover { background: var(--accent); color: var(--foreground); }
+  .btn-destructive { background: transparent; border-color: var(--destructive); color: var(--destructive); }
+  .btn-destructive:hover { background: var(--destructive-soft); }
+  .btn[aria-pressed="true"] { background: var(--foreground); border-color: var(--foreground); color: var(--background); }
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  .btn-icon { width: var(--senin-row); padding: 0; }
+
+  /* Sidebar item ------------------------------------------------------------------------------- */
+  .sidebar-item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; height: var(--senin-row); padding: 0 8px;
+    border: 0; border-radius: var(--senin-radius);
+    background: transparent; color: inherit;
+    font: inherit; text-align: left; text-decoration: none; cursor: pointer;
+  }
+  .sidebar-item > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+  .sidebar-item:hover { background: var(--sidebar-hover); }
+  .sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); font-weight: 600; box-shadow: var(--raise); }
+  .sidebar-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid var(--ring); outline-offset: 2px; }
+  .sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
+  .sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sidebar-badge { margin-left: auto; font-size: 13px; font-weight: 400; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+  .sidebar-badge-late { color: var(--destructive); font-weight: 600; }
+  /* A space (folder of lists): bold, not clickable, its lists indented below it. */
+  .sidebar-section { display: flex; flex-direction: column; gap: 2px; margin-top: 10px; }
+  .sidebar-sub { display: flex; flex-direction: column; gap: 2px; padding-left: 20px; }
+  .sidebar-space { font-weight: 600; cursor: default; }
+  .sidebar-item.sidebar-space:hover { background: none; }
+  .sidebar-logo { display: grid; place-items: center; width: 20px; height: 20px; flex-shrink: 0; border-radius: 6px; background: var(--foreground); color: var(--background); font-size: 11px; font-weight: 700; }
+  /* A keyboard shortcut, e.g. "/" on the Search row. */
+  .kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: 5px; background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 13px; }
+  .sidebar-item > .kbd { margin-left: auto; }
+
+  /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. --- */
+  .sidebar-account { position: relative; }
+  .sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; }
+  .sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
+  .avatar { display: grid; place-items: center; width: 22px; height: 22px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--foreground); font-size: 11px; font-weight: 600; }
+  .menu { display: flex; flex-direction: column; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--senin-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--raise-lg); }
+  .menu-item { display: flex; align-items: center; gap: 10px; width: 100%; height: var(--senin-row); padding: 0 10px; border: 0; border-radius: var(--senin-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
+  .menu-item > svg { width: 16px; height: 16px; color: var(--muted-foreground); }
+  .menu-item:hover { background: var(--accent); }
+  .menu-item:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: 2px; }
+  .menu-item-destructive, .menu-item-destructive > svg { color: var(--destructive); }
+  .menu-separator { height: 1px; margin: 4px 6px; background: var(--border); }
+
+  /* Sidebar ------------------------------------------------------------------------------------ */
+  .sidebar {
+    display: flex; flex-direction: column; gap: 2px;
+    width: 232px; flex-shrink: 0; padding: 10px 8px 10px 8px;
+    background: var(--sidebar); color: var(--foreground);
+    box-shadow: inset -1px 0 0 var(--border);
+    overflow-y: auto;
+  }
+  .sidebar > *, .sidebar-section > *, .sidebar-sub > * { flex-shrink: 0; }
+  /* The sidebar head: the app's logo (optional). */
+  .sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-height: var(--senin-row); padding: 0 0 0 8px; margin-bottom: 6px; }
+  .app-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; }
+  .app-logo-mark { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--primary); color: var(--primary-foreground); font-size: 13px; font-weight: 700; }
+  /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
+  .sidebar-footer { position: sticky; bottom: -10px; z-index: 1; display: flex; flex-direction: column; gap: 2px; margin: auto -8px -10px; padding: 8px 8px 10px; border-top: 1px solid var(--border); background: var(--sidebar); box-shadow: inset -1px 0 0 var(--border); }
+  /* The toggle lives in the page's title row, left of the title; its icon lines up with the page's left edge. */
+  .page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .page-title-row > .sidebar-toggle { margin-left: -10px; }
+  .page-title { margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+  /* Open and closed: data-state="closed" on the sidebar. */
+  .sidebar { transition: margin-left var(--motion-base) var(--motion-ease); }
+  .sidebar[data-state="closed"] { margin-left: -232px; visibility: hidden; }
+  /* Phones: the sidebar opens over a dimmed page. */
+  .sidebar-sheet { position: fixed; inset: 0; z-index: 40; display: flex; }
+  .sheet-backdrop { position: absolute; inset: 0; background: var(--overlay); }
+  .sidebar-sheet > .sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--raise-lg); animation: sheet-in var(--motion-base) var(--motion-ease); }
+
+  /* State changes (hover fills, focus rings, colours) use --motion-fast. */
+  .btn, .sidebar-item, .menu-item {
+    transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease),
+      box-shadow var(--motion-fast) var(--motion-ease), outline-color var(--motion-fast) var(--motion-ease);
+  }
+}
+
+@keyframes sheet-in { from { transform: translateX(-100%); } }
