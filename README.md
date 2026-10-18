@@ -1,8 +1,8 @@
-# Pecaiet UI
+# Pecaiet design
 
 The shared look for the Pecaiet apps (idp, todo): colours, type, and plain HTML/CSS components. One CSS file, `pecaiet.css`, built on Tailwind v4. Every app writes its own markup (ERB, JSX, …) with the class names below; change the CSS here and every app follows.
 
-The design lives in the private Pecaiet design system on claude.ai (Senin). This repo is its code.
+The design lives in the private Pecaiet design system on claude.ai (look: Senin). This repo is its code.
 
 ## Use it
 
@@ -16,10 +16,17 @@ Import it right after Tailwind, in the app's main CSS file:
 That gives every app:
 
 - The colour tokens as CSS variables (`--primary`, `--sidebar`, …) and as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …). The shadcn names (`sidebar-accent`, `card-foreground`, `popover`, …) are kept as aliases.
-- Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-title` (24), `text-heading` (16), `text-body` (15, the default), `text-small` (13).
-- The components below, in Tailwind's `components` layer, so a utility on the same element still wins.
+- Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-pc-title` (24), `text-pc-heading` (16), `text-pc-body` (15, the default), `text-pc-small` (13).
+- The components below, in Tailwind's `components` layer.
 
 Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
+
+## Naming
+
+- Every class and every variable of our own starts with `pc-`: `.pc-btn`, `.pc-sidebar-item`, `--pc-row`, `--pc-raise`. Nothing an app defines can clash with them.
+- Two families keep standard names: the colour tokens (shadcn's: `primary`, `muted-foreground`, …) and the fonts (Tailwind's: `--font-sans`, `--font-mono`).
+- Names describe the shape, never one app's content: `.pc-sidebar-heading`, not "space"; `.pc-sidebar-detail-alert`, not "late".
+- States are attributes, never classes: `aria-current="page"`, `aria-expanded`, `aria-pressed`, `disabled` / `aria-disabled`, `data-state="closed"`.
 
 ## Dark mode
 
@@ -30,73 +37,109 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 ## Tokens
 
 - **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `ring`, `overlay`.
-- **Row height**: `--senin-row` (36px) for sidebar rows, buttons, menu items and inputs.
-- **Corners**: `--senin-radius-sm` (5px), `--senin-radius` (10px), `--senin-radius-lg` (14px).
-- **Shadows**: `--raise` (the active row, cards), `--raise-lg` (menus, the phone sidebar).
-- **Motion**: `--motion-fast` and `--motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
+- **Row height**: `--pc-row` (36px) for sidebar rows, buttons, menu items and inputs.
+- **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
+- **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar).
+- **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
+
+## Rules for apps
+
+Follow these and nothing in an app can break the shared look.
+
+Setup:
+
+- Import `tailwindcss` in full, then `pecaiet.css`, once, at the top of the app's main CSS file. The components rely on Tailwind's base reset (box-sizing, button reset).
+- Never edit the copy inside an app. Change this repo, then update the app.
+- Point each app at a tag (`v0.1.0`), not at whatever is latest.
+
+Don't override:
+
+- Never define a `.pc-*` class or a `--pc-*` variable in an app, and never redefine the colour tokens (`--primary`, …). Running `npx shadcn init` writes its own; delete them.
+- Classes that belong to one app only get that app's prefix (`todo-…`, `idp-…`).
+- On a shared component, use utilities only to place it: margin, width, grid or flex position, hidden. Never colour, padding, height, corners, font, border or shadow. If something needs a different look, add a variant here.
+- No `!important`, and never `outline-none` on anything you can click.
+
+Tokens only:
+
+- Colours: only token colours (`bg-primary`, `text-muted-foreground`, `var(--border)`). No hex values, no Tailwind palette colours (`bg-teal-600`), no `dark:` colour pairs: the tokens switch by themselves.
+- Type: only `text-pc-title`, `text-pc-heading`, `text-pc-body`, `text-pc-small`. Not Tailwind's `text-xs`, `text-sm`, `text-lg`, ….
+- Motion: transitions use only `--pc-motion-fast`, `--pc-motion-base` and `--pc-motion-ease`, never their own durations.
+
+Markup:
+
+- Set states with the attributes above, never with classes like `.active` or `.is-open`.
+- Follow the snippets below: element order and wrappers matter (the label needs `.pc-sidebar-label` for its ellipsis).
+- Icons: Phosphor, regular weight, inline `<svg fill="currentColor">` (or `@phosphor-icons/react`), no size classes: the CSS sizes them (16px beside 15px text).
+- Dark mode is `.dark` on `<html>` only; no `prefers-color-scheme` rules in app CSS.
+
+Updating:
+
+- Change the design system on claude.ai first, then this repo.
+- Renaming or removing a class or variable is a breaking change: new major tag. Apps move to it on purpose.
 
 ## Rules every component follows
 
 - Focus: a 2px `--ring` outline with a 2px gap. Rows also take their hover fill when focused.
 - Disabled: half opacity, no pointer.
-- Icons: Phosphor, regular weight, 16px beside 15px text.
-- The page you are on is marked with `aria-current="page"`; the CSS styles that, not a class.
 
 ## Button
 
 ```html
-<button class="btn btn-primary" type="button">Save email</button>
-<button class="btn btn-outline" type="button">Cancel</button>
-<button class="btn btn-ghost" type="button">Sign out</button>
-<button class="btn btn-destructive" type="button">Delete account</button>
-<button class="btn btn-ghost btn-icon" type="button" aria-label="More"><svg>…</svg></button>
+<button class="pc-btn pc-btn-primary" type="button">Save email</button>
+<button class="pc-btn pc-btn-outline" type="button">Cancel</button>
+<button class="pc-btn pc-btn-ghost" type="button">Sign out</button>
+<button class="pc-btn pc-btn-destructive" type="button">Delete account</button>
+<button class="pc-btn pc-btn-ghost pc-btn-icon" type="button" aria-label="More"><svg>…</svg></button>
 ```
 
 - One primary button per view.
-- `btn-icon` is square; it needs an `aria-label`.
+- `pc-btn-icon` is square; it needs an `aria-label`.
 - `aria-pressed="true"` turns a button into a pressed toggle.
 
 ## Sidebar item
 
-One row of the sidebar. A link (`<a>`) when it opens a page, a `<button>` when it does something.
+One row of the sidebar: a link (`<a>`) when it opens a page, a `<button>` when it does something, or a heading.
 
 ```html
-<!-- Label only (idp) -->
-<a class="sidebar-item" href="/account" aria-current="page"><span class="sidebar-label">Account</span></a>
+<!-- Label only -->
+<a class="pc-sidebar-item" href="/account" aria-current="page"><span class="pc-sidebar-label">Account</span></a>
 
-<!-- Icon, label, count; a late count is red -->
-<a class="sidebar-item" href="/lists/1"><svg>…</svg><span class="sidebar-label">America</span><span class="sidebar-badge">3</span></a>
-<a class="sidebar-item" href="/lists/2"><svg>…</svg><span class="sidebar-label">Japan</span><span class="sidebar-badge sidebar-badge-late">10</span></a>
+<!-- Icon + label -->
+<a class="pc-sidebar-item" href="/scratchpad"><svg>…</svg><span class="pc-sidebar-label">Scratchpad</span></a>
 
-<!-- With a keyboard shortcut -->
-<button class="sidebar-item" type="button"><svg>…</svg><span class="sidebar-label">Search</span><span class="kbd">/</span></button>
+<!-- Icon + label + detail: a number, a number that needs attention, a word, or a key / icon -->
+<a class="pc-sidebar-item" href="/inbox"><svg>…</svg><span class="pc-sidebar-label">Inbox</span><span class="pc-sidebar-detail">2</span></a>
+<a class="pc-sidebar-item" href="/due"><svg>…</svg><span class="pc-sidebar-label">Due</span><span class="pc-sidebar-detail pc-sidebar-detail-alert">4</span></a>
+<a class="pc-sidebar-item" href="/lists/7"><svg>…</svg><span class="pc-sidebar-label">Q3 launch</span><span class="pc-sidebar-detail">Work</span></a>
+<button class="pc-sidebar-item" type="button"><svg>…</svg><span class="pc-sidebar-label">Search</span><span class="pc-kbd">/</span></button>
 
-<!-- A space: bold, not clickable, its lists indented under it -->
-<div class="sidebar-section">
-  <div class="sidebar-item sidebar-space"><span class="sidebar-logo">W</span><span class="sidebar-label">Work</span></div>
-  <div class="sidebar-sub">
-    <a class="sidebar-item" href="/lists/1"><svg>…</svg><span class="sidebar-label">America</span></a>
+<!-- Heading (not clickable) with nested rows -->
+<div class="pc-sidebar-section">
+  <div class="pc-sidebar-item pc-sidebar-heading"><span class="pc-sidebar-mark">W</span><span class="pc-sidebar-label">Work</span></div>
+  <div class="pc-sidebar-sub">
+    <a class="pc-sidebar-item" href="/lists/1"><svg>…</svg><span class="pc-sidebar-label">America</span><span class="pc-sidebar-detail">3</span></a>
   </div>
 </div>
 ```
 
-- Long labels are cut with an ellipsis; the count stays.
-- A closed list shows its space on the right as a `sidebar-badge`.
+- Order inside a row: icon (or `.pc-sidebar-mark` letter tile), label, detail.
+- A long label is cut with an ellipsis; the detail stays.
+- Buttons are never "the page you're on".
 
 ## Sidebar account
 
 The account row at the foot of the sidebar, and the menu it opens upward.
 
 ```html
-<div class="sidebar-account">
-  <div class="menu sidebar-account-menu" role="menu" hidden>
-    <a class="menu-item" role="menuitem" href="/account"><svg>…</svg>Settings</a>
-    <a class="menu-item" role="menuitem" href="/admin"><svg>…</svg>Admin panel</a>
-    <div class="menu-separator"></div>
-    <button class="menu-item menu-item-destructive" role="menuitem" type="button"><svg>…</svg>Sign out</button>
+<div class="pc-sidebar-account">
+  <div class="pc-menu pc-sidebar-account-menu" role="menu" hidden>
+    <a class="pc-menu-item" role="menuitem" href="/account"><svg>…</svg>Settings</a>
+    <a class="pc-menu-item" role="menuitem" href="/admin"><svg>…</svg>Admin panel</a>
+    <div class="pc-menu-separator"></div>
+    <button class="pc-menu-item pc-menu-item-destructive" role="menuitem" type="button"><svg>…</svg>Sign out</button>
   </div>
-  <button class="sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
-    <span class="avatar">A</span><span class="sidebar-label">ana@example.com</span><svg>…caret-down…</svg>
+  <button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
+    <span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg>…caret-down…</svg>
   </button>
 </div>
 ```
@@ -110,32 +153,32 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 Always a sidebar. One toggle opens and closes it on desktop and phones, and it sits in the page's title row.
 
 ```html
-<nav class="sidebar">
-  <div class="sidebar-head"><span class="app-logo"><span class="app-logo-mark">P</span>Todo</span></div>
+<nav class="pc-sidebar">
+  <div class="pc-sidebar-head"><span class="pc-app-logo"><span class="pc-app-logo-mark">P</span>Todo</span></div>
   <!-- sidebar items -->
-  <div class="sidebar-footer">
-    <button class="sidebar-item" type="button"><svg>…</svg><span class="sidebar-label">New list</span></button>
+  <div class="pc-sidebar-footer">
+    <button class="pc-sidebar-item" type="button"><svg>…</svg><span class="pc-sidebar-label">New list</span></button>
     <!-- sidebar account -->
   </div>
 </nav>
 
 <main>
-  <div class="page-title-row">
-    <button class="btn btn-ghost btn-icon sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…text-outdent…</svg></button>
-    <h1 class="page-title">America</h1>
+  <div class="pc-page-title-row">
+    <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…text-outdent…</svg></button>
+    <h1 class="pc-page-title">America</h1>
   </div>
 </main>
 ```
 
-- The logo is optional; no logo, no `sidebar-head`.
+- The logo is optional; no logo, no `pc-sidebar-head`.
 - The footer always sits at the bottom, and stays pinned while the rows scroll. The account row is always last.
-- Closed (desktop): `data-state="closed"` on the `.sidebar`. The toggle shows Phosphor `text-indent`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
+- Closed (desktop): `data-state="closed"` on the `.pc-sidebar`. The toggle shows Phosphor `text-indent`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
 - Remember the desktop choice per person; phones always start closed.
 - Phones: open it as a sheet over a dimmed page. A tap on the backdrop or Escape closes it.
 
 ```html
-<div class="sidebar-sheet">
-  <div class="sheet-backdrop"></div>
-  <nav class="sidebar">…</nav>
+<div class="pc-sidebar-sheet">
+  <div class="pc-sheet-backdrop"></div>
+  <nav class="pc-sidebar">…</nav>
 </div>
 ```
