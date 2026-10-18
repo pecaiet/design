@@ -182,3 +182,27 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
   <nav class="pc-sidebar">…</nav>
 </div>
 ```
+
+## Page header
+
+The top of a page: its title, one line about it, and the page's main action on the right. Every page's title row starts with the sidebar toggle.
+
+```html
+<div class="pc-page-header">
+  <div class="pc-page-header-text">
+    <div class="pc-page-title-row">
+      <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…text-outdent…</svg></button>
+      <h1 class="pc-page-title">OAuth clients</h1>
+    </div>
+    <p class="pc-page-description">Apps that sign in with this IdP.</p>
+  </div>
+  <div class="pc-page-header-actions">
+    <button class="pc-btn pc-btn-primary" type="button">New client</button>
+  </div>
+</div>
+```
+
+- The description is optional; it lines up with the title, not the toggle.
+- The toggle and the title never move: open, the toggle shows `text-outdent`; closed, `text-indent`.
+- Actions: at most one primary button. A page about one thing (a list, a client) can have its ⋯ menu here.
+- Phones: when the title and the actions don't fit on one line, the actions move under it.

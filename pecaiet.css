@@ -224,10 +224,6 @@
   .pc-app-logo-mark { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--primary); color: var(--primary-foreground); font-size: 13px; font-weight: 700; }
   /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
   .pc-sidebar-footer { position: sticky; bottom: -10px; z-index: 1; display: flex; flex-direction: column; gap: 2px; margin: auto -8px -10px; padding: 8px 8px 10px; border-top: 1px solid var(--border); background: var(--sidebar); box-shadow: inset -1px 0 0 var(--border); }
-  /* The toggle lives in the page's title row, left of the title; its icon lines up with the page's left edge. */
-  .pc-page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
-  .pc-page-title-row > .pc-sidebar-toggle { margin-left: -10px; }
-  .pc-page-title { margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
   /* Open and closed: data-state="closed" on the sidebar. */
   .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
   .pc-sidebar[data-state="closed"] { margin-left: -232px; visibility: hidden; }
@@ -235,6 +231,18 @@
   .pc-sidebar-sheet { position: fixed; inset: 0; z-index: 40; display: flex; }
   .pc-sheet-backdrop { position: absolute; inset: 0; background: var(--overlay); }
   .pc-sidebar-sheet > .pc-sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--pc-raise-lg); animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
+
+  /* Page header -------------------------------------------------------------------------------- */
+  .pc-page-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 16px; }
+  .pc-page-header-text { display: grid; gap: 2px; min-width: 0; }
+  .pc-page-header-actions { display: flex; align-items: center; gap: 8px; }
+  /* The sidebar toggle starts the title row, left of the title; its icon lines up with the page's left edge. */
+  .pc-page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .pc-page-title-row > .pc-sidebar-toggle { margin-left: -10px; }
+  .pc-page-title { margin: 0; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+  .pc-page-description { margin: 0; color: var(--muted-foreground); font-size: 13px; }
+  /* A description under a title row with the toggle lines up with the title, not the toggle. */
+  .pc-page-title-row:has(> .pc-sidebar-toggle) + .pc-page-description { padding-left: calc(var(--pc-row) - 4px); }
 
   /* State changes (hover fills, focus rings, colours) use --pc-motion-fast. */
   .pc-btn, .pc-sidebar-item, .pc-menu-item {
