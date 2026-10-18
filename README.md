@@ -79,7 +79,8 @@ Updating:
 
 ## Rules every component follows
 
-- Focus: a 2px `--ring` outline with a 2px gap. Rows also take their hover fill when focused.
+- Focus: a 2px `--ring` line. Controls (buttons, fields, checkboxes, links) draw it 1px outside; rows (sidebar, menu, search, table rows, calendar days) draw it inside their own edge and also take their hover fill. Rows sit with no gap between them. A row filled with teal would hide an inside ring, so such a row must draw it outside like a button.
+- Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
 
 ## Button
@@ -123,7 +124,7 @@ One row of the sidebar: a link (`<a>`) when it opens a page, a `<button>` when i
 ```
 
 - Order inside a row: icon (or `.pc-sidebar-mark` letter tile), label, detail.
-- A row is one colour, the text colour (no bold, no muted parts). Only a number that needs attention stays red. Fills mark state: the hover fill under the pointer, the raised pill on the page you are on.
+- A row is one colour, the text colour (no bold, no muted parts). Only a number that needs attention stays red. Fills mark state: the hover fill under the pointer, the flat pill (no shadow) on the page you are on.
 - A long label is cut with an ellipsis; the detail stays.
 - Buttons are never "the page you're on".
 
