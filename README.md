@@ -16,7 +16,7 @@ Import it right after Tailwind, in the app's main CSS file:
 That gives every app:
 
 - The colour tokens as CSS variables (`--primary`, `--sidebar`, …) and as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …). The shadcn names (`sidebar-accent`, `card-foreground`, `popover`, …) are kept as aliases.
-- Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-pc-title` (24), `text-pc-heading` (16), `text-pc-body` (15, the default), `text-pc-small` (13).
+- Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-pc-title` (22), `text-pc-heading` (15), `text-pc-body` (14, the default), `text-pc-small` (12).
 - The components below, in Tailwind's `components` layer.
 
 Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
@@ -69,7 +69,7 @@ Markup:
 
 - Set states with the attributes above, never with classes like `.active` or `.is-open`.
 - Follow the snippets below: element order and wrappers matter (the label needs `.pc-sidebar-label` for its ellipsis).
-- Icons: Phosphor, regular weight, inline `<svg fill="currentColor">` (or `@phosphor-icons/react`), no size classes: the CSS sizes them (16px beside 15px text).
+- Icons: Phosphor, regular weight, inline `<svg fill="currentColor">` (or `@phosphor-icons/react`), no size classes: the CSS sizes them (16px beside 14px text).
 - Dark mode is `.dark` on `<html>` only; no `prefers-color-scheme` rules in app CSS.
 
 Updating:
@@ -123,6 +123,7 @@ One row of the sidebar: a link (`<a>`) when it opens a page, a `<button>` when i
 ```
 
 - Order inside a row: icon (or `.pc-sidebar-mark` letter tile), label, detail.
+- A row is one colour, the text colour (no bold, no muted parts). Only a number that needs attention stays red. Fills mark state: the hover fill under the pointer, the raised pill on the page you are on.
 - A long label is cut with an ellipsis; the detail stays.
 - Buttons are never "the page you're on".
 
