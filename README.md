@@ -179,6 +179,7 @@ The sidebar head as a button: the current app's mark and name, and the menu of a
 - The apps first, then pe caiet home under a divider. The app you are in has `aria-current="page"`: a primary bar on the menu's left edge.
 - `.pc-app-logo-mark` is a square slot: the app's square `<img>` or `<svg>` (`pe-caiet.svg`, `todo.svg` in this repo) fills it, 24px in the head and 20px in the menu. A letter works as a stand-in.
 - `.pc-menu-end` pushes a muted icon or text to the end of a menu row.
+- In an area of the app (the admin panel), a `.pc-badge.pc-badge-soft` right after the name says where you are: `<span class="pc-sidebar-label">pe caiet</span><span class="pc-badge pc-badge-soft">Admin</span>`. The name shrinks to fit and the caret stays at the end.
 - It opens and closes like the account menu.
 
 ## Sidebar
@@ -289,7 +290,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`.
 - **Select**: `.pc-select` around a native `<select>` and a caret `<svg>`.
 - **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">`.
-- **Badge and chip**: `.pc-badge` (`-primary`, `-outline`, `-destructive`); `.pc-chip` with an optional `.pc-chip-remove` button.
+- **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-destructive`); `-soft` is a light teal tint over whatever is behind it, for the area you are in; `.pc-chip` with an optional `.pc-chip-remove` button.
 - **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
 - **Stat tile**: `.pc-stats` holding `.pc-stat` (`.pc-stat-label`, `.pc-stat-value`, `.pc-stat-value-alert`).
 - **Detail list**: `<dl class="pc-details">`.
