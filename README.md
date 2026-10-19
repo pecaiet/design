@@ -156,7 +156,6 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 - Set `aria-expanded="true"` while the menu is open; the row keeps its hover fill.
 - Settings, Admin panel (admins only), then Sign out in red. Nothing else. Inside the admin panel, Admin panel becomes "Back to pe caiet" (Phosphor `arrow-left`), which goes to pe caiet's home page.
 - It closes on a click outside, Escape, or a choice. The same menu is used on phones.
-- A page without a sidebar (idp's home) puts the same row on the right of a top bar, with an up-down caret: its menu (`.pc-menu.pc-menu-pop`, no `.pc-sidebar-account-menu`) opens downward from the row, aligned to its right edge. On phones it is the usual bottom sheet.
 
 ## App switcher
 
@@ -189,7 +188,7 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 
 ```html
 <nav class="pc-sidebar">
-  <div class="pc-sidebar-head"><span class="pc-app-logo"><span class="pc-app-logo-mark">P</span>Todo</span></div>
+  <div class="pc-sidebar-head"><!-- app switcher --></div>
   <!-- sidebar items -->
   <div class="pc-sidebar-footer">
     <button class="pc-sidebar-item" type="button"><svg>…</svg><span class="pc-sidebar-label">New list</span></button>
@@ -205,7 +204,7 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 </main>
 ```
 
-- The logo is optional; no logo, no `pc-sidebar-head`.
+- The head is the App switcher: the current app, and a menu of the others.
 - The footer always sits at the bottom, and stays pinned while the rows scroll. The account row is always last.
 - Closed (desktop): `data-state="closed"` on the `.pc-sidebar`. The toggle shows Phosphor `text-indent`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
 - Remember the desktop choice per person; phones always start closed.
@@ -217,6 +216,27 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
   <nav class="pc-sidebar">…</nav>
 </div>
 ```
+
+## Top bar
+
+A page without a sidebar (idp's home): the logo on the left and the account row on the right.
+
+```html
+<header><!-- the app's layout: a row, the logo left, the account pushed right -->
+  <span class="pc-app-logo"><span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span>pe caiet</span>
+  <div><!-- relative, so the menu opens from here -->
+    <div class="pc-menu-backdrop"></div>
+    <div class="pc-menu pc-menu-pop" role="menu" hidden><!-- the account menu: Settings, Admin panel, Sign out --></div>
+    <button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
+      <span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg>…caret-up-down…</svg>
+    </button>
+  </div>
+</header>
+```
+
+- The account row is the Sidebar account row with an up-down caret, as wide as its content.
+- Its menu opens downward from the row, aligned to its right edge; on phones it is the usual bottom sheet.
+- The bar's layout is the app's own (Tailwind in idp): 72px tall and 28px from the edges on desktop, so the logo sits where it sits on the sign-in page; 52px tall and 20px from the edges on phones, in the `sidebar` colour.
 
 ## Page header
 
