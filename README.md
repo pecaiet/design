@@ -79,11 +79,11 @@ Updating:
 
 ## Rules every component follows
 
-- Focus: as on claude.ai. Controls (buttons, fields, checkboxes, links) use `--pc-focus`: their outer 1px turns the page colour (bordered controls turn their border that colour), then a 1px blue `--ring` line on the edge and a soft glow in a darker blue. Rows (sidebar, menu, search, calendar days, table rows) use `--pc-focus-inset`: the ring inside the row's own edge, only the glow outside. Blue is for focus only, so it shows on teal buttons and ticked boxes too. Fields with an error keep their red border. Rows also take their hover fill, and sidebar rows touch, with no gap, since their ring sits inside; menu and search rows sit 4px apart. A transparent outline stays underneath for Windows high-contrast mode.
+- Focus: as on claude.ai. Controls (buttons, fields, checkboxes, links) use `--pc-focus`: their outer 1px turns the page colour (bordered controls turn their border that colour), then a 1px blue `--ring` line on the edge and a soft glow in a darker blue. Rows (sidebar, menu, search, calendar days, table rows) use `--pc-focus-inset`: the ring inside the row's own edge, only the glow outside. Blue is for focus only, so it shows on teal buttons and ticked boxes too. Fields with an error keep their red border. Rows also take their hover fill, and sidebar rows sit 1px apart, as on claude.ai; menu and search rows sit 4px apart. A transparent outline stays underneath for Windows high-contrast mode.
   - Your own focusable thing, always on `:focus-visible` with `outline: 2px solid transparent` underneath (Windows high-contrast mode draws it):
     - a control with a border: `border-color: var(--background); box-shadow: var(--pc-focus);`
     - a control without a border: `box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus);`
-    - a row in a list: `box-shadow: var(--pc-focus-inset); position: relative; z-index: 1;` plus its hover fill (the z-index keeps the glow above the next row's fill).
+    - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
