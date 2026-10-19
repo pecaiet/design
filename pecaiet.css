@@ -470,9 +470,37 @@
   /* An app's mark is a square slot: a letter for now, an svg or img later. */
   .pc-app-logo-mark > img, .pc-app-logo-mark > svg { width: 100%; height: 100%; border-radius: inherit; }
   .pc-menu-item > .pc-app-logo-mark { width: 20px; height: 20px; border-radius: 6px; font-size: 11px; }
-  /* The app you are in: a primary bar on the menu's left edge. */
-  .pc-sidebar-apps-menu .pc-menu-item[aria-current="page"] { position: relative; }
-  .pc-sidebar-apps-menu .pc-menu-item[aria-current="page"]::before { content: ""; position: absolute; top: 6px; bottom: 6px; left: -5px; width: 3px; border-radius: 0 3px 3px 0; background: var(--primary); }
+  /* Where you are, in a menu of places (.pc-menu-places; the app switcher is one): a semibold name and a primary bar on the menu's left edge. */
+  :is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"] { position: relative; font-weight: 600; }
+  :is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"]::before { content: ""; position: absolute; top: 6px; bottom: 6px; left: -5px; width: 3px; border-radius: 0 3px 3px 0; background: var(--primary); }
+
+  /* Picker: every choice is a button that opens a menu (a listbox), so options look the same everywhere and can search.
+     The button looks like a field; the chosen option carries aria-selected="true" and a .pc-menu-check tick. */
+  .pc-picker { position: relative; }
+  .pc-picker-button { display: flex; align-items: center; gap: 8px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
+  .pc-picker-button > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-picker-button > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+  .pc-picker-button:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
+  .pc-picker-button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .pc-picker-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; min-width: 100%; max-height: 320px; overflow-y: auto; }
+  /* A search field at the top of a menu (the input with an icon), and the line when nothing matches. */
+  .pc-menu > .pc-input-group { margin: 4px 4px 6px; }
+  .pc-menu-empty { margin: 0; padding: 6px 10px; color: var(--muted-foreground); font-size: 12px; }
+  /* Phones: a menu that pops up (.pc-menu-pop) is a sheet at the bottom of the screen with 44px rows, over a backdrop
+     (.pc-menu-backdrop, right before the menu; a tap on it or Escape closes). Its .pc-menu-title shows only there.
+     .pc-menu-sheet makes a menu a sheet at any width. */
+  .pc-menu-label.pc-menu-title { display: none; }
+  .pc-menu-backdrop { display: none; }
+  @media (max-width: 47.99rem) {
+    .pc-menu.pc-menu-pop { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 60; min-width: 0; max-height: 85dvh; overflow-y: auto; padding: 8px 8px calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; --pc-row: 44px; }
+    .pc-menu-pop > .pc-menu-label.pc-menu-title { display: block; }
+    .pc-menu-pop .pc-menu-item[aria-current="page"]::before { left: -8px; }
+    .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+  }
+  .pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 60; min-width: 0; max-height: 85dvh; overflow-y: auto; padding: 8px 8px calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; --pc-row: 44px; }
+  .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
+  .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: -8px; }
+  .pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
   .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 

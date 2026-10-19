@@ -240,6 +240,41 @@ The top of a page: its title, one line about it, and the page's main action on t
 - Actions: at most one primary button. A page about one thing (a list, a client) can have its ⋯ menu here.
 - Phones: when the title and the actions don't fit on one line, the actions move under it.
 
+## Picker
+
+Every choice from a list, instead of a native `<select>`: a button that looks like a field and opens a menu of options. A dropdown on desktop, a sheet on phones (see Menu on phones).
+
+```html
+<div class="pc-field">
+  <span class="pc-label">Category</span>
+  <div class="pc-picker">
+    <button class="pc-picker-button" type="button" aria-haspopup="listbox" aria-expanded="false"><span>Groceries</span><svg>…caret-down…</svg></button>
+    <div class="pc-menu-backdrop"></div>
+    <div class="pc-menu pc-picker-menu pc-menu-pop" role="listbox" aria-label="Category" hidden>
+      <div class="pc-menu-label pc-menu-title">Category</div>
+      <div class="pc-input-group"><svg>…magnifying-glass…</svg><input class="pc-input" type="search" placeholder="Search categories" aria-label="Search categories"></div>
+      <div class="pc-menu-label">Food</div>
+      <button class="pc-menu-item" type="button" role="option" aria-selected="true">Groceries<svg class="pc-menu-check">…check…</svg></button>
+      <button class="pc-menu-item" type="button" role="option" aria-selected="false">Restaurants</button>
+    </div>
+  </div>
+</div>
+```
+
+- A value: the chosen option has `aria-selected="true"` and a `.pc-menu-check` tick at the end; nothing else is bold. The button shows the value and a chevron.
+- A place (switching list, workspace or app): add `.pc-menu-places`, use links with `aria-current="page"` on where you are (a primary bar and a semibold name, no tick), and give the button the up-down caret.
+- Search is optional: the input with an icon, first in the menu. When nothing matches, one `<p class="pc-menu-empty">` says so.
+- `.pc-menu-title` names the choice and shows only on phones, where the sheet has no label above it.
+- The app opens and closes it (`hidden`, `aria-expanded`), filters for search, and moves with the arrow keys; Enter picks, Escape or a tap on the backdrop closes without a change.
+
+## Menu on phones
+
+Every menu that pops up (pickers, the account menu, the app switcher, row actions) is a sheet at the bottom of the screen on phones: full width, 44px rows, over a dimmed backdrop. On desktop it stays a dropdown.
+
+- Give the menu `.pc-menu-pop` and put a `<div class="pc-menu-backdrop">` right before it; a tap on the backdrop or Escape closes. Below 48rem the menu becomes the sheet and the backdrop shows while it is open. `.pc-menu-sheet` makes a menu a sheet at any width.
+- Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
+- No drag handle: nothing to swipe.
+
 ## Draft components
 
 In `pecaiet.css` and usable now, but not reviewed yet: their look or class names may still change. The design system card for each one shows every state; each gets a full section here once it's reviewed.
