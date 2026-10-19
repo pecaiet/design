@@ -501,11 +501,14 @@
     .pc-menu-pop > .pc-menu-label.pc-menu-title { display: block; }
     .pc-menu-pop .pc-menu-item[aria-current="page"]::before { left: -8px; }
     .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+    html:has(.pc-menu-pop:not([hidden])) { overflow: hidden; }
   }
   .pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 60; min-width: 0; max-height: 85dvh; overflow-y: auto; padding: 8px 8px calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; --pc-row: 44px; }
   .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
   .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: -8px; }
   .pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+  /* While a sheet is open (the phone sidebar, a menu sheet) the page behind it doesn't scroll. */
+  html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden])) { overflow: hidden; }
   .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 

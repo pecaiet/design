@@ -153,7 +153,7 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 ```
 
 - Set `aria-expanded="true"` while the menu is open; the row keeps its hover fill.
-- Settings, Admin panel (admins only), then Sign out in red. Nothing else.
+- Settings, Admin panel (admins only), then Sign out in red. Nothing else. Inside the admin panel, Admin panel becomes "Back to pe caiet home" (Phosphor `arrow-left`).
 - It closes on a click outside, Escape, or a choice. The same menu is used on phones.
 
 ## App switcher
@@ -208,7 +208,7 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 - The footer always sits at the bottom, and stays pinned while the rows scroll. The account row is always last.
 - Closed (desktop): `data-state="closed"` on the `.pc-sidebar`. The toggle shows Phosphor `text-indent`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
 - Remember the desktop choice per person; phones always start closed.
-- Phones: open it as a sheet over a dimmed page. A tap on the backdrop or Escape closes it.
+- Phones: open it as a sheet over a dimmed page. A tap on the backdrop or Escape closes it. While it is open the page behind it doesn't scroll.
 
 ```html
 <div class="pc-sidebar-sheet">
@@ -272,7 +272,7 @@ Every choice from a list, instead of a native `<select>`: a button that looks li
 
 Every menu that pops up (pickers, the account menu, the app switcher, row actions) is a sheet at the bottom of the screen on phones: full width, 44px rows, over a dimmed backdrop. On desktop it stays a dropdown.
 
-- Give the menu `.pc-menu-pop` and put a `<div class="pc-menu-backdrop">` right before it; a tap on the backdrop or Escape closes. Below 48rem the menu becomes the sheet and the backdrop shows while it is open. `.pc-menu-sheet` makes a menu a sheet at any width.
+- Give the menu `.pc-menu-pop` and put a `<div class="pc-menu-backdrop">` right before it; a tap on the backdrop or Escape closes. Below 48rem the menu becomes the sheet and the backdrop shows while it is open, and the page behind it doesn't scroll. `.pc-menu-sheet` makes a menu a sheet at any width.
 - Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
 - No drag handle: nothing to swipe.
 
