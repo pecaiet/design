@@ -277,9 +277,9 @@ Every menu that pops up (pickers, the account menu, the app switcher, row action
 - Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
 - No drag handle: nothing to swipe.
 
-## Modal
+## Settings modal
 
-A big window over the page with its own nav: settings. Each section has its own address (`/settings/account`), and opening that address shows the page with the modal open on top.
+A big window over the page with its own nav, for settings: not a plain modal. Each section has its own address (`/settings/account`). Opened from a link in the app it opens over the page you are on, and closing goes back there; an address typed in opens it over the home page.
 
 ```html
 <dialog class="pc-modal" tabindex="-1" aria-labelledby="settings-title">
@@ -303,7 +303,7 @@ A big window over the page with its own nav: settings. Each section has its own 
 ```
 
 - Open it with `showModal()`, then focus the window itself (`tabindex="-1"`) so no row lights up on open; Tab moves in. The browser keeps focus inside and dims the page with `::backdrop`. The page behind doesn't scroll while it is open.
-- Desktop: up to 960 × 640, centred; the nav is a 216px column with a line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
+- Desktop: up to 960 × 640, centred; the nav is a 216px column in the sidebar's colour, with no line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
 - Phones (below 48rem): it fills the screen and the nav is hidden. The toggle opens `.pc-modal-frame` as a `.pc-sidebar-sheet`, like the app's sidebar; the backdrop or Escape closes the sheet first.
 - The close button and Escape leave the modal, back to the page under it.
 
