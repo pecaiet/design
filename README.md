@@ -85,7 +85,7 @@ Updating:
     - a control without a border: `box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus);`
     - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
-- Links: a soft underline at rest that turns solid under the pointer.
+- Links: the text colour, with a soft grey underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
 - Divider lines (menus, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
 - Scrollbars: thin and muted (`muted-foreground` at 40%, no track), drawn by the browser on every scroll area and the page itself, so each system keeps its own behaviour (macOS hides them until you scroll).
