@@ -156,6 +156,7 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 - Set `aria-expanded="true"` while the menu is open; the row keeps its hover fill.
 - Settings, Admin panel (admins only), then Sign out in red. Nothing else. Inside the admin panel, Admin panel becomes "Back to pe caiet" (Phosphor `arrow-left`), which goes to pe caiet's home page.
 - It closes on a click outside, Escape, or a choice. The same menu is used on phones.
+- A page without a sidebar (idp's home) puts the same row on the right of a top bar, with an up-down caret: its menu (`.pc-menu.pc-menu-pop`, no `.pc-sidebar-account-menu`) opens downward from the row, aligned to its right edge. On phones it is the usual bottom sheet.
 
 ## App switcher
 
@@ -305,7 +306,7 @@ A big window over the page with its own nav, for settings: not a plain modal. Ea
 - Open it with `showModal()`, then focus the window itself (`tabindex="-1"`) so no row lights up on open; Tab moves in. The browser keeps focus inside and dims the page with `::backdrop`. The page behind doesn't scroll while it is open.
 - Desktop: up to 960 × 640, centred; the nav is a 216px column in the sidebar's colour, with no line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
 - Phones (below 48rem): it fills the screen and the nav is hidden. The toggle opens `.pc-modal-frame` as a `.pc-sidebar-sheet`, like the app's sidebar; the backdrop or Escape closes the sheet first.
-- The close button and Escape leave the modal, back to the page under it.
+- The close button, Escape and a click on the dimmed page around it leave the modal, back to the page under it. The click counts only when the press started there too, so selecting text and letting go outside doesn't close it.
 
 ## Draft components
 
