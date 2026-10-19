@@ -341,6 +341,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Tooltip**: `data-pc-tooltip="Text"` on any element; on a `<span tabindex="0">` around a disabled button.
 - **Dialog**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, `.pc-dialog-actions`.
 - **Date picker**: `.pc-popover` with a `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`; today `aria-current="date"`, chosen `aria-selected="true"`, `.pc-calendar-day-outside`).
+- **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Date picker `.pc-popover` dropping under it.
 - **Search**: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `.pc-search-footer`.
 - **Link**: `.pc-link`.
 - **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
