@@ -39,7 +39,7 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 - **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `ring`, `overlay`.
 - **Row height**: `--pc-row` (36px) for sidebar rows, buttons, menu items and inputs.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
-- **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar).
+- **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
 - **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
 
 ## Rules for apps
@@ -79,7 +79,12 @@ Updating:
 
 ## Rules every component follows
 
-- Focus: a 2px `--ring` line. Controls (buttons, fields, checkboxes, links) draw it 1px outside; rows (sidebar, menu, search, table rows, calendar days) draw it inside their own edge and also take their hover fill. Rows sit with no gap between them. A row filled with teal would hide an inside ring, so such a row must draw it outside like a button.
+- Focus: as on claude.ai. Controls (buttons, fields, checkboxes, links) use `--pc-focus`: their outer 1px turns the page colour (bordered controls turn their border that colour), then a 1px blue `--ring` line on the edge and a soft glow in a darker blue. Rows (sidebar, menu, search, calendar days, table rows) use `--pc-focus-inset`: the ring inside the row's own edge, only the glow outside. Blue is for focus only, so it shows on teal buttons and ticked boxes too. Fields with an error keep their red border. Rows also take their hover fill, and sidebar rows touch, with no gap, since their ring sits inside; menu and search rows sit 4px apart. A transparent outline stays underneath for Windows high-contrast mode.
+  - Your own focusable thing, always on `:focus-visible` with `outline: 2px solid transparent` underneath (Windows high-contrast mode draws it):
+    - a control with a border: `border-color: var(--background); box-shadow: var(--pc-focus);`
+    - a control without a border: `box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus);`
+    - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
+  - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
 

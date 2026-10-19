@@ -26,10 +26,12 @@
   --sidebar-active: #ffffff;
   --destructive: #bd372e;
   --destructive-soft: #fbebe9;
-  --ring: #0b7a75;
+  --ring: #2563eb;
   --overlay: #1c273366;
   --pc-raise: 0 1px 2px #1c27331a, 0 2px 8px #1c27330f;
   --pc-raise-lg: 0 8px 24px #1c27331f, 0 2px 6px #1c27330f;
+  --pc-focus: 0 0 0 1px var(--ring), 0 0 6px 1px #1e40af99;
+  --pc-focus-inset: inset 0 0 0 1px var(--ring), 0 0 6px 1px #1e40af99;
 
   /* One row height for sidebar rows, buttons, menu items and inputs. */
   --pc-row: 36px;
@@ -63,10 +65,12 @@
   --sidebar-active: #25313d;
   --destructive: #ff8177;
   --destructive-soft: #3b2023;
-  --ring: #46c7ba;
+  --ring: #60a5fa;
   --overlay: #000000a6;
   --pc-raise: 0 1px 3px #000000a6;
   --pc-raise-lg: 0 8px 24px #00000099;
+  --pc-focus: 0 0 0 1px var(--ring), 0 0 6px 1px #2563eb99;
+  --pc-focus-inset: inset 0 0 0 1px var(--ring), 0 0 6px 1px #2563eb99;
 }
 
 /* shadcn-style names, kept so existing utilities (bg-sidebar-accent, text-card-foreground, ...) still work.
@@ -150,8 +154,6 @@
 }
 
 /* Components. Built from the design system's components/bundle.css: change a component there first, then here. */
-/* Components. Built from the design system's components/bundle.css: change a component there first, then here. */
-/* Components. Built from the design system's components/bundle.css: change a component there first, then here. */
 @layer components {
   .pc-page-title { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
   .pc-page-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
@@ -177,7 +179,7 @@
   .pc-sidebar-item > svg { width: 16px; height: 16px; flex-shrink: 0; }
   .pc-sidebar-item:hover { background: var(--sidebar-hover); }
   .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
-  .pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid var(--ring); outline-offset: -2px; }
+  .pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
   .pc-sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
   .pc-sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pc-sidebar-detail { margin-left: auto; font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; }
@@ -198,7 +200,7 @@
     font: inherit; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
   }
   .pc-btn > svg { width: 16px; height: 16px; }
-  .pc-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn[aria-pressed="true"]:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
   .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
   .pc-btn-ghost { background: transparent; color: var(--foreground); }
@@ -215,7 +217,7 @@
     background: var(--card); color: var(--foreground); font: inherit;
   }
   .pc-input::placeholder { color: var(--muted-foreground); }
-  .pc-input:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-input:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-checkbox {
     appearance: none; display: grid; place-content: center;
     width: 16px; height: 16px; margin: 0; flex-shrink: 0;
@@ -224,7 +226,7 @@
   }
   .pc-checkbox:checked { background: var(--primary); border-color: var(--primary); }
   .pc-checkbox:checked::after { content: ""; width: 8px; height: 4px; border-left: 2px solid var(--primary-foreground); border-bottom: 2px solid var(--primary-foreground); transform: translateY(-1px) rotate(-45deg); }
-  .pc-checkbox:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-checkbox:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 
   /* Cards, badges, tables */
   .pc-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
@@ -262,7 +264,7 @@
     background: var(--card); color: var(--foreground); font: inherit; line-height: 1.45; resize: vertical;
   }
   .pc-textarea::placeholder { color: var(--muted-foreground); }
-  .pc-textarea:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-textarea:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-input:disabled, .pc-textarea:disabled { opacity: 0.5; cursor: not-allowed; }
   .pc-input[aria-invalid="true"], .pc-textarea[aria-invalid="true"] { border-color: var(--destructive); }
   .pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: 12px; }
@@ -272,7 +274,7 @@
 
   .pc-link { color: var(--primary); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--primary) 35%, transparent); text-underline-offset: 3px; }
   .pc-link:hover { text-decoration-color: var(--primary); }
-  .pc-link:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; border-radius: 2px; }
+  .pc-link:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); border-radius: 2px; }
 
   .pc-badge-outline { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 1px var(--input); }
   .pc-badge-destructive { background: var(--destructive-soft); color: var(--destructive); }
@@ -289,16 +291,16 @@
   .pc-row-link { color: inherit; font-weight: 600; text-decoration: none; }
   .pc-row-link::after { content: ""; position: absolute; inset: 0; }
   .pc-row-link:focus-visible { outline: none; }
-  .pc-table tr:has(.pc-row-link:focus-visible) { background: var(--accent); outline: 2px solid var(--ring); outline-offset: -2px; }
+  .pc-table tr:has(.pc-row-link:focus-visible) { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
   .pc-empty { display: grid; justify-items: center; gap: 4px; padding: 28px 16px; text-align: center; color: var(--muted-foreground); }
   .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
 
-  .pc-menu { display: flex; flex-direction: column; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-menu { display: flex; flex-direction: column; gap: 4px; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
   .pc-menu-item { display: flex; align-items: center; gap: 10px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
   .pc-menu-item > svg { width: 16px; height: 16px; color: var(--muted-foreground); }
   .pc-menu-item:hover { background: var(--accent); }
-  .pc-menu-item:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: -2px; }
+  .pc-menu-item:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
   .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
   .pc-menu-separator { height: 1px; margin: 4px 6px; background: var(--border); }
 
@@ -366,14 +368,14 @@
   .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
   .pc-select { position: relative; display: flex; align-items: center; }
   .pc-select > select { appearance: none; opacity: 1; width: 100%; height: var(--pc-row); padding: 0 34px 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; cursor: pointer; }
-  .pc-select > select:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-select > select:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-select:has(select:disabled) { opacity: 0.5; }
   .pc-select > select:disabled { cursor: not-allowed; }
   .pc-select > svg { position: absolute; right: 10px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
   .pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
   .pc-radio:checked { border-color: var(--primary); }
   .pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
-  .pc-radio:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-radio:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-radio:disabled { opacity: 0.5; cursor: not-allowed; }
   .pc-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
   .pc-chip:has(.pc-chip-remove) { padding-right: 3px; }
@@ -381,7 +383,7 @@
   .pc-chip-remove { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted-foreground); cursor: pointer; }
   .pc-chip-remove > svg { width: 14px; height: 14px; }
   .pc-chip-remove:hover { background: var(--accent); color: var(--foreground); }
-  .pc-chip-remove:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .pc-chip-remove:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 
   /* Alerts with an action, menus with checks and group labels */
   .pc-alert-action { margin-left: auto; flex-shrink: 0; }
@@ -395,11 +397,11 @@
   .pc-popover { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-calendar { display: grid; gap: 6px; }
   .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 600; }
-  .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, 36px); gap: 2px; }
+  .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, 36px); gap: 4px; }
   .pc-calendar-weekday { display: grid; place-items: center; height: 26px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
   .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
   .pc-calendar-day:hover { background: var(--accent); }
-  .pc-calendar-day:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: -2px; }
+  .pc-calendar-day:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
   .pc-calendar-day[aria-current="date"] { color: var(--primary); font-weight: 700; }
   .pc-calendar-day[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: 600; }
   .pc-calendar-day-outside { color: var(--muted-foreground); }
@@ -434,13 +436,13 @@
   .pc-search-field > input { width: 100%; height: 52px; padding: 0 16px 0 46px; border: 0; background: none; color: var(--foreground); font: inherit; }
   .pc-search-field > input::placeholder { color: var(--muted-foreground); }
   .pc-search-field > input:focus-visible { outline: none; }
-  .pc-search-results { display: grid; gap: 0; max-height: 360px; padding: 4px; overflow: auto; }
+  .pc-search-results { display: grid; gap: 4px; max-height: 360px; padding: 4px; overflow: auto; }
   .pc-search-result { display: flex; align-items: center; gap: 10px; height: var(--pc-row); padding: 0 10px; border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
   .pc-search-result > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
   .pc-search-result > .pc-task-title { flex: 1; }
   .pc-search-result > .pc-list-label { max-width: 45%; }
   .pc-search-result:hover, .pc-search-result[aria-selected="true"] { background: var(--accent); }
-  .pc-search-result:focus-visible { background: var(--accent); outline: 2px solid var(--ring); outline-offset: -2px; }
+  .pc-search-result:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
   .pc-search-result[data-done] > .pc-task-title { color: var(--muted-foreground); text-decoration: line-through; }
   .pc-search-footer { display: flex; gap: 14px; padding: 8px 14px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; }
   .pc-code-block { max-height: 360px; margin: 0; padding: 12px 16px; overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; line-height: 1.6; white-space: pre; }
@@ -459,7 +461,7 @@
 
   /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. */
   .pc-sidebar-account { position: relative; }
-  .pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; }
+  .pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; min-width: 0; }
   .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 
