@@ -161,7 +161,7 @@
   /* Sidebar */
   .pc-sidebar {
     display: flex; flex-direction: column; gap: 1px;
-    width: 232px; flex-shrink: 0; padding: 10px 8px;
+    width: 256px; flex-shrink: 0; padding: 10px 8px;
     background: var(--sidebar); color: var(--foreground);
     overflow-y: auto;
   }
@@ -449,7 +449,7 @@
 
   /* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
   .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
-  .pc-sidebar[data-state="closed"] { margin-left: -232px; visibility: hidden; }
+  .pc-sidebar[data-state="closed"] { margin-left: -256px; visibility: hidden; }
   .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
