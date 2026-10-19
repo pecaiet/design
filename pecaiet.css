@@ -490,13 +490,39 @@
   .pc-carousel-dot[aria-current="true"]::before { width: 24px; opacity: 0.9; }
   .pc-carousel-dot:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
 
+  /* Color picker: a row of swatches from a set that reads in light and dark, and at the end a rainbow ring (a colour
+     well) that opens the device's own colour chooser. Each swatch is a label around a hidden radio; its dot is ::before
+     in --pc-colour, set by a .pc-colour-* class. The chosen one gets a ring in the text colour. A custom colour fills the
+     well's middle (--pc-colour, set by the app's script), so it never looks like one from the set. */
+  .pc-colour-gray { --pc-colour: #8b8d98; }
+  .pc-colour-red { --pc-colour: #e5484d; }
+  .pc-colour-orange { --pc-colour: #f76b15; }
+  .pc-colour-yellow { --pc-colour: #ffd54a; }
+  .pc-colour-green { --pc-colour: #30a46c; }
+  .pc-colour-teal { --pc-colour: #12a594; }
+  .pc-colour-blue { --pc-colour: #0090ff; }
+  .pc-colour-purple { --pc-colour: #8e4ec6; }
+  .pc-colour-pink { --pc-colour: #d6409f; }
+  .pc-swatches { display: flex; flex-wrap: wrap; }
+  .pc-swatch { position: relative; display: grid; place-items: center; width: var(--pc-row); height: var(--pc-row); border-radius: 999px; cursor: pointer; }
+  .pc-swatch::before { content: ""; grid-area: 1 / 1; width: 20px; height: 20px; border-radius: 999px; background: var(--pc-colour); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12); outline: 2px solid transparent; outline-offset: 2px; }
+  .pc-swatch > input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .pc-swatch:hover::before { outline-color: var(--input); }
+  .pc-swatch:has(> input:checked)::before { outline-color: var(--foreground); }
+  .pc-swatch:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
+  .pc-swatch-custom::before { background: radial-gradient(circle, var(--pc-colour) 6px, transparent 6.5px); box-shadow: none; }
+  .pc-swatch-custom > input[type="radio"] { pointer-events: none; }
+  .pc-swatch-ring { grid-area: 1 / 1; width: 20px; height: 20px; border-radius: 999px; background: conic-gradient(#e5484d, #f76b15, #ffd54a, #30a46c, #12a594, #0090ff, #8e4ec6, #d6409f, #e5484d); mask: radial-gradient(circle, transparent 7px, #000 7.5px); }
+  .pc-swatch-custom > svg { grid-area: 1 / 1; width: 11px; height: 11px; }
+  .pc-swatch-custom:has(> input[type="radio"]) > svg { display: none; }
+
   /* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
   .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
   .pc-sidebar[data-state="closed"] { margin-left: -256px; visibility: hidden; }
   .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
-  .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove {
+  .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
     transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
       box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
   }
