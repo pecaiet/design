@@ -344,8 +344,6 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">`.
 - **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-destructive`); `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
 - **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
-- **Stat tile**: `.pc-stats` holding `.pc-stat` (`.pc-stat-label`, `.pc-stat-value`, `.pc-stat-value-alert`).
-- **Detail list**: `<dl class="pc-details">`.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
 - **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-art`) when there's nothing; `.pc-muted` for quiet cells.
