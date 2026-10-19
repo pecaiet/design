@@ -37,7 +37,7 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 ## Tokens
 
 - **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `ring`, `overlay`.
-- **Row height**: `--pc-row` (36px) for sidebar rows, buttons, menu items and inputs.
+- **Row height**: `--pc-row` (32px) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
 - **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
@@ -87,7 +87,7 @@ Updating:
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
-- Divider lines (menus, the sidebar footer, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
+- Divider lines (menus, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
 
 ## Button
 
