@@ -240,7 +240,7 @@ A page without a sidebar (idp's home): the logo on the left and the account row 
 
 ## Page header
 
-The top of a page: its title, one line about it, and the page's main action on the right. Every page's title row starts with the sidebar toggle.
+The top of a page: its title, an optional line about it, and, on some pages, the page's action on the right. Two types: without an action and with one. Every page's title row starts with the sidebar toggle.
 
 ```html
 <div class="pc-page-header">
@@ -251,7 +251,7 @@ The top of a page: its title, one line about it, and the page's main action on t
     </div>
     <p class="pc-page-description">Apps that sign in with this IdP.</p>
   </div>
-  <div class="pc-page-header-actions">
+  <div class="pc-page-header-actions"><!-- only on a page with an action -->
     <button class="pc-btn pc-btn-primary" type="button">New client</button>
   </div>
 </div>
@@ -260,7 +260,8 @@ The top of a page: its title, one line about it, and the page's main action on t
 - The description is optional; it lines up with the title, not the toggle.
 - The toggle and the title never move: open, the toggle shows `text-outdent`; closed, `text-indent`.
 - Actions: at most one primary button. A page about one thing (a list, a client) can have its ⋯ menu here.
-- Phones: when the title and the actions don't fit on one line, the actions move under it.
+- A page without an action leaves out `.pc-page-header-actions`.
+- When the action doesn't fit beside the title, at any width, it moves to the next row, under the title.
 
 ## Picker
 
