@@ -156,6 +156,31 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 - Settings, Admin panel (admins only), then Sign out in red. Nothing else.
 - It closes on a click outside, Escape, or a choice. The same menu is used on phones.
 
+## App switcher
+
+The sidebar head as a button: the current app's mark and name, and the menu of apps it opens downward, as wide as the head.
+
+```html
+<div class="pc-sidebar-head">
+  <div class="pc-sidebar-apps">
+    <div class="pc-menu pc-sidebar-apps-menu" role="menu" hidden>
+      <div class="pc-menu-label">Switch app</div>
+      <a class="pc-menu-item" role="menuitem" href="…"><span class="pc-app-logo-mark"><img src="todo.svg" alt=""></span>todo</a>
+      <div class="pc-menu-separator"></div>
+      <a class="pc-menu-item" role="menuitem" href="/" aria-current="page"><span class="pc-app-logo-mark">P</span>pe caiet home<svg class="pc-menu-end">…squares-four…</svg></a>
+    </div>
+    <button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
+      <span class="pc-app-logo-mark">P</span><span class="pc-sidebar-label">pe caiet</span><svg>…caret-up-down…</svg>
+    </button>
+  </div>
+</div>
+```
+
+- The apps first, then pe caiet home under a divider. The app you are in has `aria-current="page"`: a primary bar on the menu's left edge.
+- `.pc-app-logo-mark` is a square slot: a letter for now; an `<img>` or `<svg>` inside fills it (24px in the head, 20px in the menu).
+- `.pc-menu-end` pushes a muted icon or text to the end of a menu row.
+- It opens and closes like the account menu.
+
 ## Sidebar
 
 Always a sidebar. One toggle opens and closes it on desktop and phones, and it sits in the page's title row.
