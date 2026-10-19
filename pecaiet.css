@@ -444,13 +444,39 @@
   .pc-search-footer { display: flex; gap: 14px; padding: 8px 14px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; }
   .pc-code-block { max-height: 360px; margin: 0; padding: 12px 16px; overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; line-height: 1.6; white-space: pre; }
 
+  /* Accordion: <details> items in a .pc-accordion; the browser opens and closes them. Rows like a menu's: 32px at least,
+     rounded, 2px apart, no lines; the open question semibold, its answer muted and lined up with it. */
+  .pc-accordion { display: flex; flex-direction: column; gap: 2px; }
+  .pc-accordion-item > summary { display: flex; align-items: center; gap: 8px; min-height: var(--pc-row); padding: 6px 10px; border-radius: var(--pc-radius); cursor: pointer; list-style: none; }
+  .pc-accordion-item > summary::-webkit-details-marker { display: none; }
+  .pc-accordion-item > summary > svg { width: 16px; height: 16px; flex-shrink: 0; margin-left: auto; color: var(--muted-foreground); transition: transform var(--pc-motion-fast) var(--pc-motion-ease); }
+  .pc-accordion-item > summary:hover { background: var(--accent); }
+  .pc-accordion-item > summary:focus-visible { outline: 2px solid transparent; outline-offset: 1px; background: var(--accent); box-shadow: var(--pc-focus-inset); }
+  .pc-accordion-item[open] > summary { font-weight: 600; }
+  .pc-accordion-item[open] > summary > svg { transform: rotate(180deg); }
+  .pc-accordion-content { padding: 2px 10px 10px; color: var(--muted-foreground); line-height: 1.5; }
+  .pc-accordion-item[aria-disabled="true"] > summary { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+  /* In a card the questions line up with the card's title; the fill reaches past them. */
+  .pc-card-content > .pc-accordion { margin: 0 -10px; }
+
+  /* Breadcrumbs: where the page sits, above its title. Parents muted with no underline until the pointer is on them,
+     the page you are on in the text colour, a small chevron between. Above a page header with the sidebar toggle it
+     lines up with the title, like the page description. */
+  .pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; color: var(--muted-foreground); font-size: 12px; font-weight: 500; }
+  .pc-breadcrumbs > a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 2px; }
+  .pc-breadcrumbs > a:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
+  .pc-breadcrumbs > a:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .pc-breadcrumbs > [aria-current="page"] { color: var(--foreground); }
+  .pc-breadcrumbs > svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.7; }
+  .pc-breadcrumbs:has(+ .pc-page-header .pc-sidebar-toggle) { padding-left: calc(var(--pc-row) - 4px); }
+
   /* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
   .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
   .pc-sidebar[data-state="closed"] { margin-left: -256px; visibility: hidden; }
   .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
-  .pc-btn, .pc-link, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove {
+  .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove {
     transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
       box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
   }
