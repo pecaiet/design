@@ -276,6 +276,36 @@ Every menu that pops up (pickers, the account menu, the app switcher, row action
 - Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
 - No drag handle: nothing to swipe.
 
+## Modal
+
+A big window over the page with its own nav: settings. Each section has its own address (`/settings/account`), and opening that address shows the page with the modal open on top.
+
+```html
+<dialog class="pc-modal" tabindex="-1" aria-labelledby="settings-title">
+  <div class="pc-modal-frame">
+    <div class="pc-sheet-backdrop"></div>
+    <nav class="pc-sidebar pc-modal-nav" aria-label="Settings">
+      <div class="pc-sidebar-head"><h2 id="settings-title" class="pc-dialog-title">Settings</h2></div>
+      <a class="pc-sidebar-item" href="/settings/account" aria-current="page"><svg>…user-circle…</svg><span class="pc-sidebar-label">Account</span></a>
+      …
+      <div class="pc-sidebar-footer"><div class="pc-modal-nav-user"><span class="pc-avatar">A</span><span>ana@example.com</span></div></div>
+    </nav>
+  </div>
+  <section class="pc-modal-main">
+    <div class="pc-modal-head">
+      <div class="pc-page-title-row"><button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" aria-label="Open sidebar" aria-expanded="false">…</button><h2 class="pc-page-title">Account</h2></div>
+      <a class="pc-btn pc-btn-ghost pc-btn-icon" href="/" aria-label="Close settings"><svg>…x…</svg></a>
+    </div>
+    <div class="pc-modal-body">…cards…</div>
+  </section>
+</dialog>
+```
+
+- Open it with `showModal()`, then focus the window itself (`tabindex="-1"`) so no row lights up on open; Tab moves in. The browser keeps focus inside and dims the page with `::backdrop`. The page behind doesn't scroll while it is open.
+- Desktop: up to 960 × 640, centred; the nav is a 216px column with a line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
+- Phones (below 48rem): it fills the screen and the nav is hidden. The toggle opens `.pc-modal-frame` as a `.pc-sidebar-sheet`, like the app's sidebar; the backdrop or Escape closes the sheet first.
+- The close button and Escape leave the modal, back to the page under it.
+
 ## Draft components
 
 In `pecaiet.css` and usable now, but not reviewed yet: their look or class names may still change. The design system card for each one shows every state; each gets a full section here once it's reviewed.

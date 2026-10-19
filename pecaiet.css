@@ -311,6 +311,35 @@
   .pc-dialog-title { margin: 0; font-size: 15px; font-weight: 600; }
   .pc-dialog-description { margin: 4px 0 0; color: var(--muted-foreground); }
   .pc-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+  /* Modal: a big window over the page with its own nav (settings). <dialog class="pc-modal"> holds .pc-modal-frame (the nav, .pc-sidebar.pc-modal-nav,
+     after a .pc-sheet-backdrop) and .pc-modal-main: a head (title row, close) over a body that scrolls. On phones it fills the screen and the nav
+     is hidden until the toggle in the head opens the frame as a .pc-sidebar-sheet, like the app's sidebar. */
+  .pc-modal { display: flex; width: min(960px, calc(100% - 48px)); max-width: none; height: min(640px, calc(100dvh - 48px)); max-height: none; margin: auto; padding: 0; overflow: hidden; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--background); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-modal:not([open]) { display: none; }
+  .pc-modal::backdrop { background: var(--overlay); }
+  /* Focus starts on the window itself (tabindex="-1", focused after showModal()), so no row lights up on open; Tab moves into it. */
+  .pc-modal:focus { outline: none; }
+  .pc-modal-frame { display: flex; }
+  .pc-modal-frame > .pc-sheet-backdrop { display: none; }
+  .pc-modal-nav { width: 216px; border-right: 1px solid var(--border); }
+  .pc-sidebar-sheet > .pc-modal-nav { border-right: 0; }
+  .pc-modal-nav-user { display: flex; align-items: center; gap: 10px; min-height: var(--pc-row); padding: 0 8px; color: var(--muted-foreground); font-size: 12px; }
+  .pc-modal-nav-user > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-modal-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  .pc-modal-head { display: flex; align-items: center; gap: 6px; padding: 16px 16px 16px 24px; }
+  .pc-modal-head > .pc-page-title-row { flex: 1; }
+  .pc-modal-body { display: flex; flex-direction: column; gap: 24px; flex: 1; min-height: 0; padding: 0 24px 24px; overflow-y: auto; }
+  @media (min-width: 48rem) {
+    .pc-modal-head .pc-sidebar-toggle { display: none; }
+  }
+  @media (max-width: 47.99rem) {
+    .pc-modal { width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; }
+    .pc-modal-frame { display: none; }
+    .pc-modal-frame.pc-sidebar-sheet { display: flex; }
+    .pc-modal-frame.pc-sidebar-sheet > .pc-sheet-backdrop { display: block; }
+    .pc-modal-head { padding: 8px 6px 12px 16px; }
+    .pc-modal-body { padding: 0 16px calc(24px + env(safe-area-inset-bottom)); }
+  }
 
   [data-pc-tooltip] { position: relative; }
   [data-pc-tooltip]::after {
@@ -507,8 +536,8 @@
   .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
   .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: -8px; }
   .pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
-  /* While a sheet is open (the phone sidebar, a menu sheet) the page behind it doesn't scroll. */
-  html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden])) { overflow: hidden; }
+  /* While a sheet or a modal is open (the phone sidebar, a menu sheet, settings) the page behind it doesn't scroll. */
+  html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open]) { overflow: hidden; }
   .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 
