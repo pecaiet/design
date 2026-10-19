@@ -83,7 +83,7 @@ Updating:
   - Your own focusable thing, always on `:focus-visible` with `outline: 2px solid transparent` underneath (Windows high-contrast mode draws it):
     - a control with a border: `border-color: var(--background); box-shadow: var(--pc-focus);`
     - a control without a border: `box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus);`
-    - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
+    - a row in a list: `box-shadow: var(--pc-focus-inset); position: relative; z-index: 1;` plus its hover fill (the z-index keeps the glow above the next row's fill).
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
