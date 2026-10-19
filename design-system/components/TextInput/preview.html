@@ -1,0 +1,47 @@
+<!-- @dsCard height=920 width=1120 subtitle="Text field, hint, error, disabled, text area" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Text input</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--primary); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-stack"><div class="pv-sec"><div class="pv-cap">With a label.</div><div class="pc-field"><label class="pc-label" for="e1-light">Email</label><input class="pc-input" id="e1-light" type="email" value="ana@example.com"></div></div><div class="pv-sec"><div class="pv-cap">Placeholder only (needs an aria-label).</div><input class="pc-input" type="text" placeholder="Add a task to America" aria-label="New task"></div><div class="pv-sec"><div class="pv-cap">Keyboard focus.</div><div class="pc-field"><label class="pc-label" for="e2-light">Name</label><input class="pc-input force-focus" id="e2-light" type="text" value="Pe caiet todo"></div></div><div class="pv-sec"><div class="pv-cap">With a hint.</div><div class="pc-field"><label class="pc-label" for="e3-light">New password</label><input class="pc-input" id="e3-light" type="password" value="correct horse battery"><p class="pc-field-hint">At least 12 characters.</p></div></div><div class="pv-sec"><div class="pv-cap">With an error: red border, and the message says how to fix it.</div><div class="pc-field"><label class="pc-label" for="e4-light">Email</label><input class="pc-input" id="e4-light" type="email" value="ana@example" aria-invalid="true" aria-describedby="e4m-light"><p class="pc-field-error" id="e4m-light">Enter an email like name@example.com.</p></div></div><div class="pv-sec"><div class="pv-cap">Disabled.</div><div class="pc-field"><label class="pc-label" for="e5-light">Client ID</label><input class="pc-input" id="e5-light" type="text" value="pc_7f3a9c2e" disabled></div></div><div class="pv-sec"><div class="pv-cap">Text area.</div><div class="pc-field"><label class="pc-label" for="e6-light">Redirect URIs</label><textarea class="pc-textarea" id="e6-light">https://todo.pecaiet.ro/auth/callback
+http://localhost:3000/auth/callback</textarea><p class="pc-field-hint">One per line.</p></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-stack"><div class="pv-sec"><div class="pv-cap">With a label.</div><div class="pc-field"><label class="pc-label" for="e1-dark">Email</label><input class="pc-input" id="e1-dark" type="email" value="ana@example.com"></div></div><div class="pv-sec"><div class="pv-cap">Placeholder only (needs an aria-label).</div><input class="pc-input" type="text" placeholder="Add a task to America" aria-label="New task"></div><div class="pv-sec"><div class="pv-cap">Keyboard focus.</div><div class="pc-field"><label class="pc-label" for="e2-dark">Name</label><input class="pc-input force-focus" id="e2-dark" type="text" value="Pe caiet todo"></div></div><div class="pv-sec"><div class="pv-cap">With a hint.</div><div class="pc-field"><label class="pc-label" for="e3-dark">New password</label><input class="pc-input" id="e3-dark" type="password" value="correct horse battery"><p class="pc-field-hint">At least 12 characters.</p></div></div><div class="pv-sec"><div class="pv-cap">With an error: red border, and the message says how to fix it.</div><div class="pc-field"><label class="pc-label" for="e4-dark">Email</label><input class="pc-input" id="e4-dark" type="email" value="ana@example" aria-invalid="true" aria-describedby="e4m-dark"><p class="pc-field-error" id="e4m-dark">Enter an email like name@example.com.</p></div></div><div class="pv-sec"><div class="pv-cap">Disabled.</div><div class="pc-field"><label class="pc-label" for="e5-dark">Client ID</label><input class="pc-input" id="e5-dark" type="text" value="pc_7f3a9c2e" disabled></div></div><div class="pv-sec"><div class="pv-cap">Text area.</div><div class="pc-field"><label class="pc-label" for="e6-dark">Redirect URIs</label><textarea class="pc-textarea" id="e6-dark">https://todo.pecaiet.ro/auth/callback
+http://localhost:3000/auth/callback</textarea><p class="pc-field-hint">One per line.</p></div></div></div></div></div>
+</body>
+</html>

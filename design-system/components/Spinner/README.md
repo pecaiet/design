@@ -1,0 +1,3 @@
+# Spinner
+
+Not designed yet.

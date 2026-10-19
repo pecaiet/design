@@ -1,0 +1,45 @@
+<!-- @dsCard height=520 width=1120 subtitle="Notice, error, with an action" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alert</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--primary); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-stack"><div class="pv-sec"><div class="pv-cap">Notice: something worked.</div><p class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg><span>Email updated.</span></p></div><div class="pv-sec"><div class="pv-cap">Notice: what happens next.</div><p class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg><span>Check your email for a link to reset your password.</span></p></div><div class="pv-sec"><div class="pv-cap">Error: what went wrong and what to do.</div><p class="pc-alert pc-alert-error" role="alert"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></svg><span>Wrong email or password. Try again or reset your password.</span></p></div><div class="pv-sec"><div class="pv-cap">With an action (an archived list).</div><div class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,48H32A16,16,0,0,0,16,64V88a16,16,0,0,0,16,16v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM208,192H48V104H208ZM224,88H32V64H224V88ZM96,136a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,136Z"/></svg><span>This list is archived. Unarchive it to add or change tasks.</span><button class="pc-btn pc-btn-outline pc-alert-action" type="button">Unarchive</button></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-stack"><div class="pv-sec"><div class="pv-cap">Notice: something worked.</div><p class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg><span>Email updated.</span></p></div><div class="pv-sec"><div class="pv-cap">Notice: what happens next.</div><p class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg><span>Check your email for a link to reset your password.</span></p></div><div class="pv-sec"><div class="pv-cap">Error: what went wrong and what to do.</div><p class="pc-alert pc-alert-error" role="alert"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></svg><span>Wrong email or password. Try again or reset your password.</span></p></div><div class="pv-sec"><div class="pv-cap">With an action (an archived list).</div><div class="pc-alert pc-alert-notice" role="status"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,48H32A16,16,0,0,0,16,64V88a16,16,0,0,0,16,16v88a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM208,192H48V104H208ZM224,88H32V64H224V88ZM96,136a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,136Z"/></svg><span>This list is archived. Unarchive it to add or change tasks.</span><button class="pc-btn pc-btn-outline pc-alert-action" type="button">Unarchive</button></div></div></div></div></div>
+</body>
+</html>

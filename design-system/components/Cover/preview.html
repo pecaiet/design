@@ -1,0 +1,53 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pecaiet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@700&display=swap">
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--background); color: var(--foreground); overflow: hidden; font-family: var(--font-sans, Figtree, system-ui, sans-serif); }
+  .cover { position: relative; height: 288px; overflow: hidden; }
+  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art svg { display: block; width: 480px; height: 288px; }
+  .teal { fill: var(--primary); }
+  .deep { fill: var(--sidebar-active-foreground); }
+  .ink { fill: var(--foreground); }
+  .pill { fill: var(--card); }
+  .pill.on { fill: var(--primary); }
+  .words { position: absolute; left: 24px; bottom: 24px; max-width: 440px; }
+  .name { margin: 0; font-size: 100px; line-height: .92; font-weight: 700; letter-spacing: -.02em; color: var(--foreground); }
+  .tag { margin: 10px 0 0 4px; font-size: 14px; line-height: 20px; color: var(--muted-foreground); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      primary teal 144x232 bled off the top (the brand colour, largest), sidebar-active-foreground deep teal 104x104, foreground ink 200x160 bled off the right; about 27% of 960x288
+  arrangement one tall slab with two satellites, bottoms stepping down to the right; gutters pc-space-4 (16)
+  pattern     pills, from "roomy, soft": sidebar rows drawn as 14-tall pills (rx 7) at the pc-row pitch (36), cut into the teal slab and the ink slab in card, one in primary as the row you are on
+  scales      sides in pc-space-2 multiples; gutters pc-space-4; pitch pc-row; corners pc-radius-lg (14) on every block
+-->
+<rect class="teal" x="32" y="-16" width="144" height="232" rx="14"/>
+<rect class="deep" x="192" y="56" width="104" height="104" rx="14"/>
+<rect class="ink" x="312" y="104" width="200" height="160" rx="14"/>
+<rect class="pill" x="52" y="40" width="96" height="14" rx="7"/>
+<rect class="pill" x="52" y="76" width="64" height="14" rx="7"/>
+<rect class="pill" x="52" y="112" width="104" height="14" rx="7"/>
+<rect class="pill" x="52" y="148" width="56" height="14" rx="7"/>
+<rect class="pill" x="332" y="128" width="120" height="14" rx="7"/>
+<rect class="pill on" x="332" y="164" width="88" height="14" rx="7"/>
+<rect class="pill" x="332" y="200" width="136" height="14" rx="7"/>
+<rect class="pill" x="332" y="236" width="72" height="14" rx="7"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Pecaiet</h1>
+<p class="tag">Roomy, soft and calm, across every Pe caiet app.</p>
+</div>
+</div>
+</body>
+</html>

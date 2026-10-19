@@ -1,0 +1,45 @@
+<!-- @dsCard height=260 width=1120 subtitle="The account row at the foot of the sidebar, in every state" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sidebar account</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--primary); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-list"><div class="pv-strip first"><button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">At rest: avatar, email, a caret pointing down.</div><div class="pv-strip"><button class="pc-sidebar-item force-hover" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Under the pointer.</div><div class="pv-strip"><button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="true"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Open: keeps the hover fill while its menu is showing.</div><div class="pv-strip last"><button class="pc-sidebar-item force-focus" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Keyboard focus.</div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-list"><div class="pv-strip first"><button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">At rest: avatar, email, a caret pointing down.</div><div class="pv-strip"><button class="pc-sidebar-item force-hover" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Under the pointer.</div><div class="pv-strip"><button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="true"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Open: keeps the hover fill while its menu is showing.</div><div class="pv-strip last"><button class="pc-sidebar-item force-focus" type="button" aria-haspopup="menu" aria-expanded="false"><span class="pc-avatar">A</span><span class="pc-sidebar-label">ana@example.com</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button></div><div class="pv-cap">Keyboard focus.</div></div></div></div></div>
+</body>
+</html>

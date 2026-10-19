@@ -1,0 +1,53 @@
+<!-- @dsCard group="Pages" page height=440 width=1120 subtitle="The password reset email" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Email</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--primary); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div style="padding:28px 16px;background:#f4f7fa;border-radius:14px;font-family:Figtree, -apple-system, 'Segoe UI', sans-serif;color:#1c2733">
+      <div style="max-width:440px;margin:0 auto">
+        <div style="font-weight:700;font-size:15px;margin-bottom:16px">pe caiet</div>
+        <div style="background:#ffffff;border:1px solid #e0e6ee;border-radius:14px;padding:24px">
+          <h1 style="margin:0 0 8px;font-size:22px;line-height:1.25">Reset your password</h1>
+          <p style="margin:0 0 20px;font-size:14px;line-height:1.5;color:#1c2733">Someone asked to reset the password for ana@example.com. If it was you, choose a new one. The link works for 15 minutes.</p>
+          <a href="#" style="display:inline-block;padding:10px 18px;border-radius:10px;background:#0b7a75;color:#ffffff;font-weight:600;font-size:14px;text-decoration:none">Choose a new password</a>
+          <p style="margin:20px 0 0;font-size:12px;line-height:1.5;color:#566577">If you didn't ask for this, ignore this email. Your password stays the same.</p></div>
+        <p style="margin:16px 0 0;font-size:12px;color:#566577;text-align:center">Sent by pe caiet · no-reply@pecaiet.ro</p></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><p class="pv-cap" style="max-width:440px">Emails are light only. Mail apps drop stylesheets, so the email writes these colours as inline hex values: page #f4f7fa, card #ffffff, text #1c2733, secondary text #566577, button #0b7a75 with white text, border #e0e6ee. Some mail apps darken it on their own; the colours still read.</p></div></div>
+</body>
+</html>

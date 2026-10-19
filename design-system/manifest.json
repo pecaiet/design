@@ -1,0 +1,239 @@
+{
+  "manifestVersion": 3,
+  "name": "Pecaiet",
+  "namespace": "Pecaiet",
+  "files": [
+    "components/Alert/README.md",
+    "components/AppSwitcher/README.md",
+    "components/Badge/README.md",
+    "components/Button/README.md",
+    "components/Card/README.md",
+    "components/Checkbox/README.md",
+    "components/Code/README.md",
+    "components/DatePicker/README.md",
+    "components/DetailList/README.md",
+    "components/Dialog/README.md",
+    "components/Email/README.md",
+    "components/ErrorPage/README.md",
+    "components/Focus/README.md",
+    "components/Input/README.md",
+    "components/InputGroup/README.md",
+    "components/Link/README.md",
+    "components/Menu/README.md",
+    "components/PageHeader/README.md",
+    "components/Radio/README.md",
+    "components/Search/README.md",
+    "components/Select/README.md",
+    "components/Senin/README.md",
+    "components/Sidebar/README.md",
+    "components/SidebarAccount/README.md",
+    "components/SidebarItem/README.md",
+    "components/SignIn/README.md",
+    "components/StatTile/README.md",
+    "components/Table/README.md",
+    "components/TaskPane/README.md",
+    "components/TaskRow/README.md",
+    "components/Tooltip/README.md",
+    "components/bundle.css",
+    "components/bundle.js",
+    "tokens.css"
+  ],
+  "libraries": [],
+  "components": [
+    {
+      "name": "Button",
+      "group": "Actions",
+      "summary": "A button that does something, in four styles."
+    },
+    {
+      "name": "SidebarItem",
+      "group": "Navigation",
+      "summary": "One row in a sidebar: a link to a page, a button that does something, or a heading."
+    },
+    {
+      "name": "SidebarAccount",
+      "group": "Navigation",
+      "summary": "The account row at the foot of the sidebar, and the menu it opens."
+    },
+    {
+      "name": "AppSwitcher",
+      "group": "Navigation",
+      "summary": "The sidebar head as a button: the current app's mark and name, and an up-down caret."
+    },
+    {
+      "name": "Sidebar",
+      "group": "Navigation",
+      "summary": "The app's navigation, always a sidebar."
+    },
+    {
+      "name": "Focus",
+      "group": "Foundations",
+      "summary": "Keyboard focus, the same on every component, as on claude.ai: one blue ring and one soft glow."
+    },
+    {
+      "name": "PageHeader",
+      "group": "Navigation",
+      "summary": "The top of a page: its title, one line about it, and the page's main action on the right."
+    },
+    {
+      "name": "Menu",
+      "group": "Overlays",
+      "summary": "A short list of actions or places that opens over the page from a button."
+    },
+    {
+      "name": "Tooltip",
+      "group": "Overlays",
+      "summary": "A short hint shown above an element on hover and keyboard focus."
+    },
+    {
+      "name": "Dialog",
+      "group": "Overlays",
+      "summary": "A small window over the page that asks to confirm an action."
+    },
+    {
+      "name": "DatePicker",
+      "group": "Overlays",
+      "summary": "Choosing a task's due date: quick picks, a month, and its reminders, in a popover."
+    },
+    {
+      "name": "Search",
+      "group": "Overlays",
+      "summary": "A dialog for finding tasks: the field on top, results grouped below."
+    },
+    {
+      "name": "Link",
+      "group": "Actions",
+      "summary": "A teal, underlined link inside running text."
+    },
+    {
+      "name": "Input",
+      "group": "Forms",
+      "summary": "Text fields and text areas, with a label, an optional hint and an error."
+    },
+    {
+      "name": "InputGroup",
+      "group": "Forms",
+      "summary": "A text field with an icon inside it, for quick add and search."
+    },
+    {
+      "name": "Select",
+      "group": "Forms",
+      "summary": "Choosing one option from a list, using the browser's own menu."
+    },
+    {
+      "name": "Checkbox",
+      "group": "Forms",
+      "summary": "A square checkbox with its label, and an optional hint under it."
+    },
+    {
+      "name": "Radio",
+      "group": "Forms",
+      "summary": "Choosing one of a few options that are all visible at once."
+    },
+    {
+      "name": "Badge",
+      "group": "Status",
+      "summary": "A short round label for a status or a fact on a row."
+    },
+    {
+      "name": "Alert",
+      "group": "Status",
+      "summary": "A message at the top of a page or form: a notice that something worked, or an error."
+    },
+    {
+      "name": "StatTile",
+      "group": "Data",
+      "summary": "A big number with its label, for counts at a glance (admin overview, jobs)."
+    },
+    {
+      "name": "DetailList",
+      "group": "Data",
+      "summary": "Label and value pairs describing one record (a user, a client, a job)."
+    },
+    {
+      "name": "Code",
+      "group": "Data",
+      "summary": "Machine values: IDs, secrets, error codes and keyboard keys, in the system's monospace."
+    },
+    {
+      "name": "Card",
+      "group": "Containers",
+      "summary": "A white, slightly raised panel that groups one task on a page."
+    },
+    {
+      "name": "Table",
+      "group": "Containers",
+      "summary": "Rows of records, usually inside a card."
+    },
+    {
+      "name": "TaskRow",
+      "group": "Tasks",
+      "summary": "One task in a list: checkbox, title, due date."
+    },
+    {
+      "name": "TaskPane",
+      "group": "Tasks",
+      "summary": "The open task, beside the list (on wide screens) or in its place (on narrow ones)."
+    },
+    {
+      "name": "Senin",
+      "group": "Screens",
+      "summary": "Senin applied to both apps: the todo workspace and the idp Account page, in light and dark."
+    },
+    {
+      "name": "SignIn",
+      "group": "Screens",
+      "summary": "The signed-out page, used for sign in, sign up and password reset."
+    },
+    {
+      "name": "ErrorPage",
+      "group": "Screens",
+      "summary": "A signed-out page that says something went wrong and what to do (idp's \"Can't sign in to this app\")."
+    },
+    {
+      "name": "Email",
+      "group": "Screens",
+      "summary": "The password reset email, in Senin's light colours."
+    }
+  ],
+  "assetGroups": [
+    {
+      "name": "logo",
+      "files": [
+        {
+          "path": "assets/logo/pe-caiet.svg",
+          "id": "1deae5d33c6bd839a12aa49403e70a86"
+        },
+        {
+          "path": "assets/logo/todo.svg",
+          "id": "49adcace954db1559290ee2ca4730338"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "files": {
+      "assets/logo/pe-caiet.svg": {
+        "store": "blob",
+        "id": "1deae5d33c6bd839a12aa49403e70a86",
+        "sha256": "9b24e2e70e385573090632efcdbe59fe511fc63acddbd7d27f7efa0486cac2fe",
+        "bytes": 1197,
+        "type": "image/svg+xml",
+        "name": "pe-caiet.svg",
+        "addedAt": "2026-10-19T08:10:06.020Z",
+        "via": "page"
+      },
+      "assets/logo/todo.svg": {
+        "store": "blob",
+        "id": "49adcace954db1559290ee2ca4730338",
+        "sha256": "8b744c848373bd8370d9dd6ed1e8d2dd8d9b3600389f670460820fea43b3d316",
+        "bytes": 751,
+        "type": "image/svg+xml",
+        "name": "todo.svg",
+        "addedAt": "2026-10-19T08:10:06.758Z",
+        "via": "page"
+      }
+    },
+    "blobBytesUsed": 1948
+  }
+}

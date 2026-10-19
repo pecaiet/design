@@ -1,0 +1,48 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "logo": {
+      "files": {
+        "pe-caiet.svg": {
+          "blob": "1deae5d33c6bd839a12aa49403e70a86",
+          "name": "pe-caiet.svg",
+          "sha256": "9b24e2e70e385573090632efcdbe59fe511fc63acddbd7d27f7efa0486cac2fe",
+          "size": 1197,
+          "type": "image/svg+xml"
+        },
+        "todo.svg": {
+          "blob": "49adcace954db1559290ee2ca4730338",
+          "name": "todo.svg",
+          "sha256": "8b744c848373bd8370d9dd6ed1e8d2dd8d9b3600389f670460820fea43b3d316",
+          "size": 751,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "logo",
+      "order": []
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-10-18T08:38:25Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "logo"
+  ],
+  "lastChange": {
+    "at": "2026-10-19T22:05:20Z",
+    "by": "Claude",
+    "note": "Cards 1:1 with component.gallery: its 60 names in its order (Menu, Top bar, Dialog, Sidebar, Radio, Search, Input and Date picker renamed; Heading, Label and Textarea added), our own pieces after them, then pages.",
+    "via": "Claude Code"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "Pecaiet",
+  "sections": {},
+  "title": "Pecaiet"
+}

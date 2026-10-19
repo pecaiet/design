@@ -1,0 +1,3 @@
+# Slider
+
+Not designed yet.

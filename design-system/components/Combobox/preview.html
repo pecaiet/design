@@ -1,0 +1,56 @@
+<!-- @dsCard height=540 width=1120 subtitle="The Picker with search" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Combobox</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--foreground); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+
+  /* Rows: the forced states drawn on the cells, as the table draws them */
+  tr.force-hover, tr.force-focus { background: none; box-shadow: none; }
+  .pc-table tbody tr.force-hover:nth-child(n) td, .pc-table tbody tr.force-focus:nth-child(n) td { background: var(--accent); }
+  tr.force-focus td { box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  .pv-panel .pv-sec { gap: 8px; }
+  .cbx-w { max-width: 280px; }
+  .cbx-menu { position: static; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-cap">A Picker with a search field at the top of its menu: typing filters the list (“wo”); Up and Down move (Workout plan), Enter picks.</div><div class="pc-field cbx-w"><span class="pc-label">List</span><div class="pc-picker"><button class="pc-picker-button" type="button" aria-haspopup="listbox" aria-expanded="true"><span>Work</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button><div class="pc-menu pc-picker-menu cbx-menu" role="listbox" aria-label="List"><div class="pc-input-group"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg><input class="pc-input" type="search" value="wo" placeholder="Search lists" aria-label="Search lists"></div><button class="pc-menu-item" type="button" role="option" aria-selected="true">Work<svg class="pc-menu-check" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></button><button class="pc-menu-item force-hover" type="button" role="option" aria-selected="false">Workout plan</button><button class="pc-menu-item" type="button" role="option" aria-selected="false">Homework</button></div></div></div></div><div class="pv-sec"><div class="pv-cap">When nothing matches, one line says so.</div><div class="pc-field cbx-w"><span class="pc-label">List</span><div class="pc-picker"><button class="pc-picker-button" type="button" aria-haspopup="listbox" aria-expanded="true"><span>Work</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button><div class="pc-menu pc-picker-menu cbx-menu" role="listbox" aria-label="List"><div class="pc-input-group"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg><input class="pc-input" type="search" value="gym" placeholder="Search lists" aria-label="Search lists"></div><p class="pc-menu-empty">No lists match “gym”.</p></div></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-cap">A Picker with a search field at the top of its menu: typing filters the list (“wo”); Up and Down move (Workout plan), Enter picks.</div><div class="pc-field cbx-w"><span class="pc-label">List</span><div class="pc-picker"><button class="pc-picker-button" type="button" aria-haspopup="listbox" aria-expanded="true"><span>Work</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button><div class="pc-menu pc-picker-menu cbx-menu" role="listbox" aria-label="List"><div class="pc-input-group"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg><input class="pc-input" type="search" value="wo" placeholder="Search lists" aria-label="Search lists"></div><button class="pc-menu-item" type="button" role="option" aria-selected="true">Work<svg class="pc-menu-check" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></button><button class="pc-menu-item force-hover" type="button" role="option" aria-selected="false">Workout plan</button><button class="pc-menu-item" type="button" role="option" aria-selected="false">Homework</button></div></div></div></div><div class="pv-sec"><div class="pv-cap">When nothing matches, one line says so.</div><div class="pc-field cbx-w"><span class="pc-label">List</span><div class="pc-picker"><button class="pc-picker-button" type="button" aria-haspopup="listbox" aria-expanded="true"><span>Work</span><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button><div class="pc-menu pc-picker-menu cbx-menu" role="listbox" aria-label="List"><div class="pc-input-group"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg><input class="pc-input" type="search" value="gym" placeholder="Search lists" aria-label="Search lists"></div><p class="pc-menu-empty">No lists match “gym”.</p></div></div></div></div></div></div>
+</body>
+</html>
