@@ -87,6 +87,7 @@ Updating:
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: a soft underline at rest that turns solid under the pointer.
 - Disabled: half opacity, no pointer.
+- Divider lines (menus, the sidebar footer, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
 
 ## Button
 

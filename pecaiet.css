@@ -302,7 +302,7 @@
   .pc-menu-item:hover { background: var(--accent); }
   .pc-menu-item:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); position: relative; z-index: 1; }
   .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
-  .pc-menu-separator { height: 1px; margin: 4px 6px; background: var(--border); }
+  .pc-menu-separator { height: 1px; margin: 4px -4px; background: var(--border); }
 
   .pc-dialog { width: min(420px, calc(100% - 32px)); padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-dialog::backdrop { background: var(--overlay); }
@@ -332,6 +332,7 @@
   .pc-sidebar-sheet { position: fixed; inset: 0; z-index: 40; display: flex; }
   .pc-sheet-backdrop { position: absolute; inset: 0; background: var(--overlay); }
   .pc-sidebar-sheet > .pc-sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--pc-raise-lg); }
+  .pc-sidebar-sheet .pc-sidebar-footer { box-shadow: none; }
 
   .pc-task-group { display: flex; align-items: baseline; gap: 8px; padding: 14px 8px 6px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
   .pc-task-group-late { color: var(--destructive); }
