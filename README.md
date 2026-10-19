@@ -168,7 +168,7 @@ The sidebar head as a button: the current app's mark and name, and the menu of a
       <div class="pc-menu-label">Switch app</div>
       <a class="pc-menu-item" role="menuitem" href="…"><span class="pc-app-logo-mark"><img src="todo.svg" alt=""></span>todo</a>
       <div class="pc-menu-separator"></div>
-      <a class="pc-menu-item" role="menuitem" href="/" aria-current="page"><span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span>pe caiet home<svg class="pc-menu-end">…squares-four…</svg></a>
+      <a class="pc-menu-item" role="menuitem" href="/" aria-current="page"><span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span>pe caiet<svg class="pc-menu-end">…squares-four…</svg></a>
     </div>
     <button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
       <span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span><span class="pc-sidebar-label">pe caiet</span><svg>…caret-up-down…</svg>
@@ -177,7 +177,7 @@ The sidebar head as a button: the current app's mark and name, and the menu of a
 </div>
 ```
 
-- The apps first, then pe caiet home under a divider. The app you are in has `aria-current="page"`: a primary bar on the menu's left edge.
+- The apps first, then pe caiet under a divider. The app you are in has `aria-current="page"`: a primary bar on the menu's left edge.
 - `.pc-app-logo-mark` is a square slot: the app's square `<img>` or `<svg>` (`pe-caiet.svg`, `todo.svg` in this repo) fills it, 24px in the head and 20px in the menu. A letter works as a stand-in.
 - `.pc-menu-end` pushes a muted icon or text to the end of a menu row.
 - In an area of the app (the admin panel), a `.pc-badge.pc-badge-soft` right after the name says where you are: `<span class="pc-sidebar-label">pe caiet</span><span class="pc-badge pc-badge-soft">Admin</span>`. The name shrinks to fit and the caret stays at the end.
