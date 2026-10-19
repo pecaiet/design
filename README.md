@@ -347,5 +347,3 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
 - **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-art`) when there's nothing; `.pc-muted` for quiet cells.
-- **Task row**: `.pc-task-list` of `.pc-task` (`.pc-task-title`, `.pc-task-due`, `.pc-task-due-late`, `.pc-task-body`, `.pc-task-sub`, `.pc-task-meta`, `.pc-list-label`), grouped by `.pc-task-group`; `.pc-tally` for counts.
-- **Task pane**: `.pc-pane` with `.pc-pane-toolbar` (`.pc-pane-toolbar-end`), `.pc-pane-title`, `.pc-pane-notes`, `.pc-section-title`, `.pc-subtask`.
