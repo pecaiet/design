@@ -153,7 +153,7 @@ The account row at the foot of the sidebar, and the menu it opens upward.
 ```
 
 - Set `aria-expanded="true"` while the menu is open; the row keeps its hover fill.
-- Settings, Admin panel (admins only), then Sign out in red. Nothing else. Inside the admin panel, Admin panel becomes "Back to pe caiet home" (Phosphor `arrow-left`).
+- Settings, Admin panel (admins only), then Sign out in red. Nothing else. Inside the admin panel, Admin panel becomes "Back to pe caiet" (Phosphor `arrow-left`), which goes to pe caiet's home page.
 - It closes on a click outside, Escape, or a choice. The same menu is used on phones.
 
 ## App switcher
