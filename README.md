@@ -334,6 +334,8 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 
 - **Accordion**: `.pc-accordion` of `<details class="pc-accordion-item">`, each a `<summary>` (the question and a `caret-down`) and a `.pc-accordion-content`; `aria-disabled="true"` plus `tabindex="-1"` on the summary for one coming later; the same `name` on the items keeps one open at a time.
 - **Breadcrumbs**: `<nav class="pc-breadcrumbs" aria-label="Breadcrumb">` with the parent pages as `<a>`, a `caret-right` `<svg>` between, and the current page last as `<span aria-current="page">`; above a page header with the sidebar toggle it lines up with the title.
+- **Button group**: `.pc-btn-group` puts buttons side by side, 8px apart; `.pc-toolbar` holds ghost tools in a quiet `muted` tray with `.pc-toolbar-divider` between groups, the tool under the pointer or pressed (`aria-pressed="true"`) raised as a card.
+- **Carousel**: `.pc-carousel-dots` holding one `<button class="pc-carousel-dot">` per slide, the current one `aria-current="true"` (long); the app shows one slide and hides the others, with no motion.
 - **Menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
 - **Tooltip**: `data-pc-tooltip="Text"` on any element; on a `<span tabindex="0">` around a disabled button.
 - **Dialog**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, `.pc-dialog-actions`.
