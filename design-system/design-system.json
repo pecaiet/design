@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T13:14:21Z",
+    "at": "2026-10-20T13:24:42Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Text input (option A): a password with an eye to show it, read-only (muted fill, copy button), a short field, autofill keeping our colours; the text area moves to its own card."
+    "note": "Radio button (option C): a captioned group sharing one name, side by side, boxes when each choice has a description, an error state; long lists go to the Picker."
   },
   "layout": "files",
   "libraries": [],

@@ -113,6 +113,15 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
 .pc-legend { margin-bottom: 6px; padding: 0; font-size: 12px; font-weight: 600; }
 .pc-fieldset-options { display: grid; gap: 10px; }
+/* Two or three short choices side by side. */
+.pc-fieldset-options-row { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+/* Choices that each have a description sit in boxes: a thin border, the chosen one teal; the whole box picks it. */
+.pc-fieldset-boxes { gap: 8px; }
+.pc-fieldset-boxes > .pc-field { position: relative; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); }
+.pc-fieldset-boxes > .pc-field:has(:checked) { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--card)); }
+.pc-fieldset-boxes > .pc-field > .pc-check { display: flex; }
+.pc-fieldset-boxes > .pc-field > .pc-check::after { content: ""; position: absolute; inset: 0; }
+.pc-fieldset-options + .pc-field-error { margin-top: 6px; }
 .pc-input {
   width: 100%; height: var(--pc-row); padding: 0 10px;
   border: 1px solid var(--input); border-radius: var(--pc-radius);
@@ -495,6 +504,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
 .pc-radio:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-radio:disabled { opacity: 0.5; cursor: not-allowed; }
+.pc-radio[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
 .pc-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
 .pc-chip:has(.pc-chip-remove) { padding-right: 3px; }
 .pc-chip > svg { width: 14px; height: 14px; color: var(--muted-foreground); }
