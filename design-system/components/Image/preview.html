@@ -1,0 +1,55 @@
+<!-- @dsCard height=355 width=1120 subtitle="10px corners and a faint edge; a muted box until it loads" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Image</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--foreground); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+
+  /* Rows: the forced states drawn on the cells, as the table draws them */
+  tr.force-hover, tr.force-focus { background: none; box-shadow: none; }
+  .pc-table tbody tr.force-hover:nth-child(n) td, .pc-table tbody tr.force-focus:nth-child(n) td { background: var(--accent); }
+  tr.force-focus td { box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  .pv-ims { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pv-im { width: 100%; aspect-ratio: 4 / 3; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-cap">10px corners and a faint edge: a photo barely changes, a white screenshot keeps its shape on the card. Until it loads, or if it can’t, a muted box with an image icon.</div><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Office move</h3><p class="pc-card-description">Three attachments on a task.</p></div><div class="pc-card-content"><div class="pv-ims"><figure class="pc-figure"><img class="pc-image pv-im" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237fb3d5%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f3d9b1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22url%28%23s%29%22/%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2290%22%20r%3D%2234%22%20fill%3D%22%23fbe7b5%22/%3E%3Cpath%20d%3D%22M0%20210%20L90%20140%20L170%20200%20L250%20120%20L400%20230%20L400%20300%20L0%20300Z%22%20fill%3D%22%235d7f6e%22/%3E%3Cpath%20d%3D%22M0%20250%20L120%20200%20L230%20250%20L330%20210%20L400%20240%20L400%20300%20L0%20300Z%22%20fill%3D%22%233f5d50%22/%3E%3C/svg%3E" alt="Hills at sunset"><figcaption>Hills at sunset</figcaption></figure><figure class="pc-figure"><img class="pc-image pv-im" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22%23ffffff%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2228%22%20width%3D%22150%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%23d9dee5%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2264%22%20width%3D%22352%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2286%22%20width%3D%22300%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22108%22%20width%3D%22330%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22150%22%20width%3D%22110%22%20height%3D%2228%22%20rx%3D%228%22%20fill%3D%22%231f7a6d%22/%3E%3C/svg%3E" alt="The sign-in page"><figcaption>The sign-in page</figcaption></figure><figure class="pc-figure"><div class="pc-image pc-image-empty pv-im" role="img" aria-label="Office plan"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg></div><figcaption>Office plan</figcaption></figure></div></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-cap">10px corners and a faint edge: a photo barely changes, a white screenshot keeps its shape on the card. Until it loads, or if it can’t, a muted box with an image icon.</div><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Office move</h3><p class="pc-card-description">Three attachments on a task.</p></div><div class="pc-card-content"><div class="pv-ims"><figure class="pc-figure"><img class="pc-image pv-im" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237fb3d5%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23f3d9b1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22url%28%23s%29%22/%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2290%22%20r%3D%2234%22%20fill%3D%22%23fbe7b5%22/%3E%3Cpath%20d%3D%22M0%20210%20L90%20140%20L170%20200%20L250%20120%20L400%20230%20L400%20300%20L0%20300Z%22%20fill%3D%22%235d7f6e%22/%3E%3Cpath%20d%3D%22M0%20250%20L120%20200%20L230%20250%20L330%20210%20L400%20240%20L400%20300%20L0%20300Z%22%20fill%3D%22%233f5d50%22/%3E%3C/svg%3E" alt="Hills at sunset"><figcaption>Hills at sunset</figcaption></figure><figure class="pc-figure"><img class="pc-image pv-im" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22%23ffffff%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2228%22%20width%3D%22150%22%20height%3D%2216%22%20rx%3D%224%22%20fill%3D%22%23d9dee5%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2264%22%20width%3D%22352%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2286%22%20width%3D%22300%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22108%22%20width%3D%22330%22%20height%3D%2210%22%20rx%3D%223%22%20fill%3D%22%23eceff3%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22150%22%20width%3D%22110%22%20height%3D%2228%22%20rx%3D%228%22%20fill%3D%22%231f7a6d%22/%3E%3C/svg%3E" alt="The sign-in page"><figcaption>The sign-in page</figcaption></figure><figure class="pc-figure"><div class="pc-image pc-image-empty pv-im" role="img" aria-label="Office plan"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg></div><figcaption>Office plan</figcaption></figure></div></div></div></div></div></div>
+</body>
+</html>

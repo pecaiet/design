@@ -357,4 +357,6 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
+- **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.
+- **Image**: `<img class="pc-image">` (10px corners, a faint edge inside); `.pc-image.pc-image-empty` with an `image` icon until it loads; `<figure class="pc-figure">` with a `<figcaption>` for a caption.
 - **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-description`) when there's nothing; `.pc-muted` for quiet cells.

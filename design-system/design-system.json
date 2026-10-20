@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T07:42:00Z",
+    "at": "2026-10-20T07:57:03Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Form: fields in a card, Cancel and the action on the right in its footer; errors under each field when the action is pressed."
+    "note": "Image: option B, 10px corners and a faint edge inside (the text colour at 10%); a muted box with an image icon until it loads."
   },
   "layout": "files",
   "libraries": [],

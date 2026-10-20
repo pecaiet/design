@@ -237,8 +237,8 @@
   /* Cards, badges, tables */
   .pc-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
   .pc-card-header { display: grid; gap: 2px; padding: 16px 16px 0; }
-  .pc-card-title { margin: 0; font-size: 15px; font-weight: 600; }
-  .pc-card-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
+  .pc-card-title, .pc-section-title { margin: 0; font-size: 15px; font-weight: 600; }
+  .pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
   .pc-card-content { display: grid; gap: 12px; padding: 16px; }
   .pc-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
   .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 1px var(--primary); }
@@ -318,6 +318,15 @@
   a.pc-file:is(:hover, :focus-visible) > .pc-file-size { display: none; }
   a.pc-file:is(:hover, :focus-visible) > .pc-file-action { display: block; }
   div.pc-file { padding-right: 0; }
+
+  /* Image: <img class="pc-image"> with our 10px corners and a hairline inside its edge (the text colour at 10%), so a white picture keeps its
+     shape on a white card. While it loads, or if it can't, a .pc-image.pc-image-empty box in the muted fill with an image icon.
+     <figure class="pc-figure"> adds a caption under it. */
+  .pc-image { display: block; max-width: 100%; object-fit: cover; border-radius: var(--pc-radius); outline: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent); outline-offset: -1px; }
+  .pc-image-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
+  .pc-image-empty > svg { width: 16px; height: 16px; }
+  .pc-figure { display: grid; gap: 6px; margin: 0; }
+  .pc-figure > figcaption { color: var(--muted-foreground); font-size: 12px; }
 
   /* File upload: <label class="pc-btn pc-btn-outline pc-file-upload"> with a paperclip, the words ("Attach files") and the real
      <input type="file"> inside it, out of sight; the label opens the device's file picker. The chosen files show under it as File rows. */
