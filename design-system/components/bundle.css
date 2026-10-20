@@ -129,6 +129,11 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-checkbox:checked { background: var(--primary); border-color: var(--primary); }
 .pc-checkbox:checked::after { content: ""; width: 8px; height: 4px; border-left: 2px solid var(--primary-foreground); border-bottom: 2px solid var(--primary-foreground); transform: translateY(-1px) rotate(-45deg); }
 .pc-checkbox:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
+/* Half: a "pick all" box over a group when only some are ticked (set el.indeterminate = true in script; [aria-checked="mixed"]
+   works too). A teal fill with a white dash. An error (aria-invalid="true") turns the border red. */
+.pc-checkbox:indeterminate, .pc-checkbox[aria-checked="mixed"] { background: var(--primary); border-color: var(--primary); }
+.pc-checkbox:indeterminate::after, .pc-checkbox[aria-checked="mixed"]::after { content: ""; width: 8px; height: 2px; border: 0; border-radius: 1px; background: var(--primary-foreground); transform: none; }
+.pc-checkbox[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
 
 /* Cards, badges, tables */
 .pc-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
@@ -169,9 +174,20 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-textarea:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-input:disabled, .pc-textarea:disabled { opacity: 0.5; cursor: not-allowed; }
 .pc-input[aria-invalid="true"], .pc-textarea[aria-invalid="true"] { border-color: var(--destructive); }
+/* Read-only: a value you can select and copy but not change: the muted fill, no border. */
+.pc-input[readonly] { border-color: transparent; background: var(--muted); }
+/* What the browser fills in keeps our colours instead of its yellow or blue. */
+.pc-input:is(:-webkit-autofill, :autofill) { -webkit-text-fill-color: var(--foreground); box-shadow: 0 0 0 100px var(--card) inset; caret-color: var(--foreground); }
+.pc-input:is(:-webkit-autofill, :autofill):focus-visible { box-shadow: 0 0 0 100px var(--card) inset, var(--pc-focus); }
 .pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: 12px; }
 .pc-field-error { margin: 0; color: var(--destructive); font-size: 12px; font-weight: 500; }
 .pc-check { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+/* With its words in a <span>, the box stays beside their first line when they wrap. */
+.pc-check:has(> span) { align-items: flex-start; }
+.pc-check:has(> span) > :is(.pc-checkbox, .pc-radio) { font: inherit; margin-top: max(0px, calc((1lh - 16px) / 2)); }
+/* A hint or an error under a checkbox or radio lines up under its words (16px box + 10px gap). */
+.pc-field:has(> .pc-check) { gap: 2px; }
+.pc-check + .pc-field-hint, .pc-check + .pc-field-error { padding-left: 26px; }
 .pc-checkbox:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .pc-link { color: var(--foreground); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
@@ -462,7 +478,11 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Fields with an icon, selects, radios, colour swatches, chips */
 .pc-input-group { position: relative; display: flex; align-items: center; }
 .pc-input-group > svg { position: absolute; left: 12px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
-.pc-input-group > .pc-input { padding-left: 36px; }
+.pc-input-group:has(> svg) > .pc-input { padding-left: 36px; }
+/* An icon button at the end of a field (show the password, copy): 28px, muted, 2px from the edge; the text stops before it. */
+.pc-input-group-end > .pc-btn-icon { width: 28px; height: 28px; color: var(--muted-foreground); }
+.pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input { padding-right: 36px; }
+.pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input-group-end { right: 2px; }
 .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
 .pc-select { position: relative; display: flex; align-items: center; }
 .pc-select > select { appearance: none; opacity: 1; width: 100%; height: var(--pc-row); padding: 0 34px 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; cursor: pointer; }

@@ -348,9 +348,9 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Link**: `.pc-link`.
 - **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
 - **Label**: `.pc-label` (12px semibold, 6px above its field); an optional field adds `<span class="pc-label-optional">(optional)</span>`; required fields have no mark.
-- **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`.
+- **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`. An icon button in the end (`.pc-btn-ghost.pc-btn-icon`: show the password with Phosphor `eye`/`eye-slash`, copy) is 28px and the text stops before it. `readonly` gives a field the muted fill; autofilled fields keep our colours.
 - **Select**: `.pc-select` around a native `<select>` and a caret `<svg>`.
-- **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">`.
+- **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">` and the words in a `<span>` (the box stays on a long label's first line); a `.pc-field-hint` or `.pc-field-error` after it lines up under the words. Half (`el.indeterminate = true`) is a teal box with a white dash; `aria-invalid="true"` turns the border red.
 - **Fieldset**: `<fieldset class="pc-fieldset">` with a `<legend class="pc-legend">` (it looks like a field's label) over a `.pc-fieldset-options` of radios or checkboxes.
 - **File**: `.pc-files` of `.pc-file` rows (the file's icon, `.pc-file-name`, `.pc-file-size`): `<a class="pc-file" href download>` with a `.pc-file-action` download icon shown on hover and focus, or a `<div class="pc-file">` ending in an x button while editing.
 - **File upload**: `<label class="pc-btn pc-btn-outline pc-file-upload">` with a `paperclip`, the words and a hidden `<input type="file">` inside; the chosen files show under it as File rows.

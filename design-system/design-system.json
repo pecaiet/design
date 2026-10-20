@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T12:01:19Z",
+    "at": "2026-10-20T13:14:21Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "A warning colour (amber): tokens warning and warning-soft, and a warning Alert, Toast and Badge."
+    "note": "Text input (option A): a password with an eye to show it, read-only (muted fill, copy button), a short field, autofill keeping our colours; the text area moves to its own card."
   },
   "layout": "files",
   "libraries": [],
