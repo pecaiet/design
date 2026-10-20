@@ -532,9 +532,44 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-toolbar { display: inline-flex; align-items: center; gap: 2px; padding: 4px; border-radius: calc(var(--pc-radius) + 4px); background: var(--muted); }
 .pc-toolbar > .pc-btn { height: calc(var(--pc-row) - 4px); }
 .pc-toolbar > .pc-btn-icon { width: calc(var(--pc-row) - 4px); }
-.pc-toolbar > .pc-btn:hover, .pc-toolbar > .pc-btn[aria-pressed="true"] { background: var(--card); box-shadow: var(--pc-raise); }
+.pc-toolbar > .pc-btn:hover, .pc-toolbar > .pc-btn[aria-pressed="true"] { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
 .pc-toolbar > .pc-btn[aria-pressed="true"] { border-color: transparent; color: var(--foreground); }
 .pc-toolbar-divider { width: 1px; height: 16px; margin: 0 4px; background: var(--border); }
+
+/* Segmented control: the toolbar's tray, for choosing exactly one of two to five options: a role="radiogroup" of .pc-btn.pc-btn-ghost
+   labels, each around a radio kept out of sight. The options share the width evenly; the chosen one lifts as a raised card, as a tool
+   that's on in a toolbar; the arrow keys move between them. .pc-segmented-full stretches it to its container. */
+.pc-segmented { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 4px; border-radius: calc(var(--pc-radius) + 4px); background: var(--muted); }
+.pc-segmented-full { display: grid; }
+.pc-segmented > .pc-btn { position: relative; height: calc(var(--pc-row) - 4px); }
+.pc-segmented > .pc-btn > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.pc-segmented > .pc-btn:hover, .pc-segmented > .pc-btn:has(> input:checked) { background: var(--sidebar-active); box-shadow: var(--pc-raise); color: var(--foreground); }
+.pc-segmented > .pc-btn:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
+.pc-segmented > .pc-btn:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+/* Separator: a 1px line in the border colour, the same line as every divider (menus, footers, table headers, the toolbar).
+   <hr class="pc-separator"> between sections; .pc-separator-bleed runs it out to a panel's edges (16px each side);
+   .pc-separator-vertical is 16px tall, between items in a row (aria-hidden); .pc-separator-text puts a word in the middle ("or"). */
+.pc-separator { flex-shrink: 0; height: 1px; margin: 0; border: 0; background: var(--border); }
+.pc-separator-bleed { margin-inline: -16px; }
+.pc-separator-vertical { display: inline-block; width: 1px; height: 16px; vertical-align: middle; }
+.pc-separator-text { display: flex; align-items: center; gap: 12px; color: var(--muted-foreground); font-size: 12px; }
+.pc-separator-text::before, .pc-separator-text::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* Skeleton: blocks shaped like the content that's coming, in the border colour: .pc-skeleton on any box, sized by .pc-skeleton-line
+   (a line of text, 10px), .pc-skeleton-title (14px), .pc-skeleton-circle (an avatar) or .pc-skeleton-control (a field or a button).
+   They fade gently in and out together on the motion tokens: still while motion is off, never with reduced motion. The area that is
+   loading gets aria-busy="true"; the blocks are aria-hidden. */
+.pc-skeleton { display: block; flex-shrink: 0; border-radius: 6px; background: var(--border); animation: pc-skeleton-pulse calc(var(--pc-motion-base) * 8) var(--pc-motion-ease) infinite; }
+.pc-skeleton-line { height: 10px; }
+.pc-skeleton-title { height: 14px; }
+.pc-skeleton-circle { width: 22px; height: 22px; border-radius: 999px; }
+.pc-skeleton-control { height: var(--pc-row); border-radius: var(--pc-radius); }
+
+/* Skip link: <a class="pc-skip-link" href="#main">, first in the page and out of sight until it has keyboard focus; then a raised pill
+   at the top left, 8px in, over the page, with the blue focus ring. The place it skips to gets tabindex="-1" so focus lands there. */
+.pc-skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; display: inline-flex; align-items: center; height: var(--pc-row); padding: 0 12px; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font-weight: 600; text-decoration: none; transform: translateY(calc(-100% - 16px)); }
+.pc-skip-link:focus { transform: none; outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-raise-lg), var(--pc-focus); }
 
 /* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
    current long and strong, the others short and faint. */
@@ -585,6 +620,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }
 @keyframes pc-progress-slide { from { left: -35%; } to { left: 100%; } }
+@keyframes pc-skeleton-pulse { 50% { opacity: .5; } }
 
 /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
 .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {

@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T08:45:07Z",
+    "at": "2026-10-20T09:04:11Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Rating: teal stars, empty ones outlined (.pc-rating); an average with a part star and its count, or a radio group to rate with."
+    "note": "Skeleton: blocks in the border colour that pulse on the motion tokens (.pc-skeleton). Skip link: a raised pill at the top left on focus (.pc-skip-link)."
   },
   "layout": "files",
   "libraries": [],
