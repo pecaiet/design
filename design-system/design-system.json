@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T08:20:01Z",
+    "at": "2026-10-20T08:26:31Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Pagination: ghost page buttons with the current one outlined (.pc-pagination), plus compact, count and arrows, rows per page and Show more."
+    "note": "Popover: our panel, 4px from the button that opened it (.pc-popover-anchor), aligned to its start or end, above if needed; a sheet on phones."
   },
   "layout": "files",
   "libraries": [],

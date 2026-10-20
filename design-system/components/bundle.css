@@ -372,6 +372,27 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 /* Popover and calendar */
 .pc-popover { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+/* Popover: a panel that opens from a button, on click, and can hold a link, a field or buttons. .pc-popover-anchor wraps the button and the
+   .pc-popover (hidden until opened; the button gets aria-expanded="true"). It opens 4px below, aligned to the button's start;
+   .pc-popover-end aligns it to the end, .pc-popover-up opens it above. Inside: a .pc-popover-head (a .pc-dialog-title, and a
+   .pc-popover-close x shown only on phones), .pc-popover-text, and .pc-dialog-actions under a line. On phones it is a sheet from the bottom
+   over a .pc-popover-backdrop (right before it), like the menus. */
+.pc-popover[hidden] { display: none; }
+.pc-popover-anchor { position: relative; display: inline-block; }
+.pc-popover-anchor > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; width: max-content; max-width: min(320px, calc(100vw - 32px)); }
+.pc-popover-anchor > .pc-popover-end { left: auto; right: 0; }
+.pc-popover-anchor > .pc-popover-up { top: auto; bottom: calc(100% + 4px); }
+.pc-popover-head { display: flex; align-items: center; gap: 6px; }
+.pc-popover-head > .pc-dialog-title { flex: 1; min-width: 0; }
+.pc-popover-close { display: none; }
+.pc-popover-text { margin: 0; color: var(--muted-foreground); }
+.pc-popover-backdrop { display: none; }
+@media (max-width: 47.99rem) {
+  .pc-popover-anchor > .pc-popover { position: fixed; inset: auto 0 0; z-index: 60; width: auto; max-width: none; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; }
+  .pc-popover-close { display: inline-flex; }
+  .pc-popover-backdrop:has(+ .pc-popover:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+  html:has(.pc-popover-anchor > .pc-popover:not([hidden])) { overflow: hidden; }
+}
 .pc-calendar { display: grid; gap: 6px; }
 .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 600; }
 .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, var(--pc-row)); gap: 4px; }
