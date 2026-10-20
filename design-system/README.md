@@ -4,11 +4,12 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
 
 - Two themes, three tones each (sidebar, page, cards): light (sky-tinted grey ground, white cards) and dark (deep slate). In the apps, `class="dark"` on `<html>` turns dark on; without it the page is light. The cards here switch with the page's own theme control (`senin-light`, `senin-dark`). Check every new screen in both.
 - idp's older names (`card-foreground`, `secondary`, `popover`, `sidebar-accent`, `sidebar-border`, `sidebar-primary` and the rest) are kept as aliases so existing pages keep working; new code uses the main names (`foreground`, `card`, `muted`, `sidebar-hover` and the rest).
-- Use the token names, never a raw hex: `background`, `foreground`, `card`, `border`, `input`, `primary`, `sidebar`, `sidebar-active`, `destructive` and the rest.
+- Use the token names, never a raw hex: `background`, `foreground`, `card`, `border`, `input`, `primary`, `sidebar`, `sidebar-active`, `warning`, `destructive` and the rest.
 - Body text is `foreground` on `background` or `card`. Secondary text (dates, counts, descriptions, table headers) is `muted-foreground`.
 - `primary` (teal) is the one main action per view and the checked checkbox; text on it is `primary-foreground`, and it darkens to `primary-hover` under the pointer. Links are the text colour with a soft grey underline.
-- Notices sit on `primary-soft`, errors on `destructive-soft`. An open dialog dims the page with `overlay`.
+- Notices sit on `primary-soft`, warnings on `warning-soft`, errors on `destructive-soft`. An open dialog dims the page with `overlay`.
 - Late dates and counts, and delete actions, are `destructive`.
+- `warning` (amber) is for what needs attention soon but isn't wrong yet: due soon, a session about to end, offline. Like `destructive`, it always comes with an icon or words.
 - The active sidebar row is a `sidebar-active` pill; its text, icon and count keep the same colours as every other row.
 - Every text pair named in a token's note holds 4.5:1 in both themes; `input` and `ring` hold 3:1 on `card`.
 

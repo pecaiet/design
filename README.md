@@ -36,7 +36,7 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 
 ## Tokens
 
-- **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `ring`, `overlay`.
+- **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
 - **Row height**: `--pc-row` (32px) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
@@ -356,8 +356,8 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **File upload**: `<label class="pc-btn pc-btn-outline pc-file-upload">` with a `paperclip`, the words and a hidden `<input type="file">` inside; the chosen files show under it as File rows.
 - **Footer**: `<footer class="pc-footer">` with `.pc-footer-groups` of `<nav class="pc-footer-group">` (a `.pc-footer-heading` over `.pc-footer-link` links), a `.pc-footer-bottom` line (or only a `.pc-footer-line`), then the app's word, `pe-caiet-word.svg` or `todo-word.svg` pasted inline as `<svg class="pc-footer-word" aria-hidden="true">`, in the border colour and cut off by the bottom edge.
 - **Form**: the fields in a `.pc-card-content`, 12px apart, and Cancel then the action on the right in the `.pc-card-footer`; errors show when the action is pressed, as `aria-invalid="true"` and a `.pc-field-error` under each field with a problem.
-- **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-destructive`), `.pc-badge-small` (16px, 10px words) in any style; `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
-- **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
+- **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-warning`, `-destructive`), `.pc-badge-small` (16px, 10px words) in any style; `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
+- **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
 - **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.
@@ -380,7 +380,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Tabs**: `.pc-tabs` (`role="tablist"`) of `.pc-tab` buttons (`aria-selected`) or links (`aria-current="page"`), over a line; the current one semibold with a 2px teal line under it; `.pc-tab-count`; scrolls sideways when it doesn't fit.
 - **Textarea**: `.pc-textarea` starts three lines tall and grows with the text up to ten (`field-sizing: content`; a drag handle where that's missing); `.pc-field-count` under it, `data-state="over"` in red.
 - **Visually hidden**: `.pc-visually-hidden` (the same as Tailwind's `sr-only`); `.pc-visually-hidden-focusable` comes back into sight on keyboard focus.
-- **Toast**: `.pc-toasts` (bottom right; across the bottom on phones) of `.pc-toast` panels: an icon (`data-tone="success"` or `"error"`), `.pc-toast-text`, an optional ghost action and the x.
+- **Toast**: `.pc-toasts` (bottom right; across the bottom on phones) of `.pc-toast` panels: an icon (`data-tone="success"`, `"warning"` or `"error"`), `.pc-toast-text`, an optional ghost action and the x.
 - **Toggle**: `<input type="checkbox" role="switch" class="pc-switch">`, a 36×20 pill, teal when on.
 - **Tree view**: `.pc-tree` of `.pc-tree-item` rows (`aria-level`, `aria-expanded`), a `.pc-tree-caret`, an icon, `.pc-tree-label`, `.pc-tree-count`; each level 26px in, its fill starting under its parent's icon.
 - **Video**: `.pc-video` around a `<video>` with a poster: `.pc-video-play` (a white round button) and `.pc-video-length` until `data-state="playing"`, then the browser's controls; `.pc-video-empty` when it can't play.

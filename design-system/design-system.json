@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T11:23:24Z",
+    "at": "2026-10-20T12:01:19Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Hero: options card removed; it waits until there is a website."
+    "note": "A warning colour (amber): tokens warning and warning-soft, and a warning Alert, Toast and Badge."
   },
   "layout": "files",
   "libraries": [],
