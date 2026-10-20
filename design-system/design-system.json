@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T07:31:31Z",
+    "at": "2026-10-20T07:42:00Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "File upload: option A, an outline button that opens the file picker; the chosen files show under it as File rows. No drop area."
+    "note": "Form: fields in a card, Cancel and the action on the right in its footer; errors under each field when the action is pressed."
   },
   "layout": "files",
   "libraries": [],

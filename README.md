@@ -352,6 +352,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Fieldset**: `<fieldset class="pc-fieldset">` with a `<legend class="pc-legend">` (it looks like a field's label) over a `.pc-fieldset-options` of radios or checkboxes.
 - **File**: `.pc-files` of `.pc-file` rows (the file's icon, `.pc-file-name`, `.pc-file-size`): `<a class="pc-file" href download>` with a `.pc-file-action` download icon shown on hover and focus, or a `<div class="pc-file">` ending in an x button while editing.
 - **File upload**: `<label class="pc-btn pc-btn-outline pc-file-upload">` with a `paperclip`, the words and a hidden `<input type="file">` inside; the chosen files show under it as File rows.
+- **Form**: the fields in a `.pc-card-content`, 12px apart, and Cancel then the action on the right in the `.pc-card-footer`; errors show when the action is pressed, as `aria-invalid="true"` and a `.pc-field-error` under each field with a problem.
 - **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-destructive`); `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
 - **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
