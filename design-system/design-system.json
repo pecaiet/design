@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T07:57:03Z",
+    "at": "2026-10-20T08:00:36Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Image: option B, 10px corners and a faint edge inside (the text colour at 10%); a muted box with an image icon until it loads."
+    "note": "Label: 12px semibold above its field; only optional fields are marked, with (optional) in muted text (.pc-label-optional)."
   },
   "layout": "files",
   "libraries": [],

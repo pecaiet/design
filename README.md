@@ -346,6 +346,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Search**: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `.pc-search-footer`.
 - **Link**: `.pc-link`.
 - **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
+- **Label**: `.pc-label` (12px semibold, 6px above its field); an optional field adds `<span class="pc-label-optional">(optional)</span>`; required fields have no mark.
 - **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`.
 - **Select**: `.pc-select` around a native `<select>` and a caret `<svg>`.
 - **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">`.

@@ -74,6 +74,8 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 /* Forms */
 .pc-field { display: grid; gap: 6px; }
 .pc-label { font-size: 12px; font-weight: 600; }
+/* An optional field says so after its label: <span class="pc-label-optional">(optional)</span>. Required fields have no mark. */
+.pc-label-optional { color: var(--muted-foreground); font-weight: 400; }
 /* Fieldset: <fieldset class="pc-fieldset"> with a <legend class="pc-legend"> (it looks like .pc-label) over .pc-fieldset-options,
    the radios or checkboxes that belong together. No line, no box: the group reads as one more field. */
 .pc-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
