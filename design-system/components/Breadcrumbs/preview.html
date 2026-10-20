@@ -1,4 +1,4 @@
-<!-- @dsCard height=640 width=1120 subtitle="Where the page sits, above its title" -->
+<!-- @dsCard height=645 width=1120 subtitle="Where the page sits, above its title" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,6 +50,10 @@
   .bc-phone { width: 300px; }
   .pc-breadcrumbs > a.force-hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
   .pc-breadcrumbs > a.force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .bc-phone { --pc-row: 40px; }
+  .bc-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

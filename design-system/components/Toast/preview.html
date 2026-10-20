@@ -51,6 +51,10 @@
   .pv-stack { gap: 8px; }
   /* Preview only: a phone; what is fixed to the screen is fixed to the frame (transform). */
   .pv-phone { position: relative; height: 120px; max-width: 300px; transform: translateZ(0); border: 1px solid var(--border); border-radius: 22px; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-phone { --pc-row: 40px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

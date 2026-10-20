@@ -1,4 +1,4 @@
-<!-- @dsCard height=4110 width=1120 subtitle="Choose one from a list: our dropdown on desktop, a sheet on phones; placeholder, error, dots, None" -->
+<!-- @dsCard height=4147 width=1120 subtitle="Choose one from a list: our dropdown on desktop, a sheet on phones; placeholder, error, dots, None" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,6 +28,10 @@
   /* Preview only: keyboard focus, shown. */
   .force-focus.pc-menu-item { background: var(--accent); outline: 2px solid transparent; box-shadow: var(--pc-focus-inset); }
   .force-focus.pc-picker-button { border-color: var(--background); box-shadow: var(--pc-focus); }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .sh-phone { --pc-row: 40px; }
+  .sh-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

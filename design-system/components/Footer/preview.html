@@ -53,6 +53,10 @@
   /* Preview only: the pointer and keyboard focus, shown. */
   .pc-footer-link.pv-hover { color: var(--foreground); }
   .pc-footer-link.pv-focus { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-phone { --pc-row: 40px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

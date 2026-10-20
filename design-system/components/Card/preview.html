@@ -1,4 +1,4 @@
-<!-- @dsCard height=2883 width=1120 subtitle="Header, action, content, footer; rows, image, clickable, loading, empty, phones" -->
+<!-- @dsCard height=2934 width=1120 subtitle="Header, action, content, footer; rows, image, clickable, loading, empty, phones" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,6 +52,10 @@
   .pv-phone { display: grid; gap: 12px; width: 320px; padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
   .pc-card.pv-hover { background: var(--accent); }
   .pc-card.pv-focus { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-phone { --pc-row: 40px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

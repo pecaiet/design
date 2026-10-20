@@ -53,6 +53,10 @@
   .si-quiet { color: var(--muted-foreground); font-weight: 400; }
   .si-phone > .si-theme { position: absolute; top: 60px; right: 12px; }
   .si-phone .si-form { max-width: 360px; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .si-phone { --pc-row: 40px; }
+  .si-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

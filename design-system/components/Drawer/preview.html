@@ -67,6 +67,10 @@
   .pv-phone .pc-drawer-beside { position: fixed; inset: 0; z-index: 40; border-left: 0; }
   .pv-phone .pc-drawer-beside .pc-drawer-back { display: inline-flex; }
   .pv-phone .pc-drawer-beside .pc-drawer-close { display: none; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-phone { --pc-row: 40px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

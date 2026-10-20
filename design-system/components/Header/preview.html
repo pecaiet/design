@@ -46,6 +46,10 @@
   .tb-page { display: grid; gap: 2px; padding: 40px 48px 48px; }
   .tb-phone .tb-page { padding: 24px 16px 32px; }
   .tb-muted { margin: 0; color: var(--muted-foreground); font-size: 14px; line-height: 20px; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .tb-phone { --pc-row: 40px; }
+  .tb-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

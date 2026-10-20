@@ -51,6 +51,10 @@
   .sh-phone { position: relative; width: 260px; height: 420px; overflow: hidden; transform: translateZ(0); border: 1px solid var(--border); border-radius: 26px; background: var(--background); }
   /* Preview only: this card shows an open sheet, which would otherwise stop the card itself from scrolling. */
   html { overflow: visible !important; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .sh-phone { --pc-row: 40px; }
+  .sh-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

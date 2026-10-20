@@ -1,4 +1,4 @@
-<!-- @dsCard height=1662 width=1120 subtitle="Four styles, solid red to confirm, on, can’t be used, working, sizes, icons, full width" -->
+<!-- @dsCard height=1686 width=1120 subtitle="Four styles, solid red to confirm, on, can’t be used, working, sizes, icons, full width" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -52,6 +52,10 @@
   .pv-tipzone { padding-top: 40px; }
   .force-hover.pc-btn-primary.pc-btn-destructive { background: var(--destructive-hover); border-color: var(--destructive-hover); }
   .pc-toolbar > .pc-btn.force-hover { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-bt-phone { --pc-row: 40px; }
+  .pv-bt-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

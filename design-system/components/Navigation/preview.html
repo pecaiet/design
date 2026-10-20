@@ -73,6 +73,10 @@
   .sb-task-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .sb-due { font-size: 12px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
   .sb-due-late { color: var(--destructive); font-weight: 600; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .phone { --pc-row: 40px; }
+  .phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

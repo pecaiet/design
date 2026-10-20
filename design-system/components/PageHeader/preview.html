@@ -43,6 +43,10 @@
   .frame { padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
   .narrow-frame { width: 640px; }
   .phone-frame { width: 360px; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .phone-frame { --pc-row: 40px; }
+  .phone-frame :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

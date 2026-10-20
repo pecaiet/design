@@ -30,6 +30,10 @@
   .pv-phone .pc-modal-head { padding: 8px 6px 12px 16px; }
   .pv-phone .pc-modal-body { padding: 0 16px 24px; }
   .pv-phone .pc-modal-head .pc-sidebar-toggle { display: inline-flex; }
+
+  /* Phone pictures: phones get 40px rows and 16px field text. */
+  .pv-phone { --pc-row: 40px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
 <body>

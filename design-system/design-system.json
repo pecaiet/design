@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T19:31:30Z",
+    "at": "2026-10-20T19:41:59Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Consistency pass (A, 2, L, phones 40px, spacing tokens): small marks and code, Skeleton, sort button at 5px corners, phone sheets at 14px; the segmented control's pale pill under the pointer; a 20px icon in an empty image or video box; can't-be-used outliers fixed; a tooltip on every icon-only button; 40px rows and 16px field text on phones; spacing tokens in the CSS. The temporary Spacing and Consistency cards are gone."
+    "note": "The phone pictures in the cards draw 40px rows and 16px field text, as phones now get; Search's empty state drops its Clear search button (the Empty state has no button; the field's x clears)."
   },
   "layout": "files",
   "libraries": [],
