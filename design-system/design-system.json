@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T18:20:29Z",
+    "at": "2026-10-20T19:09:21Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Button redone (B, 2, Y): solid red only as a dialog's main action, soft teal for a button that stays on, one flat grey for a button that can't be used (tooltip on it), sizes, full width, working state, icon rules. Modal, Button group, Sign in and Tooltip follow; tokens destructive-hover and destructive-foreground."
+    "note": "Tooltip (A: ink, 10px corners, wraps on buttons, four sides, a short wait, Escape), Link (A and 1: links in text as today, one quiet look for footer, breadcrumbs and Clear; icons, a link-looking button, links in alerts), Input group (A and 1: words before or after inside the field, a field and its button side by side). Navigation and Header keep today's cards."
   },
   "layout": "files",
   "libraries": [],

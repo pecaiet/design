@@ -157,7 +157,25 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-card-header { display: grid; gap: 2px; padding: 16px 16px 0; }
 .pc-card-title, .pc-section-title { margin: 0; font-size: 15px; font-weight: 600; }
 .pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
-.pc-card-content { display: grid; gap: 12px; padding: 16px; }
+.pc-card-content { display: grid; flex: 1; gap: 12px; padding: 16px; }
+/* A header with nothing under it keeps 16px below; an action (.pc-card-action: a small button, a ⋯, a switch) sits on the right,
+   centred on the title's line; the description then runs under both. */
+.pc-card-header:last-child { padding-bottom: 16px; }
+.pc-card-header:has(> .pc-card-action) { grid-template-columns: 1fr auto; column-gap: 12px; }
+.pc-card-action { position: relative; z-index: 1; grid-column: 2; grid-row: 1; display: flex; align-items: center; height: 20px; }
+.pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1 / -1; }
+/* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
+.pc-card-rows { padding: 8px 4px 6px; }
+/* An image on top, edge to edge in the card's corners. */
+.pc-card-media { display: block; width: 100%; aspect-ratio: 5 / 2; object-fit: cover; border-radius: calc(var(--pc-radius-lg) - 1px) calc(var(--pc-radius-lg) - 1px) 0 0; }
+/* A card you can click: its title is a .pc-card-link that covers the card, as a table row's link does. Under the pointer it
+   takes the hover grey; keyboard focus rings the whole card. Its .pc-card-action stays clickable on its own. */
+.pc-card:has(.pc-card-link) { position: relative; cursor: pointer; }
+.pc-card:has(.pc-card-link):hover { background: var(--accent); }
+.pc-card-link { color: inherit; text-decoration: none; }
+.pc-card-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--pc-radius-lg); }
+.pc-card-link:focus-visible { outline: none; }
+.pc-card:has(.pc-card-link:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
 .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 1px var(--primary); }
 /* Rows are rounded pills 2px apart, no lines between them: every second row in the page colour, the one under the
@@ -212,6 +230,16 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-link { color: var(--foreground); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
 .pc-link:hover { text-decoration-color: var(--foreground); }
 .pc-link:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); border-radius: 2px; }
+button.pc-link { padding: 0; border: 0; background: none; font: inherit; font-weight: 500; cursor: pointer; }
+.pc-link > svg { width: 14px; height: 14px; vertical-align: -2px; }
+.pc-link > svg:first-child { margin-right: 4px; }
+.pc-link > svg:last-child { margin-left: 3px; }
+.pc-alert .pc-link { color: inherit; font-weight: 600; text-decoration-color: currentColor; }
+/* Quiet links stand alone in a muted place (a footer, breadcrumbs, a group's Clear): muted, no underline; under the pointer the
+   text colour and an underline, as a link's. Their place says they're links. */
+.pc-link-quiet { border-radius: 2px; color: var(--muted-foreground); text-decoration: none; }
+.pc-link-quiet:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.pc-link-quiet:focus-visible { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 
 .pc-badge-outline { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 1px var(--input); }
 .pc-badge-destructive { background: var(--destructive-soft); color: var(--destructive); }
@@ -228,7 +256,8 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-alert-error { background: var(--destructive-soft); color: var(--destructive); }
 .pc-alert-warning { background: var(--warning-soft); color: var(--warning); }
 
-.pc-card-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: 12px; }
 .pc-table tbody tr:hover td { background: var(--accent); }
 .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
 .pc-row-link { color: inherit; font-weight: 600; text-decoration: none; }
@@ -474,11 +503,19 @@ dialog.pc-drawer:not([open]) { display: none; }
 [data-pc-tooltip] { position: relative; }
 [data-pc-tooltip]::after {
   content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; z-index: 20;
-  width: max-content; max-width: 240px; padding: 5px 9px; border-radius: 8px;
+  width: max-content; max-width: 240px; padding: 5px 9px; border-radius: var(--pc-radius); white-space: normal;
   background: var(--foreground); color: var(--background); font-size: 12px; font-weight: 500; line-height: 1.35;
   box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
 }
-[data-pc-tooltip]:hover::after, [data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:focus-within::after { opacity: 1; }
+/* It shows after a short wait under the pointer, so moving across a toolbar doesn't flash them, and at once on keyboard focus. */
+[data-pc-tooltip]:hover::after { opacity: 1; transition-delay: 0.4s; }
+[data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:focus-within::after { opacity: 1; transition-delay: 0s; }
+/* Above by default; data-pc-tooltip-side="bottom" near the top edge, "left" or "right" where there's no room. */
+[data-pc-tooltip-side="bottom"]::after { top: calc(100% + 8px); bottom: auto; }
+[data-pc-tooltip-side="left"]::after { top: 50%; right: calc(100% + 8px); bottom: auto; left: auto; transform: translateY(-50%); }
+[data-pc-tooltip-side="right"]::after { top: 50%; left: calc(100% + 8px); bottom: auto; transform: translateY(-50%); }
+/* Escape hides it: the app sets data-pc-tooltip-hidden until the pointer or focus leaves. */
+[data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; }
 
 /* The sidebar head: the app's logo (optional). */
 .pc-app-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
@@ -517,6 +554,23 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
 .pc-input-group-end > .pc-spinner { margin: 0 6px; color: var(--muted-foreground); }
 .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
+/* Words before or after the value (https://, kg, @pecaiet.ro): a .pc-input-addon inside the field, muted, the value right after it.
+   The group then draws the field's edge, its focus ring, its error and its half strength. */
+.pc-input-group:has(> .pc-input-addon) { height: var(--pc-row); border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); }
+.pc-input-group:has(> .pc-input-addon) > .pc-input { height: 100%; border: 0; border-radius: inherit; background: none; }
+.pc-input-group:has(> .pc-input-addon) > .pc-input:focus-visible { box-shadow: none; }
+.pc-input-addon { flex-shrink: 0; color: var(--muted-foreground); white-space: nowrap; }
+.pc-input-addon:first-child { padding-left: 10px; }
+.pc-input-addon:last-child { padding-right: 10px; }
+.pc-input-addon + .pc-input { padding-left: 2px; }
+.pc-input:has(+ .pc-input-addon) { padding-right: 2px; }
+.pc-input-group:has(> .pc-input-addon):focus-within { border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-input-group:has(> .pc-input-addon):has(> .pc-input[aria-invalid="true"]) { border-color: var(--destructive); }
+.pc-input-group:has(> .pc-input-addon):has(> .pc-input:disabled) { opacity: 0.5; cursor: not-allowed; }
+.pc-input-group:has(> .pc-input-addon) > .pc-input:disabled { opacity: 1; }
+/* A field and its button side by side (Invite, Add): 8px apart, each its own shape. */
+.pc-input-row { display: flex; gap: 8px; }
+.pc-input-row > :is(.pc-input, .pc-input-group) { flex: 1; min-width: 0; }
 .pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
 .pc-radio:checked { border-color: var(--primary); }
 .pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
@@ -640,8 +694,8 @@ dialog.pc-drawer:not([open]) { display: none; }
    the top with a Cancel (.pc-search-cancel); the keys and the places go. */
 .pc-search-match { background: none; color: inherit; font-weight: 600; }
 .pc-search-field > .pc-spinner { position: absolute; right: 16px; color: var(--muted-foreground); }
-.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: 12px; font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); cursor: pointer; }
-.pc-search-group-action:hover { text-decoration-color: var(--muted-foreground); }
+.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: 12px; font-weight: 500; text-decoration: none; cursor: pointer; }
+.pc-search-group-action:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-search-cancel { display: none; }
 @media (max-width: 47.99rem) {
   .pc-dialog.pc-search { inset: 0; display: flex; flex-direction: column; width: auto; height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); border: 0; border-radius: 0; box-shadow: none; }
@@ -671,7 +725,7 @@ dialog.pc-drawer:not([open]) { display: none; }
    lines up with the title, like the page description. */
 .pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; color: var(--muted-foreground); font-size: 12px; font-weight: 500; }
 .pc-breadcrumbs > a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 2px; }
-.pc-breadcrumbs > a:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
+.pc-breadcrumbs > a:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-breadcrumbs > a:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 .pc-breadcrumbs > [aria-current="page"] { color: var(--foreground); }
 .pc-breadcrumbs > svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.7; }
@@ -838,7 +892,7 @@ a.pc-btn[aria-disabled="true"] { pointer-events: none; }
 .pc-footer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; }
 .pc-footer-heading { margin: 0 0 4px; color: var(--foreground); font-size: 12px; font-weight: 600; }
 .pc-footer-link { display: block; width: fit-content; padding: 3px 0; border-radius: 2px; color: var(--muted-foreground); text-decoration: none; }
-.pc-footer-link:hover { color: var(--foreground); }
+.pc-footer-link:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-footer-link:focus-visible { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 .pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; }
 .pc-footer-line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 12px; }
