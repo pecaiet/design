@@ -342,6 +342,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Dialog**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, `.pc-dialog-actions`.
 - **Date picker**: `.pc-popover` with a `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`; today `aria-current="date"`, chosen `aria-selected="true"`, `.pc-calendar-day-outside`).
 - **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Date picker `.pc-popover` dropping under it.
+- **Drawer**: `<dialog class="pc-drawer">` (opened with `showModal()`: over the dimmed page, full height and flush with the screen's right edge; full screen on phones) or `<aside class="pc-drawer pc-drawer-beside">` (the last thing in the page's row, nothing dimmed; full screen on phones), each holding `.pc-drawer-head` (an optional `.pc-drawer-back`, the `.pc-drawer-title`, the `.pc-drawer-close` x), `.pc-drawer-body` and `.pc-drawer-footer`.
 - **Search**: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `.pc-search-footer`.
 - **Link**: `.pc-link`.
 - **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
@@ -352,4 +353,4 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Alert**: `.pc-alert` with `.pc-alert-notice` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
-- **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-art`) when there's nothing; `.pc-muted` for quiet cells.
+- **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-description`) when there's nothing; `.pc-muted` for quiet cells.

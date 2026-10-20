@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-19T22:05:20Z",
+    "at": "2026-10-20T07:07:47Z",
     "by": "Claude",
-    "note": "Cards 1:1 with component.gallery: its 60 names in its order (Menu, Top bar, Dialog, Sidebar, Radio, Search, Input and Date picker renamed; Heading, Label and Textarea added), our own pieces after them, then pages.",
-    "via": "Claude Code"
+    "via": "Claude Code",
+    "note": "Empty state: option A, a semibold title and one muted line, centred; shown in a table and on a page with nothing in it."
   },
   "layout": "files",
   "libraries": [],

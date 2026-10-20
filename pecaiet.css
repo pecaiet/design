@@ -297,6 +297,7 @@
   .pc-table tr:has(.pc-row-link:focus-visible) td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
   .pc-empty { display: grid; justify-items: center; gap: 4px; padding: 28px 16px; text-align: center; color: var(--muted-foreground); }
   .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
+  .pc-empty-description { margin: 0; }
 
   .pc-menu { display: flex; flex-direction: column; gap: 4px; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
@@ -340,6 +341,32 @@
     .pc-modal-frame.pc-sidebar-sheet > .pc-sheet-backdrop { display: block; }
     .pc-modal-head { padding: 8px 6px 12px 16px; }
     .pc-modal-body { padding: 0 16px calc(24px + env(safe-area-inset-bottom)); }
+  }
+
+  /* Drawer: a panel from the right with a form or a record's details: a head (.pc-drawer-title, the close x), a .pc-drawer-body that
+     scrolls, and .pc-drawer-footer with the actions under a line. Two kinds:
+     - <dialog class="pc-drawer">, opened with showModal(): over a dimmed page, full height and flush with the screen's right edge;
+       on phones it fills the screen.
+     - <aside class="pc-drawer pc-drawer-beside">, the last thing in the page's row: nothing dimmed, the page stays usable; on phones it fills
+       the screen and its .pc-drawer-back shows in place of the close x (.pc-drawer-close). */
+  .pc-drawer { display: flex; flex-direction: column; overflow: hidden; background: var(--card); color: var(--foreground); }
+  dialog.pc-drawer { position: fixed; inset: 0 0 0 auto; width: min(400px, 100%); max-width: none; height: auto; max-height: none; margin: 0; padding: 0; border: 0; border-left: 1px solid var(--border); box-shadow: var(--pc-raise-lg); }
+  dialog.pc-drawer:not([open]) { display: none; }
+  .pc-drawer::backdrop { background: var(--overlay); }
+  /* Focus starts on the drawer itself (tabindex="-1", focused after showModal()), as in the Settings modal; Tab moves into it. */
+  .pc-drawer:focus { outline: none; }
+  .pc-drawer-beside { flex: 0 0 400px; border-left: 1px solid var(--border); }
+  .pc-drawer-head { display: flex; align-items: center; gap: 6px; padding: 12px 10px 12px 16px; }
+  .pc-drawer-title { flex: 1; min-width: 0; margin: 0; font-size: 15px; font-weight: 600; }
+  .pc-drawer-back { display: none; margin-left: -8px; }
+  .pc-drawer-body { display: grid; align-content: start; gap: 12px; flex: 1; min-height: 0; padding: 4px 16px 16px; overflow-y: auto; }
+  .pc-drawer-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+  @media (max-width: 47.99rem) {
+    dialog.pc-drawer { width: 100%; border-left: 0; box-shadow: none; }
+    .pc-drawer-footer { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+    .pc-drawer-beside { position: fixed; inset: 0; z-index: 40; border-left: 0; }
+    .pc-drawer-beside .pc-drawer-back { display: inline-flex; }
+    .pc-drawer-beside .pc-drawer-close { display: none; }
   }
 
   [data-pc-tooltip] { position: relative; }
@@ -579,8 +606,8 @@
   .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
   .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: -8px; }
   .pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
-  /* While a sheet or a modal is open (the phone sidebar, a menu sheet, settings) the page behind it doesn't scroll. */
-  html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open]) { overflow: hidden; }
+  /* While a sheet, a modal or a drawer over the page is open (the phone sidebar, a menu sheet, settings, a drawer) the page behind it doesn't scroll. */
+  html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-drawer[open]) { overflow: hidden; }
   .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
 }
 
