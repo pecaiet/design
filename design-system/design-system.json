@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T16:20:29Z",
+    "at": "2026-10-20T16:36:50Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Select: ours becomes the gallery's Select (the Picker card moves into it, plus placeholder, error, colour dots, None and a choice that can't be picked); the browser's own select is retired."
+    "note": "Search input (option A): a search field on a page (outlined, clear x, spinner), and the search window with recent searches, matches in semibold, a spinner, full screen on phones."
   },
   "layout": "files",
   "libraries": [],

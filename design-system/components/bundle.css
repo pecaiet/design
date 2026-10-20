@@ -501,8 +501,11 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-input-group:has(> svg) > .pc-input { padding-left: 36px; }
 /* An icon button at the end of a field (show the password, copy): 28px, muted, 2px from the edge; the text stops before it. */
 .pc-input-group-end > .pc-btn-icon { width: 28px; height: 28px; color: var(--muted-foreground); }
-.pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input { padding-right: 36px; }
-.pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input-group-end { right: 2px; }
+.pc-input-group:has(> .pc-input-group-end > :is(.pc-btn-icon, .pc-spinner)) > .pc-input { padding-right: 36px; }
+.pc-input-group:has(> .pc-input-group-end > :is(.pc-btn-icon, .pc-spinner)) > .pc-input-group-end { right: 2px; }
+/* A search field (type="search"): our own x (a ghost icon button, "Clear search") instead of the browser's; a spinner in its place while it looks. */
+.pc-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.pc-input-group-end > .pc-spinner { margin: 0 6px; color: var(--muted-foreground); }
 .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
 .pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
 .pc-radio:checked { border-color: var(--primary); }
@@ -585,6 +588,20 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-search-result:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
 .pc-search-result[data-done] > .pc-search-title { color: var(--muted-foreground); text-decoration: line-through; }
 .pc-search-footer { display: flex; gap: 14px; padding: 8px 14px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; }
+/* The search window: the words that match in semibold (<mark class="pc-search-match">), a spinner at the end of the field while it looks,
+   recent searches before typing with a .pc-search-group-action (Clear) at the end of their heading. On phones it fills the screen, the field at
+   the top with a Cancel (.pc-search-cancel); the keys and the places go. */
+.pc-search-match { background: none; color: inherit; font-weight: 600; }
+.pc-search-field > .pc-spinner { position: absolute; right: 16px; color: var(--muted-foreground); }
+.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: 12px; font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); cursor: pointer; }
+.pc-search-group-action:hover { text-decoration-color: var(--muted-foreground); }
+.pc-search-cancel { display: none; }
+@media (max-width: 47.99rem) {
+  .pc-dialog.pc-search { inset: 0; display: flex; flex-direction: column; width: auto; height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); border: 0; border-radius: 0; box-shadow: none; }
+  .pc-search-results { flex: 1; max-height: none; }
+  .pc-search-cancel { display: inline-flex; flex-shrink: 0; margin-right: 6px; color: var(--primary); }
+  .pc-search-place, .pc-search-footer { display: none; }
+}
 .pc-code-block { max-height: 360px; margin: 0; padding: 12px 16px; overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; line-height: 1.6; white-space: pre; }
 
 /* Accordion: <details> items in a .pc-accordion; the browser opens and closes them. Rows like a menu's: 32px at least,
