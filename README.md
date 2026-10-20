@@ -36,7 +36,7 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 
 ## Tokens
 
-- **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
+- **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-hover`, `destructive-foreground`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
 - **Row height**: `--pc-row` (32px) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
@@ -86,7 +86,7 @@ Updating:
     - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: the text colour, with a soft grey underline at rest that turns solid under the pointer.
-- Disabled: half opacity, no pointer.
+- Can't be used: half strength with the not-allowed pointer; buttons (and the segmented control, Attach files) instead turn one flat grey, so a tooltip on them can say why.
 - Divider lines (menus, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
 - Scrollbars: thin and muted (`muted-foreground` at 40%, no track), drawn by the browser on every scroll area and the page itself, so each system keeps its own behaviour (macOS hides them until you scroll).
 
@@ -97,12 +97,16 @@ Updating:
 <button class="pc-btn pc-btn-outline" type="button">Cancel</button>
 <button class="pc-btn pc-btn-ghost" type="button">Sign out</button>
 <button class="pc-btn pc-btn-destructive" type="button">Delete account</button>
-<button class="pc-btn pc-btn-ghost pc-btn-icon" type="button" aria-label="More"><svg>…</svg></button>
+<button class="pc-btn pc-btn-primary pc-btn-destructive" type="button">Delete user</button>
+<button class="pc-btn pc-btn-ghost pc-btn-icon" type="button" aria-label="More" data-pc-tooltip="More"><svg>…</svg></button>
 ```
 
-- One primary button per view.
-- `pc-btn-icon` is square; it needs an `aria-label`.
-- `aria-pressed="true"` turns a button into a pressed toggle.
+- One solid button per view: the main action, `pc-btn-primary` (teal) or, for a delete that can't be undone, `pc-btn-primary pc-btn-destructive` (solid red, a confirming dialog's Delete). A red outline (`pc-btn-destructive`) on a page opens that dialog; what can come back gets no red button, only an icon or menu item and Undo.
+- Sizes: `pc-btn-small` (28px), the 32px default, `pc-btn-large` (40px); `pc-btn-full` takes the full width. Icons are 16px in every size.
+- `pc-btn-icon` is square; it needs an `aria-label` and the same words as a tooltip.
+- `aria-pressed="true"`: a button that stays on, soft teal.
+- `disabled`: one flat grey, not-allowed pointer; `aria-disabled="true"` instead when a tooltip says why (the app ignores the click).
+- `aria-busy="true"` with a `.pc-spinner` while it works.
 
 ## Sidebar item
 
@@ -335,11 +339,11 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Accordion**: `.pc-accordion` of `<details class="pc-accordion-item">`, each a `<summary>` (the question and a `caret-down`) and a `.pc-accordion-content`; `aria-disabled="true"` plus `tabindex="-1"` on the summary for one coming later; the same `name` on the items keeps one open at a time.
 - **Avatar**: `.pc-avatar` (22px), `.pc-avatar-medium` (32px), `.pc-avatar-large` (48px): letters or an `<img>`; `.pc-avatar-none`, `.pc-avatar-square`, `.pc-avatars` with `.pc-avatar-more`, `.pc-avatar-status` (online), a `.pc-badge-small` inside a 32 or 48px one (bottom right, level with the dot, on a solid fill); rings from `--pc-avatar-ring`.
 - **Breadcrumbs**: `<nav class="pc-breadcrumbs" aria-label="Breadcrumb">` with the parent pages as `<a>`, a `caret-right` `<svg>` between, and the current page last as `<span aria-current="page">`; above a page header with the sidebar toggle it lines up with the title.
-- **Button group**: `.pc-btn-group` puts buttons side by side, 8px apart; `.pc-toolbar` holds ghost tools in a quiet `muted` tray with `.pc-toolbar-divider` between groups, the tool under the pointer or pressed (`aria-pressed="true"`) raised as a card.
+- **Button group**: `.pc-btn-group` puts buttons side by side, 8px apart; `.pc-toolbar` holds ghost tools in a quiet `muted` tray with `.pc-toolbar-divider` between groups, the tool under the pointer raised as a card, a pressed one (`aria-pressed="true"`) soft teal.
 - **Carousel**: `.pc-carousel-dots` holding one `<button class="pc-carousel-dot">` per slide, the current one `aria-current="true"` (long); the app shows one slide and hides the others, with no motion.
 - **Color picker**: `.pc-swatches` (`role="radiogroup"`) of `<label class="pc-swatch pc-colour-red" data-pc-tooltip="Red">` around a radio, from the set `.pc-colour-gray`, `-red`, `-orange`, `-yellow`, `-green`, `-teal`, `-blue`, `-purple`, `-pink`; the chosen one ringed in the text colour. Last, the colour well `.pc-swatch .pc-swatch-custom`: an `<input type="color">`, a `.pc-swatch-ring` (rainbow) and a `plus`, opening the device's own chooser. A picked colour fills the ring's middle: the app's script adds its radio (`value` the hex) to the well and sets `--pc-colour` on it.
 - **Menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
-- **Tooltip**: `data-pc-tooltip="Text"` on any element; on a `<span tabindex="0">` around a disabled button.
+- **Tooltip**: `data-pc-tooltip="Text"` on any element; on a button that can't be used, use `aria-disabled="true"` and put it on the button.
 - **Modal**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, an optional `.pc-dialog-content` (fields, an error, longer text; it scrolls when it doesn't fit) and `.pc-dialog-actions`. No x; on phones a sheet from the bottom with the buttons sharing the width.
 - **Date picker**: `.pc-popover` with a `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`; today `aria-current="date"`, chosen `aria-selected="true"`, `.pc-calendar-day-outside`).
 - **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Date picker `.pc-popover` dropping under it.
@@ -358,7 +362,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Footer**: `<footer class="pc-footer">` with `.pc-footer-groups` of `<nav class="pc-footer-group">` (a `.pc-footer-heading` over `.pc-footer-link` links), a `.pc-footer-bottom` line (or only a `.pc-footer-line`), then the app's word, `pe-caiet-word.svg` or `todo-word.svg` pasted inline as `<svg class="pc-footer-word" aria-hidden="true">`, in the border colour and cut off by the bottom edge.
 - **Form**: the fields in a `.pc-card-content`, 12px apart, and Cancel then the action on the right in the `.pc-card-footer`; errors show when the action is pressed, as `aria-invalid="true"` and a `.pc-field-error` under each field with a problem.
 - **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-warning`, `-destructive`), `.pc-badge-small` (16px, 10px words) in any style; `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
-- **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, an optional icon first, and an optional `.pc-alert-action`.
+- **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, the icon first (required). One line takes the kind's colour; a longer one has a `.pc-alert-body` with a `.pc-alert-title` in the kind's colour over text in the text colour (or a lead line over a list of a form's errors). Optional `.pc-alert-action`, a `.pc-alert-close` x, and `.pc-alert-banner` for a banner across the top of a page.
 - **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
 - **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.

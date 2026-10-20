@@ -1,7 +1,14 @@
 # Button
 
-A button that does something, in four styles.
+A button that does something: four styles, three sizes, and the states every style shares.
 
-- `.pc-btn` plus one of `.pc-btn-primary` (the main action, at most once per view), `.pc-btn-outline` (secondary actions, Cancel), `.pc-btn-ghost` (quiet actions in rows and menus), `.pc-btn-destructive` (delete, sign out everywhere).
-- `.pc-btn-icon` makes a square icon-only button; give it an `aria-label`.
-- Label with a verb and what it acts on: "Save email", "Delete account". Disabled buttons use the `disabled` attribute.
+- `.pc-btn` plus one style: `.pc-btn-primary` (the one main action of a view, at most once), `.pc-btn-outline` (secondary actions, Cancel), `.pc-btn-ghost` (quiet actions in rows, menus and toolbars), `.pc-btn-destructive` (a red outline that starts something that can't be undone: Delete account, Sign out everywhere).
+- Deleting starts with one question: can it come back? If it can (a task, a file being attached, a chip), there is no red button and no dialog: an icon button or a menu item does it, and a Toast offers Undo. If it can't (an account, a user, a client app), a red outline on the page opens a Modal, and the Modal's Delete is `.pc-btn-primary.pc-btn-destructive`: solid red, the dialog's one main action. Solid always means "the main action here", teal or red; never two solid buttons in one view.
+- Sizes: `.pc-btn-small` (28px) and `.pc-btn-large` (40px, 15px words) around the 32px default. Toolbars, the segmented control, toasts, buttons inside fields and an alert's x are small by themselves. Icons are 16px in every size.
+- Icons: a 16px Phosphor icon before the words when the button adds or does something (`plus` for New list), after them when it opens a menu (`caret-down`) or goes to the next step (`caret-right`). `.pc-btn-icon` makes a square icon-only button: give it an `aria-label` and the same words as a tooltip (`data-pc-tooltip`).
+- A button that stays on (a filter, a view, Bold) carries `aria-pressed="true"`: soft teal (`primary-soft`, `primary-hover` words), an outline's edge teal. The same in a toolbar, where the raised pill only means "under the pointer".
+- Can't be used: the `disabled` attribute. Every style turns one flat grey (`muted` fill, `border` edge, `muted-foreground` words; a ghost keeps no fill), with the not-allowed pointer. To say why, use `aria-disabled="true"` instead: it stays focusable, the tooltip goes on the button itself, and the app ignores the click. A link that goes nowhere (`<a class="pc-btn" aria-disabled="true">`) can't be clicked.
+- Working: `aria-busy="true"`, a `.pc-spinner` in place of the icon (or before the words), and words that say what's happening ("Saving…"). It keeps its width and can't be pressed twice; icon-only, the spinner replaces the icon.
+- `.pc-btn-full` stretches it to its container: forms on phones, the sign-in page. Words never wrap, so keep them short.
+- A button that goes to another page is an `<a class="pc-btn …">` with the same look.
+- Label with a verb and what it acts on: "Save email", "Delete account".

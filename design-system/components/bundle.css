@@ -101,7 +101,15 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-btn-ghost { background: transparent; color: var(--foreground); }
 .pc-btn-ghost:hover, .pc-btn-outline:hover { background: var(--accent); color: var(--foreground); }
 .pc-btn-destructive { background: transparent; border-color: var(--destructive); color: var(--destructive); }
-.pc-btn[aria-pressed="true"] { background: var(--foreground); border-color: var(--foreground); color: var(--background); }
+/* A button that stays on (aria-pressed="true"): soft teal, teal words; an outline's edge turns teal. */
+.pc-btn[aria-pressed="true"] { background: var(--primary-soft); border-color: transparent; color: var(--primary-hover); }
+.pc-btn-outline[aria-pressed="true"] { border-color: var(--primary); }
+/* Solid red: a delete that is the main action of its view (a dialog's Delete), .pc-btn-primary.pc-btn-destructive. */
+.pc-btn-primary.pc-btn-destructive { background: var(--destructive); border-color: var(--destructive); color: var(--destructive-foreground); }
+/* Sizes around the 32px row, and full width. */
+.pc-btn-small { height: calc(var(--pc-row) - 4px); padding: 0 10px; }
+.pc-btn-large { height: calc(var(--pc-row) + 8px); padding: 0 16px; font-size: 15px; }
+.pc-btn-full { width: 100%; }
 
 /* Forms */
 .pc-field { display: grid; gap: 6px; }
@@ -167,8 +175,10 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 /* States and extra variants */
 .pc-btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
 .pc-btn-destructive:hover { background: var(--destructive-soft); }
-.pc-btn:disabled, .pc-btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.pc-btn-primary.pc-btn-destructive:hover { background: var(--destructive-hover); border-color: var(--destructive-hover); }
 .pc-btn-icon { width: var(--pc-row); padding: 0; }
+.pc-btn-small.pc-btn-icon { width: calc(var(--pc-row) - 4px); }
+.pc-btn-large.pc-btn-icon { width: calc(var(--pc-row) + 8px); }
 .pc-btn-icon > svg { width: 16px; height: 16px; }
 
 /* A text area starts three lines tall and grows with what's written, up to ten lines, then scrolls inside. Where the browser can't
@@ -377,7 +387,7 @@ div.pc-file { padding-right: 0; }
 .pc-file-upload { position: relative; justify-self: start; }
 .pc-file-upload > input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .pc-file-upload:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
-.pc-file-upload:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.pc-file-upload:has(> input:disabled) { background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed; }
 
 .pc-menu { display: flex; flex-direction: column; gap: 4px; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
@@ -525,6 +535,23 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-alert-action { margin-left: auto; flex-shrink: 0; }
 .pc-alert:has(.pc-alert-action) { align-items: center; padding-top: 6px; padding-bottom: 6px; }
 .pc-alert:has(.pc-alert-action) > svg { margin-top: 0; }
+/* Longer alerts: a .pc-alert-body with a .pc-alert-title (or a lead line) and the text or a list under it. The first line keeps the kind's
+   colour (a notice's title teal); everything after it is in the text colour, easier to read. */
+.pc-alert-body { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.pc-alert-body > p { margin: 0; }
+.pc-alert-body > ul { margin: 4px 0 0; padding-left: 18px; }
+.pc-alert-body li + li { margin-top: 2px; }
+.pc-alert-title { font-weight: 600; }
+.pc-alert-notice .pc-alert-title { color: var(--primary); }
+.pc-alert-body > :not(:first-child) { color: var(--foreground); }
+/* Dismissible: a ghost x at the end, in the alert's colour. */
+.pc-alert-close.pc-btn-icon { width: 28px; height: 28px; margin: -4px -8px -4px auto; color: inherit; opacity: 0.7; }
+.pc-alert-close.pc-btn-icon:hover { opacity: 1; background: color-mix(in srgb, currentColor 10%, transparent); color: inherit; }
+.pc-alert-action ~ .pc-alert-close.pc-btn-icon { margin-left: 0; }
+.pc-alert:has(> .pc-alert-close) { padding-right: 10px; }
+/* A banner across the top of a page: no corners, edge to edge, one line. */
+.pc-alert-banner { padding: 8px 16px; border-radius: 0; align-items: center; }
+.pc-alert-banner > svg { margin-top: 0; }
 .pc-menu-check { margin-left: auto; color: var(--primary); }
 .pc-menu-end { margin-left: auto; color: var(--muted-foreground); }
 .pc-menu-item > .pc-menu-check { width: 16px; height: 16px; color: var(--primary); }
@@ -587,7 +614,6 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 
 
-.pc-btn-late { color: var(--destructive); }
 
 /* Search: a dialog with the field on top and grouped results */
 .pc-search { width: min(560px, calc(100% - 32px)); padding: 0; overflow: hidden; }
@@ -653,13 +679,14 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 /* Button group: buttons side by side, 8px apart, each its own shape; they wrap when there is no room. */
 .pc-btn-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-/* Toolbar: ghost buttons in a quiet tray, 4px around them; the one under the pointer, or pressed (aria-pressed), lifts
-   as a raised card. A .pc-toolbar-divider separates groups of tools. */
+/* Toolbar: ghost buttons in a quiet tray, 4px around them; the one under the pointer lifts as a raised card. A tool that
+   stays on (aria-pressed) is soft teal, like any button that stays on, and stays so under the pointer.
+   A .pc-toolbar-divider separates groups of tools. */
 .pc-toolbar { display: inline-flex; align-items: center; gap: 2px; padding: 4px; border-radius: calc(var(--pc-radius) + 4px); background: var(--muted); }
 .pc-toolbar > .pc-btn { height: calc(var(--pc-row) - 4px); }
 .pc-toolbar > .pc-btn-icon { width: calc(var(--pc-row) - 4px); }
-.pc-toolbar > .pc-btn:hover, .pc-toolbar > .pc-btn[aria-pressed="true"] { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
-.pc-toolbar > .pc-btn[aria-pressed="true"] { border-color: transparent; color: var(--foreground); }
+.pc-toolbar > .pc-btn:hover:not(:disabled, [aria-disabled="true"]) { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
+.pc-toolbar > .pc-btn[aria-pressed="true"]:hover { background: var(--primary-soft); box-shadow: none; }
 .pc-toolbar-divider { width: 1px; height: 16px; margin: 0 4px; background: var(--border); }
 
 /* Segmented control: the toolbar's tray, for choosing exactly one of two to five options: a role="radiogroup" of .pc-btn.pc-btn-ghost
@@ -671,7 +698,17 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-segmented > .pc-btn > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
 .pc-segmented > .pc-btn:hover, .pc-segmented > .pc-btn:has(> input:checked) { background: var(--sidebar-active); box-shadow: var(--pc-raise); color: var(--foreground); }
 .pc-segmented > .pc-btn:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
-.pc-segmented > .pc-btn:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.pc-segmented > .pc-btn:has(> input:disabled) { color: var(--muted-foreground); cursor: not-allowed; }
+.pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: none; }
+
+/* A button that can't be used: one flat grey for every style (a ghost keeps no fill), the not-allowed pointer, nothing under
+   the pointer. It still takes the pointer, so a tooltip on it can say why: use aria-disabled="true" then (focusable; the app
+   ignores the click). A link that goes nowhere can't be clicked. */
+.pc-btn:is(:disabled, [aria-disabled="true"]), .pc-btn:is(:disabled, [aria-disabled="true"]):hover {
+  background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed;
+}
+.pc-btn-ghost:is(:disabled, [aria-disabled="true"]), .pc-btn-ghost:is(:disabled, [aria-disabled="true"]):hover { background: none; border-color: transparent; }
+a.pc-btn[aria-disabled="true"] { pointer-events: none; }
 
 /* Separator: a 1px line in the border colour, the same line as every divider (menus, footers, table headers, the toolbar).
    <hr class="pc-separator"> between sections; .pc-separator-bleed runs it out to a panel's edges (16px each side);
@@ -791,7 +828,6 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-toast-text { flex: 1; min-width: 0; }
 .pc-toast > .pc-btn { height: 28px; padding: 0 10px; }
 .pc-toast > .pc-btn-icon { width: 28px; padding: 0; }
-.pc-toast > .pc-btn-icon > svg { width: 14px; height: 14px; }
 @media (max-width: 47.99rem) { .pc-toasts { right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); left: 8px; width: auto; } }
 
 /* Footer: the bottom of a site's page (signed-out pages, a landing page); apps with a sidebar have none. A line across its top, link

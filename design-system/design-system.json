@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T17:14:51Z",
+    "at": "2026-10-20T18:20:29Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Datepicker: today back to its first look, the number in bold teal."
+    "note": "Button redone (B, 2, Y): solid red only as a dialog's main action, soft teal for a button that stays on, one flat grey for a button that can't be used (tooltip on it), sizes, full width, working state, icon rules. Modal, Button group, Sign in and Tooltip follow; tokens destructive-hover and destructive-foreground."
   },
   "layout": "files",
   "libraries": [],
