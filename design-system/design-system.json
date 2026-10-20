@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T11:00:11Z",
+    "at": "2026-10-20T11:18:23Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Badge: a second size, .pc-badge-small (16px, 10px words), in every style; the avatar's badge uses it."
+    "note": "Footer (option A): link groups and a bottom line, then the app's word drawn in Figtree Black, big and faint, cut off by the bottom edge (.pc-footer)."
   },
   "layout": "files",
   "libraries": [],
