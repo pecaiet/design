@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T07:25:10Z",
+    "at": "2026-10-20T07:31:31Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "File: option A, a row like a task or menu row with the file's icon, name and size; a download link, or an x to remove while editing."
+    "note": "File upload: option A, an outline button that opens the file picker; the chosen files show under it as File rows. No drop area."
   },
   "layout": "files",
   "libraries": [],

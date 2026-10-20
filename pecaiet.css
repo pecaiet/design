@@ -319,6 +319,13 @@
   a.pc-file:is(:hover, :focus-visible) > .pc-file-action { display: block; }
   div.pc-file { padding-right: 0; }
 
+  /* File upload: <label class="pc-btn pc-btn-outline pc-file-upload"> with a paperclip, the words ("Attach files") and the real
+     <input type="file"> inside it, out of sight; the label opens the device's file picker. The chosen files show under it as File rows. */
+  .pc-file-upload { position: relative; justify-self: start; }
+  .pc-file-upload > input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .pc-file-upload:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
+  .pc-file-upload:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
   .pc-menu { display: flex; flex-direction: column; gap: 4px; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
   .pc-menu-item { display: flex; align-items: center; gap: 10px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
