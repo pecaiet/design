@@ -330,6 +330,25 @@
   .pc-figure { display: grid; gap: 6px; margin: 0; }
   .pc-figure > figcaption { color: var(--muted-foreground); font-size: 12px; }
 
+  /* Pagination: <nav class="pc-pagination" aria-label="Pages"> of ghost buttons: Previous and Next (with words, or arrows alone where room is
+     short), the page numbers (.pc-pagination-page; the current one has aria-current="page" and an outline button's border), and
+     .pc-pagination-gap ("…") for the pages left out. The compact one says .pc-pagination-where ("Page 5 of 20") between two arrows.
+     An end that goes nowhere gets aria-disabled="true". .pc-pagination-bar puts a .pc-pagination-count ("41–60 of 134") or a
+     .pc-pagination-size (rows per page) first and the pages at the end. .pc-pagination-more is a Show more button with its count. */
+  .pc-pagination { display: flex; align-items: center; gap: 2px; }
+  .pc-pagination > .pc-btn:not(.pc-btn-icon):first-child { padding-left: 6px; }
+  .pc-pagination > .pc-btn:not(.pc-btn-icon):last-child { padding-right: 6px; }
+  .pc-pagination-page { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .pc-pagination-page[aria-current="page"] { border-color: var(--input); background: var(--card); font-weight: 600; }
+  .pc-pagination-gap { display: inline-grid; place-items: center; width: 24px; color: var(--muted-foreground); }
+  .pc-pagination-where { padding: 0 8px; font-variant-numeric: tabular-nums; }
+  .pc-pagination-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc-pagination-bar { display: flex; flex: 1; align-items: center; gap: 12px; min-width: 0; }
+  .pc-pagination-bar > :first-child { margin-right: auto; }
+  .pc-pagination-size { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 12px; }
+  .pc-pagination-size > .pc-picker-button { width: 72px; color: var(--foreground); font-size: 14px; }
+  .pc-pagination-more { display: flex; align-items: center; gap: 12px; }
+
   /* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 20px in, 4px apart.
      A label-and-value list is <dl class="pc-details">, <dt> and <dd> in turn: the label muted in a 160px column, the value beside it;
      on phones the label goes above its value. */
@@ -364,7 +383,8 @@
   .pc-dialog-body { display: grid; gap: 16px; }
   .pc-dialog-title { margin: 0; font-size: 15px; font-weight: 600; }
   .pc-dialog-description { margin: 4px 0 0; color: var(--muted-foreground); }
-  .pc-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; }
+  /* The actions sit under a line from edge to edge, as in a Card's footer and the Drawer's. */
+  .pc-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin: 0 -16px -16px; padding: 12px 16px; border-top: 1px solid var(--border); }
   /* Settings modal: a big window over the page with its own nav, for settings. <dialog class="pc-modal"> holds .pc-modal-frame (the nav, .pc-sidebar.pc-modal-nav,
      after a .pc-sheet-backdrop) and .pc-modal-main: a head (title row, close) over a body that scrolls. On phones it fills the screen and the nav
      is hidden until the toggle in the head opens the frame as a .pc-sidebar-sheet, like the app's sidebar. */

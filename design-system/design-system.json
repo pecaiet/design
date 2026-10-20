@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T08:05:54Z",
+    "at": "2026-10-20T08:20:01Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "List: bullets and numbers with muted markers (.pc-list), and a label-and-value list side by side, stacked on phones (.pc-details)."
+    "note": "Pagination: ghost page buttons with the current one outlined (.pc-pagination), plus compact, count and arrows, rows per page and Show more."
   },
   "layout": "files",
   "libraries": [],
