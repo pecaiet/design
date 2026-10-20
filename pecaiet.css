@@ -262,11 +262,14 @@
   .pc-btn-icon { width: var(--pc-row); padding: 0; }
   .pc-btn-icon > svg { width: 16px; height: 16px; }
 
+  /* A text area starts three lines tall and grows with what's written, up to ten lines, then scrolls inside. Where the browser can't
+     grow it (field-sizing), it keeps a handle to drag it taller. */
   .pc-textarea {
-    width: 100%; min-height: 96px; padding: 8px 10px;
+    width: 100%; min-height: 76px; max-height: 236px; padding: 8px 10px;
     border: 1px solid var(--input); border-radius: var(--pc-radius);
-    background: var(--card); color: var(--foreground); font: inherit; line-height: 1.45; resize: vertical;
+    background: var(--card); color: var(--foreground); font: inherit; line-height: 1.45; resize: none; field-sizing: content;
   }
+  @supports not (field-sizing: content) { .pc-textarea { resize: vertical; } }
   .pc-textarea::placeholder { color: var(--muted-foreground); }
   .pc-textarea:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-input:disabled, .pc-textarea:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -775,6 +778,25 @@
   .pc-stepper > button:disabled { background: none; opacity: 0.4; cursor: not-allowed; }
   .pc-stepper:has(> input:focus-visible) { border-color: var(--background); box-shadow: var(--pc-focus); }
   .pc-stepper:has(> input:disabled) { opacity: 0.5; }
+
+  /* Tabs: switching between parts of a page. <div class="pc-tabs" role="tablist"> of <button class="pc-tab" role="tab"> (or links,
+     <a class="pc-tab" aria-current="page">, when each part has its own address), over a line from edge to edge. The current tab
+     (aria-selected="true") is in the text colour, semibold, with a 2px teal line under it; the rest are muted. An optional 16px icon
+     before the words and a .pc-tab-count after them. When they don't fit, the row scrolls sideways. */
+  .pc-tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; box-shadow: inset 0 -1px 0 var(--border); }
+  .pc-tabs::-webkit-scrollbar { display: none; }
+  .pc-tab { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; gap: 6px; height: 36px; padding: 0 8px; border: 0; border-radius: var(--pc-radius-sm); background: none; color: var(--muted-foreground); font: inherit; font-weight: 500; white-space: nowrap; text-decoration: none; cursor: pointer; }
+  .pc-tab > svg { width: 16px; height: 16px; }
+  .pc-tab:hover, .pc-tab[aria-selected="true"], .pc-tab[aria-current="page"] { color: var(--foreground); }
+  .pc-tab[aria-selected="true"], .pc-tab[aria-current="page"] { font-weight: 600; }
+  .pc-tab[aria-selected="true"]::after, .pc-tab[aria-current="page"]::after { content: ""; position: absolute; right: 8px; bottom: 0; left: 8px; height: 2px; border-radius: 2px; background: var(--primary); }
+  .pc-tab:focus-visible { outline: 2px solid transparent; outline-offset: -2px; box-shadow: var(--pc-focus-inset); }
+  .pc-tab-count { padding: 0 6px; border-radius: 999px; background: var(--muted); color: var(--muted-foreground); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pc-tab-panel:focus-visible { outline: none; }
+
+  /* A text area's count: .pc-field-count under it, on the right ("13 / 200"); data-state="over" turns it red. */
+  .pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc-field-count[data-state="over"] { color: var(--destructive); font-weight: 600; }
 
   /* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
      current long and strong, the others short and faint. */

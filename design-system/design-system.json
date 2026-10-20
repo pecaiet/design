@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T09:39:18Z",
+    "at": "2026-10-20T09:54:55Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Table: rows stay 32px and striped; adds picking rows (aria-selected, primary-soft), a sortable column, numbers on the right and a row's \u22ef menu."
+    "note": "Tabs: an underline (.pc-tabs, .pc-tab). Textarea: three lines tall, growing with the text up to ten (field-sizing), a count for a limit (.pc-field-count)."
   },
   "layout": "files",
   "libraries": [],
