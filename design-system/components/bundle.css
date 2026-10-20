@@ -563,6 +563,27 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-calendar-day[aria-current="date"] { color: var(--primary); font-weight: 700; }
 .pc-calendar-day[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: 600; }
 .pc-calendar-day-outside { color: var(--muted-foreground); }
+/* A range: the two ends chosen (aria-selected, teal), the days between (data-range="mid") joined by a soft teal band from end to end,
+   round only at the ends and at the week's edges. While picking the end, the day under the pointer is outlined (data-range-preview). */
+.pc-calendar { --pc-range: color-mix(in srgb, var(--primary) 14%, var(--card)); }
+.pc-calendar-day[data-range] { border-radius: 0; }
+.pc-calendar-day[data-range="mid"] { background: var(--pc-range); }
+.pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: -4px 0 0 var(--pc-range); }
+.pc-calendar-day:is([data-range="start"], [data-range]:nth-child(7n+1)) { border-top-left-radius: var(--pc-radius); border-bottom-left-radius: var(--pc-radius); }
+.pc-calendar-day:is([data-range="end"], [data-range]:nth-child(7n)) { border-top-right-radius: var(--pc-radius); border-bottom-right-radius: var(--pc-radius); }
+.pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: -4px 0 0 var(--pc-range), inset 0 0 0 1.5px var(--primary); }
+/* A day that can't be picked: faded, no hover, skipped by the keyboard. */
+.pc-calendar-day[aria-disabled="true"] { color: var(--muted-foreground); opacity: 0.45; cursor: not-allowed; }
+.pc-calendar-day[aria-disabled="true"]:hover { background: none; }
+/* The month's name is a button that opens the twelve months (.pc-calendar-months); the arrows then change the year. */
+.pc-calendar-title { padding: 2px 8px; border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.pc-calendar-title:hover { background: var(--accent); }
+.pc-calendar-title:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
+.pc-calendar-months { display: grid; grid-template-columns: repeat(3, minmax(72px, 1fr)); gap: 6px; }
+.pc-calendar-month { height: var(--pc-row); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; cursor: pointer; }
+.pc-calendar-month:hover { background: var(--accent); }
+.pc-calendar-month[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: 600; }
+.pc-calendar-month:focus-visible { background: var(--accent); outline: 2px solid transparent; box-shadow: var(--pc-focus-inset); }
 
 
 
@@ -875,6 +896,12 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-date > .pc-date-clear:hover { color: var(--foreground); }
 .pc-date:has(> .pc-date-clear) > .pc-picker-button { padding-right: calc(var(--pc-row) + 2px); }
 .pc-date > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; width: max-content; }
+/* Phones: the Datepicker is a sheet from the bottom over a .pc-popover-backdrop, like the popovers; the month fills the width. */
+@media (max-width: 47.99rem) {
+  .pc-date > .pc-popover { position: fixed; inset: auto 0 0; z-index: 60; width: auto; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; }
+  .pc-date > .pc-popover .pc-calendar-grid { grid-template-columns: repeat(7, 1fr); }
+  .pc-date > .pc-popover .pc-dialog-actions > .pc-btn { flex: 1; }
+}
 
 /* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
 .pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
