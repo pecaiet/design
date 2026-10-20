@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T10:17:52Z",
+    "at": "2026-10-20T11:00:11Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Video: Image's corners and edge, a white round play button and the length until it starts, then the browser's own controls (.pc-video)."
+    "note": "Badge: a second size, .pc-badge-small (16px, 10px words), in every style; the avatar's badge uses it."
   },
   "layout": "files",
   "libraries": [],
