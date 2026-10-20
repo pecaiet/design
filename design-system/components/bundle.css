@@ -74,6 +74,11 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 /* Forms */
 .pc-field { display: grid; gap: 6px; }
 .pc-label { font-size: 12px; font-weight: 600; }
+/* Fieldset: <fieldset class="pc-fieldset"> with a <legend class="pc-legend"> (it looks like .pc-label) over .pc-fieldset-options,
+   the radios or checkboxes that belong together. No line, no box: the group reads as one more field. */
+.pc-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.pc-legend { margin-bottom: 6px; padding: 0; font-size: 12px; font-weight: 600; }
+.pc-fieldset-options { display: grid; gap: 10px; }
 .pc-input {
   width: 100%; height: var(--pc-row); padding: 0 10px;
   border: 1px solid var(--input); border-radius: var(--pc-radius);
@@ -161,6 +166,21 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .pc-empty { display: grid; justify-items: center; gap: 4px; padding: 28px 16px; text-align: center; color: var(--muted-foreground); }
 .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
 .pc-empty-description { margin: 0; }
+
+/* File: a file as a row, like a task or menu row: the file's icon, a .pc-file-name (cut off when long) and a .pc-file-size. .pc-files stacks
+   them 2px apart. To download, the row is <a class="pc-file" href download>; under the pointer or keyboard focus its download icon
+   (.pc-file-action) shows in place of the size. While editing it is a <div class="pc-file"> ending in a ghost icon button with an x. */
+.pc-files { display: grid; gap: 2px; }
+.pc-file { display: flex; align-items: center; gap: 10px; min-width: 0; height: var(--pc-row); padding: 0 10px; border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
+.pc-file > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+.pc-file-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pc-file-size { color: var(--muted-foreground); font-size: 12px; white-space: nowrap; }
+.pc-file > .pc-file-action { display: none; }
+a.pc-file:hover { background: var(--accent); }
+a.pc-file:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
+a.pc-file:is(:hover, :focus-visible) > .pc-file-size { display: none; }
+a.pc-file:is(:hover, :focus-visible) > .pc-file-action { display: block; }
+div.pc-file { padding-right: 0; }
 
 .pc-menu { display: flex; flex-direction: column; gap: 4px; min-width: 220px; padding: 4px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
@@ -425,7 +445,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }
 
 /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
-.pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
+.pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
   transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
     box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
 }
