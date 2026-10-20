@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T19:09:21Z",
+    "at": "2026-10-20T19:31:30Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Tooltip (A: ink, 10px corners, wraps on buttons, four sides, a short wait, Escape), Link (A and 1: links in text as today, one quiet look for footer, breadcrumbs and Clear; icons, a link-looking button, links in alerts), Input group (A and 1: words before or after inside the field, a field and its button side by side). Navigation and Header keep today's cards."
+    "note": "Consistency pass (A, 2, L, phones 40px, spacing tokens): small marks and code, Skeleton, sort button at 5px corners, phone sheets at 14px; the segmented control's pale pill under the pointer; a 20px icon in an empty image or video box; can't-be-used outliers fixed; a tooltip on every icon-only button; 40px rows and 16px field text on phones; spacing tokens in the CSS. The temporary Spacing and Consistency cards are gone."
   },
   "layout": "files",
   "libraries": [],

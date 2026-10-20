@@ -37,7 +37,8 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 ## Tokens
 
 - **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-hover`, `destructive-foreground`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
-- **Row height**: `--pc-row` (32px) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects.
+- **Row height**: `--pc-row` (32px; 40px on phones, under 48rem wide) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects. On phones fields also take 16px text, so iPhones don't zoom in.
+- **Spacing**: `--pc-space-1` 4px, `--pc-space-2` 8px, `--pc-space-3` 12px, `--pc-space-4` 16px, `--pc-space-6` 24px; the components use them for padding, margins and gaps.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
 - **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
@@ -374,7 +375,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Progress indicator**: `<ol class="pc-steps">` of `<li class="pc-step">` (a 4px bar over each `.pc-step-label`; `aria-current="step"`, `data-state="done"` or `"error"`); `.pc-steps-compact` with a `.pc-steps-head` for phones; `.pc-steps-vertical` for a checklist.
 - **Quote**: `<figure class="pc-quote">` with a `<blockquote>` (a 2px line down its start) and a `<figcaption>` (`.pc-quote-name`, then the role in muted text); `.pc-quote-pull` (15px semibold), `.pc-quote-small` (a quoted reply).
 - **Rating**: `.pc-rating-star` (a `star` outline and a `star-fill` cut to `--fill`); `.pc-rating` with `.pc-rating-stars`, `.pc-rating-value`, `.pc-rating-count` to show one; `.pc-rating-input`, a radio group of five star labels, to set one.
-- **Segmented control**: `.pc-segmented` (`role="radiogroup"`) of `<label class="pc-btn pc-btn-ghost">`s around hidden radios; the chosen one lifts like a toolbar tool that's on; `.pc-segmented-full` stretches it.
+- **Segmented control**: `.pc-segmented` (`role="radiogroup"`) of `<label class="pc-btn pc-btn-ghost">`s around hidden radios; the chosen one lifts as a raised pill, the one under the pointer shows a pale pill; `.pc-segmented-full` stretches it.
 - **Separator**: `<hr class="pc-separator">` (1px, the border colour); `.pc-separator-bleed` to a panel's edges; `.pc-separator-vertical` (16px tall, between items in a row); `.pc-separator-text` with a word in the middle.
 - **Skeleton**: `.pc-skeleton` blocks in the border colour (`.pc-skeleton-line`, `-title`, `-circle`, `-control`), pulsing on the motion tokens; `aria-busy="true"` on the area, the blocks `aria-hidden`.
 - **Skip link**: `<a class="pc-skip-link" href="#main">`, first in the page, out of sight until focused, then a raised pill at the top left; the target gets `tabindex="-1"`.
