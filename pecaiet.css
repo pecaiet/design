@@ -798,6 +798,69 @@
   .pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
   .pc-field-count[data-state="over"] { color: var(--destructive); font-weight: 600; }
 
+  /* Visually hidden: words for screen readers only, out of sight but still read out (the same as Tailwind's sr-only).
+     .pc-visually-hidden-focusable comes back into sight when it gets keyboard focus. */
+  .pc-visually-hidden, .pc-visually-hidden-focusable:not(:focus):not(:focus-within) { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+  /* Toast: a short message after something happens, over the page at the bottom right (across the bottom on phones). .pc-toasts holds
+     them, the newest at the bottom, 8px apart. A .pc-toast is our panel (card colour, border, the menus' lift): a 16px icon in its
+     meaning's colour (data-tone="success" teal, "error" red, otherwise muted), the words (.pc-toast-text), an optional action (a ghost
+     button: Undo, Retry) and the x. role="status" (role="alert" for an error). */
+  .pc-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 70; display: grid; justify-items: end; gap: 8px; width: min(380px, calc(100% - 32px)); }
+  .pc-toast { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 6px 6px 6px 14px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+  .pc-toast > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+  .pc-toast[data-tone="success"] > svg { color: var(--primary); }
+  .pc-toast[data-tone="error"] > svg { color: var(--destructive); }
+  .pc-toast-text { flex: 1; min-width: 0; }
+  .pc-toast > .pc-btn { height: 28px; padding: 0 10px; }
+  .pc-toast > .pc-btn-icon { width: 28px; padding: 0; }
+  .pc-toast > .pc-btn-icon > svg { width: 14px; height: 14px; }
+  @media (max-width: 47.99rem) { .pc-toasts { right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); left: 8px; width: auto; } }
+
+  /* Toggle: a switch for a setting that takes effect straight away, with no Save: <input type="checkbox" role="switch" class="pc-switch">,
+     a 36×20 pill: off is the field-border colour with a white knob at the start; on is teal with the knob at the end. Its words sit in
+     a <label class="pc-check"> beside it, or at the start of a settings row with the switch at the end. */
+  .pc-switch { position: relative; flex-shrink: 0; width: 36px; height: 20px; margin: 0; border-radius: 999px; background: var(--input); cursor: pointer; appearance: none; }
+  .pc-switch::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px #0003; transition: left var(--pc-motion-base) var(--pc-motion-ease); }
+  .pc-switch:checked { background: var(--primary); }
+  .pc-switch:checked::before { left: 18px; }
+  .pc-switch:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
+  .pc-switch:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Tree view: things inside things (folders of lists) as sidebar rows: <ul class="pc-tree" role="tree"> of .pc-tree-item rows
+     (role="treeitem", aria-level; aria-expanded on those that open). A .pc-tree-caret before anything that opens (caret-right,
+     caret-down when open), a 16px icon, the .pc-tree-label and an optional .pc-tree-count. Each level starts 26px further in, and the
+     row's fill starts there too, right under its parent's icon. The current item has aria-current="page": the active sidebar pill. */
+  .pc-tree { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
+  .pc-tree-item { --level: 0; display: flex; align-items: center; gap: 6px; height: var(--pc-row); margin-left: calc(var(--level) * 26px); padding: 0 8px; border-radius: var(--pc-radius); color: var(--sidebar-foreground); text-decoration: none; cursor: pointer; }
+  .pc-tree-item:has(> .pc-tree-caret) { padding-left: 4px; }
+  .pc-tree-item[aria-level="2"] { --level: 1; }
+  .pc-tree-item[aria-level="3"] { --level: 2; }
+  .pc-tree-item[aria-level="4"] { --level: 3; }
+  .pc-tree-item > svg, .pc-tree-caret > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+  .pc-tree-caret { display: inline-grid; place-items: center; flex-shrink: 0; width: 16px; }
+  .pc-tree-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-tree-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc-tree-item:hover { background: var(--sidebar-hover); }
+  .pc-tree-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
+  .pc-tree-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
+
+  /* Video: <div class="pc-video"> around a <video> with a poster, with Image's 10px corners and faint edge and black behind; 16:9 unless
+     it's given another aspect-ratio. Before it plays: a white 48px round .pc-video-play button in the middle (Phosphor play-fill, the
+     text colour) and the .pc-video-length at the bottom right. When it starts, data-state="playing" hides both and the video gets the
+     browser's own controls. Not loaded, or can't play: .pc-video.pc-video-empty, the muted fill with a video icon. */
+  .pc-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--pc-radius); background: #000; }
+  .pc-video::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 10%, transparent); pointer-events: none; }
+  .pc-video > video { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 999px; background: #fff; color: #1c2733; box-shadow: 0 2px 8px #0004; cursor: pointer; }
+  .pc-video-play > svg { width: 20px; height: 20px; margin-left: 2px; }
+  .pc-video-play:hover { background: #e9eef4; }
+  .pc-video-play:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus), 0 2px 8px #0004; }
+  .pc-video-length { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: var(--pc-radius-sm); background: #000a; color: #fff; font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
+  .pc-video[data-state="playing"] > .pc-video-play, .pc-video[data-state="playing"] > .pc-video-length { display: none; }
+  .pc-video-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
+  .pc-video-empty > svg { width: 16px; height: 16px; }
+
   /* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
      current long and strong, the others short and faint. */
   .pc-carousel-dots { display: flex; gap: 2px; }
