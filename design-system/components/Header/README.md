@@ -1,6 +1,6 @@
 # Header
 
-The bar across the top of a page without a sidebar (idp's home): the logo, and who is signed in.
+The bar across the top of a page without a sidebar: the logo, and who is signed in. Only pe caiet's root page uses it.
 
 - A `<header>` row: the `.pc-app-logo` on the left and the account row on the right: the Sidebar account row (`.pc-sidebar-item` with an `.pc-avatar` and the email in `.pc-sidebar-label`) with an up-down caret (Phosphor `caret-up-down`), as wide as its content.
 - Its menu, the account menu (`.pc-menu.pc-menu-pop`, see Dropdown menu), opens down from the row, aligned to its right edge; on phones it is a sheet at the bottom of the screen.

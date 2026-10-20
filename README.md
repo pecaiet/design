@@ -36,11 +36,11 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 
 ## Tokens
 
-- **Colours**: `background`, `foreground`, `muted`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-hover`, `destructive-foreground`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
+- **Colours**: `background`, `foreground`, `muted`, `track`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-hover`, `destructive-foreground`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
 - **Row height**: `--pc-row` (32px; 40px on phones, under 48rem wide) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects. On phones fields also take 16px text, so iPhones don't zoom in.
 - **Spacing**: `--pc-space-1` 4px, `--pc-space-2` 8px, `--pc-space-3` 12px, `--pc-space-4` 16px, `--pc-space-6` 24px; the components use them for padding, margins and gaps.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
-- **Shadows**: `--pc-raise` (the active row, cards), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
+- **Shadows**: `--pc-raise` (cards, the raised pill: a toolbar tool under the pointer, the chosen segment; the slider's handle), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
 - **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
 
 ## Rules for apps
@@ -88,7 +88,7 @@ Updating:
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: the text colour, with a soft grey underline at rest that turns solid under the pointer. Quiet links (a footer, breadcrumbs, a group's Clear) are muted with no underline until the pointer is on them.
 - Can't be used: half strength with the not-allowed pointer; buttons (and the segmented control, Attach files) instead turn one flat grey, so a tooltip on them can say why.
-- Divider lines (menus, card footers, the search dialog, table rows) run edge to edge, the same everywhere.
+- Divider lines (menus, card footers, the search dialog) run edge to edge, the same everywhere.
 - Scrollbars: thin and muted (`muted-foreground` at 40%, no track), drawn by the browser on every scroll area and the page itself, so each system keeps its own behaviour (macOS hides them until you scroll).
 
 ## Button
@@ -187,7 +187,7 @@ The sidebar head as a button: the current app's mark and name, and the menu of a
 - `.pc-menu-end` pushes a muted icon or text to the end of a menu row.
 - It opens and closes like the account menu.
 
-## Sidebar
+## Navigation
 
 Always a sidebar. One toggle opens and closes it on desktop and phones, and it sits in the page's title row.
 
@@ -222,9 +222,9 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 </div>
 ```
 
-## Top bar
+## Header
 
-A page without a sidebar (idp's home): the logo on the left and the account row on the right.
+A page without a sidebar: the logo on the left and the account row on the right. Used only on pe caiet's root page.
 
 ```html
 <header><!-- the app's layout: a row, the logo left, the account pushed right -->
@@ -270,7 +270,7 @@ The top of a page: its title, an optional line about it, and, on some pages, the
 
 ## Select
 
-Every choice from a list, instead of a native `<select>`: a button that looks like a field and opens a menu of options. A dropdown on desktop, a sheet on phones (see Menu on phones).
+Every choice from a list, instead of a native `<select>`: a button that looks like a field and opens a menu of options. A dropdown on desktop, a sheet on phones (see Dropdown menu on phones).
 
 ```html
 <div class="pc-field">
@@ -291,13 +291,13 @@ Every choice from a list, instead of a native `<select>`: a button that looks li
 
 - A value: the chosen option has `aria-selected="true"` and a `.pc-menu-check` tick at the end; nothing else is bold. The button shows the value and a chevron.
 - A place (switching list, workspace or app): add `.pc-menu-places`, use links with `aria-current="page"` on where you are (a primary bar and a semibold name, no tick), and give the button the up-down caret.
-- Search is optional: the input with an icon, first in the menu. When nothing matches, one `<p class="pc-menu-empty">` says so.
+- Search is optional: an Input group, first in the menu. When nothing matches, one `<p class="pc-menu-empty">` says so.
 - `.pc-menu-title` names the choice and shows only on phones, where the sheet has no label above it.
 - The app opens and closes it (`hidden`, `aria-expanded`), filters for search, and moves with the arrow keys; Enter picks, Escape or a tap on the backdrop closes without a change.
 
-## Menu on phones
+## Dropdown menu on phones
 
-Every menu that pops up (pickers, the account menu, the app switcher, row actions) is a sheet at the bottom of the screen on phones: full width, 44px rows, over a dimmed backdrop. On desktop it stays a dropdown.
+Every menu that pops up (pickers, the account menu, the app switcher, row actions) is a sheet at the bottom of the screen on phones: full width, 40px rows like every row on phones, over a dimmed backdrop. On desktop it stays a dropdown.
 
 - Give the menu `.pc-menu-pop` and put a `<div class="pc-menu-backdrop">` right before it; a tap on the backdrop or Escape closes. Below 48rem the menu becomes the sheet and the backdrop shows while it is open, and the page behind it doesn't scroll. `.pc-menu-sheet` makes a menu a sheet at any width.
 - Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
@@ -340,19 +340,18 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Accordion**: `.pc-accordion` of `<details class="pc-accordion-item">`, each a `<summary>` (the question and a `caret-down`) and a `.pc-accordion-content`; `aria-disabled="true"` plus `tabindex="-1"` on the summary for one coming later; the same `name` on the items keeps one open at a time.
 - **Avatar**: `.pc-avatar` (22px), `.pc-avatar-medium` (32px), `.pc-avatar-large` (48px): letters or an `<img>`; `.pc-avatar-none`, `.pc-avatar-square`, `.pc-avatars` with `.pc-avatar-more`, `.pc-avatar-status` (online), a `.pc-badge-small` inside a 32 or 48px one (bottom right, level with the dot, on a solid fill); rings from `--pc-avatar-ring`.
 - **Breadcrumbs**: `<nav class="pc-breadcrumbs" aria-label="Breadcrumb">` with the parent pages as `<a>`, a `caret-right` `<svg>` between, and the current page last as `<span aria-current="page">`; above a page header with the sidebar toggle it lines up with the title.
-- **Button group**: `.pc-btn-group` puts buttons side by side, 8px apart; `.pc-toolbar` holds ghost tools in a quiet `muted` tray with `.pc-toolbar-divider` between groups, the tool under the pointer raised as a card, a pressed one (`aria-pressed="true"`) soft teal.
+- **Button group**: `.pc-btn-group` puts buttons side by side, 8px apart; `.pc-toolbar` holds ghost tools in a quiet `muted` tray with `.pc-toolbar-divider` between groups, the tool under the pointer raised as a pill, a pressed one (`aria-pressed="true"`) soft teal.
 - **Carousel**: `.pc-carousel-dots` holding one `<button class="pc-carousel-dot">` per slide, the current one `aria-current="true"` (long); the app shows one slide and hides the others, with no motion.
 - **Color picker**: `.pc-swatches` (`role="radiogroup"`) of `<label class="pc-swatch pc-colour-red" data-pc-tooltip="Red">` around a radio, from the set `.pc-colour-gray`, `-red`, `-orange`, `-yellow`, `-green`, `-teal`, `-blue`, `-purple`, `-pink`; the chosen one ringed in the text colour. Last, the colour well `.pc-swatch .pc-swatch-custom`: an `<input type="color">`, a `.pc-swatch-ring` (rainbow) and a `plus`, opening the device's own chooser. A picked colour fills the ring's middle: the app's script adds its radio (`value` the hex) to the well and sets `--pc-colour` on it.
-- **Menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
+- **Dropdown menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
 - **Tooltip**: `data-pc-tooltip="Text"` on any element, ink (dark on light, light on dark); every icon-only button gets one with its name. `data-pc-tooltip-side="bottom|left|right"` where there's no room above; a 0.4s wait under the pointer, at once on keyboard focus; `data-pc-tooltip-hidden` hides it (Escape). On a button that can't be used, use `aria-disabled="true"` and put it on the button.
 - **Modal**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, an optional `.pc-dialog-content` (fields, an error, longer text; it scrolls when it doesn't fit) and `.pc-dialog-actions`. No x; on phones a sheet from the bottom with the buttons sharing the width.
-- **Date picker**: `.pc-popover` with a `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`; today `aria-current="date"`, chosen `aria-selected="true"`, `.pc-calendar-day-outside`).
-- **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Date picker `.pc-popover` dropping under it.
-- **Datepicker**: `.pc-calendar` in a `.pc-popover`; today (`aria-current="date"`) has its number in bold teal, chosen days are filled teal; a range uses `data-range="start|mid|end"` (one soft teal band) and `data-range-preview` while picking the end; `aria-disabled="true"` days are faded; `.pc-calendar-title` opens `.pc-calendar-months`; inside a `.pc-date` it's a sheet on phones.
+- **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Datepicker `.pc-popover` dropping under it.
+- **Datepicker**: `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`, `.pc-calendar-day-outside`) in a `.pc-popover`; today (`aria-current="date"`) has its number in bold teal, chosen days (`aria-selected="true"`) are filled teal; a range uses `data-range="start|mid|end"` (one soft teal band) and `data-range-preview` while picking the end; `aria-disabled="true"` days are faded; `.pc-calendar-title` opens `.pc-calendar-months`; inside a `.pc-date` it's a sheet on phones.
 - **Drawer**: `<dialog class="pc-drawer">` (opened with `showModal()`: over the dimmed page, full height and flush with the screen's right edge; full screen on phones) or `<aside class="pc-drawer pc-drawer-beside">` (the last thing in the page's row, nothing dimmed; full screen on phones), each holding `.pc-drawer-head` (an optional `.pc-drawer-back`, the `.pc-drawer-title`, the `.pc-drawer-close` x), `.pc-drawer-body` and `.pc-drawer-footer`.
-- **Search**: on a page, a `.pc-input-group` (`role="search"`) with the magnifier, a `type="search"` `.pc-input`, and our x or a `.pc-spinner` in its `.pc-input-group-end`. The window: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `<mark class="pc-search-match">`, `.pc-search-group-action`, `.pc-search-footer`, `.pc-search-cancel`; full screen on phones.
+- **Search input**: on a page, a `.pc-input-group` (`role="search"`) with the magnifier, a `type="search"` `.pc-input`, and our x or a `.pc-spinner` in its `.pc-input-group-end`. The window: `.pc-search` (on a `.pc-dialog`) with `.pc-search-field`, `.pc-search-results`, `.pc-search-result` (`aria-selected="true"` for the highlighted one), `<mark class="pc-search-match">`, `.pc-search-group-action`, `.pc-search-footer`, `.pc-search-cancel`; full screen on phones.
 - **Link**: `.pc-link` in text (also on a `<button>`; an icon before or after it, `arrow-square-out` for another site; inside an alert it takes the alert's colour); `.pc-link-quiet` for links that stand alone in a muted place.
-- **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
+- **Text input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
 - **Label**: `.pc-label` (12px semibold, 6px above its field); an optional field adds `<span class="pc-label-optional">(optional)</span>`; required fields have no mark.
 - **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`. An icon button in the end (`.pc-btn-ghost.pc-btn-icon`: show the password with Phosphor `eye`/`eye-slash`, copy) is 28px and the text stops before it. `readonly` gives a field the muted fill; autofilled fields keep our colours. Words before or after the value: a `.pc-input-addon` inside the field (muted), the group then draws the field's edge, focus ring and error. A field and its button side by side: `.pc-input-row`, 8px apart.
 - **Select**: ours, not the browser's (see the Select section above; the code names stay `pc-picker`). `aria-invalid="true"` on the button turns it red; options can start with a `.pc-menu-dot` (plus a `.pc-colour-*`); `.pc-menu-none` is a muted first "None"; `aria-disabled="true"` with a `.pc-menu-note` for a choice that can't be picked. The native `.pc-select` is retired.
@@ -364,14 +363,14 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Form**: the fields in a `.pc-card-content`, 12px apart, and Cancel then the action on the right in the `.pc-card-footer`; errors show when the action is pressed, as `aria-invalid="true"` and a `.pc-field-error` under each field with a problem.
 - **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-warning`, `-destructive`), `.pc-badge-small` (16px, 10px words) in any style; `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
 - **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, the icon first (required). One line takes the kind's colour; a longer one has a `.pc-alert-body` with a `.pc-alert-title` in the kind's colour over text in the text colour (or a lead line over a list of a form's errors). Optional `.pc-alert-action`, a `.pc-alert-close` x, and `.pc-alert-banner` for a banner across the top of a page.
-- **Code**: `.pc-code` inline, `.pc-secret` with `.pc-secret-value` and an outline Copy button (a secret shown once sits inside the notice that warns about it), `.pc-code-block` for output.
+- **Code**: `.pc-code` inline; a secret shown once sits inside the notice that warns about it, as a read-only `.pc-input.pc-input-mono` in a `.pc-input-group` with a copy icon button at its end (after a click: a tick, and the tooltip says "Copied"); `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`, an optional `.pc-card-action` on the right), `.pc-card-content`, `.pc-card-footer` (an optional `.pc-card-footer-note` on its left). `.pc-card-rows` on the content for a table or rows (4px from the edge); `.pc-card-media` for an image on top; a `.pc-card-link` title makes the whole card clickable (hover grey, focus ring round the card). Cards in a row share their height. Never a card inside a card.
 - **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.
 - **Image**: `<img class="pc-image">` (10px corners, a faint edge inside); `.pc-image.pc-image-empty` with an `image` icon until it loads; `<figure class="pc-figure">` with a `<figcaption>` for a caption.
 - **List**: `<ul class="pc-list">` or `<ol class="pc-list">` (muted markers, 20px in, 4px apart); `<dl class="pc-details">` with `<dt>` and `<dd>` in turn for labels and values (a 160px muted label column; stacked on phones).
 - **Pagination**: `<nav class="pc-pagination">` of ghost buttons (Previous, `.pc-pagination-page` numbers with the current one `aria-current="page"` and outlined, `.pc-pagination-gap`, Next); `.pc-pagination-where` for the compact one; `.pc-pagination-bar` with a `.pc-pagination-count` or `.pc-pagination-size` first; `.pc-pagination-more` for Show more.
 - **Popover**: `.pc-popover-anchor` around the button and its `.pc-popover` (hidden until opened), 4px below and aligned to the start; `.pc-popover-end`, `.pc-popover-up`; `.pc-popover-head`, `.pc-popover-text`, `.pc-dialog-actions` inside; a sheet over a `.pc-popover-backdrop` on phones.
-- **Progress bar**: `<div class="pc-progress" role="progressbar" aria-valuenow>` with a `.pc-progress-fill` (6px, teal on the muted track); no `aria-valuenow` moves a third of the bar along it; `.pc-progress-error`, `.pc-progress-small`; `.pc-progress-head` with a `.pc-progress-value` above it.
+- **Progress bar**: `<div class="pc-progress" role="progressbar" aria-valuenow>` with a `.pc-progress-fill` (6px, teal on the grey `track`); no `aria-valuenow` moves a third of the bar along it; `.pc-progress-error`, `.pc-progress-small`; `.pc-progress-head` with a `.pc-progress-value` above it.
 - **Progress indicator**: `<ol class="pc-steps">` of `<li class="pc-step">` (a 4px bar over each `.pc-step-label`; `aria-current="step"`, `data-state="done"` or `"error"`); `.pc-steps-compact` with a `.pc-steps-head` for phones; `.pc-steps-vertical` for a checklist.
 - **Quote**: `<figure class="pc-quote">` with a `<blockquote>` (a 2px line down its start) and a `<figcaption>` (`.pc-quote-name`, then the role in muted text); `.pc-quote-pull` (15px semibold), `.pc-quote-small` (a quoted reply).
 - **Rating**: `.pc-rating-star` (a `star` outline and a `star-fill` cut to `--fill`); `.pc-rating` with `.pc-rating-stars`, `.pc-rating-value`, `.pc-rating-count` to show one; `.pc-rating-input`, a radio group of five star labels, to set one.

@@ -1,6 +1,6 @@
 # Progress bar
 
-How far a long task has got: a 6px bar, teal on the muted track, filling as it goes.
+How far a long task has got: a 6px bar, teal on the grey `track`, filling as it goes.
 
 - `<div class="pc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">` holds a `.pc-progress-fill` as wide as what's done. Give it a name: `aria-label`, or `aria-labelledby` pointing at the words above it.
 - Above it, in a `.pc-field`: a `.pc-progress-head` with what's happening on the left ("Uploading Contract draft.pdf") and a `.pc-progress-value` on the right ("64%").

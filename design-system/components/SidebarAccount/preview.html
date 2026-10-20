@@ -20,6 +20,12 @@
   .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
   .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
   .pv-list .pv-cap { padding: 4px 0; }
+  /* One continuous panel: each strip fills its row, the row centred in it; captions centred on their row. */
+  .pv-list { align-items: stretch; }
+  .pv-list > .pv-strip { display: grid; align-content: center; }
+  .pv-list > .pv-cap { align-self: center; }
+  .pv-list > .pv-strip.first + .pv-cap { padding-top: 12px; }
+  .pv-list > .pv-strip.last + .pv-cap { padding-bottom: 12px; }
   .pv-stack { display: grid; gap: 14px; max-width: 420px; }
   .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
   .pv-tipzone { padding-top: 44px; }

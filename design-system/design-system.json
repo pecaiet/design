@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T19:41:59Z",
+    "at": "2026-10-20T21:25:37Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "The phone pictures in the cards draw 40px rows and 16px field text, as phones now get; Search's empty state drops its Clear search button (the Empty state has no button; the field's x clears)."
+    "note": "Final review: app bugs fixed (closed search on phones, Tailwind clashes, tooltips on click and in panel heads, focus you couldn't see, state clashes), contrast fixes, stale docs and card pictures; picks: dark hover a step lighter, a lighter dark sidebar pill, a track token, 40px phone menus, a darker field edge, ghost buttons that can't be used turn grey, Copied on the button, a secret in a read-only field, Settings' theme as a segmented control. The Review picks card is gone."
   },
   "layout": "files",
   "libraries": [],

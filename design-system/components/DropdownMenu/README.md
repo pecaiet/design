@@ -14,7 +14,7 @@ A short list of actions or choices that opens over the page from a button.
 
 ## On phones
 
-Every menu that pops up is a sheet on phones: docked to the bottom of the screen, full width, rows 44px tall, over the dimmed page. On desktop it stays a dropdown. There is no drag handle: a tap on the dimmed page or Escape closes it.
+Every menu that pops up is a sheet on phones: docked to the bottom of the screen, full width, rows 40px tall like every row on phones, over the dimmed page. On desktop it stays a dropdown. There is no drag handle: a tap on the dimmed page or Escape closes it.
 
 - Give the popping-up `.pc-menu` the `.pc-menu-pop` modifier and put a `.pc-menu-backdrop` right before it. Below 48rem the menu becomes the sheet and the backdrop shows while it is open. `.pc-menu-sheet` makes a menu a sheet at any width.
 - A `.pc-menu-label.pc-menu-title` names the thing acted on; it shows only in the sheet.
