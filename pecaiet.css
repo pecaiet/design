@@ -645,12 +645,6 @@
   .pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input { padding-right: 36px; }
   .pc-input-group:has(> .pc-input-group-end > .pc-btn-icon) > .pc-input-group-end { right: 2px; }
   .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: 4px; }
-  .pc-select { position: relative; display: flex; align-items: center; }
-  .pc-select > select { appearance: none; opacity: 1; width: 100%; height: var(--pc-row); padding: 0 34px 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; cursor: pointer; }
-  .pc-select > select:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
-  .pc-select:has(select:disabled) { opacity: 0.5; }
-  .pc-select > select:disabled { cursor: not-allowed; }
-  .pc-select > svg { position: absolute; right: 10px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
   .pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
   .pc-radio:checked { border-color: var(--primary); }
   .pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
@@ -1010,7 +1004,7 @@
   .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
-  .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-select > select, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
+  .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
     transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
       box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
   }
@@ -1035,10 +1029,19 @@
      The button looks like a field; the chosen option carries aria-selected="true" and a .pc-menu-check tick. */
   .pc-picker { position: relative; }
   .pc-picker-button { display: flex; align-items: center; gap: 8px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
-  .pc-picker-button > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-picker-button > span { flex: 1; width: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pc-picker-button > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
   .pc-picker-button:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-picker-button:disabled { opacity: 0.5; cursor: not-allowed; }
+  /* Select (pc-picker): an error turns the button's border red. Options can start with a colour dot (.pc-menu-dot plus a .pc-colour-*) or a
+     16px icon; a first "None" option (.pc-menu-none) is muted; a choice that can't be picked (aria-disabled="true") is half strength and says why
+     at its end (.pc-menu-note). */
+  .pc-picker-button[aria-invalid="true"] { border-color: var(--destructive); }
+  .pc-menu-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 999px; background: var(--pc-colour, var(--muted-foreground)); }
+  .pc-menu-item.pc-menu-none { color: var(--muted-foreground); }
+  .pc-menu-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+  .pc-menu-item[aria-disabled="true"]:hover { background: none; }
+  .pc-menu-note { margin-left: auto; color: var(--muted-foreground); font-size: 12px; }
   .pc-picker-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; min-width: 100%; max-height: 320px; overflow-y: auto; }
   /* A search field at the top of a menu (the input with an icon), and the line when nothing matches. */
   .pc-menu > .pc-input-group { margin: 4px 4px 6px; }

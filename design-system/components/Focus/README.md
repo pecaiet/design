@@ -4,7 +4,7 @@ Keyboard focus, the same on every component, as on claude.ai: one blue ring and 
 
 Two shapes:
 
-- **Outside, for controls** (buttons, fields, select, checkboxes, radios, links): `--pc-focus` draws a 1px blue `ring` just outside the edge and the glow. The control's own outer 1px turns the page colour, so a thin line separates its fill from the ring.
+- **Outside, for controls** (buttons, fields, the Select, checkboxes, radios, links): `--pc-focus` draws a 1px blue `ring` just outside the edge and the glow. The control's own outer 1px turns the page colour, so a thin line separates its fill from the ring.
   - Bordered controls turn their border that colour: `border-color: var(--background)`.
   - Borderless ones draw the line inside: `box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus)`.
 - **Inside, for rows** (sidebar rows, menu items, search results, calendar days, table rows): `--pc-focus-inset` draws the ring inside the row's own edge; only the glow leaves the row. Rows also take their hover fill. This lets rows sit with no gap.

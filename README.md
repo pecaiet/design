@@ -263,7 +263,7 @@ The top of a page: its title, an optional line about it, and, on some pages, the
 - A page without an action leaves out `.pc-page-header-actions`.
 - When the action doesn't fit beside the title, at any width, it moves to the next row, under the title.
 
-## Picker
+## Select
 
 Every choice from a list, instead of a native `<select>`: a button that looks like a field and opens a menu of options. A dropdown on desktop, a sheet on phones (see Menu on phones).
 
@@ -349,7 +349,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Input**: `.pc-field` holding a `.pc-label` and a `.pc-input` or `.pc-textarea`, then `.pc-field-hint` or `.pc-field-error` (with `aria-invalid="true"` on the field).
 - **Label**: `.pc-label` (12px semibold, 6px above its field); an optional field adds `<span class="pc-label-optional">(optional)</span>`; required fields have no mark.
 - **Input group**: `.pc-input-group` with an icon `<svg>` first, then the `.pc-input`, and an optional `.pc-input-group-end`. An icon button in the end (`.pc-btn-ghost.pc-btn-icon`: show the password with Phosphor `eye`/`eye-slash`, copy) is 28px and the text stops before it. `readonly` gives a field the muted fill; autofilled fields keep our colours.
-- **Select**: `.pc-select` around a native `<select>` and a caret `<svg>`.
+- **Select**: ours, not the browser's (see the Select section above; the code names stay `pc-picker`). `aria-invalid="true"` on the button turns it red; options can start with a `.pc-menu-dot` (plus a `.pc-colour-*`); `.pc-menu-none` is a muted first "None"; `aria-disabled="true"` with a `.pc-menu-note` for a choice that can't be picked. The native `.pc-select` is retired.
 - **Checkbox and radio**: `<label class="pc-check">` with an `<input class="pc-checkbox">` or `<input class="pc-radio">` and the words in a `<span>` (the box stays on a long label's first line); a `.pc-field-hint` or `.pc-field-error` after it lines up under the words. Half (`el.indeterminate = true`) is a teal box with a white dash; `aria-invalid="true"` turns the border red.
 - **Fieldset**: `<fieldset class="pc-fieldset">` with a `<legend class="pc-legend">` (it looks like a field's label) over a `.pc-fieldset-options` of radios or checkboxes; `.pc-fieldset-options-row` puts two or three short choices side by side, `.pc-fieldset-boxes` puts choices with a description in boxes (the chosen one teal). Radios in a group share one `name`; `aria-invalid="true"` turns them red.
 - **File**: `.pc-files` of `.pc-file` rows (the file's icon, `.pc-file-name`, `.pc-file-size`): `<a class="pc-file" href download>` with a `.pc-file-action` download icon shown on hover and focus, or a `<div class="pc-file">` ending in an x button while editing.

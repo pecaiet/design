@@ -7,4 +7,4 @@ Choosing exactly one of two to five options that are always in view: Dark, Light
 - The options share the width evenly. `.pc-segmented-full` stretches it to its container (in a card, on a phone).
 - Icons only: `.pc-btn-icon` on the label and an `aria-label` on its radio.
 - The keyboard works as in any radio group: Tab to the chosen option, the arrow keys to move; focus is the blue ring. `disabled` on the radios fades it.
-- Six or more options, or long words, are a Picker. Separate tools that each do their own thing (search, sort, more) are a toolbar.
+- Six or more options, or long words, are a Select. Separate tools that each do their own thing (search, sort, more) are a toolbar.

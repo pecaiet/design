@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T14:22:11Z",
+    "at": "2026-10-20T16:20:29Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Modal (option C, no x): one thing at a time, the Picker in forms, working, an error, long content scrolling in .pc-dialog-content, a sheet on phones."
+    "note": "Select: ours becomes the gallery's Select (the Picker card moves into it, plus placeholder, error, colour dots, None and a choice that can't be picked); the browser's own select is retired."
   },
   "layout": "files",
   "libraries": [],
