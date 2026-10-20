@@ -302,6 +302,20 @@
   .pc-table tr:has(.pc-row-link:focus-visible) td { background: var(--accent); box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
   .pc-table tr:has(.pc-row-link:focus-visible) td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
   .pc-table tr:has(.pc-row-link:focus-visible) td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  /* Picking rows: a first column (.pc-table-check) with a checkbox in each row and one in the header for all; a picked row has
+     aria-selected="true" and turns primary-soft. A column people can sort has a <button class="pc-table-sort"> in its th, with aria-sort
+     on the th and a caret (up for A to Z, down for Z to A). Numbers sit on the right (.pc-table-num). The last column can hold a row's
+     ⋯ menu button (.pc-table-actions). Checkboxes and buttons sit above a row link, so they stay clickable. */
+  .pc-table .pc-table-check { width: 28px; padding-right: 0; }
+  .pc-table .pc-table-num { text-align: right; font-variant-numeric: tabular-nums; }
+  .pc-table .pc-table-actions { width: 32px; padding: 0 0 0 4px; text-align: right; }
+  .pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: 1; vertical-align: middle; }
+  .pc-table tbody tr[aria-selected="true"] td { background: var(--primary-soft); }
+  .pc-table-sort { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: 0; border-radius: 4px; background: none; color: inherit; font: inherit; cursor: pointer; }
+  .pc-table-sort > svg { width: 12px; height: 12px; }
+  .pc-table th[aria-sort] .pc-table-sort { color: var(--foreground); }
+  .pc-table-sort:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
   .pc-empty { display: grid; justify-items: center; gap: 4px; padding: 28px 16px; text-align: center; color: var(--muted-foreground); }
   .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
   .pc-empty-description { margin: 0; }
@@ -747,6 +761,20 @@
   .pc-spinner-large { width: 20px; height: 20px; }
   .pc-btn[aria-busy="true"] { pointer-events: none; }
   @media (prefers-reduced-motion: reduce) { .pc-spinner > svg { animation-duration: 2.4s; } }
+
+  /* Stepper: a number to change a step at a time. .pc-stepper is one 32px field like a text field: a "−" button, the number
+     (<input type="number">) and a "+" button inside one border. At the lowest or highest value that button is disabled. The buttons are
+     for the pointer (tabindex="-1"); with the keyboard, focus is in the number, the whole control gets the ring, the arrow keys change it. */
+  .pc-stepper { display: inline-flex; align-items: center; justify-self: start; height: var(--pc-row); border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); }
+  .pc-stepper > input { width: 48px; height: 100%; padding: 0; border: 0; background: transparent; color: var(--foreground); font: inherit; font-variant-numeric: tabular-nums; text-align: center; appearance: textfield; }
+  .pc-stepper > input::-webkit-inner-spin-button, .pc-stepper > input::-webkit-outer-spin-button { margin: 0; appearance: none; }
+  .pc-stepper > input:focus { outline: none; }
+  .pc-stepper > button { display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: calc(var(--pc-radius) - 2px); background: none; color: var(--foreground); cursor: pointer; }
+  .pc-stepper > button > svg { width: 16px; height: 16px; }
+  .pc-stepper > button:hover { background: var(--accent); }
+  .pc-stepper > button:disabled { background: none; opacity: 0.4; cursor: not-allowed; }
+  .pc-stepper:has(> input:focus-visible) { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .pc-stepper:has(> input:disabled) { opacity: 0.5; }
 
   /* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
      current long and strong, the others short and faint. */
