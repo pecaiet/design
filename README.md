@@ -360,4 +360,5 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`), `.pc-card-content`, `.pc-card-footer`.
 - **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.
 - **Image**: `<img class="pc-image">` (10px corners, a faint edge inside); `.pc-image.pc-image-empty` with an `image` icon until it loads; `<figure class="pc-figure">` with a `<figcaption>` for a caption.
+- **List**: `<ul class="pc-list">` or `<ol class="pc-list">` (muted markers, 20px in, 4px apart); `<dl class="pc-details">` with `<dt>` and `<dd>` in turn for labels and values (a 160px muted label column; stacked on phones).
 - **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-description`) when there's nothing; `.pc-muted` for quiet cells.

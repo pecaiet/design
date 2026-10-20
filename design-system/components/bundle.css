@@ -193,6 +193,19 @@ div.pc-file { padding-right: 0; }
 .pc-figure { display: grid; gap: 6px; margin: 0; }
 .pc-figure > figcaption { color: var(--muted-foreground); font-size: 12px; }
 
+/* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 20px in, 4px apart.
+   A label-and-value list is <dl class="pc-details">, <dt> and <dd> in turn: the label muted in a 160px column, the value beside it;
+   on phones the label goes above its value. */
+.pc-list { display: grid; gap: 4px; margin: 0; padding-left: 20px; }
+.pc-list > li::marker { color: var(--muted-foreground); }
+.pc-details { display: grid; grid-template-columns: 160px 1fr; gap: 10px 16px; margin: 0; }
+.pc-details > dt { color: var(--muted-foreground); }
+.pc-details > dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 47.99rem) {
+  .pc-details { grid-template-columns: 1fr; gap: 2px; }
+  .pc-details > dd { margin-bottom: 10px; }
+}
+
 /* File upload: <label class="pc-btn pc-btn-outline pc-file-upload"> with a paperclip, the words ("Attach files") and the real
    <input type="file"> inside it, out of sight; the label opens the device's file picker. The chosen files show under it as File rows. */
 .pc-file-upload { position: relative; justify-self: start; }

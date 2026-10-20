@@ -1,0 +1,61 @@
+<!-- @dsCard height=915 width=1120 subtitle="Bullets, numbers, and labels with their values" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>List</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--foreground); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+
+  /* Rows: the forced states drawn on the cells, as the table draws them */
+  tr.force-hover, tr.force-focus { background: none; box-shadow: none; }
+  .pc-table tbody tr.force-hover:nth-child(n) td, .pc-table tbody tr.force-focus:nth-child(n) td { background: var(--accent); }
+  tr.force-focus td { box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  .pv-text { display: grid; gap: 6px; max-width: 460px; }
+  .pv-text > p { margin: 0; }
+  .pv-text > .pc-list { margin-bottom: 6px; }
+  .pv-wide { max-width: 460px; }
+  .pv-phone { max-width: 300px; }
+  /* Preview only: the phone rules, drawn in the phone-sized frame (the card itself is wider than a phone). */
+  .pv-phone .pc-details { grid-template-columns: 1fr; gap: 2px; }
+  .pv-phone .pc-details > dd { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-cap">Bullets and numbers, for a few short points: muted markers, 20px in, 4px apart.</div><div class="pv-text"><p>Before you add a client:</p><ul class="pc-list"><li>Pick a name people will recognise.</li><li>Have its redirect URI ready.</li><li>Decide if it can keep a secret.</li></ul><p>To rotate a secret:</p><ol class="pc-list"><li>Regenerate it here.</li><li>Put the new one in the app.</li><li>Check the app can sign in.</li></ol></div></div><div class="pv-sec"><div class="pv-cap">A label-and-value list: the label muted in a 160px column, the value beside it.</div><div class="pv-wide"><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Weather app</h3></div><div class="pc-card-content"><dl class="pc-details"><dt>Client ID</dt><dd><code class="pc-code">pc_7f3a9c2e</code></dd><dt>Type</dt><dd>Confidential</dd><dt>Redirect URIs</dt><dd><code class="pc-code">https://weather.example.com/callback</code></dd><dt>Created</dt><dd>14 Oct 2026</dd></dl></div></div></div></div><div class="pv-sec"><div class="pv-cap">On phones the label goes above its value.</div><div class="pv-phone"><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Weather app</h3></div><div class="pc-card-content"><dl class="pc-details"><dt>Client ID</dt><dd><code class="pc-code">pc_7f3a9c2e</code></dd><dt>Type</dt><dd>Confidential</dd><dt>Redirect URIs</dt><dd><code class="pc-code">https://weather.example.com/callback</code></dd><dt>Created</dt><dd>14 Oct 2026</dd></dl></div></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-cap">Bullets and numbers, for a few short points: muted markers, 20px in, 4px apart.</div><div class="pv-text"><p>Before you add a client:</p><ul class="pc-list"><li>Pick a name people will recognise.</li><li>Have its redirect URI ready.</li><li>Decide if it can keep a secret.</li></ul><p>To rotate a secret:</p><ol class="pc-list"><li>Regenerate it here.</li><li>Put the new one in the app.</li><li>Check the app can sign in.</li></ol></div></div><div class="pv-sec"><div class="pv-cap">A label-and-value list: the label muted in a 160px column, the value beside it.</div><div class="pv-wide"><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Weather app</h3></div><div class="pc-card-content"><dl class="pc-details"><dt>Client ID</dt><dd><code class="pc-code">pc_7f3a9c2e</code></dd><dt>Type</dt><dd>Confidential</dd><dt>Redirect URIs</dt><dd><code class="pc-code">https://weather.example.com/callback</code></dd><dt>Created</dt><dd>14 Oct 2026</dd></dl></div></div></div></div><div class="pv-sec"><div class="pv-cap">On phones the label goes above its value.</div><div class="pv-phone"><div class="pc-card"><div class="pc-card-header"><h3 class="pc-card-title">Weather app</h3></div><div class="pc-card-content"><dl class="pc-details"><dt>Client ID</dt><dd><code class="pc-code">pc_7f3a9c2e</code></dd><dt>Type</dt><dd>Confidential</dd><dt>Redirect URIs</dt><dd><code class="pc-code">https://weather.example.com/callback</code></dd><dt>Created</dt><dd>14 Oct 2026</dd></dl></div></div></div></div></div></div>
+</body>
+</html>
