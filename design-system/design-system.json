@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T08:26:31Z",
+    "at": "2026-10-20T08:38:28Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Popover: our panel, 4px from the button that opened it (.pc-popover-anchor), aligned to its start or end, above if needed; a sheet on phones."
+    "note": "Quote: a 2px line down the start, who said it underneath (.pc-quote); a pull quote and a small quoted reply."
   },
   "layout": "files",
   "libraries": [],

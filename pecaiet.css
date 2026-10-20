@@ -349,6 +349,53 @@
   .pc-pagination-size > .pc-picker-button { width: 72px; color: var(--foreground); font-size: 14px; }
   .pc-pagination-more { display: flex; align-items: center; gap: 12px; }
 
+  /* Progress bar: <div class="pc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"> holding a
+     .pc-progress-fill as wide as what's done: 6px, round ends, teal on the muted track. With no aria-valuenow it can't tell how long:
+     a third of the bar moves along it (still while motion is off). .pc-progress-error turns the fill red where it stopped;
+     .pc-progress-small is 4px, for inside a row. .pc-progress-head puts what's happening and a .pc-progress-value above it. */
+  .pc-progress { position: relative; height: 6px; overflow: hidden; border-radius: 999px; background: var(--muted); }
+  .pc-progress-fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--primary); }
+  .pc-progress:not([aria-valuenow]) > .pc-progress-fill { left: 30%; width: 35%; animation: pc-progress-slide calc(var(--pc-motion-base) * 7) var(--pc-motion-ease) infinite; }
+  .pc-progress-error > .pc-progress-fill { background: var(--destructive); }
+  .pc-progress-small { height: 4px; }
+  .pc-progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .pc-progress-value { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  /* Progress indicator: <ol class="pc-steps"> of <li class="pc-step">, each a 4px bar over its .pc-step-label. Done steps
+     (data-state="done") and the current one (aria-current="step", its label bold) are teal; the rest muted; data-state="error" is red,
+     with a ! before its label. .pc-steps-compact (phones): the step's name and "Step 2 of 4" over the bars, labels hidden.
+     .pc-steps-vertical: down the page, the bar beside each label. */
+  .pc-steps { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .pc-step { display: flex; flex: 1; flex-direction: column; gap: 8px; min-width: 0; color: var(--muted-foreground); font-size: 12px; }
+  .pc-step::before { content: ""; flex-shrink: 0; height: 4px; border-radius: 999px; background: var(--muted); }
+  .pc-step[data-state="done"], .pc-step[aria-current="step"], .pc-step[data-state="error"] { color: var(--foreground); }
+  .pc-step[data-state="done"]::before, .pc-step[aria-current="step"]::before { background: var(--primary); }
+  .pc-step[data-state="error"]::before { background: var(--destructive); }
+  .pc-step[aria-current="step"] > .pc-step-label { font-weight: 600; }
+  .pc-step[data-state="error"] > .pc-step-label::before { content: "! "; color: var(--destructive); font-weight: 600; }
+  .pc-step-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc-steps-compact { display: grid; gap: 8px; }
+  .pc-steps-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .pc-steps-now { font-weight: 600; }
+  .pc-steps-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .pc-steps-compact .pc-step { gap: 0; }
+  .pc-steps-compact .pc-step-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .pc-steps-vertical { flex-direction: column; gap: 10px; }
+  .pc-steps-vertical > .pc-step { flex-direction: row; align-items: center; gap: 10px; font-size: 14px; }
+  .pc-steps-vertical > .pc-step::before { width: 4px; height: 20px; }
+
+  /* Quote: <figure class="pc-quote"> with a <blockquote> (a 2px line down its start, the words in the text colour) and an optional
+     <figcaption> under it: who said it (.pc-quote-name, then their role or the source in muted text), with an optional avatar.
+     .pc-quote-pull sets the words bigger (15px semibold), for a line pulled from the page; .pc-quote-small is muted 12px, for a
+     quoted reply. An inline quote is only curly quotes in the text. */
+  .pc-quote { display: grid; gap: 8px; margin: 0; }
+  .pc-quote > blockquote { margin: 0; padding-left: 14px; border-left: 2px solid var(--input); }
+  .pc-quote > blockquote > p { margin: 0; }
+  .pc-quote > figcaption { display: flex; align-items: center; gap: 8px; padding-left: 16px; color: var(--muted-foreground); font-size: 12px; }
+  .pc-quote-name { color: var(--foreground); font-weight: 600; }
+  .pc-quote-pull > blockquote { font-size: 15px; font-weight: 600; }
+  .pc-quote-small > blockquote { padding-left: 10px; color: var(--muted-foreground); font-size: 12px; }
+
   /* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 20px in, 4px apart.
      A label-and-value list is <dl class="pc-details">, <dt> and <dd> in turn: the label muted in a 160px column, the value beside it;
      on phones the label goes above its value. */
@@ -704,3 +751,4 @@
 }
 
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }
+@keyframes pc-progress-slide { from { left: -35%; } to { left: 100%; } }
