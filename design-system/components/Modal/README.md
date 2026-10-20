@@ -1,8 +1,13 @@
 # Modal
 
-A small window over the page that asks to confirm an action.
+A small window over the page that asks one thing: a yes or no, or a few fields.
 
-- `<dialog class="pc-dialog">` holding `.pc-dialog-body`: the `.pc-dialog-title` (the question), `.pc-dialog-description` (what will happen), and `.pc-dialog-actions` with Cancel (outline) and the action (primary, or destructive when it can't be undone), on the right under a line from edge to edge, as in a Card's footer and the Drawer's.
-- Name the action on the button: "Sign out", "Delete user", never "OK" or "Yes".
-- Only for yes/no. Anything that needs a field gets its own form.
-- A dialog with a form puts its `.pc-field`s between the text and the actions; the action names what it creates: "Create list".
+- `<dialog class="pc-dialog">` opened with `showModal()` and labelled by its title. Inside `.pc-dialog-body`: a `<div>` with the `.pc-dialog-title` (the question, or the task) and an optional `.pc-dialog-description`; an optional `.pc-dialog-content` (fields, an error, longer text); then `.pc-dialog-actions` with Cancel (outline) and the action (primary, or destructive when it can't be undone), on the right under a line from edge to edge.
+- Name the action on the button: "Sign out", "Delete user", "Create list"; never "OK" or "Yes".
+- One thing at a time: a confirmation, or a short form (a few fields; choices use the Picker). Anything longer gets its own page or the Drawer.
+- Closing: Cancel, Esc, or a click on the dimmed page (not while it's working, and not on a form with unsaved changes). There's no x.
+- Working: the action gets `aria-busy="true"`, a spinner and new words ("Creating…"); Cancel is disabled until it's done.
+- Something went wrong: an error Alert at the top of `.pc-dialog-content`; what was typed stays.
+- Long content: `.pc-dialog-content` scrolls; the title and the actions stay where they are.
+- Focus: opening moves it to the first field, or to Cancel for a dangerous confirmation; closing returns it to the button that opened the modal.
+- Phones: a sheet from the bottom over the dimmed page, like the menus and popovers; the buttons share the width. It grows with its content up to 85% of the screen, then the middle scrolls.

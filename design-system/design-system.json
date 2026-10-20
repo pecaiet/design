@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T13:24:42Z",
+    "at": "2026-10-20T14:22:11Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Radio button (option C): a captioned group sharing one name, side by side, boxes when each choice has a description, an error state; long lists go to the Picker."
+    "note": "Modal (option C, no x): one thing at a time, the Picker in forms, working, an error, long content scrolling in .pc-dialog-content, a sheet on phones."
   },
   "layout": "files",
   "libraries": [],

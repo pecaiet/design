@@ -390,11 +390,22 @@ div.pc-file { padding-right: 0; }
 
 .pc-dialog { width: min(420px, calc(100% - 32px)); padding: 16px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-dialog::backdrop { background: var(--overlay); }
-.pc-dialog-body { display: grid; gap: 16px; }
+.pc-dialog-body { display: grid; gap: 16px; max-height: calc(100dvh - 64px); }
+/* What sits between the text and the actions (fields, an error, longer text); it scrolls when it doesn't fit, the title and actions stay. */
+.pc-dialog-content { display: grid; gap: 12px; min-height: 0; overflow-y: auto; }
+.pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
+.pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
 .pc-dialog-title { margin: 0; font-size: 15px; font-weight: 600; }
 .pc-dialog-description { margin: 4px 0 0; color: var(--muted-foreground); }
 /* The actions sit under a line from edge to edge, as in a Card's footer and the Drawer's. */
 .pc-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin: 0 -16px -16px; padding: 12px 16px; border-top: 1px solid var(--border); }
+/* Phones: a sheet from the bottom over the dimmed page, the buttons sharing the width; up to 85% of the screen, then the middle scrolls. */
+@media (max-width: 47.99rem) {
+  .pc-dialog { position: fixed; inset: auto 0 0; width: auto; max-width: none; max-height: none; margin: 0; padding-bottom: calc(16px + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: 16px 16px 0 0; }
+  .pc-dialog-body { max-height: calc(85dvh - 32px - env(safe-area-inset-bottom)); }
+  .pc-dialog-actions { margin-bottom: calc(-16px - env(safe-area-inset-bottom)); padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+  .pc-dialog-actions > .pc-btn { flex: 1; }
+}
 /* Settings modal: a big window over the page with its own nav, for settings. <dialog class="pc-modal"> holds .pc-modal-frame (the nav, .pc-sidebar.pc-modal-nav,
    after a .pc-sheet-backdrop) and .pc-modal-main: a head (title row, close) over a body that scrolls. On phones it fills the screen and the nav
    is hidden until the toggle in the head opens the frame as a .pc-sidebar-sheet, like the app's sidebar. */
