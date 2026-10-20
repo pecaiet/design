@@ -396,6 +396,28 @@
   .pc-quote-pull > blockquote { font-size: 15px; font-weight: 600; }
   .pc-quote-small > blockquote { padding-left: 10px; color: var(--muted-foreground); font-size: 12px; }
 
+  /* Rating: teal stars; empty ones are outlines in the field-border colour. Each .pc-rating-star holds the outline, then the filled star,
+     cut to --fill (0–100%). To show one: .pc-rating with .pc-rating-stars (role="img", aria-label "4.2 out of 5"), the number
+     (.pc-rating-value) and how many rated (.pc-rating-count). To set one: .pc-rating-input, a radiogroup of five .pc-rating-star labels,
+     each around a hidden radio: 20px stars in 28px targets; the chosen star and those before it fill, and under the pointer the stars up
+     to it fill lighter. */
+  .pc-rating { display: inline-flex; align-items: center; gap: 8px; }
+  .pc-rating-stars, .pc-rating-input { display: inline-flex; gap: 2px; }
+  .pc-rating-star { --fill: 100%; position: relative; display: inline-grid; place-items: center; flex-shrink: 0; width: 16px; height: 16px; }
+  .pc-rating-star > svg { grid-area: 1 / 1; width: 16px; height: 16px; }
+  .pc-rating-star > svg:first-of-type { color: var(--input); }
+  .pc-rating-star > svg:last-of-type { color: var(--primary); clip-path: inset(0 calc(100% - var(--fill)) 0 0); }
+  .pc-rating-value { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pc-rating-count { color: var(--muted-foreground); font-size: 12px; }
+  .pc-rating-compact { gap: 4px; font-size: 12px; }
+  .pc-rating-input > .pc-rating-star { --fill: 0%; width: 28px; height: 28px; border-radius: var(--pc-radius-sm); cursor: pointer; }
+  .pc-rating-input > .pc-rating-star > svg { width: 20px; height: 20px; }
+  .pc-rating-input > .pc-rating-star > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+  .pc-rating-input > .pc-rating-star:is(:has(input:checked), :has(~ .pc-rating-star input:checked)) { --fill: 100%; }
+  .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)) { --fill: 100%; }
+  .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: .55; }
+  .pc-rating-input > .pc-rating-star:has(input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
+
   /* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 20px in, 4px apart.
      A label-and-value list is <dl class="pc-details">, <dt> and <dd> in turn: the label muted in a 160px column, the value beside it;
      on phones the label goes above its value. */

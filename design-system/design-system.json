@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T08:38:28Z",
+    "at": "2026-10-20T08:45:07Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Quote: a 2px line down the start, who said it underneath (.pc-quote); a pull quote and a small quoted reply."
+    "note": "Rating: teal stars, empty ones outlined (.pc-rating); an average with a part star and its count, or a radio group to rate with."
   },
   "layout": "files",
   "libraries": [],
