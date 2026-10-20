@@ -371,4 +371,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Separator**: `<hr class="pc-separator">` (1px, the border colour); `.pc-separator-bleed` to a panel's edges; `.pc-separator-vertical` (16px tall, between items in a row); `.pc-separator-text` with a word in the middle.
 - **Skeleton**: `.pc-skeleton` blocks in the border colour (`.pc-skeleton-line`, `-title`, `-circle`, `-control`), pulsing on the motion tokens; `aria-busy="true"` on the area, the blocks `aria-hidden`.
 - **Skip link**: `<a class="pc-skip-link" href="#main">`, first in the page, out of sight until focused, then a raised pill at the top left; the target gets `tabindex="-1"`.
+- **Stack**: `.pc-stack` (a column, 12px apart), `.pc-stack-1` 4px, `-2` 8px, `-4` 16px, `-6` 24px; `.pc-stack-row` side by side, 8px apart, wrapping.
+- **Slider**: `<input type="range" class="pc-slider">` (6px track, teal up to `--value`, white 18px handle); `.pc-slider-marks` for steps; `.pc-slider-range` around two sliders with `--from` and `--to`.
+- **Spinner**: `<span class="pc-spinner" role="status" aria-label="Loading">` with Phosphor's `circle-notch`, turning (even while motion is off; slower with reduced motion); `-small` 14px, `-large` 20px; a button at work gets `aria-busy="true"`.
 - **Table**: `.pc-table`; `.pc-row-link` makes a whole row a link; `.pc-empty` (`.pc-empty-title`, `.pc-empty-description`) when there's nothing; `.pc-muted` for quiet cells.

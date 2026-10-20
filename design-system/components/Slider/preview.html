@@ -1,0 +1,57 @@
+<!-- @dsCard height=497 width=1120 subtitle="A 6px track, teal up to the value, and a white handle" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Slider</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--foreground); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+
+  /* Rows: the forced states drawn on the cells, as the table draws them */
+  tr.force-hover, tr.force-focus { background: none; box-shadow: none; }
+  .pc-table tbody tr.force-hover:nth-child(n) td, .pc-table tbody tr.force-focus:nth-child(n) td { background: var(--accent); }
+  tr.force-focus td { box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  .pv-w { max-width: 440px; }
+  .pv-ends { display: flex; justify-content: space-between; color: var(--muted-foreground); font-size: 12px; }
+  /* Preview only: keyboard focus, shown. */
+  .pc-slider.pv-focus::-webkit-slider-thumb { border-color: var(--background); box-shadow: var(--pc-focus); }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-cap">A value: the label and the value above, the slider under them; teal up to the value.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Volume</span><span class="pc-progress-value">60%</span></div><input class="pc-slider" type="range" min="0" max="100" value="60" style="--value:60%" aria-label="Volume"></div></div></div><div class="pv-sec"><div class="pv-cap">In steps, with a mark at each step and words at both ends.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Remind me</span><span class="pc-progress-value">3 days before</span></div><input class="pc-slider" type="range" min="0" max="7" step="1" value="3" style="--value:42.86%" aria-label="Remind me, days before"><div class="pc-slider-marks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="pv-ends"><span>On the day</span><span>A week before</span></div></div></div></div><div class="pv-sec"><div class="pv-cap">A range, with two handles: from and to.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Due in</span><span class="pc-progress-value">2 to 9 days</span></div><div class="pc-slider-range" style="--from:14%;--to:64%"><input class="pc-slider" type="range" min="0" max="14" value="2" aria-label="From"><input class="pc-slider" type="range" min="0" max="14" value="9" aria-label="To"></div></div></div></div><div class="pv-sec"><div class="pv-cap">Keyboard focus on the handle: the blue ring; the arrow keys move it a step.</div><div class="pv-w"><input class="pc-slider pv-focus" type="range" min="0" max="100" value="40" style="--value:40%" aria-label="Volume"></div></div><div class="pv-sec"><div class="pv-cap">Turned off: half strength.</div><div class="pv-w"><input class="pc-slider" type="range" min="0" max="100" value="40" style="--value:40%" aria-label="Volume" disabled></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-cap">A value: the label and the value above, the slider under them; teal up to the value.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Volume</span><span class="pc-progress-value">60%</span></div><input class="pc-slider" type="range" min="0" max="100" value="60" style="--value:60%" aria-label="Volume"></div></div></div><div class="pv-sec"><div class="pv-cap">In steps, with a mark at each step and words at both ends.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Remind me</span><span class="pc-progress-value">3 days before</span></div><input class="pc-slider" type="range" min="0" max="7" step="1" value="3" style="--value:42.86%" aria-label="Remind me, days before"><div class="pc-slider-marks" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="pv-ends"><span>On the day</span><span>A week before</span></div></div></div></div><div class="pv-sec"><div class="pv-cap">A range, with two handles: from and to.</div><div class="pv-w"><div class="pc-field"><div class="pc-progress-head"><span class="pc-label">Due in</span><span class="pc-progress-value">2 to 9 days</span></div><div class="pc-slider-range" style="--from:14%;--to:64%"><input class="pc-slider" type="range" min="0" max="14" value="2" aria-label="From"><input class="pc-slider" type="range" min="0" max="14" value="9" aria-label="To"></div></div></div></div><div class="pv-sec"><div class="pv-cap">Keyboard focus on the handle: the blue ring; the arrow keys move it a step.</div><div class="pv-w"><input class="pc-slider pv-focus" type="range" min="0" max="100" value="40" style="--value:40%" aria-label="Volume"></div></div><div class="pv-sec"><div class="pv-cap">Turned off: half strength.</div><div class="pv-w"><input class="pc-slider" type="range" min="0" max="100" value="40" style="--value:40%" aria-label="Volume" disabled></div></div></div></div>
+</body>
+</html>

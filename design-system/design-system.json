@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T09:04:11Z",
+    "at": "2026-10-20T09:18:20Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Skeleton: blocks in the border colour that pulse on the motion tokens (.pc-skeleton). Skip link: a raised pill at the top left on focus (.pc-skip-link)."
+    "note": "Slider: a 6px teal track and a white handle (.pc-slider), steps and a two-handle range. Spinner: Phosphor's circle-notch turning (.pc-spinner)."
   },
   "layout": "files",
   "libraries": [],

@@ -1,0 +1,59 @@
+<!-- @dsCard height=687 width=1120 subtitle="The spacing scale as a wrapper: 4, 8, 12, 16 and 24px between children" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stack</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { background: var(--background); }
+  .pv { display: grid; grid-template-columns: 1fr 1fr; }
+  .pv-panel { display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 20px 24px 28px; }
+  .pv-mode { color: var(--muted-foreground); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .pv-sec { display: grid; gap: 10px; }
+  .pv-cap { color: var(--muted-foreground); font-size: 12px; line-height: 1.4; }
+  .pv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .pv-list { display: grid; grid-template-columns: 240px 1fr; align-items: center; column-gap: 16px; }
+  .pv-list.wide { grid-template-columns: 340px 1fr; }
+  .pv-strip { padding: 2px 8px; background: var(--sidebar); }
+  .pv-strip.first { padding-top: 10px; border-radius: 14px 14px 0 0; }
+  .pv-strip.last { padding-bottom: 10px; border-radius: 0 0 14px 14px; }
+  .pv-list .pv-cap { padding: 4px 0; }
+  .pv-stack { display: grid; gap: 14px; max-width: 420px; }
+  .pv-backdrop { display: grid; place-items: center; padding: 28px 16px; border-radius: 14px; background: var(--overlay); }
+  .pv-tipzone { padding-top: 44px; }
+  .phone { position: relative; height: 440px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
+  .force-hover.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-hover.pc-btn-primary { background: var(--primary-hover); border-color: var(--primary-hover); }
+  .force-hover.pc-btn-outline, .force-hover.pc-btn-ghost, .force-hover.pc-menu-item, .force-hover.pc-task, tr.force-hover { background: var(--accent); color: var(--foreground); }
+  .force-hover.pc-btn-destructive { background: var(--destructive-soft); }
+  .force-hover.pc-link { text-decoration-color: var(--foreground); }
+  .force-hover.pc-tab { color: var(--foreground); }
+  .force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .force-focus.pc-btn, .force-focus.pc-input, .force-focus.pc-textarea, .pc-select > .force-focus, .force-focus.pc-checkbox, .force-focus.pc-radio { border-color: var(--background); box-shadow: var(--pc-focus); }
+  .force-focus.pc-sidebar-item, .force-focus.pc-menu-item, .force-focus.pc-search-result, .force-focus.pc-calendar-day, tr.force-focus { box-shadow: var(--pc-focus-inset); }
+  .force-focus.pc-menu-item { background: var(--accent); }
+  .force-focus.pc-sidebar-item { background: var(--sidebar-hover); }
+  .force-focus.pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); }
+  .force-tip[data-pc-tooltip]::after { opacity: 1; }
+
+  /* Rows: the forced states drawn on the cells, as the table draws them */
+  tr.force-hover, tr.force-focus { background: none; box-shadow: none; }
+  .pc-table tbody tr.force-hover:nth-child(n) td, .pc-table tbody tr.force-focus:nth-child(n) td { background: var(--accent); }
+  tr.force-focus td { box-shadow: inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:first-child { box-shadow: inset 1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+  tr.force-focus td:last-child { box-shadow: inset -1px 0 0 var(--ring), inset 0 1px 0 var(--ring), inset 0 -1px 0 var(--ring); }
+
+  .pv-w { max-width: 460px; }
+  .pv-steps { display: grid; gap: 14px; }
+  .pv-step { display: grid; grid-template-columns: 120px 56px 1fr; align-items: center; gap: 16px; }
+  .pv-name { display: grid; gap: 2px; font-size: 12px; color: var(--muted-foreground); }
+  .pv-box { display: block; height: 8px; border-radius: 3px; background: color-mix(in srgb, var(--primary) 35%, transparent); }
+  .pv-use { color: var(--muted-foreground); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="pv"><div class="ui pv-panel" data-theme="senin-light"><div class="pv-mode">Light</div><div class="pv-sec"><div class="pv-cap">The five steps of the spacing scale, and what each is for.</div><div class="pv-w"><div class="pv-steps"><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-1</code><span>4px</span></div><div class="pc-stack pc-stack-1"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">rows in a menu</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-2</code><span>8px</span></div><div class="pc-stack pc-stack-2"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">a title and its line; buttons side by side</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack</code><span>12px</span></div><div class="pc-stack "><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">fields in a form: the default</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-4</code><span>16px</span></div><div class="pc-stack pc-stack-4"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">groups inside a card</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-6</code><span>24px</span></div><div class="pc-stack pc-stack-6"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">cards and sections on a page</div></div></div></div></div><div class="pv-sec"><div class="pv-cap">In use: fields 12px apart (.pc-stack), and the buttons side by side, 8px apart (.pc-stack-row).</div><div class="pv-w"><div class="pc-card"><div class="pc-card-content"><div class="pc-stack"><div class="pc-field"><label class="pc-label" for="light-n">Name</label><input class="pc-input" id="light-n" value="Weather app"></div><div class="pc-field"><label class="pc-label" for="light-u">Redirect URI</label><input class="pc-input" id="light-u" value="https://weather.example.com/callback"></div><div class="pc-stack pc-stack-row"><button class="pc-btn pc-btn-outline" type="button">Cancel</button><button class="pc-btn pc-btn-primary" type="button">Save</button></div></div></div></div></div></div></div><div class="ui pv-panel" data-theme="senin-dark"><div class="pv-mode">Dark</div><div class="pv-sec"><div class="pv-cap">The five steps of the spacing scale, and what each is for.</div><div class="pv-w"><div class="pv-steps"><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-1</code><span>4px</span></div><div class="pc-stack pc-stack-1"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">rows in a menu</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-2</code><span>8px</span></div><div class="pc-stack pc-stack-2"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">a title and its line; buttons side by side</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack</code><span>12px</span></div><div class="pc-stack "><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">fields in a form: the default</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-4</code><span>16px</span></div><div class="pc-stack pc-stack-4"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">groups inside a card</div></div><div class="pv-step"><div class="pv-name"><code class="pc-code">.pc-stack-6</code><span>24px</span></div><div class="pc-stack pc-stack-6"><span class="pv-box"></span><span class="pv-box"></span><span class="pv-box"></span></div><div class="pv-use">cards and sections on a page</div></div></div></div></div><div class="pv-sec"><div class="pv-cap">In use: fields 12px apart (.pc-stack), and the buttons side by side, 8px apart (.pc-stack-row).</div><div class="pv-w"><div class="pc-card"><div class="pc-card-content"><div class="pc-stack"><div class="pc-field"><label class="pc-label" for="dark-n">Name</label><input class="pc-input" id="dark-n" value="Weather app"></div><div class="pc-field"><label class="pc-label" for="dark-u">Redirect URI</label><input class="pc-input" id="dark-u" value="https://weather.example.com/callback"></div><div class="pc-stack pc-stack-row"><button class="pc-btn pc-btn-outline" type="button">Cancel</button><button class="pc-btn pc-btn-primary" type="button">Save</button></div></div></div></div></div></div></div></div>
+</body>
+</html>
