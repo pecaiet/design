@@ -777,11 +777,15 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-segmented > .pc-btn:has(> input:disabled) { color: var(--muted-foreground); cursor: not-allowed; }
 .pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: none; }
 
-/* A button that can't be used: one flat grey for every style, the not-allowed pointer, nothing under
+/* A button that can't be used keeps its own shape, in grey: a button with a box (primary, outline, delete) turns one flat grey
+   box; a ghost button, which has no box, turns grey words at half strength, with no box. The not-allowed pointer, nothing under
    the pointer. It still takes the pointer, so a tooltip on it can say why: use aria-disabled="true" then (focusable; the app
    ignores the click). A link that goes nowhere has no href. */
 .pc-btn:is(:disabled, [aria-disabled="true"]), .pc-btn:is(:disabled, [aria-disabled="true"]):hover {
   background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed;
+}
+.pc-btn-ghost:is(:disabled, [aria-disabled="true"]), .pc-btn-ghost:is(:disabled, [aria-disabled="true"]):hover {
+  background: none; border-color: transparent; box-shadow: none; opacity: var(--pc-opacity-disabled);
 }
 
 /* Separator: a 1px line in the border colour, the same line as every divider (menus, footers, table headers, the toolbar).

@@ -56,7 +56,7 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
 - Hover, keyboard focus and disabled states are built into the classes, the same way everywhere:
   - Hover: every clickable row and ghost or outline control takes a fill (`accent` on surfaces, `sidebar-hover` in the sidebar).
   - Focus, as on claude.ai. Controls (buttons, fields, checkboxes, links) use `pc-focus`: their outer 1px turns the page colour (bordered controls turn their border that colour), then a 1px blue `ring` line on the edge and a soft glow in a darker blue. Rows (sidebar, menu, search, calendar days, table rows) use `pc-focus-inset`: the ring inside the row's own edge, only the glow outside. A transparent outline stays underneath for Windows high-contrast mode. Blue is used for focus only, so it shows on teal buttons and ticked boxes too. Rows also take their hover fill. Sidebar rows sit 2px apart. Menu and search rows sit 4px apart. Borderless inline fields (the search field) show only the caret.
-  - Disabled: half strength and a not-allowed pointer, fields included. Buttons instead turn one flat grey.
+  - Disabled: half strength and a not-allowed pointer, fields included. Buttons instead keep their own shape, in grey: a button with a box turns one flat grey box, a ghost button grey words with no box.
   - Choices from a list use the Select (our own list), never the browser's dropdown. Every menu that pops up (pickers, the account menu, the app switcher, row actions) is a dropdown on desktop and a sheet at the bottom of the screen on phones.
   - Divider lines (menus, card footers, the search dialog, table headers) run edge to edge, the same everywhere.
   - Panels (cards, dialogs, popovers) have 16px inside.

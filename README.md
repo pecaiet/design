@@ -88,7 +88,7 @@ Updating:
     - a row in a list: `box-shadow: var(--pc-focus-inset);` plus its hover fill.
   - Focus wins over hover and over a selected toggle (`aria-pressed`), so a focused button looks the same under the pointer.
 - Links: the text colour, with a soft grey underline at rest that turns solid under the pointer. Quiet links (a footer, breadcrumbs, a group's Clear) are muted with no underline until the pointer is on them.
-- Can't be used: half strength with the not-allowed pointer; buttons (and the segmented control, Attach files) instead turn one flat grey, so a tooltip on them can say why.
+- Can't be used: half strength with the not-allowed pointer; buttons keep their own shape in grey (a box turns a flat grey box, a ghost button grey words with no box; the segmented control and Attach files likewise), so a tooltip on them can say why.
 - Divider lines (menus, card footers, the search dialog) run edge to edge, the same everywhere.
 - Scrollbars: thin and muted (`muted-foreground` at 40%, no track), drawn by the browser on every scroll area and the page itself, so each system keeps its own behaviour (macOS hides them until you scroll).
 
@@ -107,7 +107,7 @@ Updating:
 - Sizes: `pc-btn-small` (28px), the 32px default, `pc-btn-large` (40px); `pc-btn-full` takes the full width. Icons are 16px in every size.
 - `pc-btn-icon` is square; it needs an `aria-label` and the same words as a tooltip.
 - `aria-pressed="true"`: a button that stays on, soft teal.
-- `disabled`: one flat grey, not-allowed pointer; `aria-disabled="true"` instead when a tooltip says why (the app ignores the click).
+- `disabled`: its own shape in grey (a flat grey box; a ghost button grey words, no box), not-allowed pointer; `aria-disabled="true"` instead when a tooltip says why (the app ignores the click).
 - `aria-busy="true"` with a `.pc-spinner` while it works.
 
 ## Sidebar item

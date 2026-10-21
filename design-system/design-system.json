@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T10:22:02Z",
+    "at": "2026-10-21T10:42:55Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Final sweep: card heights measured after the font loads (no light band under the dark half), link icons (an icon before the words takes .pc-link-lead), room for focus rings on quiet, footer and breadcrumb links, sidebar marks line up with icons, swatches line up with their label, key caps' room, a turned-off stepper fades once, and the cards' own spacing and small text on the scales."
+    "note": "Can't be used, B: a button keeps its own shape in grey; a box turns a flat grey box, a ghost button (Previous, a toolbar tool, an icon-only ghost) grey words at half strength with no box. The temporary can't-be-used cards are gone."
   },
   "layout": "files",
   "libraries": [],
