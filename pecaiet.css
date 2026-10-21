@@ -1412,12 +1412,15 @@
 
   /* Changes; opacity and translate ride along for whatever fades or slides in. */
   .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-switch, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-tab,
-  .pc-accordion-item > summary, .pc-table tbody td, .pc-table tbody tr, .pc-search-result, .pc-calendar-day, .pc-chip, .pc-chip-remove, .pc-swatch, .pc-swatch::before,
+  .pc-accordion-item > summary, .pc-table tbody td, .pc-table tbody tr, .pc-search-result, .pc-calendar-day, .pc-chip, .pc-chip-remove, .pc-swatch,
   .pc-tree-item, .pc-menu, .pc-popover, .pc-tab-panel, .pc-carousel-slide, .pc-menu-backdrop, .pc-popover-backdrop, .pc-sheet-backdrop {
     transition: background-color var(--pc-motion) var(--pc-motion-ease), color var(--pc-motion) var(--pc-motion-ease), border-color var(--pc-motion) var(--pc-motion-ease),
-      box-shadow var(--pc-motion) var(--pc-motion-ease), outline-color var(--pc-motion) var(--pc-motion-ease), text-decoration-color var(--pc-motion) var(--pc-motion-ease),
+      box-shadow var(--pc-motion) var(--pc-motion-ease), text-decoration-color var(--pc-motion) var(--pc-motion-ease),
       opacity var(--pc-motion) var(--pc-motion-ease), translate var(--pc-motion) var(--pc-motion-ease);
   }
+  /* Outlines don't fade: under every focus ring is an outline only Windows' high-contrast mode draws, and fading it would start it in
+     the text colour (a flash on Tab). The swatch's ring is its one visible outline, so it fades on its own. */
+  .pc-swatch::before { transition: outline-color var(--pc-motion) var(--pc-motion-ease); }
   .pc-btn > svg { transition: opacity var(--pc-motion) var(--pc-motion-ease); }
   .pc-checkbox:checked::after, .pc-radio:checked::after { animation: pc-fade-in var(--pc-motion) var(--pc-motion-ease); }
   .pc-progress-fill { transition: width var(--pc-motion) var(--pc-motion-ease); }

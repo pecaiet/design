@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T17:22:04Z",
+    "at": "2026-10-21T17:25:38Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Chips just fade: one added or removed fades in or out where it is, like everything else that appears in place."
+    "note": "No more flash on Tab: outlines no longer fade (the focus outline under every ring started in the text colour); only the colour swatch's ring still fades."
   },
   "layout": "files",
   "libraries": [],
