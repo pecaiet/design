@@ -4,7 +4,7 @@ The shared look for the Pecaiet apps (idp, todo): colours, type, and plain HTML/
 
 The design lives in the private Pecaiet design system on claude.ai (look: Senin). This repo is its code.
 
-`design-system/` is a copy of that design system's own files (guidelines, cards, `tokens.json`, `components/bundle.css`). The real tokens are `design-system/tokens.json` and `pecaiet.css`; the design-system page makes its own `tokens.css`, `manifest.json` and `api/` cards, which aren't kept here.
+`design-system/` is a copy of that design system's own files (guidelines, cards, `tokens.json`, `components/bundle.css`, and `components/bundle.js`, which is `pecaiet.js` with the card order on its first line, so every card plays the same motion as the apps). The real tokens are `design-system/tokens.json` and `pecaiet.css`; the design-system page makes its own `tokens.css`, `manifest.json` and `api/` cards, which aren't kept here.
 
 ## Use it
 
@@ -50,7 +50,7 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 
 ## Motion
 
-One speed and one curve, the same in every app (the design system's Motion card shows them playing): everything takes `--pc-motion` (120ms) with Ease out. Changes, then three kinds of motion, never two at once (nothing fades while it moves):
+One speed and one curve, the same in every app (the design system's Motion card plays each kind; every motion, one card each: the [motion playground](https://claude.ai/artifact/Wg3LnYi3P4z6BptwdCDzqZ)): everything takes `--pc-motion` (120ms) with Ease out. Changes, then three kinds of motion, never two at once (nothing fades while it moves):
 
 - **Change**: hover and focus colours, ticks, dots, arrows (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work; `pecaiet.js`).
 - **Fade**: what appears in place. Menus, popovers, tooltips (after `--pc-motion-wait`, 360ms), dialogs, tab panels, carousel slides, chips added or removed (`Pecaiet.enter`, `Pecaiet.leave`) and content that takes a skeleton's place (`pecaiet.js`) fade in and out where they are.

@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T17:25:38Z",
+    "at": "2026-10-21T19:10:34Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "No more flash on Tab: outlines no longer fade (the focus outline under every ring started in the text colour); only the colour swatch's ring still fades."
+    "note": "Motion linked: the bundle (components/bundle.js) is now pecaiet.js, so every card plays the same motion as the apps; the Motion card plays each kind live on real components (Play, Play all); the Motion guideline and the README link the motion playground, and the playground links back."
   },
   "layout": "files",
   "libraries": [],

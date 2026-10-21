@@ -1,5 +1,6 @@
 /* Pecaiet shared script: the motion pecaiet.css can't play by itself, and the two Settings choices that change the whole page (theme,
-   motion). Load it once in every app, next to pecaiet.css: <script src="pecaiet.js" defer></script> (or import it once).
+   motion). Load it once in every app, next to pecaiet.css, as a deferred script (or import it once). In the design system it is the
+   bundle (components/bundle.js, built from this file), so every card plays the same motion.
    Everything in the apps works without it; the things below just happen at once. Timings come from pecaiet.css (--pc-motion-*),
    so motion is still set in one place.
 
