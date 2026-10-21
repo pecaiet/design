@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T17:11:56Z",
+    "at": "2026-10-21T17:22:04Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "One motion speed: pc-motion (120ms) for everything, replacing pc-motion-fast and pc-motion-base. Waits and loops are multiples of it: tooltip wait 360ms, spinner 0.84s, unknown progress 1.44s, skeleton 1.56s."
+    "note": "Chips just fade: one added or removed fades in or out where it is, like everything else that appears in place."
   },
   "layout": "files",
   "libraries": [],

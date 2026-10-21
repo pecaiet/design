@@ -5,10 +5,11 @@
 
    Calls (on window.Pecaiet):
      leave(el)          el shrinks out while it fades, in one motion (what's around it glides), then it's removed; a table row
-                        (it can't shrink) fades. Resolves when it's gone. { remove: false } plays it and leaves the removing to you.
-     enter(el)          something the person just added: a row, chip or alert grows in while it fades (what's below glides), a table
-                        row fades in, anything else fades in where it is. Works as a React ref (null is ignored). Content that's
-                        only drawn again doesn't move.
+                        (it can't shrink) and a chip fade out where they are. Resolves when it's gone. { remove: false } plays
+                        it and leaves the removing to you.
+     enter(el)          something the person just added: a row or alert grows in while it fades (what's below glides); a table
+                        row, a chip and anything else fade in where they are. Works as a React ref (null is ignored). Content
+                        that's only drawn again doesn't move.
      close(el)          play the closing, then close: a <dialog> (close()) or anything shown by removing hidden (sets hidden).
      setTheme(mode)     "dark" | "light" | "system": the .dark class on <html>, remembered in the theme cookie, crossfading.
      setMotion(mode)    "on" | "off" (or null to follow the device again): data-motion on <html>, remembered in the motion cookie.
@@ -22,7 +23,7 @@
      - toasts and field errors grow in whenever they appear after the page has loaded, even in a page drawn again (they're news);
      - an alert's x (.pc-alert-close) and any [data-pc-dismiss] button make their alert or toast leave;
      - the chosen tab's line slides to the next tab;
-     - Turbo: a removed row, alert or toast leaves first; rows, chips and alerts a stream adds (append, prepend, before, after) grow in;
+     - Turbo: a removed row, chip, alert or toast leaves first; rows, chips and alerts a stream adds (append, prepend, before, after) come in;
      - a tree item's children grow in right after it opens;
      - an icon swapped inside a button (a copy turning into a tick, the spinner at work) fades in;
      - content that takes a skeleton's place (the app swaps it in, or a Turbo frame loads) fades in;
@@ -58,7 +59,7 @@
   };
   const shownFrame = { opacity: "1", translate: "0 0" };
 
-  // The space el takes, and none of it: its height (its width, in a row such as chips) with min sizes, padding, borders and the gap
+  // The space el takes, and none of it: its height (its width, in a row) with min sizes, padding, borders and the gap
   // beside it, so what's around it glides in the same motion. A one-column grid keeps its gap until the row is gone, so while it
   // moves the grid's gaps become margins (data-pc-gaps, pecaiet.css) and the row's own gap closes with it. Only reads; start() changes.
   function space(el) {
@@ -98,21 +99,22 @@
     return Promise.all(runs.map(a => a.finished)).catch(() => {}).then(() => ({ settle: () => { unclip(el); runs.forEach(a => a.cancel()); sp.done(); } }));
   }
 
+
   async function leave(el, { remove = true } = {}) {
     if (!el?.isConnected) return;
     const t = timing(), gone = () => { if (remove) el.remove(); else el.style.setProperty("display", "none", "important"); };
     if (!t.duration) return gone();
-    // Table rows can't shrink: they fade, then go.
-    if (el.tagName === "TR") { await play(el, [shownFrame, { opacity: "0" }], t).finished.catch(() => {}); return gone(); }
+    // Table rows can't shrink, and chips keep their shape: they fade, then go.
+    if (el.tagName === "TR" || el.matches(".pc-chip")) { await play(el, [shownFrame, { opacity: "0" }], t).finished.catch(() => {}); return gone(); }
     // Anything else shrinks while it fades, in one motion.
     const shrink = await grow(el, false, t);
     gone();
     shrink.settle();
   }
 
-  // What takes room grows in; a table row (it can't grow) and anything else fade in where they are. Toasts and field errors are
-  // always news, so they grow in by themselves.
-  const GROWS = ".pc-file, .pc-tree-item, .pc-chip, .pc-sidebar-item, .pc-menu-item, .pc-alert, .pc-toast, .pc-field-error", NEWS = ".pc-toast, .pc-field-error";
+  // What takes room grows in; a table row (it can't grow), a chip and anything else fade in where they are. Toasts and field errors
+  // are always news, so they grow in by themselves.
+  const GROWS = ".pc-file, .pc-tree-item, .pc-sidebar-item, .pc-menu-item, .pc-alert, .pc-toast, .pc-field-error", NEWS = ".pc-toast, .pc-field-error";
   function enter(el) {
     const t = timing();
     if (!el?.isConnected || !t.duration) return Promise.resolve();
@@ -253,16 +255,16 @@
         if (n.matches(SHOWN)) remembered(n);
         if ((c.target.matches?.(".pc-btn") && n.matches("svg, .pc-spinner")) || skeletons.has(c.target)) fades.push(n);
         else if (n.matches(".pc-tree-item") && performance.now() - (opened.get(parentItem(n)) ?? -1e9) < 1000) rows.push(n);
-        else if (adding && (n.matches(GROWS) || n.tagName === "TR")) rows.push(n);
+        else if (adding && (n.matches(GROWS + ", .pc-chip") || n.tagName === "TR")) rows.push(n);
         else if (!root.hasAttribute("data-turbo-preview")) rows.push(...(n.matches(NEWS) ? [n] : n.querySelectorAll(NEWS)));
       });
     }
-    // New rows grow in together: every size is read first, then they all start. A table row fades in, and so do a swapped icon and
-    // what took a skeleton's place.
+    // New rows grow in together: every size is read first, then they all start. A table row and a chip fade in, and so do a swapped
+    // icon and what took a skeleton's place.
     if (!rows.length && !fades.length) return;
     const t = timing(), list = rows.splice(0), faded = fades.splice(0);
     if (!t.duration) return;
-    const spaces = list.map(n => (n.tagName === "TR" ? null : space(n)));
+    const spaces = list.map(n => (n.tagName === "TR" || n.matches(".pc-chip") ? null : space(n)));
     const fadeIn = n => { const a = play(n, [{ opacity: "0" }, { opacity: "1" }], t); a.finished.then(() => a.cancel(), () => {}); };
     list.forEach((n, i) => { if (spaces[i]) grow(n, true, t, {}, true, spaces[i]).then(g => g.settle()); else fadeIn(n); });
     faded.forEach(fadeIn);
