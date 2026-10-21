@@ -6,7 +6,7 @@ The signed-out pages, all on one layout: sign in, create an account, reset your 
   - a wash of the app's colour over the whole half (22% in light, 16% in dark);
   - its mark, 160px with rounded corners and a soft shadow, above "One space for / your lists" (`pc-page-title`; the word is the app's: lists, account), a muted line, and dots that pick an app (the current one long);
   - the same mark at 900px, very faint (14% in light, 10% in dark) and tilted, cut off at the half's bottom-right corner.
-  - No motion, only show and hide. It stops while an error shows (on the first app) and for people who ask for reduced motion.
+  - The app shown fades in; nothing slides. It stops while an error shows (on the first app) and when motion is off.
 - Desktop: the left content and the form are both 400px columns, each 7% of the window (40–120px) from the divider, so the two halves mirror each other.
 - The right half holds the form: the title (`pc-page-title`), a muted line with the switch to the other page (`pc-link`), the fields (`pc-field`, `pc-label`, `pc-input`, `pc-field-hint`), and the main button full width (`.pc-btn-full`).
 - Errors: a `pc-alert pc-alert-error` above the fields, and `aria-invalid="true"` on the field at fault. After a reset request the person is back on sign in with a `pc-alert pc-alert-notice` above the fields.

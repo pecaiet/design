@@ -11,3 +11,4 @@ Rows of records, usually inside a card.
 - A row's own actions: a ⋯ ghost icon button (`aria-label`, `aria-haspopup="menu"`) in the last column (`.pc-table-actions`), opening a Dropdown menu. The header cell names it for screen readers only.
 - Checkboxes and buttons in a row stay clickable over a row link.
 - Empty: one row with a cell spanning all columns holding `.pc-empty` (an `.pc-empty-title` and a `.pc-empty-description` about what will appear).
+- Motion: rows added after the page has loaded fade in and drop 4px; `Pecaiet.leave(row)` fades one out before it goes (a Turbo remove does it by itself).

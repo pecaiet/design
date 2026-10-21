@@ -12,3 +12,4 @@ A panel from the right with a form or a record's details, over the page or besid
 - Label the drawer by its title (`aria-labelledby`). Focus starts on the drawer itself (`tabindex="-1"`, focused after `showModal()`), as in the Settings modal; Tab moves into it. The page behind doesn't scroll while it is open.
 - The app provides: opening and closing (`showModal()`, `close()`, the click on the dimmed page), which row is open, and the row a drawer beside the page sits in, as tall as the page.
 - A yes/no question stays a Modal.
+- Motion: it slides in from the right edge while the page dims, and out the same way (Escape or `Pecaiet.close(drawer)` everywhere; CSS alone in Chrome and Edge).

@@ -1,9 +1,21 @@
 /* Pecaiet shared classes (Senin). Colours, row height, corners and fonts come from tokens.css. */
 
-/* Motion: off for now, so everything is instant. Every transition and animation below reads these values;
-   set them (for example 120ms and 200ms) to turn motion on in every app at once. Reduced motion always keeps 0. */
-:root { --pc-motion-fast: 0ms; --pc-motion-base: 0ms; --pc-motion-ease: cubic-bezier(0.2, 0, 0, 1); }
-@media (prefers-reduced-motion: reduce) { :root { --pc-motion-fast: 0ms; --pc-motion-base: 0ms; } }
+/* Motion: two speeds from the tokens (pc-motion-fast for small changes, pc-motion-base for whatever appears, leaves or travels), one
+   curve, and the longer times worked out from base. Off in Settings puts data-motion="off" on <html>; with nothing chosen, a device that
+   asks for less motion gets Off as well. The spinner keeps turning then, slowly, so loading still shows. */
+:root {
+  --pc-motion-ease: cubic-bezier(0.2, 0, 0, 1); --pc-motion-distance: var(--pc-space-1);
+  --pc-motion-wait: calc(var(--pc-motion-base) * 2); --pc-motion-spin: calc(var(--pc-motion-base) * 4);
+  --pc-motion-slide: calc(var(--pc-motion-base) * 7); --pc-motion-pulse: calc(var(--pc-motion-base) * 8); --pc-motion-spin-off: calc(var(--pc-motion-base) * 12);
+}
+[data-motion="off"] body {
+  --pc-motion-fast: 0ms; --pc-motion-base: 0ms; --pc-motion-wait: 0ms; --pc-motion-slide: 0ms; --pc-motion-pulse: 0ms; --pc-motion-spin: var(--pc-motion-spin-off);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) body {
+    --pc-motion-fast: 0ms; --pc-motion-base: 0ms; --pc-motion-wait: 0ms; --pc-motion-slide: 0ms; --pc-motion-pulse: 0ms; --pc-motion-spin: var(--pc-motion-spin-off);
+  }
+}
 
 body { margin: 0; background: var(--background); color: var(--foreground); }
 
@@ -338,11 +350,11 @@ div.pc-file { padding-right: 0; }
 
 /* Progress bar: <div class="pc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"> holding a
    .pc-progress-fill as wide as what's done: 6px, round ends, teal on the track colour. With no aria-valuenow it can't tell how long:
-   a third of the bar moves along it (still while motion is off). .pc-progress-error turns the fill red where it stopped;
+   a third of the bar slides along it (still with motion off). .pc-progress-error turns the fill red where it stopped;
    .pc-progress-small is 4px, for inside a row. .pc-progress-head puts what's happening and a .pc-progress-value above it. */
 .pc-progress { position: relative; height: var(--pc-bar-6); overflow: hidden; border-radius: var(--pc-radius-full); background: var(--track); }
 .pc-progress-fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--primary); }
-.pc-progress:not([aria-valuenow]) > .pc-progress-fill { left: 30%; width: 35%; animation: pc-progress-slide calc(var(--pc-motion-base) * 7) var(--pc-motion-ease) infinite; }
+.pc-progress:not([aria-valuenow]) > .pc-progress-fill { left: 30%; width: 35%; animation: pc-progress-slide var(--pc-motion-slide) var(--pc-motion-ease) infinite; }
 .pc-progress-error > .pc-progress-fill { background: var(--destructive); }
 .pc-progress-small { height: var(--pc-bar-4); }
 .pc-progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--pc-space-3); }
@@ -402,6 +414,8 @@ div.pc-file { padding-right: 0; }
 .pc-rating-input > .pc-rating-star > input { position: absolute; width: var(--pc-border); height: var(--pc-border); margin: 0; opacity: 0; pointer-events: none; }
 .pc-rating-input > .pc-rating-star:is(:has(input:checked), :has(~ .pc-rating-star input:checked)) { --fill: 100%; }
 .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)) { --fill: 100%; }
+.pc-rating-input > .pc-rating-star > svg:last-of-type { clip-path: none; opacity: 0; transition: opacity var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-rating-input > .pc-rating-star:is(:has(input:checked), :has(~ .pc-rating-star input:checked), :hover, :has(~ .pc-rating-star:hover)) > svg:last-of-type { opacity: 1; }
 .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: var(--pc-opacity-50); }
 .pc-rating-input > .pc-rating-star:has(input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 /* Can't be used: half strength, the not-allowed pointer, no stars filling under it. */
@@ -518,15 +532,16 @@ dialog.pc-drawer:not([open]) { display: none; }
   content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + var(--pc-space-2)); left: 50%; z-index: var(--pc-layer-tooltip);
   width: max-content; max-width: var(--pc-width-256); padding: var(--pc-space-1-5) var(--pc-space-2); border-radius: var(--pc-radius); white-space: normal;
   background: var(--foreground); color: var(--background); font-size: var(--pc-text-12); font-weight: var(--pc-weight-medium); line-height: var(--pc-line-16);
-  box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
+  box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%); translate: 0 var(--pc-motion-distance);
+  transition: opacity var(--pc-motion-base) var(--pc-motion-ease), translate var(--pc-motion-base) var(--pc-motion-ease);
 }
-/* It shows under the pointer and on keyboard focus (a short wait under the pointer comes back with motion). */
-[data-pc-tooltip]:hover::after { opacity: 1; }
-[data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:has(:focus-visible)::after { opacity: 1; }
+/* It shows after the pointer rests on it (pc-motion-wait, 0.4s), and at once on keyboard focus. */
+[data-pc-tooltip]:hover::after { opacity: 1; translate: 0 0; transition-delay: var(--pc-motion-wait); }
+[data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:has(:focus-visible)::after { opacity: 1; translate: 0 0; transition-delay: 0s; }
 /* Above by default; data-pc-tooltip-side="bottom" near the top edge, "left" or "right" where there's no room. */
-[data-pc-tooltip-side="bottom"]::after { top: calc(100% + var(--pc-space-2)); bottom: auto; }
-[data-pc-tooltip-side="left"]::after { top: 50%; right: calc(100% + var(--pc-space-2)); bottom: auto; left: auto; transform: translateY(-50%); }
-[data-pc-tooltip-side="right"]::after { top: 50%; left: calc(100% + var(--pc-space-2)); bottom: auto; transform: translateY(-50%); }
+[data-pc-tooltip-side="bottom"]::after { top: calc(100% + var(--pc-space-2)); bottom: auto; translate: 0 calc(-1 * var(--pc-motion-distance)); }
+[data-pc-tooltip-side="left"]::after { top: 50%; right: calc(100% + var(--pc-space-2)); bottom: auto; left: auto; transform: translateY(-50%); translate: var(--pc-motion-distance) 0; }
+[data-pc-tooltip-side="right"]::after { top: 50%; left: calc(100% + var(--pc-space-2)); bottom: auto; transform: translateY(-50%); translate: calc(-1 * var(--pc-motion-distance)) 0; }
 /* Escape hides it: the app sets data-pc-tooltip-hidden until the pointer or focus leaves. */
 [data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; }
 
@@ -766,12 +781,26 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Segmented control: the toolbar's tray, for choosing exactly one of two to five options: a role="radiogroup" of .pc-btn.pc-btn-ghost
    labels, each around a radio kept out of sight. The options share the width evenly; the chosen one lifts as a raised pill, the one
    under the pointer shows a pale pill; the arrow keys move between them. .pc-segmented-full stretches it to its container. */
-.pc-segmented { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--pc-space-0-5); padding: var(--pc-space-1); border-radius: var(--pc-radius-lg); background: var(--muted); }
+.pc-segmented { position: relative; isolation: isolate; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--pc-space-0-5); padding: var(--pc-space-1); border-radius: var(--pc-radius-lg); background: var(--muted); }
 .pc-segmented-full { display: grid; }
 .pc-segmented > .pc-btn { position: relative; height: var(--pc-row-sm); }
 .pc-segmented > .pc-btn > input { position: absolute; width: var(--pc-border); height: var(--pc-border); margin: 0; opacity: 0; pointer-events: none; }
 .pc-segmented > .pc-btn:hover { background: color-mix(in srgb, var(--sidebar-active) var(--pc-opacity-50), transparent); box-shadow: none; color: var(--foreground); }
-.pc-segmented > .pc-btn:has(> input:checked) { background: var(--sidebar-active); box-shadow: var(--pc-raise); color: var(--foreground); }
+.pc-segmented > .pc-btn:has(> input:checked) { color: var(--foreground); }
+/* The chosen pill is one shape that slides between the options (they share one width; up to five). */
+.pc-segmented::before { content: ""; position: absolute; top: var(--pc-space-1); left: var(--pc-space-1); z-index: -1; width: calc((100% - 2 * var(--pc-space-1) - (var(--n, 1) - 1) * var(--pc-space-0-5)) / var(--n, 1));
+  height: var(--pc-row-sm); border-radius: var(--pc-radius); background: var(--sidebar-active); box-shadow: var(--pc-raise); translate: calc(var(--i, 0) * (100% + var(--pc-space-0-5))) 0;
+  transition: translate var(--pc-motion-base) var(--pc-motion-ease); }
+.pc-segmented:not(:has(> .pc-btn > input:checked))::before { display: none; }
+.pc-segmented:has(> .pc-btn:nth-child(2):last-child) { --n: 2; }
+.pc-segmented:has(> .pc-btn:nth-child(3):last-child) { --n: 3; }
+.pc-segmented:has(> .pc-btn:nth-child(4):last-child) { --n: 4; }
+.pc-segmented:has(> .pc-btn:nth-child(5):last-child) { --n: 5; }
+.pc-segmented:has(> .pc-btn:nth-child(2) > input:checked) { --i: 1; }
+.pc-segmented:has(> .pc-btn:nth-child(3) > input:checked) { --i: 2; }
+.pc-segmented:has(> .pc-btn:nth-child(4) > input:checked) { --i: 3; }
+.pc-segmented:has(> .pc-btn:nth-child(5) > input:checked) { --i: 4; }
+.pc-segmented > .pc-btn:has(> input:checked):hover { background: none; }
 .pc-segmented > .pc-btn:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 .pc-segmented > .pc-btn:has(> input:disabled) { color: var(--muted-foreground); cursor: not-allowed; }
 .pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: none; }
@@ -798,9 +827,9 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 /* Skeleton: blocks shaped like the content that's coming, in the border colour: .pc-skeleton on any box, sized by .pc-skeleton-line
    (a line of text, 10px), .pc-skeleton-title (14px), .pc-skeleton-circle (an avatar) or .pc-skeleton-control (a field or a button).
-   They fade gently in and out together on the motion tokens: still while motion is off, never with reduced motion. The area that is
+   They pulse gently together (pc-motion-pulse, 1.6s); still with motion off. The area that is
    loading gets aria-busy="true"; the blocks are aria-hidden. */
-.pc-skeleton { display: block; flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--border); animation: pc-skeleton-pulse calc(var(--pc-motion-base) * 8) var(--pc-motion-ease) infinite; }
+.pc-skeleton { display: block; flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--border); animation: pc-skeleton-pulse var(--pc-motion-pulse) var(--pc-motion-ease) infinite; }
 .pc-skeleton-line { height: var(--pc-text-10); }
 .pc-skeleton-title { height: var(--pc-text-14); }
 .pc-skeleton-circle { width: var(--pc-size-24); height: var(--pc-size-24); border-radius: var(--pc-radius-full); }
@@ -844,16 +873,15 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-slider-range > .pc-slider::-webkit-slider-thumb { pointer-events: auto; }
 .pc-slider-range > .pc-slider::-moz-range-thumb { pointer-events: auto; }
 
-/* Spinner: Phosphor's circle-notch in the colour of the words around it, still while motion is off: <span class="pc-spinner" role="status"
+/* Spinner: Phosphor's circle-notch in the colour of the words around it, turning once every 0.8s (pc-motion-spin): <span class="pc-spinner" role="status"
    aria-label="Loading"> holding the svg. 16px beside text, .pc-spinner-small 12px in tight spots, .pc-spinner-large 20px on its own.
-   It turns even while motion is off, as it's the only way it says "working"; with reduced motion it turns slower. A button at work
+   With motion off it still turns, slowly (2.4s), as it's the only way it says "working". A button at work
    gets aria-busy="true": it keeps its width, its words change, and it can't be pressed again. */
 .pc-spinner { display: inline-flex; flex-shrink: 0; width: var(--pc-size-16); height: var(--pc-size-16); }
-.pc-spinner > svg { width: 100%; height: 100%; animation: none; }
+.pc-spinner > svg { width: 100%; height: 100%; animation: pc-spin var(--pc-motion-spin) linear infinite; }
 .pc-spinner-small { width: var(--pc-size-12); height: var(--pc-size-12); }
 .pc-spinner-large { width: var(--pc-size-20); height: var(--pc-size-20); }
 .pc-btn[aria-busy="true"] { pointer-events: none; }
-@media (prefers-reduced-motion: reduce) { .pc-spinner > svg { animation-duration: 2.4s; } }
 
 /* Stepper: a number to change a step at a time. .pc-stepper is one field as tall as the row, like a text field: a "−" button, the number
    (<input type="number">) and a "+" button inside one border. At the lowest or highest value that button is disabled. The buttons are
@@ -874,7 +902,7 @@ dialog.pc-drawer:not([open]) { display: none; }
    <a class="pc-tab" aria-current="page">, when each part has its own address), over a line from edge to edge. The current tab
    (aria-selected="true") is in the text colour, semibold, with a 2px teal line under it; the rest are muted. An optional 16px icon
    before the words and a .pc-tab-count after them. When they don't fit, the row scrolls sideways. */
-.pc-tabs { display: flex; gap: var(--pc-space-1); overflow-x: auto; scrollbar-width: none; box-shadow: inset 0 calc(-1 * var(--pc-border)) 0 var(--border); }
+.pc-tabs { position: relative; display: flex; gap: var(--pc-space-1); overflow-x: auto; scrollbar-width: none; box-shadow: inset 0 calc(-1 * var(--pc-border)) 0 var(--border); }
 .pc-tabs::-webkit-scrollbar { display: none; }
 .pc-tab { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row); padding: 0 var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: var(--muted-foreground); font: inherit; font-weight: var(--pc-weight-medium); white-space: nowrap; text-decoration: none; cursor: pointer; }
 .pc-tab > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
@@ -885,6 +913,11 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-tab:is(:disabled, [aria-disabled="true"]), .pc-tab:is(:disabled, [aria-disabled="true"]):hover { color: var(--muted-foreground); opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-tab-count { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); font-variant-numeric: tabular-nums; }
 .pc-tab-panel:focus-visible { outline: none; }
+/* With pecaiet.js the chosen tab's line is one shape that slides between tabs (it sets --pc-tab-x and --pc-tab-w and marks the tabs
+   data-pc-tab-line); without it each tab draws its own line. */
+.pc-tabs[data-pc-tab-line] > .pc-tab::after { display: none; }
+.pc-tabs[data-pc-tab-line]::after { content: ""; position: absolute; bottom: 0; left: var(--pc-tab-x); width: var(--pc-tab-w); height: var(--pc-border-2); border-radius: var(--pc-radius-xs);
+  background: var(--primary); transition: left var(--pc-motion-base) var(--pc-motion-ease), width var(--pc-motion-base) var(--pc-motion-ease); }
 
 /* A text area's count: .pc-field-count under it, on the right ("13 / 200"); data-state="over" turns it red. */
 .pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
@@ -937,7 +970,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 /* Tree view: things inside things (folders of lists) as sidebar rows: <ul class="pc-tree" role="tree"> of .pc-tree-item rows
    (role="treeitem", aria-level; aria-expanded on those that open). A .pc-tree-caret before anything that opens (caret-right,
-   caret-down when open), a 16px icon, the .pc-tree-label and an optional .pc-tree-count. Each level starts 24px further in, and the
+   turning down when open), a 16px icon, the .pc-tree-label and an optional .pc-tree-count. Each level starts 24px further in, and the
    row's fill starts there too, right under its parent's icon. The current item has aria-current="page": the active sidebar pill. */
 .pc-tree { display: grid; gap: var(--pc-space-0-5); margin: 0; padding: 0; list-style: none; }
 .pc-tree-item { --level: 0; display: flex; align-items: center; gap: var(--pc-space-2-5); height: var(--pc-row); margin-left: calc(var(--level) * var(--pc-space-6)); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius); color: var(--foreground); text-decoration: none; cursor: pointer; }
@@ -946,6 +979,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-tree-item[aria-level="3"] { --level: 2; }
 .pc-tree-item[aria-level="4"] { --level: 3; }
 .pc-tree-item > svg, .pc-tree-caret > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; }
+.pc-tree-item[aria-expanded="true"] > .pc-tree-caret > svg { rotate: 90deg; }
 .pc-tree-caret { display: inline-grid; place-items: center; flex-shrink: 0; width: var(--pc-size-16); }
 .pc-tree-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-tree-count { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
@@ -970,7 +1004,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-video-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
 .pc-video-empty > svg { width: var(--pc-size-20); height: var(--pc-size-20); }
 
-/* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
+/* Carousel: one slide at a time (the app shows one .pc-carousel-slide and hides the others; the shown one fades in); dots under it pick one, the
    current long and strong, the others short and faint. */
 .pc-carousel-dots { display: flex; gap: var(--pc-space-0-5); }
 .pc-carousel-dot { display: grid; place-items: center; height: var(--pc-size-24); padding: 0 var(--pc-space-1); border: 0; border-radius: var(--pc-radius-full); background: none; color: inherit; cursor: pointer; }
@@ -1021,21 +1055,7 @@ dialog.pc-drawer:not([open]) { display: none; }
   .pc-date > .pc-popover .pc-dialog-actions > .pc-btn { flex: 1; }
 }
 
-/* Sidebar open and close, and the phone sheet: moving things use --pc-motion-base. */
-.pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
 .pc-sidebar[data-state="closed"] { margin-left: calc(-1 * var(--pc-width-256)); visibility: hidden; }
-.pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
-@keyframes pc-sheet-in { from { transform: translateX(-100%); } }
-@keyframes pc-progress-slide { from { left: -35%; } to { left: 100%; } }
-@keyframes pc-skeleton-pulse { 50% { opacity: var(--pc-opacity-50); } }
-@keyframes pc-spin { to { transform: rotate(1turn); } }
-
-/* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
-.pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-accordion-item > summary, .pc-table tbody td, .pc-search-result, .pc-calendar-day, .pc-chip-remove, .pc-swatch, .pc-swatch::before {
-  transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
-    box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease);
-}
-[data-pc-tooltip]::after { transition: opacity var(--pc-motion-fast) var(--pc-motion-ease); }
 
 /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. */
 .pc-sidebar-account { position: relative; }
@@ -1117,4 +1137,82 @@ html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-d
   body { --pc-row: var(--pc-row-touch); --pc-row-xs: calc(var(--pc-row-touch) - var(--pc-space-2)); --pc-row-sm: calc(var(--pc-row-touch) - var(--pc-space-1)); --pc-row-lg: calc(var(--pc-row-touch) + var(--pc-space-2)); }
   .pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input, .pc-input-addon { font-size: var(--pc-text-16); line-height: var(--pc-line-24); }
   .pc-calendar-grid { grid-template-columns: repeat(7, 1fr); }
+}
+
+/* Motion ------------------------------------------------------------------------------------------------------------------------
+   Three kinds, the same everywhere. A change (colours, ticks, arrows) takes pc-motion-fast. Whatever appears fades in while it moves
+   pc-motion-distance (4px) from where it comes from, at pc-motion-base, and leaves the same way backwards. Whatever is attached to an
+   edge of the screen slides in from that edge, at pc-motion-base. --pc-enter is where each thing comes from (a translate);
+   pecaiet.js reads the same value to play closings and removals, which CSS can't. */
+
+/* Changes; opacity and translate ride along for whatever also appears. */
+.pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-switch, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-tab,
+.pc-accordion-item > summary, .pc-table tbody td, .pc-table tbody tr, .pc-search-result, .pc-calendar-day, .pc-chip, .pc-chip-remove, .pc-swatch, .pc-swatch::before,
+.pc-tree-item, .pc-menu, .pc-popover, .pc-toast, .pc-field-error, .pc-tab-panel, .pc-carousel-slide, .pc-menu-backdrop, .pc-popover-backdrop, .pc-sheet-backdrop {
+  transition: background-color var(--pc-motion-fast) var(--pc-motion-ease), color var(--pc-motion-fast) var(--pc-motion-ease), border-color var(--pc-motion-fast) var(--pc-motion-ease),
+    box-shadow var(--pc-motion-fast) var(--pc-motion-ease), outline-color var(--pc-motion-fast) var(--pc-motion-ease), text-decoration-color var(--pc-motion-fast) var(--pc-motion-ease),
+    opacity var(--pc-motion-base) var(--pc-motion-ease), translate var(--pc-motion-base) var(--pc-motion-ease);
+}
+.pc-btn > svg { transition: opacity var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-checkbox:checked::after, .pc-radio:checked::after { animation: pc-fade-in var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-progress-fill { transition: width var(--pc-motion-base) var(--pc-motion-ease); }
+.pc-tree-caret > svg { transition: rotate var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-skip-link { transition: transform var(--pc-motion-base) var(--pc-motion-ease); }
+
+/* Where things come from: menus and popovers drop from their button (rise when they open upward), dialogs and toasts rise, errors and
+   answers drop from what's above them, the drawer comes from the right edge; on phones the sheets come up from the bottom edge. */
+.pc-menu, .pc-popover, .pc-field-error, .pc-accordion-content, .pc-tree-item, .pc-file, .pc-table tbody tr { --pc-enter: 0 calc(-1 * var(--pc-motion-distance)); }
+.pc-sidebar-account-menu, .pc-popover-up, .pc-toast, dialog.pc-dialog, dialog.pc-modal { --pc-enter: 0 var(--pc-motion-distance); }
+dialog.pc-drawer { --pc-enter: 100% 0; --pc-enter-opacity: 1; }
+.pc-menu.pc-menu-sheet { --pc-enter: 0 100%; --pc-enter-opacity: 1; }
+@media (max-width: 47.99rem) {
+  .pc-menu.pc-menu-pop, .pc-popover-anchor > .pc-popover, .pc-date > .pc-popover, dialog.pc-dialog { --pc-enter: 0 100%; --pc-enter-opacity: 1; }
+}
+
+/* Appearing. Rows, chips, tree rows, tab panels and slides only when they arrive after the page has loaded (pecaiet.js marks that with
+   data-pc-ready), so a page doesn't fade in row by row. */
+@starting-style {
+  .pc-menu, .pc-popover, .pc-toast, .pc-field-error { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter, 0 0); }
+  .pc-menu-backdrop, .pc-popover-backdrop, .pc-sheet-backdrop { opacity: 0; }
+  :root[data-pc-ready] :is(.pc-tree-item, .pc-file, .pc-table tbody tr) { opacity: 0; translate: var(--pc-enter); }
+  :root[data-pc-ready] :is(.pc-chip, .pc-tab-panel, .pc-carousel-slide, .pc-btn > svg) { opacity: 0; }
+}
+.pc-accordion-item[open] > .pc-accordion-content { animation: pc-enter var(--pc-motion-base) var(--pc-motion-ease); }
+@keyframes pc-enter { from { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter, 0 0); } }
+@keyframes pc-fade-in { from { opacity: 0; } }
+
+/* Dialogs, the settings window and the drawer, with the page dimming behind them. Where the browser can animate the closing (Chrome,
+   Edge) CSS plays it; elsewhere pecaiet.js does (Escape, or Pecaiet.close(dialog)). */
+dialog:is(.pc-dialog, .pc-modal, .pc-drawer), dialog:is(.pc-dialog, .pc-modal, .pc-drawer)::backdrop {
+  transition: opacity var(--pc-motion-base) var(--pc-motion-ease), translate var(--pc-motion-base) var(--pc-motion-ease);
+}
+@starting-style {
+  dialog:is(.pc-dialog, .pc-modal, .pc-drawer)[open] { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter); }
+  dialog:is(.pc-dialog, .pc-modal, .pc-drawer)[open]::backdrop { opacity: 0; }
+}
+@supports (overlay: auto) {
+  dialog:is(.pc-dialog, .pc-modal, .pc-drawer), dialog:is(.pc-dialog, .pc-modal, .pc-drawer)::backdrop {
+    transition: opacity var(--pc-motion-base) var(--pc-motion-ease), translate var(--pc-motion-base) var(--pc-motion-ease),
+      display var(--pc-motion-base) allow-discrete, overlay var(--pc-motion-base) allow-discrete;
+  }
+  dialog:is(.pc-dialog, .pc-modal, .pc-drawer):not([open]) { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter); }
+  dialog:is(.pc-dialog, .pc-modal, .pc-drawer):not([open])::backdrop { opacity: 0; }
+}
+
+/* Sliding: the sidebar in and out (the page widens with it), and its sheet on phones. */
+.pc-sidebar { transition: margin-left var(--pc-motion-base) var(--pc-motion-ease); }
+.pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
+@keyframes pc-sheet-in { from { transform: translateX(-100%); } }
+
+/* Loading: the spinner turns, the skeleton pulses, unknown progress slides (each reads its own time above). */
+@keyframes pc-spin { to { transform: rotate(1turn); } }
+@keyframes pc-skeleton-pulse { 50% { opacity: var(--pc-opacity-50); } }
+@keyframes pc-progress-slide { from { left: -35%; } to { left: 100%; } }
+
+/* Pages: a crossfade from one page to the next (Chrome, Edge and Safari; Firefox changes at once). Off stops it too. */
+@view-transition { navigation: auto; }
+::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: var(--pc-motion-base); animation-timing-function: var(--pc-motion-ease); }
+:root[data-motion="off"]::view-transition-group(*), :root[data-motion="off"]::view-transition-old(*), :root[data-motion="off"]::view-transition-new(*) { animation-duration: 0s; }
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"])::view-transition-group(*), :root:not([data-motion="on"])::view-transition-old(*), :root:not([data-motion="on"])::view-transition-new(*) { animation-duration: 0s; }
 }

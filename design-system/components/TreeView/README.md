@@ -7,3 +7,4 @@ Things inside things, like folders of lists, as sidebar rows that open and close
 - At the top level, a row with nothing to open keeps an empty `.pc-tree-caret` so its icon lines up with the folders'.
 - Under the pointer a row takes the sidebar hover fill; the current item (`aria-current="page"`) is the active sidebar pill; keyboard focus is the ring inside the row.
 - Keyboard: up and down move between rows, right opens or goes into a folder, left closes or goes back to its folder.
+- Motion: one caret (`caret-right`) that turns down when the item opens (`aria-expanded="true"`); rows added after the page has loaded fade in and drop 4px.

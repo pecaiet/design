@@ -10,3 +10,4 @@ Choosing a date, or a range of dates, from a month, in a popover under its field
 - Quick picks (todo's due date): `.pc-menu-item` buttons first, each with its day in a `.pc-menu-note`, a `.pc-menu-separator`, then the month; reminders as `.pc-chip`s under it; Clear date and Done in `.pc-dialog-actions`.
 - Keyboard: the arrow keys move by day and week, Page Up and Page Down by month, Enter picks, Escape closes. Focus is the ring inside the day.
 - Phones: inside a `.pc-date` it becomes a sheet from the bottom over a `.pc-popover-backdrop` (right before it), the month the full width and the buttons sharing it.
+- Motion: the calendar moves like every popover; on phones the sheet slides up.

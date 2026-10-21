@@ -19,3 +19,4 @@ Every menu that pops up is a sheet on phones: docked to the bottom of the screen
 - Give the popping-up `.pc-menu` the `.pc-menu-pop` modifier and put a `.pc-menu-backdrop` right before it. Below 48rem the menu becomes the sheet and the backdrop shows while it is open. `.pc-menu-sheet` makes a menu a sheet at any width.
 - A `.pc-menu-label.pc-menu-title` names the thing acted on; it shows only in the sheet.
 - The sheet leaves room for the phone's home bar and scrolls inside when it is taller than 85% of the screen. While it is open the page behind it doesn't scroll.
+- Motion: it fades in and drops 4px from its button (200ms), and closes the same way backwards (pecaiet.js plays the closing when the app hides it). On phones the sheet slides up from the bottom while the page dims.

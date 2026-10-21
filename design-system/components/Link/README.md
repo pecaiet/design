@@ -10,3 +10,4 @@ A link: in running text, the text colour with a soft underline; standing alone i
 - Inside an alert: the alert's colour, semibold, a solid underline.
 - `.pc-link-quiet` for links that stand alone in a muted place: muted, no underline; under the pointer the text colour and an underline. The footer's links, breadcrumbs and a group's Clear (Search) look the same.
 - Visited links look the same. Rows that open something use the Table row link or a sidebar item instead.
+- Motion: the underline's colour fades (120ms).

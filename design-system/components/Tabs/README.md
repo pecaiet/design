@@ -8,3 +8,4 @@ Switching between parts of one page: words over a line, the current one marked w
 - Keyboard: only the current tab is in the Tab order (`tabindex="0"`, the rest `-1`); the arrow keys move between tabs, and focus is the ring inside the tab's edge.
 - When the tabs don't fit (on a phone), the row scrolls sideways; keep the current tab in view.
 - Two to six tabs, named with a noun. Choosing a value or a view of the same things (List or Board) is a Segmented control; going to another page is Navigation.
+- Motion: with pecaiet.js the line slides to the chosen tab (200ms); a panel shown after the page has loaded fades in.

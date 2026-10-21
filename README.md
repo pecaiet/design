@@ -15,6 +15,8 @@ Import it right after Tailwind, in the app's main CSS file:
 @import "<path to>/pecaiet.css";
 ```
 
+And load the script once, next to it: `<script src="<path to>/pecaiet.js" defer></script>` in the layout's head (or `import "<path to>/pecaiet.js"` once). It plays the motion CSS can't (Motion below); without it everything still works and those things happen at once. With Turbo, add `<meta name="view-transition" content="same-origin">` to the layout too, for the crossfade between pages. The layout sets `data-motion` on `<html>` from the motion cookie, as it sets `.dark` from the theme cookie.
+
 That gives every app:
 
 - The colour tokens as CSS variables (`--primary`, `--sidebar`, …) and as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …). The shadcn names (`sidebar-accent`, `card-foreground`, `popover`, …) are kept as aliases.
@@ -44,7 +46,26 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 - **Every other size** (tokens.json's further sections, in the Tokens `:root` here): `--pc-text-N` with its line `--pc-line-N` (nine text sizes; a line is named by its own value: `--pc-line-20` is the 20px line of 14px text), `--pc-size-12/16/20/24/32/48` (icons and fixed squares), `--pc-width-*`, `--pc-height-list/panel/sheet`, `--pc-border`, `--pc-border-2`, `--pc-row-xs/-sm/-lg` and `--pc-row-touch` (control heights; phones work theirs out from `--pc-row-touch`), `--pc-bar-2/4/6`, `--pc-dot-8/12`, `--pc-opacity-12` and `--pc-opacity-50` (faint and half, for fading and for mixing one colour into another), `--pc-weight-*`, `--pc-tracking-*`, `--pc-layer-*` (raised, tooltip, menu, drawer, sheet, toast, skip link). Corners add `--pc-radius-xs` (2px) and `--pc-radius-full` (round). Colours that stay the same in both themes: `--media`, `--media-scrim`, `--on-media`, `--on-media-foreground`, `--on-media-hover`, `--knob`, `--colour-gray` … `--colour-pink`.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (cards, the raised pill: a toolbar tool under the pointer, the chosen segment; the slider's handle; a switch's knob), `--pc-raise-lg` (everything that opens over the page: menus, popovers, dialogs, drawers, toasts, tooltips, the skip link, the phone sidebar, a video's play button), `--pc-focus-offset` (keyboard focus on a chosen day or month), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
-- **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
+- **Motion**: `--pc-motion-fast` (120ms) and `--pc-motion-base` (200ms), with `--pc-motion-ease`, `--pc-motion-distance` and the times worked out from base (`--pc-motion-wait`, `-spin`, `-slide`, `-pulse`). See Motion.
+
+## Motion
+
+Two speeds and one curve, three kinds of motion, the same in every app (the design system's Motion card shows them playing):
+
+- **Change** (`--pc-motion-fast`, 120ms): hover and focus colours, ticks, dots, arrows. Things that travel take `--pc-motion-base` (200ms): the switch's knob, the segmented pill, the tab line, a progress bar.
+- **Appear** (`--pc-motion-base`): menus, popovers, tooltips (after `--pc-motion-wait`, 0.4s), dialogs, toasts, field errors, accordion answers and new rows fade in while they move 4px (`--pc-motion-distance`) from where they come from (`--pc-enter`), and leave the same way backwards.
+- **Slide** (`--pc-motion-base`): the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link come in from their edge.
+- **Off**: `data-motion="off"` on `<html>` makes everything instant (the spinner turns slowly); `data-motion="on"` keeps motion even when the device asks for less; with neither, the device decides. Settings › Preferences › Motion (On · Off) sets it.
+
+`pecaiet.js` does what CSS can't. With no calls it plays the closing of menus, popovers and sheets when the app hides them (`hidden`), Escape on a dialog or drawer, an accordion answer closing, an alert's x (`.pc-alert-close`) and any `[data-pc-dismiss]`, the tab line, Turbo removals (`turbo-stream action="remove"` fades the target out first), smooth jumps to `#` links, and radios named `pc-theme` (dark/light/system) or `pc-motion` (on/off). For what only the app knows, one call:
+
+```js
+Pecaiet.leave(row)              // fades it out, closes its gap, removes it (await it in React before dropping it from state)
+Pecaiet.close(dialog)           // plays the closing, then closes (a <dialog>, or anything shown by removing hidden)
+Pecaiet.setTheme("dark")        // "dark" | "light" | "system", with a crossfade; idp's theme script calls this
+Pecaiet.setMotion("off")        // "on" | "off" | null (back to the device)
+Pecaiet.enter(el)               // fades something in the way it comes (also as a React ref)
+```
 
 ## Rules for apps
 
@@ -67,7 +88,7 @@ Tokens only:
 
 - Colours: only token colours (`bg-primary`, `text-muted-foreground`, `var(--border)`). No hex values, no Tailwind palette colours (`bg-teal-600`), no `dark:` colour pairs: the tokens switch by themselves.
 - Type: only the `text-pc-*` sizes above. Not Tailwind's `text-xs`, `text-sm`, `text-lg`, ….
-- Motion: transitions use only `--pc-motion-fast`, `--pc-motion-base` and `--pc-motion-ease`, never their own durations.
+- Motion: transitions use only the motion tokens, never their own durations or curves. Something the app removes goes through `Pecaiet.leave`, a dialog it closes through `Pecaiet.close`.
 
 Markup:
 

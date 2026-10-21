@@ -7,3 +7,4 @@ Stars: to show how something was rated, or to rate it. Filled stars are teal; em
 - To set one: `.pc-rating-input` (`role="radiogroup"`, `aria-label`) of five `<label class="pc-rating-star">`, each around a radio (`aria-label="3 stars"`) that stays out of sight. The chosen star and those before it fill; under the pointer, the stars up to it fill lighter until clicked. Keyboard focus rings the chosen star, and the arrow keys move it, as in any radio group.
 - Say what the number means beside it, in `.pc-rating-count`: "Good", "Not rated yet".
 - Icons on their own are 20px: the stars you click (in targets as tall as a small button: 28px, 36 on phones), a lone Spinner, the icon in an empty image or video box. Stars that only show a rating are 16px.
+- Motion: picked stars fade in (120ms).

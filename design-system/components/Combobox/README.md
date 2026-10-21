@@ -8,3 +8,4 @@ Picking one value from a long list by typing: the Select with search. No classes
 - Its menu (`aria-multiselectable="true"`) starts with the same search; each row starts with a `.pc-checkbox`, ticked when picked (the Select's tick at the end means "the one"). A click or Enter picks or unpicks and the menu stays open; Backspace in an empty search removes the last chip; Escape or a click outside closes it. On phones it's the Select's sheet, open while you pick.
 - An error (`aria-invalid="true"`) turns the field's border red, with the message under it; turned off (`aria-disabled="true"`), it fades to half like every field.
 - Only values from the list: typing only filters. Typing straight into the field and creating a value from what was typed are not designed; new values are made where they're managed (settings).
+- Motion: its menu moves like every menu; a chip added after the page has loaded fades in, and one removed with `Pecaiet.leave(chip)` fades out.

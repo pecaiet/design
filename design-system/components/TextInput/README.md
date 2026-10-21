@@ -9,3 +9,4 @@ A one-line field for text, with a label, an optional hint and an error. More tha
 - Read-only: the `readonly` attribute gives the muted fill and no border; the value can still be selected and copied. An optional copy button sits at the end the same way (Phosphor `copy`, `aria-label="Copy client ID"`); after a click its icon turns into a tick and its tooltip says "Copied" for two seconds. No toast.
 - A short field (a code, a year) gets a width that fits what goes in, such as `width: 12ch`; everything else is the full width.
 - What the browser fills in (a saved email or password) keeps our colours instead of its yellow or blue.
+- Motion: the error message fades in and drops 4px under the field.

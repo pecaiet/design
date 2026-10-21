@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T12:38:50Z",
+    "at": "2026-10-21T14:39:20Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Line heights are their own token family (Line), next to Text."
+    "note": "Motion on: two speeds (120/200ms), one curve; changes, things that appear and leave, and slides from an edge; the segmented pill and tab line slide; Settings has a Motion card (On · Off); a Motion card shows it all; pecaiet.js plays the rest."
   },
   "layout": "files",
   "libraries": [],

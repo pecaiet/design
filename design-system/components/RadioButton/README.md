@@ -11,3 +11,4 @@ Choosing one of a few options that are all visible at once.
 - Keyboard: Tab reaches the group, the arrow keys move between its choices. Focus is the blue ring; a choice turned off (`disabled`) is half strength and its hint says why. Nothing changes under the pointer.
 - Error: `aria-invalid="true"` on the radios turns the circles red; a `.pc-field-error` under the group says what to do, tied to the fieldset with `aria-describedby`.
 - Radios are round; checkboxes are square.
+- Motion: the dot fades in (120ms).

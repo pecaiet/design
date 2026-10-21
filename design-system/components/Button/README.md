@@ -13,3 +13,4 @@ A button that does something: four styles, three sizes, and the states every sty
 - `.pc-btn-full` stretches it to its container: forms on phones, the sign-in page. Words never wrap, so keep them short.
 - A button that goes to another page is an `<a class="pc-btn …">` with the same look.
 - Label with a verb and what it acts on: "Save email", "Delete account".
+- Motion: hover and focus colours fade (120ms); pressing doesn't move it. At work, its icon becomes the spinner (it fades in) and the words change.

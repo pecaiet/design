@@ -8,3 +8,4 @@ A big window over the page with its own nav, for settings: not a plain modal. Ea
 - Desktop: up to 960 × 640, centred, with 24px of page showing around it; the toggle is hidden.
 - Phones (below 48rem): it fills the screen and the nav is hidden. The toggle opens `.pc-modal-frame` as a `.pc-sidebar-sheet`, exactly like the app's sidebar; the backdrop or Escape closes the sheet.
 - The close button, Escape and a click on the dimmed page around it leave the modal (back to the page under it). The click counts only when the press started there too, so selecting text and letting go outside doesn't close it. The page behind doesn't scroll while it is open.
+- Motion: it opens and closes like a Modal; on phones the settings nav slides in from the left. Preferences has a Motion card under Theme, On · Off (radios named `pc-motion` set it, with pecaiet.js loaded).
