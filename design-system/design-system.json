@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T09:46:17Z",
+    "at": "2026-10-21T10:22:02Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Light tints a step deeper; every size from a scale (spacing, text with its own line, sizes, widths, heights, edges, bars and dots, fading, weights, letter spacing, layers) as token families; the last review's fixes and picks: widths in six steps, motion fully off (spinner still), dark grey a step lighter, 40px toasts, 28px tooltips, tree rows like sidebar rows, 24px list indent. The picks cards are gone."
+    "note": "Final sweep: card heights measured after the font loads (no light band under the dark half), link icons (an icon before the words takes .pc-link-lead), room for focus rings on quiet, footer and breadcrumb links, sidebar marks line up with icons, swatches line up with their label, key caps' room, a turned-off stepper fades once, and the cards' own spacing and small text on the scales."
   },
   "layout": "files",
   "libraries": [],

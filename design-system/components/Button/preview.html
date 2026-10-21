@@ -1,4 +1,4 @@
-<!-- @dsCard height=1689 width=1120 subtitle="Four styles, solid red to confirm, on, can’t be used, working, sizes, icons, full width" -->
+<!-- @dsCard height=1681 width=1120 subtitle="Four styles, solid red to confirm, on, can’t be used, working, sizes, icons, full width" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +48,7 @@
   .pv-bt-grid { display: grid; grid-template-columns: 64px repeat(3, max-content); align-items: center; gap: 10px 12px; }
   .pv-bt-sizes { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px 12px; }
   .pv-bt-phone { display: grid; gap: 12px; width: 300px; padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); }
-  .pv-backdrop { padding: 20px 16px; }
+  .pv-backdrop { padding: 24px 16px; }
   .pv-tipzone { padding-top: 40px; }
   .force-hover.pc-btn-primary.pc-btn-destructive { background: var(--destructive-hover); border-color: var(--destructive-hover); }
   .pc-toolbar > .pc-btn.force-hover { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
@@ -56,7 +56,7 @@
   /* Phone pictures: phones get 40px rows and 16px field text. */
   .pv-bt-phone { --pc-row: 40px; }
   .pv-bt-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
-  .pv-tipzone { padding-left: 48px; }
+  .pv-tipzone:has(> [aria-disabled="true"]) { padding-left: 48px; }
 </style>
 </head>
 <body>

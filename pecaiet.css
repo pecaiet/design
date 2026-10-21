@@ -319,6 +319,7 @@
   }
   .pc-sidebar-item > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; }
   .pc-sidebar-item > .pc-avatar:first-child { margin: 0 calc(-1 * var(--pc-space-1)); }
+  .pc-sidebar-item > .pc-sidebar-mark:first-child { margin: 0 calc(-1 * var(--pc-space-0-5)); }
   .pc-sidebar-item:hover { background: var(--sidebar-hover); }
   .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
   .pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
@@ -518,12 +519,12 @@
   .pc-link:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-radius: var(--pc-radius-xs); }
   button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; font: inherit; font-weight: var(--pc-weight-medium); cursor: pointer; }
   .pc-link > svg { display: inline-block; width: var(--pc-size-16); height: var(--pc-size-16); vertical-align: calc(-1 * var(--pc-space-0-5)); }
-  .pc-link > svg:first-child { margin-right: var(--pc-space-1); }
-  .pc-link > svg:not(:first-child) { margin-left: var(--pc-space-1); }
+  .pc-link > svg { margin-left: var(--pc-space-1); }
+  .pc-link > svg.pc-link-lead { margin: 0 var(--pc-space-1) 0 0; }
   .pc-alert .pc-link { color: inherit; font-weight: var(--pc-weight-semibold); text-decoration-color: currentColor; }
   /* Quiet links stand alone in a muted place (a footer, breadcrumbs, a group's Clear): muted, no underline; under the pointer the
      text colour and an underline, as a link's. Their place says they're links. */
-  .pc-link-quiet { border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
+  .pc-link-quiet { margin: 0 calc(-1 * var(--pc-space-0-5)); padding: 0 var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
   .pc-link-quiet:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
   .pc-link-quiet:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
 
@@ -827,7 +828,7 @@
   .pc-page-header-actions { display: flex; align-items: center; gap: var(--pc-space-2); }
 
   .pc-code { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--muted); box-shadow: inset 0 0 0 var(--pc-border) var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-  .pc-kbd { display: inline-grid; place-items: center; min-width: var(--pc-size-20); height: var(--pc-size-20); padding: 0 var(--pc-space-1-5); border: var(--pc-border) solid color-mix(in srgb, var(--muted-foreground) var(--pc-mix-line), transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+  .pc-kbd { margin: 0 var(--pc-space-0-5); display: inline-grid; place-items: center; min-width: var(--pc-size-20); height: var(--pc-size-20); padding: 0 var(--pc-space-1-5); border: var(--pc-border) solid color-mix(in srgb, var(--muted-foreground) var(--pc-mix-line), transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 
   /* Fields with an icon, selects, radios, colour swatches, chips */
   .pc-input-group { position: relative; display: flex; align-items: center; }
@@ -1137,6 +1138,7 @@
   .pc-stepper > button:disabled { background: none; opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
   .pc-stepper:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
   .pc-stepper:has(> input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+  .pc-stepper:has(> input:disabled) > button:disabled { opacity: 1; }
 
   /* Tabs: switching between parts of a page. <div class="pc-tabs" role="tablist"> of <button class="pc-tab" role="tab"> (or links,
      <a class="pc-tab" aria-current="page">, when each part has its own address), over a line from edge to edge. The current tab
@@ -1184,7 +1186,7 @@
   .pc-footer { overflow: hidden; padding: var(--pc-space-6) var(--pc-space-6) 0; border-top: var(--pc-border) solid var(--border); background: var(--background); color: var(--muted-foreground); }
   .pc-footer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(var(--pc-width-160), 1fr)); gap: var(--pc-space-4); }
   .pc-footer-heading { margin: 0 0 var(--pc-space-1); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
-  .pc-footer-link { display: block; width: fit-content; padding: var(--pc-space-0-5) 0; border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
+  .pc-footer-link { display: block; width: fit-content; margin: 0 calc(-1 * var(--pc-space-0-5)); padding: var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
   .pc-footer-link:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
   .pc-footer-link:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
   .pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--pc-space-1) var(--pc-space-4); margin-top: var(--pc-space-6); padding-top: var(--pc-space-3); border-top: var(--pc-border) solid var(--border); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
@@ -1260,7 +1262,7 @@
   .pc-colour-blue { --pc-colour: var(--colour-blue); }
   .pc-colour-purple { --pc-colour: var(--colour-purple); }
   .pc-colour-pink { --pc-colour: var(--colour-pink); }
-  .pc-swatches { display: flex; flex-wrap: wrap; }
+  .pc-swatches { display: flex; flex-wrap: wrap; margin-inline: calc((var(--pc-size-20) - var(--pc-row)) / 2); }
   .pc-swatch { position: relative; display: grid; place-items: center; width: var(--pc-row); height: var(--pc-row); border-radius: var(--pc-radius-full); cursor: pointer; }
   .pc-swatch::before { content: ""; grid-area: 1 / 1; width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-full); background: var(--pc-colour); box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-mix-edge), transparent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border-2); }
   .pc-swatch > input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }

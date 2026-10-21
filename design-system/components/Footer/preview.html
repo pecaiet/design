@@ -1,4 +1,4 @@
-<!-- @dsCard height=1514 width=1120 subtitle="Links, then the app’s word, big and faint, cut off by the bottom edge" -->
+<!-- @dsCard height=1530 width=1120 subtitle="Links, then the app’s word, big and faint, cut off by the bottom edge" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -47,12 +47,12 @@
 
   .pv-frame { overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); }
   .pv-phone { max-width: 300px; }
-  .pv-phone .pc-footer { padding: 20px 16px 0; }
-  .pv-page { display: grid; gap: 8px; padding: 16px 24px 20px; }
+  .pv-phone .pc-footer { padding: 24px 16px 0; }
+  .pv-page { display: grid; gap: 8px; padding: 16px 24px 24px; }
   .pv-page > span { display: block; height: 10px; border-radius: 999px; background: var(--muted); } .pv-page > span + span { width: 60%; }
   /* Preview only: the pointer and keyboard focus, shown. */
-  .pc-footer-link.pv-hover { color: var(--foreground); }
-  .pc-footer-link.pv-focus { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
+  .pc-footer-link.pv-hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
+  .pc-footer-link.pv-focus { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
 
   /* Phone pictures: phones get 40px rows and 16px field text. */
   .pv-phone { --pc-row: 40px; }

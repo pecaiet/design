@@ -1,4 +1,4 @@
-<!-- @dsCard height=2223 width=1120 subtitle="A search field on a page, and the search window: recent, searching, matches; full screen on phones" -->
+<!-- @dsCard height=2251 width=1120 subtitle="A search field on a page, and the search window: recent, searching, matches; full screen on phones" -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,11 +51,11 @@
   .pv-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
   .pv-toolbar .pv-box { max-width: none; }
   .pv-grow { flex: 1; }
-  .pv-count { color: var(--muted-foreground); font-size: 12px; }
+  .pv-count { color: var(--muted-foreground); font-size: 12px; line-height: 16px; }
   .pv-table { display: grid; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); overflow: hidden; }
   .pv-tr { display: flex; justify-content: space-between; align-items: center; height: var(--pc-row); padding: 0 12px; border-top: 1px solid var(--border); }
-  .pv-tr:first-child { border-top: 0; } .pv-muted { color: var(--muted-foreground); font-size: 12px; }
-  .pv-backdrop { align-items: start; padding: 20px 16px; }
+  .pv-tr:first-child { border-top: 0; } .pv-muted { color: var(--muted-foreground); font-size: 12px; line-height: 16px; }
+  .pv-backdrop { align-items: start; padding: 24px 16px; }
   .pv-backdrop > .pc-dialog { position: static; margin: 0; width: 100%; }
   .pv-wait { display: flex; align-items: center; height: 40px; padding: 0 16px; color: var(--muted-foreground); font-size: 12px; line-height: 16px; }
   .pv-phone { position: relative; height: 380px; max-width: 300px; overflow: hidden; border: 1px solid var(--border); border-radius: 22px; background: var(--background); }
@@ -66,7 +66,7 @@
 
   /* Phone pictures: phones get 40px rows and 16px field text. */
   .pv-phone { --pc-row: 40px; }
-  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
+  .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input) { font-size: 16px; line-height: 24px; }
 </style>
 </head>
 <body>

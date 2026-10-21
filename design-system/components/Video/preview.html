@@ -48,8 +48,8 @@
   .pv-vids { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 12px; }
   .pv-vids > .pc-video:only-child { grid-column: 1; }
   /* Preview only: the pointer and keyboard focus, shown. */
-  .pc-video-play.pv-hover { background: #e9eef4; }
-  .pc-video-play.pv-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus), 0 2px 8px #0004; }
+  .pc-video-play.pv-hover { background: var(--on-media-hover); }
+  .pc-video-play.pv-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus), var(--pc-raise-media); }
 </style>
 </head>
 <body>
