@@ -10,16 +10,16 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .ui {
   font-family: var(--font-sans, Figtree, system-ui, sans-serif);
   font-size: var(--pc-text-14);
-  line-height: var(--pc-line-14);
+  line-height: var(--pc-line-20);
   color: var(--foreground);
   background: var(--background);
   -webkit-font-smoothing: antialiased;
 }
 .ui *, .ui *::before, .ui *::after { box-sizing: border-box; }
 /* Scrollbars: thin and muted, drawn by the browser, on every scroll area and the page itself. */
-* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--muted-foreground) var(--pc-mix-line), transparent) transparent; }
-.pc-page-title { margin: 0; font-size: var(--pc-text-22); line-height: var(--pc-line-22); font-weight: var(--pc-weight-bold); letter-spacing: var(--pc-tracking-tight); }
-.pc-page-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--muted-foreground) var(--pc-opacity-50), transparent) transparent; }
+.pc-page-title { margin: 0; font-size: var(--pc-text-22); line-height: var(--pc-line-28); font-weight: var(--pc-weight-bold); letter-spacing: var(--pc-tracking-tight); }
+.pc-page-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 
 /* Sidebar */
 .pc-sidebar {
@@ -43,14 +43,14 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .pc-sidebar-item > .pc-sidebar-mark:first-child { margin: 0 calc(-1 * var(--pc-space-0-5)); }
 .pc-sidebar-item:hover { background: var(--sidebar-hover); }
 .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
-.pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
 .pc-sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-sidebar-detail { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-regular); font-variant-numeric: tabular-nums; }
+.pc-sidebar-detail { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-regular); font-variant-numeric: tabular-nums; }
 .pc-sidebar-detail-alert { color: var(--destructive); font-weight: var(--pc-weight-semibold); }
 .pc-sidebar-heading { font-weight: var(--pc-weight-semibold); cursor: default; }
 .pc-sidebar-item.pc-sidebar-heading:hover { background: none; }
-.pc-sidebar-mark { display: grid; place-items: center; width: var(--pc-size-20); height: var(--pc-size-20); flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--foreground); color: var(--background); font-size: var(--pc-text-10); line-height: var(--pc-line-10); font-weight: var(--pc-weight-bold); }
+.pc-sidebar-mark { display: grid; place-items: center; width: var(--pc-size-20); height: var(--pc-size-20); flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--foreground); color: var(--background); font-size: var(--pc-text-10); line-height: var(--pc-line-14); font-weight: var(--pc-weight-bold); }
 .pc-sidebar-item > .pc-kbd { margin-left: auto; }
 /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
 .pc-sidebar-footer { position: sticky; bottom: calc(-1 * var(--pc-space-2-5)); z-index: var(--pc-layer-raised); display: flex; flex-direction: column; gap: var(--pc-space-0-5); margin: auto calc(-1 * var(--pc-space-2)) calc(-1 * var(--pc-space-2-5)); padding: var(--pc-space-2) var(--pc-space-2) var(--pc-space-2-5); background: var(--sidebar); }
@@ -59,16 +59,16 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
    .pc-avatar-none: nobody (a person icon, muted). .pc-avatar-square: a team, an app or a client. .pc-avatars overlaps several, with a
    .pc-avatar-more "+3"; .pc-avatar-status is the teal online dot; a small badge (.pc-badge.pc-badge-small) inside a 32 or 48px one sits at the bottom right, level with the dot, on a solid fill. Rings take the colour
    behind the avatar from --pc-avatar-ring (the page colour unless a surface sets it). */
-.pc-avatar { position: relative; display: grid; place-items: center; width: var(--pc-size-24); height: var(--pc-size-24); flex-shrink: 0; padding: 0; border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-full); background: var(--card); color: var(--foreground); font-family: inherit; font-size: var(--pc-text-10); font-weight: var(--pc-weight-semibold); line-height: var(--pc-line-10); }
+.pc-avatar { position: relative; display: grid; place-items: center; width: var(--pc-size-24); height: var(--pc-size-24); flex-shrink: 0; padding: 0; border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-full); background: var(--card); color: var(--foreground); font-family: inherit; font-size: var(--pc-text-10); font-weight: var(--pc-weight-semibold); line-height: var(--pc-line-14); }
 .pc-card, .pc-dialog, .pc-drawer, .pc-popover, .pc-menu { --pc-avatar-ring: var(--card); }
 .pc-sidebar { --pc-avatar-ring: var(--sidebar); }
-.pc-avatar-medium { width: var(--pc-size-32); height: var(--pc-size-32); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
-.pc-avatar-large { width: var(--pc-size-48); height: var(--pc-size-48); font-size: var(--pc-text-22); line-height: var(--pc-line-22); }
-.pc-avatar > img { position: absolute; inset: calc(-1 * var(--pc-border)); width: calc(100% + 2 * var(--pc-border)); height: calc(100% + 2 * var(--pc-border)); max-width: none; border-radius: inherit; object-fit: cover; outline: var(--pc-border) solid color-mix(in srgb, var(--foreground) var(--pc-mix-edge), transparent); outline-offset: calc(-1 * var(--pc-border)); }
+.pc-avatar-medium { width: var(--pc-size-32); height: var(--pc-size-32); font-size: var(--pc-text-14); line-height: var(--pc-line-20); }
+.pc-avatar-large { width: var(--pc-size-48); height: var(--pc-size-48); font-size: var(--pc-text-22); line-height: var(--pc-line-28); }
+.pc-avatar > img { position: absolute; inset: calc(-1 * var(--pc-border)); width: calc(100% + 2 * var(--pc-border)); height: calc(100% + 2 * var(--pc-border)); max-width: none; border-radius: inherit; object-fit: cover; outline: var(--pc-border) solid color-mix(in srgb, var(--foreground) var(--pc-opacity-12), transparent); outline-offset: calc(-1 * var(--pc-border)); }
 .pc-avatar > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
 .pc-avatar-large > svg { width: var(--pc-size-24); height: var(--pc-size-24); }
 .pc-avatar-none, .pc-avatar-more { border-color: transparent; background: var(--muted); color: var(--muted-foreground); }
-.pc-avatar-medium.pc-avatar-more { font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-avatar-medium.pc-avatar-more { font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-avatar-square { border-radius: var(--pc-radius-sm); }
 .pc-avatar-medium.pc-avatar-square { border-radius: var(--pc-radius); }
 .pc-avatar-large.pc-avatar-square { border-radius: var(--pc-radius-lg); }
@@ -77,15 +77,14 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .pc-avatars > .pc-avatar + .pc-avatar { margin-left: calc(-1 * var(--pc-space-1)); }
 .pc-avatars > .pc-avatar-medium + .pc-avatar-medium { margin-left: calc(-1 * var(--pc-space-1-5)); }
 .pc-avatar-status { position: absolute; right: calc(-1 * var(--pc-border)); bottom: calc(-1 * var(--pc-border)); width: var(--pc-dot-8); height: var(--pc-dot-8); border-radius: var(--pc-radius-full); background: var(--primary); box-shadow: 0 0 0 var(--pc-border-2) var(--pc-avatar-ring, var(--background)); }
-.pc-avatar-medium > .pc-avatar-status { width: var(--pc-dot-10); height: var(--pc-dot-10); }
 .pc-avatar-large > .pc-avatar-status { right: var(--pc-border); bottom: var(--pc-border); width: var(--pc-dot-12); height: var(--pc-dot-12); }
 .pc-avatar > .pc-badge { position: absolute; right: calc(-1 * var(--pc-space-1-5)); bottom: calc(-1 * var(--pc-space-1)); outline: var(--pc-border-2) solid var(--pc-avatar-ring, var(--background)); }
 .pc-avatar-large > .pc-badge { bottom: calc(-1 * var(--pc-border)); }
 .pc-avatar > .pc-badge-outline { background: var(--pc-avatar-ring, var(--background)); }
-.pc-avatar > .pc-badge-soft { background: color-mix(in srgb, var(--primary) var(--pc-mix-tint), var(--pc-avatar-ring, var(--background))); }
+.pc-avatar > .pc-badge-soft { background: color-mix(in srgb, var(--primary) var(--pc-opacity-12), var(--pc-avatar-ring, var(--background))); }
 button.pc-avatar { cursor: pointer; }
 button.pc-avatar:hover { box-shadow: 0 0 0 var(--pc-border-2) var(--input); }
-button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 
 /* Buttons */
 .pc-btn {
@@ -95,7 +94,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
   font: inherit; font-weight: var(--pc-weight-semibold); white-space: nowrap; text-decoration: none; cursor: pointer;
 }
 .pc-btn > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
-.pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn[aria-pressed="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn[aria-pressed="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
 .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
 .pc-btn-ghost { background: transparent; color: var(--foreground); }
@@ -107,28 +106,28 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-btn-primary.pc-btn-destructive { background: var(--destructive); border-color: var(--destructive); color: var(--destructive-foreground); }
 /* Sizes around the row (pc-row-sm, pc-row-lg), and full width. */
 .pc-btn-small { height: var(--pc-row-sm); padding: 0 var(--pc-space-2-5); }
-.pc-btn-large { height: var(--pc-row-lg); padding: 0 var(--pc-space-4); font-size: var(--pc-text-16); line-height: var(--pc-line-16); }
+.pc-btn-large { height: var(--pc-row-lg); padding: 0 var(--pc-space-4); font-size: var(--pc-text-16); line-height: var(--pc-line-24); }
 .pc-btn-full { width: 100%; }
 
 /* Forms */
 .pc-field { display: grid; gap: var(--pc-space-1-5); }
-.pc-label { font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
+.pc-label { font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
 /* An optional field says so after its label: <span class="pc-label-optional">(optional)</span>. Required fields have no mark. */
 .pc-label-optional { color: var(--muted-foreground); font-weight: var(--pc-weight-regular); }
 /* Fieldset: <fieldset class="pc-fieldset"> with a <legend class="pc-legend"> (it looks like .pc-label) over .pc-fieldset-options,
    the radios or checkboxes that belong together. No line, no box: the group reads as one more field. */
 .pc-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
-.pc-legend { margin-bottom: var(--pc-space-1-5); padding: 0; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
+.pc-legend { margin-bottom: var(--pc-space-1-5); padding: 0; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
 .pc-fieldset-options { display: grid; gap: var(--pc-space-2-5); }
 /* Two or three short choices side by side. */
 .pc-fieldset-options-row { display: flex; flex-wrap: wrap; gap: var(--pc-space-2-5) var(--pc-space-6); }
 /* Choices that each have a description sit in boxes: a thin border, the chosen one teal; the whole box picks it. */
 .pc-fieldset-boxes { gap: var(--pc-space-2); }
 .pc-fieldset-boxes > .pc-field { position: relative; padding: var(--pc-space-2-5) var(--pc-space-3); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius); background: var(--card); }
-.pc-fieldset-boxes > .pc-field:has(:checked) { border-color: var(--primary); background: color-mix(in srgb, var(--primary) var(--pc-mix-tint), var(--card)); }
+.pc-fieldset-boxes > .pc-field:has(:checked) { border-color: var(--primary); background: color-mix(in srgb, var(--primary) var(--pc-opacity-12), var(--card)); }
 .pc-fieldset-boxes > .pc-field > .pc-check { display: flex; }
 .pc-fieldset-boxes > .pc-field > .pc-check::after { content: ""; position: absolute; inset: 0; }
-.pc-fieldset-boxes > .pc-field:has(input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-fieldset-boxes > .pc-field:has(input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-fieldset-boxes > .pc-field > .pc-check:has(> input:disabled) { opacity: 1; }
 .pc-fieldset-options + .pc-field-error { margin-top: var(--pc-space-1-5); }
 .pc-input {
@@ -137,7 +136,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
   background: var(--card); color: var(--foreground); font: inherit;
 }
 .pc-input::placeholder { color: var(--muted-foreground); }
-.pc-input:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-input:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-checkbox {
   appearance: none; display: grid; place-content: center;
   width: var(--pc-size-16); height: var(--pc-size-16); margin: 0; flex-shrink: 0;
@@ -146,7 +145,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 }
 .pc-checkbox:checked { background: var(--primary); border-color: var(--primary); }
 .pc-checkbox:checked::after { content: ""; width: var(--pc-dot-8); height: var(--pc-bar-4); border-left: var(--pc-border-2) solid var(--primary-foreground); border-bottom: var(--pc-border-2) solid var(--primary-foreground); transform: translateY(calc(-1 * var(--pc-border))) rotate(-45deg); }
-.pc-checkbox:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-checkbox:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 /* Half: a "pick all" box over a group when only some are ticked (set el.indeterminate = true in script; [aria-checked="mixed"]
    works too). A teal fill with a dash in primary-foreground. An error (aria-invalid="true") turns the border red. */
 .pc-checkbox:indeterminate, .pc-checkbox[aria-checked="mixed"] { background: var(--primary); border-color: var(--primary); }
@@ -156,14 +155,14 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 /* Cards, badges, tables */
 .pc-card { display: flex; flex-direction: column; background: var(--card); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
 .pc-card-header { display: grid; gap: var(--pc-space-0-5); padding: var(--pc-space-4) var(--pc-space-4) 0; }
-.pc-card-title, .pc-section-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
-.pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-card-title, .pc-section-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
+.pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-card-content { display: grid; flex: 1; gap: var(--pc-space-3); padding: var(--pc-space-4); }
 /* A header with nothing under it keeps 16px below; an action (.pc-card-action: a small button, a ⋯, a switch) sits on the right,
    centred on the title's line; the description then runs under both. */
 .pc-card-header:last-child { padding-bottom: var(--pc-space-4); }
 .pc-card-header:has(> .pc-card-action) { grid-template-columns: 1fr auto; column-gap: var(--pc-space-3); }
-.pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: var(--pc-line-16); }
+.pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: var(--pc-line-24); }
 .pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1 / -1; }
 /* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
 .pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) var(--pc-space-1-5); }
@@ -176,13 +175,13 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-card-link { color: inherit; text-decoration: none; }
 .pc-card-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--pc-radius-lg); }
 .pc-card-link:focus-visible { outline: none; }
-.pc-card:has(.pc-card-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
-.pc-badge { display: inline-flex; align-items: center; height: var(--pc-size-20); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
+.pc-card:has(.pc-card-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-badge { display: inline-flex; align-items: center; height: var(--pc-size-20); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
 .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 var(--pc-border) var(--primary); }
 /* Rows are rounded pills 2px apart, no lines between them: every second row in the page colour, the one under the
    pointer in accent. The fills sit on the cells, rounded at the row's two ends. */
 .pc-table { width: 100%; border-collapse: separate; border-spacing: 0 var(--pc-space-0-5); }
-.pc-table th { height: var(--pc-row); padding: 0 var(--pc-space-3); border-bottom: var(--pc-border) solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); text-align: left; }
+.pc-table th { height: var(--pc-row); padding: 0 var(--pc-space-3); border-bottom: var(--pc-border) solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); text-align: left; }
 .pc-table td { height: var(--pc-row); padding: var(--pc-space-1) var(--pc-space-3); }
 .pc-table tbody td:first-child { border-radius: var(--pc-radius) 0 0 var(--pc-radius); }
 .pc-table tbody td:last-child { border-radius: 0 var(--pc-radius) var(--pc-radius) 0; }
@@ -207,22 +206,22 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-textarea {
   width: 100%; min-height: calc(3lh + 2 * var(--pc-space-2) + 2 * var(--pc-border)); max-height: calc(10lh + 2 * var(--pc-space-2) + 2 * var(--pc-border)); padding: var(--pc-space-2) var(--pc-space-2-5);
   border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius);
-  background: var(--card); color: var(--foreground); font: inherit; line-height: var(--pc-line-14); resize: none; field-sizing: content;
+  background: var(--card); color: var(--foreground); font: inherit; line-height: var(--pc-line-20); resize: none; field-sizing: content;
 }
 @supports not (field-sizing: content) { .pc-textarea { resize: vertical; } }
 .pc-textarea::placeholder { color: var(--muted-foreground); }
-.pc-textarea:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
-.pc-input:disabled, .pc-textarea:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-textarea:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-input:disabled, .pc-textarea:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-input[aria-invalid="true"], .pc-textarea[aria-invalid="true"] { border-color: var(--destructive); }
 /* Read-only: a value you can select and copy but not change: the muted fill, no border. */
 .pc-input[readonly] { border-color: transparent; background: var(--muted); }
 /* A machine value in a field (a secret, a key): the monospace at 12px. */
-.pc-input-mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-input-mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 /* What the browser fills in keeps our colours instead of its yellow or blue. */
 .pc-input:is(:-webkit-autofill, :autofill) { -webkit-text-fill-color: var(--foreground); box-shadow: 0 0 0 100px var(--card) inset; caret-color: var(--foreground); }
 .pc-input:is(:-webkit-autofill, :autofill):focus-visible { box-shadow: 0 0 0 100px var(--card) inset, var(--pc-focus); }
-.pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-.pc-field-error { margin: 0; color: var(--destructive); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-medium); }
+.pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
+.pc-field-error { margin: 0; color: var(--destructive); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-medium); }
 .pc-check { display: inline-flex; align-items: center; gap: var(--pc-space-2-5); cursor: pointer; }
 /* With its words in a <span>, the box stays beside their first line when they wrap. */
 .pc-check:has(> span) { align-items: flex-start; }
@@ -231,14 +230,14 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-field:has(> .pc-check) { gap: var(--pc-space-0-5); }
 .pc-check + .pc-field-hint, .pc-check + .pc-field-error { padding-left: calc(var(--pc-size-16) + var(--pc-space-2-5)); }
 .pc-check:has(> .pc-switch) + :is(.pc-field-hint, .pc-field-error) { padding-left: calc(2 * var(--pc-size-16) + var(--pc-space-1) + var(--pc-space-2-5)); }
-.pc-checkbox:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-checkbox:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 /* A checkbox, radio or switch that can't be used fades with its words (the box itself only once). */
-.pc-check:has(> input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-check:has(> input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-check > input:disabled { opacity: 1; }
 
-.pc-link { margin: 0 calc(-1 * var(--pc-space-0-5)); padding: 0 var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--foreground); font-weight: var(--pc-weight-medium); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-decoration-color: color-mix(in srgb, var(--muted-foreground) var(--pc-mix-line), transparent); text-underline-offset: var(--pc-underline-offset); }
+.pc-link { margin: 0 calc(-1 * var(--pc-space-0-5)); padding: 0 var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--foreground); font-weight: var(--pc-weight-medium); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-decoration-color: color-mix(in srgb, var(--muted-foreground) var(--pc-opacity-50), transparent); text-underline-offset: var(--pc-underline-offset); }
 .pc-link:hover { text-decoration-color: var(--foreground); }
-.pc-link:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-radius: var(--pc-radius-xs); }
+.pc-link:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-radius: var(--pc-radius-xs); }
 button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; font: inherit; font-weight: var(--pc-weight-medium); cursor: pointer; }
 .pc-link > svg { display: inline-block; width: var(--pc-size-16); height: var(--pc-size-16); vertical-align: calc(-1 * var(--pc-space-0-5)); }
 .pc-link > svg { margin-left: var(--pc-space-1); }
@@ -248,17 +247,17 @@ button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; fo
    text colour and an underline, as a link's. Their place says they're links. */
 .pc-link-quiet { margin: 0 calc(-1 * var(--pc-space-0-5)); padding: 0 var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
 .pc-link-quiet:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
-.pc-link-quiet:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-link-quiet:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 
 .pc-badge-outline { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 var(--pc-border) var(--input); }
 .pc-badge-destructive { background: var(--destructive-soft); color: var(--destructive); }
 .pc-badge-warning { background: var(--warning-soft); color: var(--warning); }
 /* Soft: a light teal tint over whatever is behind it (the sidebar or a card), so the pill always shows; the deeper teal keeps the text readable. */
-.pc-badge-soft { background: color-mix(in srgb, var(--primary) var(--pc-mix-tint), transparent); color: var(--primary-hover); }
+.pc-badge-soft { background: color-mix(in srgb, var(--primary) var(--pc-opacity-12), transparent); color: var(--primary-hover); }
 /* A small badge: 16px tall with 10px words, for tight spots such as on an avatar. */
-.pc-badge-small { height: var(--pc-size-16); padding: 0 var(--pc-space-1); font-size: var(--pc-text-10); line-height: var(--pc-line-10); }
+.pc-badge-small { height: var(--pc-size-16); padding: 0 var(--pc-space-1); font-size: var(--pc-text-10); line-height: var(--pc-line-14); }
 
-.pc-alert { display: flex; align-items: flex-start; gap: var(--pc-space-2-5); margin: 0; padding: var(--pc-space-2-5) var(--pc-space-3); border-radius: var(--pc-radius); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
+.pc-alert { display: flex; align-items: flex-start; gap: var(--pc-space-2-5); margin: 0; padding: var(--pc-space-2-5) var(--pc-space-3); border-radius: var(--pc-radius); font-size: var(--pc-text-14); line-height: var(--pc-line-20); }
 .pc-alert > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; margin-top: var(--pc-space-0-5); }
 .pc-alert-notice { background: var(--primary-soft); color: var(--foreground); }
 .pc-alert-notice > svg { color: var(--primary); }
@@ -266,13 +265,13 @@ button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; fo
 .pc-alert-warning { background: var(--warning-soft); color: var(--warning); }
 
 .pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
-.pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-table tbody tr:hover td { background: var(--accent); }
 .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
 .pc-row-link { color: inherit; font-weight: var(--pc-weight-semibold); text-decoration: none; }
 .pc-row-link::after { content: ""; position: absolute; inset: 0; }
 .pc-row-link:focus-visible { outline: none; }
-.pc-table tr:has(.pc-row-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); }
+.pc-table tr:has(.pc-row-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); }
 /* Keyboard focus: the row's pill in accent with a 1px ring line inside its edge, drawn cell by cell so it follows the rounded ends. */
 .pc-table tr:has(.pc-row-link:focus-visible) td { background: var(--accent); }
 .pc-row-link:focus-visible::after { box-shadow: var(--pc-focus-inset); }
@@ -289,7 +288,7 @@ button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; fo
 .pc-table-sort { display: inline-flex; align-items: center; gap: var(--pc-space-1); padding: 0; border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; cursor: pointer; }
 .pc-table-sort > svg { width: var(--pc-size-12); height: var(--pc-size-12); }
 .pc-table th[aria-sort] .pc-table-sort { color: var(--foreground); }
-.pc-table-sort:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-table-sort:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 .pc-empty { display: grid; justify-items: center; gap: var(--pc-space-1); padding: var(--pc-space-6) var(--pc-space-4); text-align: center; color: var(--muted-foreground); }
 .pc-empty-title { margin: 0; color: var(--foreground); font-weight: var(--pc-weight-semibold); }
 .pc-empty-description { margin: 0; }
@@ -301,22 +300,22 @@ button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; fo
 .pc-file { display: flex; align-items: center; gap: var(--pc-space-2-5); min-width: 0; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
 .pc-file > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; color: var(--muted-foreground); }
 .pc-file-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-file-size { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); white-space: nowrap; }
+.pc-file-size { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); white-space: nowrap; }
 .pc-file > .pc-file-action { display: none; }
 a.pc-file:hover { background: var(--accent); }
-a.pc-file:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+a.pc-file:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 a.pc-file:is(:hover, :focus-visible) > .pc-file-size { display: none; }
 a.pc-file:is(:hover, :focus-visible) > .pc-file-action { display: block; }
 div.pc-file { padding-right: 0; }
 
-/* Image: <img class="pc-image"> with our 10px corners and a hairline inside its edge (the text colour at 10%), so a white picture keeps its
+/* Image: <img class="pc-image"> with our 10px corners and a hairline inside its edge (the text colour at 12%), so a white picture keeps its
    shape on a white card. While it loads, or if it can't, a .pc-image.pc-image-empty box in the muted fill with an image icon.
    <figure class="pc-figure"> adds a caption under it. */
-.pc-image { display: block; max-width: 100%; object-fit: cover; border-radius: var(--pc-radius); outline: var(--pc-border) solid color-mix(in srgb, var(--foreground) var(--pc-mix-edge), transparent); outline-offset: calc(-1 * var(--pc-border)); }
+.pc-image { display: block; max-width: 100%; object-fit: cover; border-radius: var(--pc-radius); outline: var(--pc-border) solid color-mix(in srgb, var(--foreground) var(--pc-opacity-12), transparent); outline-offset: calc(-1 * var(--pc-border)); }
 .pc-image-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
 .pc-image-empty > svg { width: var(--pc-size-20); height: var(--pc-size-20); }
 .pc-figure { display: grid; gap: var(--pc-space-1-5); margin: 0; }
-.pc-figure > figcaption { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-figure > figcaption { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 
 /* Pagination: <nav class="pc-pagination" aria-label="Pages"> of ghost buttons: Previous and Next (with words, or arrows alone where room is
    short), the page numbers (.pc-pagination-page; the current one has aria-current="page" and an outline button's border), and
@@ -330,11 +329,11 @@ div.pc-file { padding-right: 0; }
 .pc-pagination-page[aria-current="page"] { border-color: var(--input); background: var(--card); font-weight: var(--pc-weight-semibold); }
 .pc-pagination-gap { display: inline-grid; place-items: center; width: var(--pc-size-24); color: var(--muted-foreground); }
 .pc-pagination-where { padding: 0 var(--pc-space-2); font-variant-numeric: tabular-nums; }
-.pc-pagination-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
+.pc-pagination-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
 .pc-pagination-bar { display: flex; flex: 1; align-items: center; gap: var(--pc-space-3); min-width: 0; }
 .pc-pagination-bar > :first-child { margin-right: auto; }
-.pc-pagination-size { display: flex; align-items: center; gap: var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-.pc-pagination-size > .pc-picker-button { width: calc(var(--pc-size-48) + var(--pc-space-6)); color: var(--foreground); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
+.pc-pagination-size { display: flex; align-items: center; gap: var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
+.pc-pagination-size > .pc-picker-button { width: calc(var(--pc-size-48) + var(--pc-space-6)); color: var(--foreground); font-size: var(--pc-text-14); line-height: var(--pc-line-20); }
 .pc-pagination-more { display: flex; align-items: center; gap: var(--pc-space-3); }
 
 /* Progress bar: <div class="pc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"> holding a
@@ -347,14 +346,14 @@ div.pc-file { padding-right: 0; }
 .pc-progress-error > .pc-progress-fill { background: var(--destructive); }
 .pc-progress-small { height: var(--pc-bar-4); }
 .pc-progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--pc-space-3); }
-.pc-progress-value { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
+.pc-progress-value { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
 
 /* Progress indicator: <ol class="pc-steps"> of <li class="pc-step">, each a 4px bar over its .pc-step-label. Done steps
    (data-state="done") and the current one (aria-current="step", its label bold) are teal; the rest the track colour; data-state="error" is red,
    with a ! before its label. .pc-steps-compact (phones): the step's name and "Step 2 of 4" over the bars, labels hidden.
    .pc-steps-vertical: down the page, the bar beside each label. */
 .pc-steps { display: flex; gap: var(--pc-space-1-5); margin: 0; padding: 0; list-style: none; }
-.pc-step { display: flex; flex: 1; flex-direction: column; gap: var(--pc-space-2); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-step { display: flex; flex: 1; flex-direction: column; gap: var(--pc-space-2); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-step::before { content: ""; flex-shrink: 0; height: var(--pc-bar-4); border-radius: var(--pc-radius-full); background: var(--track); }
 .pc-step[data-state="done"], .pc-step[aria-current="step"], .pc-step[data-state="error"] { color: var(--foreground); }
 .pc-step[data-state="done"]::before, .pc-step[aria-current="step"]::before { background: var(--primary); }
@@ -365,11 +364,11 @@ div.pc-file { padding-right: 0; }
 .pc-steps-compact { display: grid; gap: var(--pc-space-2); }
 .pc-steps-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--pc-space-3); }
 .pc-steps-now { font-weight: var(--pc-weight-semibold); }
-.pc-steps-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
+.pc-steps-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
 .pc-steps-compact .pc-step { gap: 0; }
 .pc-steps-compact .pc-step-label { position: absolute; width: var(--pc-border); height: var(--pc-border); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .pc-steps-vertical { flex-direction: column; gap: var(--pc-space-2-5); }
-.pc-steps-vertical > .pc-step { flex-direction: row; align-items: center; gap: var(--pc-space-2-5); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
+.pc-steps-vertical > .pc-step { flex-direction: row; align-items: center; gap: var(--pc-space-2-5); font-size: var(--pc-text-14); line-height: var(--pc-line-20); }
 .pc-steps-vertical > .pc-step::before { width: var(--pc-bar-4); height: var(--pc-size-20); }
 
 /* Quote: <figure class="pc-quote"> with a <blockquote> (a 2px line down its start, the words in the text colour) and an optional
@@ -379,10 +378,10 @@ div.pc-file { padding-right: 0; }
 .pc-quote { display: grid; gap: var(--pc-space-2); margin: 0; }
 .pc-quote > blockquote { margin: 0; padding-left: var(--pc-space-3); border-left: var(--pc-border-2) solid var(--input); }
 .pc-quote > blockquote > p { margin: 0; }
-.pc-quote > figcaption { display: flex; align-items: center; gap: var(--pc-space-2); padding-left: calc(var(--pc-border-2) + var(--pc-space-3)); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-quote > figcaption { display: flex; align-items: center; gap: var(--pc-space-2); padding-left: calc(var(--pc-border-2) + var(--pc-space-3)); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-quote-name { color: var(--foreground); font-weight: var(--pc-weight-semibold); }
-.pc-quote-pull > blockquote { font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
-.pc-quote-small > blockquote { padding-left: var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-quote-pull > blockquote { font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
+.pc-quote-small > blockquote { padding-left: var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 
 /* Rating: teal stars; empty ones are outlines in the field-border colour. Each .pc-rating-star holds the outline, then the filled star,
    cut to --fill (0–100%). To show one: .pc-rating with .pc-rating-stars (role="img", aria-label "4.2 out of 5"), the number
@@ -396,17 +395,17 @@ div.pc-file { padding-right: 0; }
 .pc-rating-star > svg:first-of-type { color: var(--input); }
 .pc-rating-star > svg:last-of-type { color: var(--primary); clip-path: inset(0 calc(100% - var(--fill)) 0 0); }
 .pc-rating-value { font-weight: var(--pc-weight-semibold); font-variant-numeric: tabular-nums; }
-.pc-rating-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-.pc-rating-compact { gap: var(--pc-space-1); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-rating-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
+.pc-rating-compact { gap: var(--pc-space-1); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-rating-input > .pc-rating-star { --fill: 0%; width: var(--pc-row-sm); height: var(--pc-row-sm); border-radius: var(--pc-radius-sm); cursor: pointer; }
 .pc-rating-input > .pc-rating-star > svg { width: var(--pc-size-20); height: var(--pc-size-20); }
 .pc-rating-input > .pc-rating-star > input { position: absolute; width: var(--pc-border); height: var(--pc-border); margin: 0; opacity: 0; pointer-events: none; }
 .pc-rating-input > .pc-rating-star:is(:has(input:checked), :has(~ .pc-rating-star input:checked)) { --fill: 100%; }
 .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)) { --fill: 100%; }
-.pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: var(--pc-opacity-disabled); }
-.pc-rating-input > .pc-rating-star:has(input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: var(--pc-opacity-50); }
+.pc-rating-input > .pc-rating-star:has(input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 /* Can't be used: half strength, the not-allowed pointer, no stars filling under it. */
-.pc-rating-input:has(input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-rating-input:has(input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-rating-input:has(input:disabled) > .pc-rating-star { pointer-events: none; }
 
 /* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 24px in, 4px apart.
@@ -428,16 +427,16 @@ ol.pc-list { list-style: decimal; }
    <input type="file"> inside it, out of sight; the label opens the device's file picker. The chosen files show under it as File rows. */
 .pc-file-upload { position: relative; justify-self: start; }
 .pc-file-upload > input[type="file"] { position: absolute; width: var(--pc-border); height: var(--pc-border); opacity: 0; pointer-events: none; }
-.pc-file-upload:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-file-upload:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-file-upload:has(> input:disabled) { background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed; }
 
-.pc-menu { display: flex; flex-direction: column; gap: var(--pc-space-1); min-width: var(--pc-width-240); padding: var(--pc-space-1); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+.pc-menu { display: flex; flex-direction: column; gap: var(--pc-space-1); min-width: var(--pc-width-256); padding: var(--pc-space-1); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-menu[hidden] { display: none; }
-.pc-menu-label { padding: var(--pc-space-1-5) var(--pc-space-2-5); overflow: hidden; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); text-overflow: ellipsis; white-space: nowrap; }
+.pc-menu-label { padding: var(--pc-space-1-5) var(--pc-space-2-5); overflow: hidden; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); text-overflow: ellipsis; white-space: nowrap; }
 .pc-menu-item { display: flex; align-items: center; gap: var(--pc-space-2-5); width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
 .pc-menu-item > svg { width: var(--pc-size-16); height: var(--pc-size-16); color: var(--muted-foreground); }
 .pc-menu-item:hover { background: var(--accent); }
-.pc-menu-item:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-menu-item:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
 .pc-menu-separator { height: var(--pc-border); margin: var(--pc-space-1) calc(-1 * var(--pc-space-1)); background: var(--border); }
 
@@ -448,7 +447,7 @@ ol.pc-list { list-style: decimal; }
 .pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; overflow-y: auto; }
 .pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
 .pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
-.pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
+.pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
 .pc-dialog-description { margin: var(--pc-space-1) 0 0; color: var(--muted-foreground); }
 /* The actions sit under a line from edge to edge, as in a Card's footer and the Drawer's. */
 .pc-dialog-actions { display: flex; justify-content: flex-end; gap: var(--pc-space-2); margin: 0 calc(-1 * var(--pc-space-4)) calc(-1 * var(--pc-space-4)); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
@@ -469,8 +468,8 @@ ol.pc-list { list-style: decimal; }
 .pc-modal:focus { outline: none; }
 .pc-modal-frame { display: flex; }
 .pc-modal-frame > .pc-sheet-backdrop { display: none; }
-.pc-modal-nav { width: var(--pc-width-240); }
-.pc-modal-nav-user { display: flex; align-items: center; gap: var(--pc-space-2-5); min-height: var(--pc-row); padding: 0 var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-modal-nav { width: var(--pc-width-256); }
+.pc-modal-nav-user { display: flex; align-items: center; gap: var(--pc-space-2-5); min-height: var(--pc-row); padding: 0 var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-modal-nav-user > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-modal-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .pc-modal-head { display: flex; align-items: center; gap: var(--pc-space-1-5); padding: var(--pc-space-4) var(--pc-space-4) var(--pc-space-4) var(--pc-space-6); }
@@ -502,7 +501,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-drawer:focus { outline: none; }
 .pc-drawer-beside { flex: 0 0 var(--pc-width-400); border-left: var(--pc-border) solid var(--border); }
 .pc-drawer-head { display: flex; align-items: center; gap: var(--pc-space-1-5); padding: var(--pc-space-3) var(--pc-space-2-5) var(--pc-space-3) var(--pc-space-4); }
-.pc-drawer-title { flex: 1; min-width: 0; margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
+.pc-drawer-title { flex: 1; min-width: 0; margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
 .pc-drawer-back { display: none; margin-left: calc((var(--pc-size-16) - var(--pc-row)) / 2); }
 .pc-drawer-body { display: grid; align-content: start; gap: var(--pc-space-3); flex: 1; min-height: 0; padding: var(--pc-space-1) var(--pc-space-4) var(--pc-space-4); overflow-y: auto; }
 .pc-drawer-footer { display: flex; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
@@ -517,8 +516,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 [data-pc-tooltip] { position: relative; }
 [data-pc-tooltip]::after {
   content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + var(--pc-space-2)); left: 50%; z-index: var(--pc-layer-tooltip);
-  width: max-content; max-width: var(--pc-width-240); padding: var(--pc-space-1-5) var(--pc-space-2); border-radius: var(--pc-radius); white-space: normal;
-  background: var(--foreground); color: var(--background); font-size: var(--pc-text-12); font-weight: var(--pc-weight-medium); line-height: var(--pc-line-12);
+  width: max-content; max-width: var(--pc-width-256); padding: var(--pc-space-1-5) var(--pc-space-2); border-radius: var(--pc-radius); white-space: normal;
+  background: var(--foreground); color: var(--background); font-size: var(--pc-text-12); font-weight: var(--pc-weight-medium); line-height: var(--pc-line-16);
   box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
 }
 /* It shows under the pointer and on keyboard focus (a short wait under the pointer comes back with motion). */
@@ -532,8 +531,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 [data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; }
 
 /* The sidebar head: the app's logo (optional). */
-.pc-app-logo { display: inline-flex; align-items: center; gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
-.pc-app-logo-mark { display: grid; place-items: center; flex-shrink: 0; width: var(--pc-size-24); height: var(--pc-size-24); border-radius: var(--pc-radius-sm); background: var(--primary); color: var(--primary-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-bold); }
+.pc-app-logo { display: inline-flex; align-items: center; gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
+.pc-app-logo-mark { display: grid; place-items: center; flex-shrink: 0; width: var(--pc-size-24); height: var(--pc-size-24); border-radius: var(--pc-radius-sm); background: var(--primary); color: var(--primary-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-bold); }
 .pc-sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--pc-space-1-5); min-height: var(--pc-row); padding: 0 0 0 var(--pc-space-2); margin-bottom: var(--pc-space-4); }
 /* The sidebar toggle lives in the page's title row, left of the title; its icon lines up with the page's left edge. */
 .pc-page-title-row { display: flex; align-items: center; gap: var(--pc-space-1-5); min-width: 0; }
@@ -551,8 +550,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-page-header-actions { display: flex; align-items: center; gap: var(--pc-space-2); }
 
 
-.pc-code { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--muted); box-shadow: inset 0 0 0 var(--pc-border) var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-.pc-kbd { margin: 0 var(--pc-space-0-5); display: inline-grid; place-items: center; min-width: var(--pc-size-20); height: var(--pc-size-20); padding: 0 var(--pc-space-1-5); border: var(--pc-border) solid color-mix(in srgb, var(--muted-foreground) var(--pc-mix-line), transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-code { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--muted); box-shadow: inset 0 0 0 var(--pc-border) var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
+.pc-kbd { margin: 0 var(--pc-space-0-5); display: inline-grid; place-items: center; min-width: var(--pc-size-20); height: var(--pc-size-20); padding: 0 var(--pc-space-1-5); border: var(--pc-border) solid color-mix(in srgb, var(--muted-foreground) var(--pc-opacity-50), transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 
 /* Fields with an icon, selects, radios, colour swatches, chips */
 .pc-input-group { position: relative; display: flex; align-items: center; }
@@ -576,9 +575,9 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-input-addon:last-child { padding-right: var(--pc-space-2-5); }
 .pc-input-addon + .pc-input { padding-left: var(--pc-space-0-5); }
 .pc-input:has(+ .pc-input-addon) { padding-right: var(--pc-space-0-5); }
-.pc-input-group:has(> .pc-input-addon):focus-within { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-input-group:has(> .pc-input-addon):focus-within { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-input-group:has(> .pc-input-addon):has(> .pc-input[aria-invalid="true"]) { border-color: var(--destructive); }
-.pc-input-group:has(> .pc-input-addon):has(> .pc-input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-input-group:has(> .pc-input-addon):has(> .pc-input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-input-group:has(> .pc-input-addon) > .pc-input:disabled { opacity: 1; }
 /* A field and its button side by side (Invite, Add): 8px apart, each its own shape. */
 .pc-input-row { display: flex; gap: var(--pc-space-2); }
@@ -586,21 +585,21 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-radio { appearance: none; display: grid; place-content: center; width: var(--pc-size-16); height: var(--pc-size-16); margin: 0; flex-shrink: 0; border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); cursor: pointer; }
 .pc-radio:checked { border-color: var(--primary); }
 .pc-radio:checked::after { content: ""; width: var(--pc-dot-8); height: var(--pc-dot-8); border-radius: var(--pc-radius-full); background: var(--primary); }
-.pc-radio:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
-.pc-radio:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-radio:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-radio:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-radio[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
-.pc-chip { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row-sm); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
+.pc-chip { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row-sm); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
 .pc-chip:has(.pc-chip-remove) { padding-right: var(--pc-space-1); }
 .pc-chip > svg { width: var(--pc-size-16); height: var(--pc-size-16); color: var(--muted-foreground); }
 .pc-chip-remove { display: grid; place-items: center; width: calc(var(--pc-row-xs) - var(--pc-space-1)); height: calc(var(--pc-row-xs) - var(--pc-space-1)); padding: 0; border: 0; border-radius: var(--pc-radius-full); background: none; color: var(--muted-foreground); cursor: pointer; }
 .pc-chip-remove > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
 .pc-chip-remove:hover { background: var(--accent); color: var(--foreground); }
-.pc-chip-remove:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
-.pc-chip-remove:disabled, .pc-chip-remove:disabled:hover { background: none; color: var(--muted-foreground); opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-chip-remove:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
+.pc-chip-remove:disabled, .pc-chip-remove:disabled:hover { background: none; color: var(--muted-foreground); opacity: var(--pc-opacity-50); cursor: not-allowed; }
 
 /* Alerts with an action, menus with checks and group labels */
 .pc-alert-action { margin-left: auto; flex-shrink: 0; }
-.pc-alert-action { align-self: center; margin-block: calc((var(--pc-line-14) - var(--pc-row-sm)) / 2); }
+.pc-alert-action { align-self: center; margin-block: calc((var(--pc-line-20) - var(--pc-row-sm)) / 2); }
 /* Longer alerts: a .pc-alert-body with a .pc-alert-title (or a lead line) and the text or a list under it. The first line keeps the kind's
    colour (a notice's title teal); everything after it is in the text colour, easier to read. */
 .pc-alert-body { flex: 1; min-width: 0; display: grid; gap: var(--pc-space-0-5); }
@@ -611,8 +610,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-alert-notice .pc-alert-title { color: var(--primary-hover); }
 .pc-alert-body > :not(:first-child) { color: var(--foreground); }
 /* Dismissible: a ghost x at the end, in the alert's colour. */
-.pc-alert-close.pc-btn-icon { width: var(--pc-row-sm); height: var(--pc-row-sm); margin: calc((var(--pc-line-14) - var(--pc-row-sm)) / 2) calc(-1 * var(--pc-space-2)) calc((var(--pc-line-14) - var(--pc-row-sm)) / 2) auto; color: inherit; }
-.pc-alert-close.pc-btn-icon:hover { background: color-mix(in srgb, currentColor var(--pc-mix-edge), transparent); color: inherit; }
+.pc-alert-close.pc-btn-icon { width: var(--pc-row-sm); height: var(--pc-row-sm); margin: calc((var(--pc-line-20) - var(--pc-row-sm)) / 2) calc(-1 * var(--pc-space-2)) calc((var(--pc-line-20) - var(--pc-row-sm)) / 2) auto; color: inherit; }
+.pc-alert-close.pc-btn-icon:hover { background: color-mix(in srgb, currentColor var(--pc-opacity-12), transparent); color: inherit; }
 .pc-alert-action ~ .pc-alert-close.pc-btn-icon { margin-left: 0; }
 .pc-alert:has(> .pc-alert-close) { padding-right: var(--pc-space-2-5); }
 /* A banner across the top of a page: no corners, edge to edge, one line. */
@@ -621,7 +620,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-menu-check { margin-left: auto; color: var(--primary); }
 .pc-menu-end { margin-left: auto; color: var(--muted-foreground); }
 .pc-menu-item > .pc-menu-check { width: var(--pc-size-16); height: var(--pc-size-16); color: var(--primary); }
-.pc-menu-item:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-menu-item:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 
 /* Popover and calendar */
 .pc-popover { display: grid; gap: var(--pc-space-2-5); padding: var(--pc-space-4); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
@@ -641,25 +640,25 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-popover-text { margin: 0; color: var(--muted-foreground); }
 .pc-popover-backdrop { display: none; }
 @media (max-width: 47.99rem) {
-  .pc-popover-anchor > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-overlay); width: auto; max-width: none; max-height: var(--pc-height-sheet); overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-popover-anchor > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-sheet); width: auto; max-width: none; max-height: var(--pc-height-sheet); overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-popover-close { display: inline-flex; }
-  .pc-popover-backdrop:has(+ .pc-popover:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-backdrop); background: var(--overlay); }
+  .pc-popover-backdrop:has(+ .pc-popover:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-sheet); background: var(--overlay); }
   html:has(.pc-popover-anchor > .pc-popover:not([hidden])) { overflow: hidden; }
 }
 .pc-calendar { display: grid; gap: var(--pc-space-1-5); }
 .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--pc-space-2); font-weight: var(--pc-weight-semibold); }
 .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, var(--pc-row)); gap: var(--pc-space-1); }
-.pc-calendar-weekday { display: grid; place-items: center; height: var(--pc-size-24); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
+.pc-calendar-weekday { display: grid; place-items: center; height: var(--pc-size-24); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
 .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
 .pc-calendar-day:hover { background: var(--accent); }
-.pc-calendar-day:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-calendar-day:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-calendar-day[aria-current="date"] { color: var(--primary); font-weight: var(--pc-weight-bold); }
 .pc-calendar-day[aria-current="date"]:not([aria-selected="true"]):is(:hover, :focus-visible) { color: var(--primary-hover); }
 .pc-calendar-day[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: var(--pc-weight-semibold); }
 .pc-calendar-day-outside { color: var(--muted-foreground); }
 /* A range: the two ends chosen (aria-selected, teal), the days between (data-range="mid") joined by a soft teal band from end to end,
    round only at the ends and at the week's edges. While picking the end, the day under the pointer is outlined (data-range-preview). */
-.pc-calendar { --pc-range: color-mix(in srgb, var(--primary) var(--pc-mix-tint), var(--card)); }
+.pc-calendar { --pc-range: color-mix(in srgb, var(--primary) var(--pc-opacity-12), var(--card)); }
 .pc-calendar-day[data-range] { border-radius: 0; }
 .pc-calendar-day[data-range="mid"] { background: var(--pc-range); }
 .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range); }
@@ -671,17 +670,17 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-calendar .pc-calendar-day[data-range]:not([aria-selected="true"]):focus-visible { box-shadow: var(--pc-focus-inset); }
 .pc-calendar .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)):not([aria-selected="true"]):focus-visible { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range), var(--pc-focus-inset); }
 /* A day that can't be picked: faded, no hover, skipped by the keyboard. */
-.pc-calendar-day[aria-disabled="true"] { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-calendar-day[aria-disabled="true"] { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-calendar-day[aria-disabled="true"]:hover { background: none; }
 /* The month's name is a button that opens the twelve months (.pc-calendar-months); the arrows then change the year. */
 .pc-calendar-title { padding: var(--pc-space-0-5) var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; font-weight: var(--pc-weight-semibold); cursor: pointer; }
 .pc-calendar-title:hover { background: var(--accent); }
-.pc-calendar-title:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-calendar-title:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 /* The twelve months take the day grid's width, so the popover keeps one width in both views. */
 .pc-calendar-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--pc-space-1-5); min-width: calc(7 * var(--pc-row) + 6 * var(--pc-space-1)); }
 .pc-calendar-month { height: var(--pc-row); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; cursor: pointer; }
 .pc-calendar-month:hover { background: var(--accent); }
-.pc-calendar-month:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-calendar-month:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-calendar-month[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: var(--pc-weight-semibold); }
 .pc-calendar-month[aria-selected="true"]:focus-visible { box-shadow: var(--pc-focus-offset); }
 
@@ -699,22 +698,22 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-search-results { display: grid; gap: var(--pc-space-1); max-height: var(--pc-height-list); padding: var(--pc-space-1); overflow: auto; }
 .pc-search-result { display: flex; align-items: center; gap: var(--pc-space-2-5); height: var(--pc-row); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
 .pc-search-result > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; color: var(--muted-foreground); }
-.pc-search-group { display: flex; align-items: baseline; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-2) var(--pc-space-1-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
+.pc-search-group { display: flex; align-items: baseline; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-2) var(--pc-space-1-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
 .pc-search-count { color: var(--muted-foreground); font-weight: var(--pc-weight-regular); font-variant-numeric: tabular-nums; }
 .pc-search-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-search-place { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); min-width: 0; max-width: 45%; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-search-place { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); min-width: 0; max-width: 45%; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-search-place > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; }
 .pc-search-place > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-search-result:hover, .pc-search-result[aria-selected="true"] { background: var(--accent); }
-.pc-search-result:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-search-result:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-search-result[data-done] > .pc-search-title { color: var(--muted-foreground); text-decoration: line-through; }
-.pc-search-footer { display: flex; gap: var(--pc-space-3); padding: var(--pc-space-2) var(--pc-space-3); border-top: var(--pc-border) solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-search-footer { display: flex; gap: var(--pc-space-3); padding: var(--pc-space-2) var(--pc-space-3); border-top: var(--pc-border) solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 /* The search window: the words that match in semibold (<mark class="pc-search-match">), a spinner at the end of the field while it looks,
    recent searches before typing with a .pc-search-group-action (Clear) at the end of their heading. On phones it fills the screen, the field at
    the top with a Cancel (.pc-search-cancel); the keys and the places go. */
 .pc-search-match { background: none; color: inherit; font-weight: var(--pc-weight-semibold); }
 .pc-search-field > .pc-spinner { position: absolute; right: var(--pc-space-4); color: var(--muted-foreground); }
-.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-medium); text-decoration: none; cursor: pointer; }
+.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-medium); text-decoration: none; cursor: pointer; }
 .pc-search-group-action:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
 .pc-search-cancel { display: none; }
 @media (max-width: 47.99rem) {
@@ -723,7 +722,7 @@ dialog.pc-drawer:not([open]) { display: none; }
   .pc-search-cancel { display: inline-flex; flex-shrink: 0; margin-right: var(--pc-space-1-5); color: var(--primary); }
   .pc-search-place, .pc-search-footer { display: none; }
 }
-.pc-code-block { max-height: var(--pc-height-list); margin: 0; padding: var(--pc-space-3) var(--pc-space-4); overflow: auto; border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); white-space: pre; }
+.pc-code-block { max-height: var(--pc-height-list); margin: 0; padding: var(--pc-space-3) var(--pc-space-4); overflow: auto; border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-16); white-space: pre; }
 
 /* Accordion: <details> items in a .pc-accordion; the browser opens and closes them. Rows like a menu's: 32px at least,
    rounded, 2px apart, no lines; the open question semibold, its answer muted and lined up with it. */
@@ -732,22 +731,22 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-accordion-item > summary::-webkit-details-marker { display: none; }
 .pc-accordion-item > summary > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; margin-left: auto; color: var(--muted-foreground); transition: transform var(--pc-motion-fast) var(--pc-motion-ease); }
 .pc-accordion-item > summary:hover { background: var(--accent); }
-.pc-accordion-item > summary:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); background: var(--accent); box-shadow: var(--pc-focus-inset); }
+.pc-accordion-item > summary:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); background: var(--accent); box-shadow: var(--pc-focus-inset); }
 .pc-accordion-item[open] > summary { font-weight: var(--pc-weight-semibold); }
 .pc-accordion-item[open] > summary > svg { transform: rotate(180deg); }
-.pc-accordion-content { padding: var(--pc-space-0-5) var(--pc-space-2-5) var(--pc-space-2-5); color: var(--muted-foreground); line-height: var(--pc-line-14); }
+.pc-accordion-content { padding: var(--pc-space-0-5) var(--pc-space-2-5) var(--pc-space-2-5); color: var(--muted-foreground); line-height: var(--pc-line-20); }
 .pc-accordion-item[aria-disabled="true"] { cursor: not-allowed; }
-.pc-accordion-item[aria-disabled="true"] > summary { opacity: var(--pc-opacity-disabled); pointer-events: none; }
+.pc-accordion-item[aria-disabled="true"] > summary { opacity: var(--pc-opacity-50); pointer-events: none; }
 /* In a card the questions line up with the card's title; the fill reaches past them. */
 .pc-card-content > .pc-accordion { margin: 0 calc(-1 * var(--pc-space-2-5)); }
 
 /* Breadcrumbs: where the page sits, above its title. Parents muted with no underline until the pointer is on them,
    the page you are on in the text colour, a small chevron between. Above a page header with the sidebar toggle it
    lines up with the title, like the page description. */
-.pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: var(--pc-space-1-5); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-medium); }
+.pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: var(--pc-space-1-5); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-medium); }
 .pc-breadcrumbs > a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: var(--pc-radius-xs); }
 .pc-breadcrumbs > a:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
-.pc-breadcrumbs > a:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-breadcrumbs > a:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 .pc-breadcrumbs > [aria-current="page"] { color: var(--foreground); }
 .pc-breadcrumbs > svg { width: var(--pc-size-12); height: var(--pc-size-12); flex-shrink: 0; }
 .pc-breadcrumbs:has(+ .pc-page-header .pc-sidebar-toggle) { padding-left: calc((var(--pc-row) + var(--pc-size-16)) / 2 + var(--pc-space-1-5)); }
@@ -771,9 +770,9 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-segmented-full { display: grid; }
 .pc-segmented > .pc-btn { position: relative; height: var(--pc-row-sm); }
 .pc-segmented > .pc-btn > input { position: absolute; width: var(--pc-border); height: var(--pc-border); margin: 0; opacity: 0; pointer-events: none; }
-.pc-segmented > .pc-btn:hover { background: color-mix(in srgb, var(--sidebar-active) var(--pc-mix-hover), transparent); box-shadow: none; color: var(--foreground); }
+.pc-segmented > .pc-btn:hover { background: color-mix(in srgb, var(--sidebar-active) var(--pc-opacity-50), transparent); box-shadow: none; color: var(--foreground); }
 .pc-segmented > .pc-btn:has(> input:checked) { background: var(--sidebar-active); box-shadow: var(--pc-raise); color: var(--foreground); }
-.pc-segmented > .pc-btn:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-segmented > .pc-btn:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 .pc-segmented > .pc-btn:has(> input:disabled) { color: var(--muted-foreground); cursor: not-allowed; }
 .pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: none; }
 
@@ -785,7 +784,7 @@ dialog.pc-drawer:not([open]) { display: none; }
   background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed;
 }
 .pc-btn-ghost:is(:disabled, [aria-disabled="true"]), .pc-btn-ghost:is(:disabled, [aria-disabled="true"]):hover {
-  background: none; border-color: transparent; box-shadow: none; opacity: var(--pc-opacity-disabled);
+  background: none; border-color: transparent; box-shadow: none; opacity: var(--pc-opacity-50);
 }
 
 /* Separator: a 1px line in the border colour, the same line as every divider (menus, footers, table headers, the toolbar).
@@ -794,7 +793,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-separator { flex-shrink: 0; height: var(--pc-border); margin: 0; border: 0; background: var(--border); }
 .pc-separator-bleed { margin-inline: calc(-1 * var(--pc-space-4)); }
 .pc-separator-vertical { display: inline-block; width: var(--pc-border); height: var(--pc-size-16); vertical-align: middle; }
-.pc-separator-text { display: flex; align-items: center; gap: var(--pc-space-3); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-separator-text { display: flex; align-items: center; gap: var(--pc-space-3); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-separator-text::before, .pc-separator-text::after { content: ""; flex: 1; height: var(--pc-border); background: var(--border); }
 
 /* Skeleton: blocks shaped like the content that's coming, in the border colour: .pc-skeleton on any box, sized by .pc-skeleton-line
@@ -810,7 +809,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Skip link: <a class="pc-skip-link" href="#main">, first in the page and out of sight until it has keyboard focus; then a raised pill
    at the top left, 8px in, over the page, with the blue focus ring. The place it skips to gets tabindex="-1" so focus lands there. */
 .pc-skip-link { position: fixed; top: var(--pc-space-2); left: var(--pc-space-2); z-index: var(--pc-layer-skip-link); display: inline-flex; align-items: center; height: var(--pc-row); padding: 0 var(--pc-space-3); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font-weight: var(--pc-weight-semibold); text-decoration: none; transform: translateY(calc(-100% - var(--pc-space-4))); }
-.pc-skip-link:focus { transform: none; outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-raise-lg), var(--pc-focus); }
+.pc-skip-link:focus { transform: none; outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-raise-lg), var(--pc-focus); }
 
 /* Stack: children one under another with the same space between them, from the spacing scale (pc-space-*): .pc-stack is 12px, the
    space between fields; .pc-stack-1 4px (menu rows), .pc-stack-2 8px (a title and its line), .pc-stack-4 16px (groups in a card),
@@ -832,9 +831,9 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-slider::-webkit-slider-thumb { width: var(--pc-size-20); height: var(--pc-size-20); margin-top: calc((var(--pc-bar-6) - var(--pc-size-20)) / 2); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); appearance: none; }
 .pc-slider::-moz-range-thumb { box-sizing: border-box; width: var(--pc-size-20); height: var(--pc-size-20); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); }
 .pc-slider:focus-visible { outline: none; }
-.pc-slider:focus-visible::-webkit-slider-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
-.pc-slider:focus-visible::-moz-range-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
-.pc-slider:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-slider:focus-visible::-webkit-slider-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-slider:focus-visible::-moz-range-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-slider:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-slider-marks { display: flex; justify-content: space-between; margin-top: calc(-1 * var(--pc-space-0-5)); padding: 0 calc((var(--pc-size-20) - var(--pc-bar-2)) / 2); }
 .pc-slider-marks > span { width: var(--pc-bar-2); height: var(--pc-bar-2); border-radius: var(--pc-radius-full); background: var(--muted-foreground); }
 .pc-slider-range { --from: 20%; --to: 60%; position: relative; height: var(--pc-size-20); }
@@ -866,9 +865,9 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-stepper > button { display: inline-grid; place-items: center; width: var(--pc-row-sm); height: var(--pc-row-sm); padding: 0; border: 0; border-radius: calc(var(--pc-radius) - var(--pc-space-0-5)); background: none; color: var(--foreground); cursor: pointer; }
 .pc-stepper > button > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
 .pc-stepper > button:hover { background: var(--accent); }
-.pc-stepper > button:disabled { background: none; opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
-.pc-stepper:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); border-color: var(--background); box-shadow: var(--pc-focus); }
-.pc-stepper:has(> input:disabled) { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-stepper > button:disabled { background: none; opacity: var(--pc-opacity-50); cursor: not-allowed; }
+.pc-stepper:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-stepper:has(> input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-stepper:has(> input:disabled) > button:disabled { opacity: 1; }
 
 /* Tabs: switching between parts of a page. <div class="pc-tabs" role="tablist"> of <button class="pc-tab" role="tab"> (or links,
@@ -883,12 +882,12 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-tab[aria-selected="true"], .pc-tab[aria-current="page"] { font-weight: var(--pc-weight-semibold); }
 .pc-tab[aria-selected="true"]::after, .pc-tab[aria-current="page"]::after { content: ""; position: absolute; right: var(--pc-space-2); bottom: 0; left: var(--pc-space-2); height: var(--pc-border-2); border-radius: var(--pc-radius-xs); background: var(--primary); }
 .pc-tab:focus-visible { outline: var(--pc-focus-outline); outline-offset: calc(-1 * var(--pc-border-2)); box-shadow: var(--pc-focus-inset); }
-.pc-tab:is(:disabled, [aria-disabled="true"]), .pc-tab:is(:disabled, [aria-disabled="true"]):hover { color: var(--muted-foreground); opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
-.pc-tab-count { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); font-variant-numeric: tabular-nums; }
+.pc-tab:is(:disabled, [aria-disabled="true"]), .pc-tab:is(:disabled, [aria-disabled="true"]):hover { color: var(--muted-foreground); opacity: var(--pc-opacity-50); cursor: not-allowed; }
+.pc-tab-count { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); font-variant-numeric: tabular-nums; }
 .pc-tab-panel:focus-visible { outline: none; }
 
 /* A text area's count: .pc-field-count under it, on the right ("13 / 200"); data-state="over" turns it red. */
-.pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
+.pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
 .pc-field-count[data-state="over"] { color: var(--destructive); font-weight: var(--pc-weight-semibold); }
 
 /* Visually hidden: words for screen readers only, out of sight but still read out (the same as Tailwind's sr-only).
@@ -916,12 +915,12 @@ dialog.pc-drawer:not([open]) { display: none; }
    across the full width in the border colour, its bottom cut off by the page's edge. */
 .pc-footer { overflow: hidden; padding: var(--pc-space-6) var(--pc-space-6) 0; border-top: var(--pc-border) solid var(--border); background: var(--background); color: var(--muted-foreground); }
 .pc-footer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(var(--pc-width-160), 1fr)); gap: var(--pc-space-4); }
-.pc-footer-heading { margin: 0 0 var(--pc-space-1); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: var(--pc-weight-semibold); }
+.pc-footer-heading { margin: 0 0 var(--pc-space-1); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
 .pc-footer-link { display: block; width: fit-content; margin: 0 calc(-1 * var(--pc-space-0-5)); padding: var(--pc-space-0-5); border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
 .pc-footer-link:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
-.pc-footer-link:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
-.pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--pc-space-1) var(--pc-space-4); margin-top: var(--pc-space-6); padding-top: var(--pc-space-3); border-top: var(--pc-border) solid var(--border); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
-.pc-footer-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pc-space-1) var(--pc-space-4); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-footer-link:focus-visible { color: var(--foreground); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
+.pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--pc-space-1) var(--pc-space-4); margin-top: var(--pc-space-6); padding-top: var(--pc-space-3); border-top: var(--pc-border) solid var(--border); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
+.pc-footer-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pc-space-1) var(--pc-space-4); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-footer-line > .pc-footer-link { padding: 0; }
 .pc-footer-word { display: block; width: 100%; height: auto; margin-top: var(--pc-space-6); color: var(--border); }
 @media (max-width: 47.99rem) { .pc-footer { padding: var(--pc-space-6) var(--pc-space-4) 0; } }
@@ -930,11 +929,11 @@ dialog.pc-drawer:not([open]) { display: none; }
    a 36×20 pill: off is the field-border colour with a white knob at the start; on is teal with the knob at the end. Its words sit in
    a <label class="pc-check"> beside it, or at the start of a settings row with the switch at the end. */
 .pc-switch { position: relative; flex-shrink: 0; width: calc(2 * var(--pc-size-16) + var(--pc-space-1)); height: var(--pc-size-20); margin: 0; border-radius: var(--pc-radius-full); background: var(--input); cursor: pointer; appearance: none; }
-.pc-switch::before { content: ""; position: absolute; top: var(--pc-space-0-5); left: var(--pc-space-0-5); width: var(--pc-size-16); height: var(--pc-size-16); border-radius: var(--pc-radius-full); background: var(--knob); box-shadow: var(--pc-raise-sm); transition: left var(--pc-motion-base) var(--pc-motion-ease); }
+.pc-switch::before { content: ""; position: absolute; top: var(--pc-space-0-5); left: var(--pc-space-0-5); width: var(--pc-size-16); height: var(--pc-size-16); border-radius: var(--pc-radius-full); background: var(--knob); box-shadow: var(--pc-raise); transition: left var(--pc-motion-base) var(--pc-motion-ease); }
 .pc-switch:checked { background: var(--primary); }
 .pc-switch:checked::before { left: calc(var(--pc-size-16) + var(--pc-space-0-5)); background: var(--primary-foreground); }
-.pc-switch:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
-.pc-switch:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-switch:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
+.pc-switch:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 
 /* Tree view: things inside things (folders of lists) as sidebar rows: <ul class="pc-tree" role="tree"> of .pc-tree-item rows
    (role="treeitem", aria-level; aria-expanded on those that open). A .pc-tree-caret before anything that opens (caret-right,
@@ -949,10 +948,10 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-tree-item > svg, .pc-tree-caret > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; }
 .pc-tree-caret { display: inline-grid; place-items: center; flex-shrink: 0; width: var(--pc-size-16); }
 .pc-tree-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-tree-count { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
+.pc-tree-count { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; }
 .pc-tree-item:hover { background: var(--sidebar-hover); }
 .pc-tree-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
-.pc-tree-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus-inset); }
+.pc-tree-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-tree-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
 
 /* Video: <div class="pc-video"> around a <video> with a poster, with Image's 10px corners and faint edge and black behind; 16:9 unless
@@ -960,13 +959,13 @@ dialog.pc-drawer:not([open]) { display: none; }
    text colour) and the .pc-video-length at the bottom right. When it starts, data-state="playing" hides both and the video gets the
    browser's own controls. Not loaded, or can't play: .pc-video.pc-video-empty, the muted fill with a video icon. */
 .pc-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--pc-radius); background: var(--media); }
-.pc-video::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-mix-edge), transparent); pointer-events: none; }
+.pc-video::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-opacity-12), transparent); pointer-events: none; }
 .pc-video > video { display: block; width: 100%; height: 100%; object-fit: contain; }
-.pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: var(--pc-size-48); height: var(--pc-size-48); padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: var(--pc-radius-full); background: var(--on-media); color: var(--on-media-foreground); box-shadow: var(--pc-raise-media); cursor: pointer; }
+.pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: var(--pc-size-48); height: var(--pc-size-48); padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: var(--pc-radius-full); background: var(--on-media); color: var(--on-media-foreground); box-shadow: var(--pc-raise-lg); cursor: pointer; }
 .pc-video-play > svg { width: var(--pc-size-20); height: var(--pc-size-20); margin-left: var(--pc-space-0-5); }
 .pc-video-play:hover { background: var(--on-media-hover); }
-.pc-video-play:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus), var(--pc-raise-media); }
-.pc-video-length { position: absolute; right: var(--pc-space-2); bottom: var(--pc-space-2); padding: var(--pc-space-0-5) var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--media-scrim); color: var(--on-media); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; pointer-events: none; }
+.pc-video-play:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus), var(--pc-raise-lg); }
+.pc-video-length { position: absolute; right: var(--pc-space-2); bottom: var(--pc-space-2); padding: var(--pc-space-0-5) var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--media-scrim); color: var(--on-media); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-variant-numeric: tabular-nums; pointer-events: none; }
 .pc-video[data-state="playing"] > .pc-video-play, .pc-video[data-state="playing"] > .pc-video-length { display: none; }
 .pc-video-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
 .pc-video-empty > svg { width: var(--pc-size-20); height: var(--pc-size-20); }
@@ -978,7 +977,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-carousel-dot::before { content: ""; width: var(--pc-dot-8); height: var(--pc-dot-8); border-radius: var(--pc-radius-full); background: var(--input); transition: width var(--pc-motion-fast) var(--pc-motion-ease), background-color var(--pc-motion-fast) var(--pc-motion-ease), opacity var(--pc-motion-fast) var(--pc-motion-ease); }
 .pc-carousel-dot:hover::before { background: var(--muted-foreground); }
 .pc-carousel-dot[aria-current="true"]::before { width: var(--pc-size-24); background: currentColor; }
-.pc-carousel-dot:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-carousel-dot:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 
 /* Color picker: a row of swatches from a set that reads in light and dark, and at the end a rainbow ring (a colour
    well) that opens the device's own colour chooser. Each swatch is a label around a hidden radio; its dot is ::before
@@ -995,11 +994,11 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-colour-pink { --pc-colour: var(--colour-pink); }
 .pc-swatches { display: flex; flex-wrap: wrap; margin-inline: calc((var(--pc-size-20) - var(--pc-row)) / 2); }
 .pc-swatch { position: relative; display: grid; place-items: center; width: var(--pc-row); height: var(--pc-row); border-radius: var(--pc-radius-full); cursor: pointer; }
-.pc-swatch::before { content: ""; grid-area: 1 / 1; width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-full); background: var(--pc-colour); box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-mix-edge), transparent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border-2); }
+.pc-swatch::before { content: ""; grid-area: 1 / 1; width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-full); background: var(--pc-colour); box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-opacity-12), transparent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border-2); }
 .pc-swatch > input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .pc-swatch:hover::before { outline-color: var(--input); }
 .pc-swatch:has(> input:checked)::before { outline-color: var(--foreground); }
-.pc-swatch:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); }
+.pc-swatch:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
 .pc-swatch-custom::before { background: radial-gradient(circle, var(--pc-colour) calc(var(--pc-dot-12) / 2), transparent calc(var(--pc-dot-12) / 2 + var(--pc-border) / 2)); box-shadow: none; }
 .pc-swatch-custom > input[type="radio"] { pointer-events: none; }
 .pc-swatch-ring { grid-area: 1 / 1; width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-full); background: conic-gradient(var(--colour-red), var(--colour-orange), var(--colour-yellow), var(--colour-green), var(--colour-teal), var(--colour-blue), var(--colour-purple), var(--colour-pink), var(--colour-red)); mask: radial-gradient(circle, transparent calc(var(--pc-size-20) / 2 - var(--pc-border-2) - var(--pc-border)), #000 calc(var(--pc-size-20) / 2 - var(--pc-border-2) - var(--pc-border) / 2)); }
@@ -1016,7 +1015,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-date > .pc-popover { position: absolute; top: calc(100% + var(--pc-space-1)); left: 0; z-index: var(--pc-layer-menu); width: min-content; }
 /* Phones: the Datepicker is a sheet from the bottom over a .pc-popover-backdrop, like the popovers; the month fills the width. */
 @media (max-width: 47.99rem) {
-  .pc-date > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-overlay); width: auto; max-height: var(--pc-height-sheet); overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-date > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-sheet); width: auto; max-height: var(--pc-height-sheet); overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-date > .pc-popover .pc-calendar-grid { grid-template-columns: repeat(7, 1fr); }
   .pc-date > .pc-popover .pc-calendar-months { min-width: 0; }
   .pc-date > .pc-popover .pc-dialog-actions > .pc-btn { flex: 1; }
@@ -1028,7 +1027,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-sidebar-sheet > .pc-sidebar { animation: pc-sheet-in var(--pc-motion-base) var(--pc-motion-ease); }
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }
 @keyframes pc-progress-slide { from { left: -35%; } to { left: 100%; } }
-@keyframes pc-skeleton-pulse { 50% { opacity: var(--pc-opacity-disabled); } }
+@keyframes pc-skeleton-pulse { 50% { opacity: var(--pc-opacity-50); } }
 @keyframes pc-spin { to { transform: rotate(1turn); } }
 
 /* State changes (hover fills, focus rings, colours, tooltips) use --pc-motion-fast. */
@@ -1044,11 +1043,11 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* App switcher: the sidebar head as a button that opens the apps, a menu as wide as the head, below it. */
 .pc-sidebar-head:has(> .pc-sidebar-apps) { padding: 0; }
 .pc-sidebar-apps { position: relative; flex: 1; min-width: 0; }
-.pc-sidebar-apps > .pc-sidebar-item { gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
+.pc-sidebar-apps > .pc-sidebar-item { gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
 .pc-sidebar-apps-menu { position: absolute; left: 0; right: 0; top: calc(100% + var(--pc-space-1)); z-index: var(--pc-layer-menu); min-width: 0; }
 /* An app's mark is a square slot: a letter for now, an svg or img later. */
 .pc-app-logo-mark > img, .pc-app-logo-mark > svg { width: 100%; height: 100%; border-radius: inherit; }
-.pc-menu-item > .pc-app-logo-mark { width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-sm); font-size: var(--pc-text-10); line-height: var(--pc-line-10); }
+.pc-menu-item > .pc-app-logo-mark { width: var(--pc-size-20); height: var(--pc-size-20); border-radius: var(--pc-radius-sm); font-size: var(--pc-text-10); line-height: var(--pc-line-14); }
 /* Where you are, in a menu of places (.pc-menu-places; the app switcher is one): a semibold name and a primary bar on the menu's left edge. */
 :is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"] { position: relative; font-weight: var(--pc-weight-semibold); }
 :is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"]::before { content: ""; position: absolute; top: var(--pc-space-1-5); bottom: var(--pc-space-1-5); left: calc(-1 * (var(--pc-space-1) + var(--pc-border))); width: var(--pc-bar-2); border-radius: 0 var(--pc-radius-xs) var(--pc-radius-xs) 0; background: var(--primary); }
@@ -1059,8 +1058,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-picker-button { display: flex; align-items: center; gap: var(--pc-space-2); width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
 .pc-picker-button > span { flex: 1; width: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-picker-button > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; color: var(--muted-foreground); }
-.pc-picker-button:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
-.pc-picker-button:disabled { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-picker-button:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-picker-button:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 /* Select (pc-picker): an error turns the button's border red. Options can start with a colour dot (.pc-menu-dot plus a .pc-colour-*) or a
    16px icon; a first "None" option (.pc-menu-none) is muted; a choice that can't be picked (aria-disabled="true") is half strength and says why
    at its end (.pc-menu-note). */
@@ -1078,36 +1077,36 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-picker-field > .pc-picker-placeholder { flex: 1; min-width: calc(2 * var(--pc-size-48)); padding: 0 calc(var(--pc-space-2-5) - var(--pc-space-1)); color: var(--muted-foreground); }
 .pc-picker-field > .pc-chip ~ .pc-picker-placeholder { display: none; }
 .pc-picker-field > svg { position: absolute; top: calc((var(--pc-row) - var(--pc-size-16)) / 2 - var(--pc-border)); right: var(--pc-space-2-5); width: var(--pc-size-16); height: var(--pc-size-16); color: var(--muted-foreground); }
-.pc-picker-field:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-focus-outline-offset); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-picker-field:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-picker-field[aria-invalid="true"] { border-color: var(--destructive); }
-.pc-picker-field[aria-disabled="true"] { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-picker-field[aria-disabled="true"] { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-picker-field[aria-disabled="true"] .pc-chip-remove { pointer-events: none; }
 .pc-menu-item > .pc-checkbox { pointer-events: none; }
-.pc-menu-dot { width: var(--pc-dot-10); height: var(--pc-dot-10); flex-shrink: 0; border-radius: var(--pc-radius-full); background: var(--pc-colour, var(--muted-foreground)); }
+.pc-menu-dot { width: var(--pc-dot-12); height: var(--pc-dot-12); flex-shrink: 0; border-radius: var(--pc-radius-full); background: var(--pc-colour, var(--muted-foreground)); }
 .pc-menu-item.pc-menu-none { color: var(--muted-foreground); }
-.pc-menu-item[aria-disabled="true"] { opacity: var(--pc-opacity-disabled); cursor: not-allowed; }
+.pc-menu-item[aria-disabled="true"] { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-menu-item:is(:disabled, [aria-disabled="true"]):hover { background: none; }
-.pc-menu-note { margin-left: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-menu-note { margin-left: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 .pc-picker-menu { position: absolute; top: calc(100% + var(--pc-space-1)); left: 0; z-index: var(--pc-layer-menu); min-width: 100%; max-height: var(--pc-height-list); overflow-y: auto; }
 /* A search field at the top of a menu (the input with an icon), and the line when nothing matches. */
 .pc-menu > .pc-input-group { margin: var(--pc-space-1) var(--pc-space-1) var(--pc-space-1-5); }
-.pc-menu-empty { margin: 0; padding: var(--pc-space-1-5) var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-menu-empty { margin: 0; padding: var(--pc-space-1-5) var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
 /* Phones: a menu that pops up (.pc-menu-pop) is a sheet at the bottom of the screen with the phone's 40px rows, over a backdrop
    (.pc-menu-backdrop, right before the menu; a tap on it or Escape closes). Its .pc-menu-title shows only there.
    .pc-menu-sheet makes a menu a sheet at any width. */
 .pc-menu-label.pc-menu-title { display: none; }
 .pc-menu-backdrop { display: none; }
 @media (max-width: 47.99rem) {
-  .pc-menu.pc-menu-pop { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-overlay); min-width: 0; max-height: var(--pc-height-sheet); overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-menu.pc-menu-pop { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-sheet); min-width: 0; max-height: var(--pc-height-sheet); overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-menu-pop > .pc-menu-label.pc-menu-title { display: block; }
   .pc-menu-pop .pc-menu-item[aria-current="page"]::before { left: calc(-1 * var(--pc-space-2)); }
-  .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-backdrop); background: var(--overlay); }
+  .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-sheet); background: var(--overlay); }
   html:has(.pc-menu-pop:not([hidden])) { overflow: hidden; }
 }
-.pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-overlay); min-width: 0; max-height: var(--pc-height-sheet); overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+.pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-sheet); min-width: 0; max-height: var(--pc-height-sheet); overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
 .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
 .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: calc(-1 * var(--pc-space-2)); }
-.pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-backdrop); background: var(--overlay); }
+.pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-sheet); background: var(--overlay); }
 /* While a sheet, a modal or a drawer over the page is open (the phone sidebar, a menu sheet, settings, a drawer) the page behind it doesn't scroll. */
 html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-drawer[open]) { overflow: hidden; }
 .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
@@ -1116,6 +1115,6 @@ html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-d
    one is tapped. */
 @media (max-width: 47.99rem) {
   body { --pc-row: var(--pc-row-touch); --pc-row-xs: calc(var(--pc-row-touch) - var(--pc-space-2)); --pc-row-sm: calc(var(--pc-row-touch) - var(--pc-space-1)); --pc-row-lg: calc(var(--pc-row-touch) + var(--pc-space-2)); }
-  .pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input, .pc-input-addon { font-size: var(--pc-text-16); line-height: var(--pc-line-16); }
+  .pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input, .pc-input-addon { font-size: var(--pc-text-16); line-height: var(--pc-line-24); }
   .pc-calendar-grid { grid-template-columns: repeat(7, 1fr); }
 }

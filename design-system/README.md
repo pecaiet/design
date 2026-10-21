@@ -15,7 +15,7 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
 
 ## Type
 
-- Figtree throughout (`--font-sans`), plus the system's monospace (`pc-mono`, `--font-mono`) for IDs, secrets and error codes. Figtree comes in one scale of ten sizes, each with its own line height, and no others: 10/14, 12/16, 14/20, 16/24, 18/24, 22/28, 28/36, 40/48, and 56/64 and 72/80 for a hero only (`--pc-text-N` and `--pc-line-N` in the CSS). The ones in use have names: `pc-title` (22: page, pane and dialog-page titles, a number on a stat), `pc-heading` (16: card, dialog and section titles, the sidebar app name, a large button's words), `pc-body` (14: everything else), `pc-small` (12: dates, counts, labels, hints, keys, tooltips, code), `pc-tiny` (10: letters in a 20px app mark or a 24px avatar, a small badge's count). In the apps they are the Tailwind utilities `text-pc-title`, `text-pc-heading`, `text-pc-body`, `text-pc-small`, `text-pc-tiny`, plus `text-pc-18`, `text-pc-28`, `text-pc-40`, `text-pc-56` and `text-pc-72`; Tailwind's own sizes (`text-sm`, `text-lg`, …) are not used.
+- Figtree throughout (`--font-sans`), plus the system's monospace (`pc-mono`, `--font-mono`) for IDs, secrets and error codes. Figtree comes in one scale of nine sizes, each with its own line height, and no others: 10/14, 12/16, 14/20, 16/24, 22/28, 28/36, 40/48, and 56/64 and 72/80 for a hero only (`--pc-text-N` with its line `--pc-line-N` in the CSS; a line is named by its own value: `--pc-line-20` is the 20px line of 14px text). The ones in use have names: `pc-title` (22: page, pane and dialog-page titles, a number on a stat), `pc-heading` (16: card, dialog and section titles, the sidebar app name, a large button's words), `pc-body` (14: everything else), `pc-small` (12: dates, counts, labels, hints, keys, tooltips, code), `pc-tiny` (10: letters in a 20px app mark or a 24px avatar, a small badge's count). In the apps they are the Tailwind utilities `text-pc-title`, `text-pc-heading`, `text-pc-body`, `text-pc-small`, `text-pc-tiny`, plus `text-pc-28`, `text-pc-40`, `text-pc-56` and `text-pc-72`; Tailwind's own sizes (`text-sm`, `text-lg`, …) are not used.
 - The apps load fonts only from their own origin (idp's Content Security Policy), so Figtree is self-hosted as woff2 files.
 
 ## Shape and density
@@ -23,20 +23,21 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
 - One row height, `pc-row` (32px; 40px on phones, where fields take 16px text), for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs, selects.
 - Every size comes from a token, and every kind of size has one short scale (tokens.json, a section each on this page):
   - Spacing (`pc-space-*`): 2, 4, 6, 8, 10, 12, 16, 24, 32, 48.
-  - Text (`pc-text-N` with its own line, `pc-line-N`): 10/14, 12/16, 14/20, 16/24, 18/24, 22/28, 28/36, 40/48; 56/64 and 72/80 for a hero only.
+  - Text (`pc-text-*`): 10, 12, 14, 16, 22, 28, 40; 56 and 72 for a hero only.
+  - Line heights (`pc-line-*`), named by their own value, one for each text size: 10/14, 12/16, 14/20, 16/24, 22/28, 28/36, 40/48; 56/64 and 72/80 for a hero.
   - Sizes (`pc-size-*`), fixed squares: 12 (the smallest marks), 16 (icons beside words, checkboxes), 20 (an icon on its own, badges, handles), 24, 32 and 48 (avatars; the play button; the search window's field).
   - Heights of controls (`pc-row-*`): `pc-row-xs` 24 (chips in a field), `pc-row-sm` 28 (small), `pc-row` 32, `pc-row-lg` 40 (large); on phones each is worked out from `pc-row-touch` (40): 32, 36, 40, 48.
   - Every size in the CSS is a token or a sum of tokens. Two plain values remain, because CSS can't take a token there: the phone breakpoint (48rem, in media queries) and the huge inner shadow that hides a browser's autofill colour.
-  - Widths (`pc-width-*`): 160, 240, 256 (the sidebar), 320, 400, 560, 960. Heights of what scrolls (`pc-height-*`): a list 360, the settings window 640, a phone sheet 85% of the screen.
+  - Widths (`pc-width-*`): 160, 256 (the sidebar, menus, tooltips), 320, 400, 560, 960. Heights of what scrolls (`pc-height-*`): a list 360, the settings window 640, a phone sheet 85% of the screen.
   - Corners (`pc-radius-*`): 2, 5, 10, 14 and round.
   - Edges (`pc-border`, `pc-border-2`): 1, and 2 for the tab underline, a quote's line and rings around avatars and swatches.
-  - Bars and dots (`pc-bar-*`, `pc-dot-*`): bars 2, 4, 6; dots 8, 10, 12.
+  - Bars and dots (`pc-bar-*`, `pc-dot-*`): bars 2, 4, 6; dots 8, 12.
   - Weights (`pc-weight-*`): 400, 500, 600, 700. Letter spacing (`pc-tracking-*`): −0.01em from 22 up, −0.02em for a hero.
-  - Fading (`pc-opacity-disabled`): 0.5, only for what can't be used. Mixing a colour into another (`pc-mix-*`): 10%, 12%, 45%, 55%.
-  - Layers (`pc-layer-*`), bottom to top: raised, tooltip, menu, drawer, backdrop, overlay, toast, skip link.
+  - Fading and mixing one colour into another (`pc-opacity-*`): 12% faint (edges round photos, soft teal), 50% half (what can't be used, a quiet line, the segmented hover).
+  - Layers (`pc-layer-*`), bottom to top: raised, tooltip, menu, drawer, sheet (a phone sheet and the dimmed page behind it), toast, skip link.
   - Motion: off for now, the spinner too.
 - Corners: `pc-radius-xs` (2px) for focus rings round links and the tab underline, `pc-radius-sm` (5px) for checkboxes and key caps, `pc-radius` (10px) for every row and control (tabs and a rating's stars take `pc-radius-sm`), `pc-radius-lg` (14px) for panels (cards, menus, dialogs, popovers). Avatars, badges, chips and radios are round. Inside a padded container the inner corner is the outer one minus the gap: menus keep 4px around 10px rows (14 = 10 + 4).
-- Shadows: `pc-raise` for cards, the raised pill (a toolbar tool under the pointer, the chosen segment) and the slider's handle; `pc-raise-lg` for what opens over the page (menus, dialogs, popovers, drawers, toasts, tooltips). The active sidebar row is a flat pill: its fill alone marks it.
+- Shadows: `pc-raise` for cards, the raised pill (a toolbar tool under the pointer, the chosen segment), the slider's handle and a switch's knob; `pc-raise-lg` for what opens over the page (menus, dialogs, popovers, drawers, toasts, tooltips) and a video's play button. The active sidebar row is a flat pill: its fill alone marks it.
 
 ## Motion
 

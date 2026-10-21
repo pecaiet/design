@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T11:51:54Z",
+    "at": "2026-10-21T12:38:50Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Combobox card: the several-values picker as a sheet on phones."
+    "note": "Line heights are their own token family (Line), next to Text."
   },
   "layout": "files",
   "libraries": [],
