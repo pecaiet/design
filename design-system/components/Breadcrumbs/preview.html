@@ -52,7 +52,7 @@
   .pc-breadcrumbs > a.force-focus { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 
   /* Phone pictures: phones get 40px rows and 16px field text. */
-  .bc-phone { --pc-row: 40px; }
+  .bc-phone { --pc-row: var(--pc-row-touch); --pc-row-xs: calc(var(--pc-row-touch) - var(--pc-space-2)); --pc-row-sm: calc(var(--pc-row-touch) - var(--pc-space-1)); --pc-row-lg: calc(var(--pc-row-touch) + var(--pc-space-2)); }
   .bc-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>

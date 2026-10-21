@@ -47,7 +47,7 @@
 
   .pv-w { max-width: 440px; }
   .pv-panelbody { padding-top: 12px; color: var(--muted-foreground); }
-  .pv-narrow { --pc-row: 40px; max-width: 290px; }
+  .pv-narrow { --pc-row: var(--pc-row-touch); --pc-row-xs: calc(var(--pc-row-touch) - var(--pc-space-2)); --pc-row-sm: calc(var(--pc-row-touch) - var(--pc-space-1)); --pc-row-lg: calc(var(--pc-row-touch) + var(--pc-space-2)); max-width: 290px; }
   /* Preview only: the pointer and keyboard focus, shown. */
   .pc-tab.pv-hover { color: var(--foreground); }
   .pc-tab.pv-focus { outline: 2px solid transparent; outline-offset: -2px; box-shadow: var(--pc-focus-inset); }

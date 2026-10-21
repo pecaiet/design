@@ -54,7 +54,7 @@
   .pc-card.pv-focus { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
 
   /* Phone pictures: phones get 40px rows and 16px field text. */
-  .pv-phone { --pc-row: 40px; }
+  .pv-phone { --pc-row: var(--pc-row-touch); --pc-row-xs: calc(var(--pc-row-touch) - var(--pc-space-2)); --pc-row-sm: calc(var(--pc-row-touch) - var(--pc-space-1)); --pc-row-lg: calc(var(--pc-row-touch) + var(--pc-space-2)); }
   .pv-phone :is(.pc-input, .pc-textarea, .pc-stepper > input) { font-size: 16px; }
 </style>
 </head>
