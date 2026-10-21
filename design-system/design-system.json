@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T10:48:41Z",
+    "at": "2026-10-21T10:53:41Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Widths from the scale only: the page column under the header is 960 (was 1120), the sign-in form 400 on every screen (was 360 on phones)."
+    "note": "Hero and Rich text editor marked not needed for now: each has a placeholder card and a one-line guideline; designed when an app needs them."
   },
   "layout": "files",
   "libraries": [],
