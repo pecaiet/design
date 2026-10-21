@@ -4,6 +4,8 @@ The shared look for the Pecaiet apps (idp, todo): colours, type, and plain HTML/
 
 The design lives in the private Pecaiet design system on claude.ai (look: Senin). This repo is its code.
 
+`design-system/` is a copy of that design system's own files (guidelines, cards, `tokens.json`, `components/bundle.css`). The real tokens are `design-system/tokens.json` and `pecaiet.css`; the design-system page makes its own `tokens.css`, `manifest.json` and `api/` cards, which aren't kept here.
+
 ## Use it
 
 Import it right after Tailwind, in the app's main CSS file:
