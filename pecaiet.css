@@ -1008,8 +1008,8 @@
   .pc-accordion-item > summary > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; margin-left: auto; color: var(--muted-foreground); transition: transform var(--pc-motion-fast) var(--pc-motion-ease); }
   .pc-accordion-item > summary:hover { background: var(--accent); }
   .pc-accordion-item > summary:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); background: var(--accent); box-shadow: var(--pc-focus-inset); }
-  .pc-accordion-item[open] > summary { font-weight: var(--pc-weight-semibold); }
-  .pc-accordion-item[open] > summary > svg { transform: rotate(180deg); }
+  .pc-accordion-item[open]:not([data-pc-closing]) > summary { font-weight: var(--pc-weight-semibold); }
+  .pc-accordion-item[open]:not([data-pc-closing]) > summary > svg { transform: rotate(180deg); }
   .pc-accordion-content { padding: var(--pc-space-0-5) var(--pc-space-2-5) var(--pc-space-2-5); color: var(--muted-foreground); line-height: var(--pc-line-20); }
   .pc-accordion-item[aria-disabled="true"] { cursor: not-allowed; }
   .pc-accordion-item[aria-disabled="true"] > summary { opacity: var(--pc-opacity-50); pointer-events: none; }
@@ -1421,8 +1421,8 @@
   .pc-skip-link { transition: transform var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* Where things come from: menus and popovers drop from their button (rise when they open upward), dialogs and toasts rise, errors and
-     answers drop from what's above them, the drawer comes from the right edge; on phones the sheets come up from the bottom edge. */
-  .pc-menu, .pc-popover, .pc-field-error, .pc-accordion-content, .pc-tree-item, .pc-file, .pc-table tbody tr { --pc-enter: 0 calc(-1 * var(--pc-motion-distance)); }
+     rows drop from what's above them, the drawer comes from the right edge; on phones the sheets come up from the bottom edge. */
+  .pc-menu, .pc-popover, .pc-field-error, .pc-file, .pc-table tbody tr { --pc-enter: 0 calc(-1 * var(--pc-motion-distance)); }
   .pc-sidebar-account-menu, .pc-popover-up, .pc-toast, dialog.pc-dialog, dialog.pc-modal { --pc-enter: 0 var(--pc-motion-distance); }
   dialog.pc-drawer { --pc-enter: 100% 0; --pc-enter-opacity: 1; }
   .pc-menu.pc-menu-sheet { --pc-enter: 0 100%; --pc-enter-opacity: 1; }
@@ -1430,15 +1430,14 @@
     .pc-menu.pc-menu-pop, .pc-popover-anchor > .pc-popover, .pc-date > .pc-popover, dialog.pc-dialog { --pc-enter: 0 100%; --pc-enter-opacity: 1; }
   }
 
-  /* Appearing. Rows, chips, tree rows, tab panels and slides only when they arrive after the page has loaded (pecaiet.js marks that with
+  /* Appearing. Accordion answers and tree branches grow open and shrink closed (pecaiet.js plays the height). Rows, chips, tab panels and slides only when they arrive after the page has loaded (pecaiet.js marks that with
      data-pc-ready), so a page doesn't fade in row by row. */
   @starting-style {
     .pc-menu, .pc-popover, .pc-toast, .pc-field-error { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter, 0 0); }
     .pc-menu-backdrop, .pc-popover-backdrop, .pc-sheet-backdrop { opacity: 0; }
-    :root[data-pc-ready] :is(.pc-tree-item, .pc-file, .pc-table tbody tr) { opacity: 0; translate: var(--pc-enter); }
+    :root[data-pc-ready] :is(.pc-file, .pc-table tbody tr) { opacity: 0; translate: var(--pc-enter); }
     :root[data-pc-ready] :is(.pc-chip, .pc-tab-panel, .pc-carousel-slide, .pc-btn > svg) { opacity: 0; }
   }
-  .pc-accordion-item[open] > .pc-accordion-content { animation: pc-enter var(--pc-motion-base) var(--pc-motion-ease); }
 
   /* Dialogs, the settings window and the drawer, with the page dimming behind them. Where the browser can animate the closing (Chrome,
      Edge) CSS plays it; elsewhere pecaiet.js does (Escape, or Pecaiet.close(dialog)). */
@@ -1473,7 +1472,6 @@
   }
 }
 
-@keyframes pc-enter { from { opacity: var(--pc-enter-opacity, 0); translate: var(--pc-enter, 0 0); } }
 @keyframes pc-fade-in { from { opacity: 0; } }
 @keyframes pc-sheet-in { from { transform: translateX(-100%); } }
 @keyframes pc-spin { to { transform: rotate(1turn); } }

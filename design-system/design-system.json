@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T14:39:20Z",
+    "at": "2026-10-21T15:06:35Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Motion on: two speeds (120/200ms), one curve; changes, things that appear and leave, and slides from an edge; the segmented pill and tab line slide; Settings has a Motion card (On · Off); a Motion card shows it all; pecaiet.js plays the rest."
+    "note": "Accordion answers and tree branches grow open and shrink closed (pecaiet.js), so what's below glides instead of jumping."
   },
   "layout": "files",
   "libraries": [],

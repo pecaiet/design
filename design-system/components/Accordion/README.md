@@ -9,4 +9,4 @@ Questions or sections that open to show more, one under another.
 - Several can be open at once. To keep one open at a time, give the items the same `name`; the browser closes the others.
 - In a card it sits in `.pc-card-content`, and the questions line up with the card's title.
 - For FAQs and optional detail; never to hide something people need to finish a task.
-- Motion: the answer fades in while it drops 4px, and the arrow turns (120ms); with pecaiet.js, closing plays it backwards.
+- Motion: with pecaiet.js the answer grows open (200ms), its words fading in, and the questions below glide down; closing shrinks it back. The arrow turns at once (120ms). Without the script it opens and closes at once.

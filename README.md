@@ -53,11 +53,11 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 Two speeds and one curve, three kinds of motion, the same in every app (the design system's Motion card shows them playing):
 
 - **Change** (`--pc-motion-fast`, 120ms): hover and focus colours, ticks, dots, arrows. Things that travel take `--pc-motion-base` (200ms): the switch's knob, the segmented pill, the tab line, a progress bar.
-- **Appear** (`--pc-motion-base`): menus, popovers, tooltips (after `--pc-motion-wait`, 0.4s), dialogs, toasts, field errors, accordion answers and new rows fade in while they move 4px (`--pc-motion-distance`) from where they come from (`--pc-enter`), and leave the same way backwards.
+- **Appear** (`--pc-motion-base`): menus, popovers, tooltips (after `--pc-motion-wait`, 0.4s), dialogs, toasts, field errors and new rows fade in while they move 4px (`--pc-motion-distance`) from where they come from (`--pc-enter`), and leave the same way backwards. Accordion answers and tree branches grow open and shrink closed (`pecaiet.js`).
 - **Slide** (`--pc-motion-base`): the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link come in from their edge.
 - **Off**: `data-motion="off"` on `<html>` makes everything instant (the spinner turns slowly); `data-motion="on"` keeps motion even when the device asks for less; with neither, the device decides. Settings › Preferences › Motion (On · Off) sets it.
 
-`pecaiet.js` does what CSS can't. With no calls it plays the closing of menus, popovers and sheets when the app hides them (`hidden`), Escape on a dialog or drawer, an accordion answer closing, an alert's x (`.pc-alert-close`) and any `[data-pc-dismiss]`, the tab line, Turbo removals (`turbo-stream action="remove"` fades the target out first), smooth jumps to `#` links, and radios named `pc-theme` (dark/light/system) or `pc-motion` (on/off). For what only the app knows, one call:
+`pecaiet.js` does what CSS can't. With no calls it plays the closing of menus, popovers and sheets when the app hides them (`hidden`), the phone sidebar sliding out when the app takes `.pc-sidebar-sheet` off its frame, Escape on a dialog or drawer, accordion answers and tree branches growing open and shrinking closed (what's below glides), an alert's x (`.pc-alert-close`) and any `[data-pc-dismiss]`, the tab line, Turbo removals (`turbo-stream action="remove"` fades the target out first), smooth jumps to `#` links, and radios named `pc-theme` (dark/light/system) or `pc-motion` (on/off). For what only the app knows, one call:
 
 ```js
 Pecaiet.leave(row)              // fades it out, closes its gap, removes it (await it in React before dropping it from state)
