@@ -1,11 +1,11 @@
 # Motion
 
-How things move in every app: two speeds, one curve, three kinds of motion, the same everywhere.
+How things move in every app: one speed, one curve, three kinds of motion, the same everywhere.
 
-- Speeds (tokens): `pc-motion-fast` 120ms for small changes, `pc-motion-base` 200ms for whatever appears, leaves or travels. Curve: Ease out (`--pc-motion-ease`). Worked out from base: `--pc-motion-wait` (a tooltip's wait, 0.4s), `--pc-motion-spin` (one spinner turn, 0.8s), `--pc-motion-slide` (unknown progress, 1.4s), `--pc-motion-pulse` (the skeleton, 1.6s).
-- Change: hover and focus colours fade, ticks and dots fade in, arrows turn (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work) fades in (120ms).
-- Then three kinds, at 200ms, the same everywhere and never two at once (nothing fades while it moves):
-- Fade, for what appears in place: menus, popovers, tooltips (after 0.4s), dialogs, tab panels, carousel slides and content that takes a skeleton's place fade in and out where they are.
+- Speed (token): `pc-motion`, 120ms, for everything that moves. Curve: Ease out (`--pc-motion-ease`). Worked out from it: `--pc-motion-wait` (a tooltip's wait, ×3, 360ms), `--pc-motion-spin` (one spinner turn, ×7, 0.84s), `--pc-motion-slide` (unknown progress, ×12, 1.44s), `--pc-motion-pulse` (the skeleton, ×13, 1.56s).
+- Change: hover and focus colours fade, ticks and dots fade in, arrows turn (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work) fades in.
+- Then three kinds, the same everywhere and never two at once (nothing fades while it moves):
+- Fade, for what appears in place: menus, popovers, tooltips (after 360ms), dialogs, tab panels, carousel slides and content that takes a skeleton's place fade in and out where they are.
 - Grow, for what takes room or gives it back: toasts and field errors whenever they appear; a row, chip or alert the person just added (`Pecaiet.enter(el)`, or a Turbo stream that adds it); accordion answers and tree branches as they open and close; whatever is removed (`Pecaiet.leave(el)`). It fades while it grows or shrinks, in one motion, so what's around it glides instead of jumping (pecaiet.js). Content that's only drawn again (a Turbo frame, a React update) shows at once, never row by row. Table rows can't grow: they fade.
 - Slide, for what comes from an edge or travels: the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link come in from their edge (`--pc-enter`), while the page dims behind sheets; the switch's knob, the segmented pill, the tab line and a progress bar slide to their new place.
 - Loading: the spinner turns, the skeleton pulses, unknown progress slides. Pages crossfade (Chrome, Edge, Safari); jumps within a page scroll smoothly.

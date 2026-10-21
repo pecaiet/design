@@ -46,10 +46,10 @@
     const v = getComputedStyle(document.body || root).getPropertyValue(name).trim();
     return v.endsWith("ms") ? parseFloat(v) : (parseFloat(v) || 0) * 1000;
   };
-  const on = () => time("--pc-motion-base") > 0;
+  const on = () => time("--pc-motion") > 0;
   // Every motion reads what it needs first and only then changes the page: a style read after a change makes the browser work
   // the styles out again, and a few of those in a row are what makes a motion start late.
-  const timing = () => ({ duration: time("--pc-motion-base"), easing: getComputedStyle(root).getPropertyValue("--pc-motion-ease").trim() || "ease-out" });
+  const timing = () => ({ duration: time("--pc-motion"), easing: getComputedStyle(root).getPropertyValue("--pc-motion-ease").trim() || "ease-out" });
   const play = (el, frames, t, more = {}) => el.animate(frames, { ...t, fill: "forwards", ...more });
   // Where el comes from, as pecaiet.css says (--pc-enter, --pc-enter-opacity): an edge for what slides, else nowhere (it fades).
   const from = el => {
@@ -237,7 +237,7 @@
   // What counts as new: children inserted under a tree item within a second of that same item opening (a tree drawn again has new
   // items, so it stays still), rows a Turbo stream adds, and every toast and field error (not in Turbo's preview of a cached page).
   // Also faded in: an icon swapped inside a button that stays, and whatever is put where a skeleton was taken out.
-  const rows = [], swaps = [], loads = [], opened = new WeakMap();
+  const rows = [], fades = [], opened = new WeakMap();
   const parentItem = n => { const level = +n.getAttribute("aria-level") || 1; let p = n.previousElementSibling; while (p && (+p.getAttribute("aria-level") || 1) >= level) p = p.previousElementSibling; return p; };
   let adding = 0;
   new MutationObserver(changes => {
@@ -251,23 +251,21 @@
         if (!(n instanceof Element)) return;
         if (n.matches(".pc-tabs")) watchTabs(n.parentElement); else watchTabs(n);
         if (n.matches(SHOWN)) remembered(n);
-        if (c.target.matches?.(".pc-btn") && n.matches("svg, .pc-spinner")) swaps.push(n);
-        else if (skeletons.has(c.target)) loads.push(n);
+        if ((c.target.matches?.(".pc-btn") && n.matches("svg, .pc-spinner")) || skeletons.has(c.target)) fades.push(n);
         else if (n.matches(".pc-tree-item") && performance.now() - (opened.get(parentItem(n)) ?? -1e9) < 1000) rows.push(n);
         else if (adding && (n.matches(GROWS) || n.tagName === "TR")) rows.push(n);
         else if (!root.hasAttribute("data-turbo-preview")) rows.push(...(n.matches(NEWS) ? [n] : n.querySelectorAll(NEWS)));
       });
     }
-    // New rows grow in together: every size is read first, then they all start. A table row fades in, and so does what took a
-    // skeleton's place; a swapped icon fades in at the quick speed.
-    if (!rows.length && !swaps.length && !loads.length) return;
-    const t = timing(), fast = time("--pc-motion-fast"), list = rows.splice(0), icons = swaps.splice(0), contents = loads.splice(0);
+    // New rows grow in together: every size is read first, then they all start. A table row fades in, and so do a swapped icon and
+    // what took a skeleton's place.
+    if (!rows.length && !fades.length) return;
+    const t = timing(), list = rows.splice(0), faded = fades.splice(0);
     if (!t.duration) return;
     const spaces = list.map(n => (n.tagName === "TR" ? null : space(n)));
-    const fadeIn = (n, more = {}) => { const a = play(n, [{ opacity: "0" }, { opacity: "1" }], t, more); a.finished.then(() => a.cancel(), () => {}); };
+    const fadeIn = n => { const a = play(n, [{ opacity: "0" }, { opacity: "1" }], t); a.finished.then(() => a.cancel(), () => {}); };
     list.forEach((n, i) => { if (spaces[i]) grow(n, true, t, {}, true, spaces[i]).then(g => g.settle()); else fadeIn(n); });
-    contents.forEach(n => fadeIn(n));
-    icons.forEach(n => fadeIn(n, { duration: fast }));
+    faded.forEach(fadeIn);
   }).observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-selected", "aria-current", "aria-expanded"] });
 
   // Theme and motion, and the Settings radios that set them.

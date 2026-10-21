@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T17:03:06Z",
+    "at": "2026-10-21T17:11:56Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Motion gaps closed: a Select's arrow turns, a copy's tick and a busy button's spinner fade in, content that replaces a skeleton fades in, the collapsing sidebar stays visible while it slides out, and an error under a radio group grows its own gap too."
+    "note": "One motion speed: pc-motion (120ms) for everything, replacing pc-motion-fast and pc-motion-base. Waits and loops are multiples of it: tooltip wait 360ms, spinner 0.84s, unknown progress 1.44s, skeleton 1.56s."
   },
   "layout": "files",
   "libraries": [],

@@ -8,4 +8,4 @@ Choosing exactly one of two to five options that are always in view: Dark, Light
 - Icons only: `.pc-btn-icon` on the label, an `aria-label` on its radio and the same words as a tooltip on the label.
 - The keyboard works as in any radio group: Tab to the chosen option, the arrow keys to move; focus is the blue ring. `disabled` on the radios turns the words grey (the chosen one keeps its pill), with the not-allowed pointer.
 - Six or more options, or long words, are a Select. Separate tools that each do their own thing (search, sort, more) are a toolbar.
-- Motion: the chosen pill slides to the new option (200ms), in CSS alone (the options share one width; up to five).
+- Motion: the chosen pill slides to the new option (120ms), in CSS alone (the options share one width; up to five).

@@ -35,16 +35,16 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
   - Weights (`pc-weight-*`): 400, 500, 600, 700. Letter spacing (`pc-tracking-*`): −0.01em from 22 up, −0.02em for a hero.
   - Fading and mixing one colour into another (`pc-opacity-*`): 12% faint (edges round photos, soft teal), 50% half (what can't be used, a quiet line, the segmented hover).
   - Layers (`pc-layer-*`), bottom to top: raised, tooltip, menu, drawer, sheet (a phone sheet and the dimmed page behind it), toast, skip link.
-  - Motion (`pc-motion-*`): 120ms for small changes, 200ms for whatever appears, leaves or travels (Motion, below).
+  - Motion (`pc-motion`): 120ms for everything that moves (Motion, below).
 - Corners: `pc-radius-xs` (2px) for focus rings round links and the tab underline, `pc-radius-sm` (5px) for checkboxes and key caps, `pc-radius` (10px) for every row and control (tabs and a rating's stars take `pc-radius-sm`), `pc-radius-lg` (14px) for panels (cards, menus, dialogs, popovers). Avatars, badges, chips and radios are round. Inside a padded container the inner corner is the outer one minus the gap: menus keep 4px around 10px rows (14 = 10 + 4).
 - Shadows: `pc-raise` for cards, the raised pill (a toolbar tool under the pointer, the chosen segment), the slider's handle and a switch's knob; `pc-raise-lg` for what opens over the page (menus, dialogs, popovers, drawers, toasts, tooltips) and a video's play button. The active sidebar row is a flat pill: its fill alone marks it.
 
 ## Motion
 
-- Two speeds and one curve: `pc-motion-fast` (120ms) for small changes (colours, a tick, an arrow turning) and `pc-motion-base` (200ms) for whatever appears, leaves or travels, both with Ease out (`--pc-motion-ease`). Longer times are multiples of base: a tooltip's wait ×2, one spinner turn ×4, unknown progress ×7, the skeleton's pulse ×8.
-- Changes take 120ms: hover and focus colours fade, ticks and dots fade in, arrows turn (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work) fades in.
+- One speed and one curve: `pc-motion` (120ms) for everything that changes, appears, leaves or travels, with Ease out (`--pc-motion-ease`). Longer times are multiples of it: a tooltip's wait ×3 (360ms), one spinner turn ×7 (0.84s), unknown progress ×12 (1.44s), the skeleton's pulse ×13 (1.56s).
+- Changes: hover and focus colours fade, ticks and dots fade in, arrows turn (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work) fades in.
 - Then three kinds of motion, the same everywhere and never two at once (nothing fades while it moves):
-  - Fade, something appears in place: menus, popovers, tooltips (after 0.4s), dialogs, tab panels, carousel slides and content that takes a skeleton's place fade in and out where they are.
+  - Fade, something appears in place: menus, popovers, tooltips (after 360ms), dialogs, tab panels, carousel slides and content that takes a skeleton's place fade in and out where they are.
   - Grow, something takes room or gives it back: toasts and field errors grow in whenever they appear; a row, chip or alert the person just added (`Pecaiet.enter(el)`, or a Turbo stream that adds it) grows in; accordion answers and tree branches grow open and shrink closed; a removed row, chip, alert or toast shrinks out. Each fades while it grows, in one motion, so what's around it glides instead of jumping. Content that's only drawn again (a Turbo frame, a React update) shows at once, never row by row. Table rows can't grow: they fade.
   - Slide, something comes from an edge or travels: the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link slide in from their edge; the switch's knob, the segmented pill, the tab line and a progress bar slide to their new place.
 - Loading: the spinner turns, the skeleton pulses, unknown progress slides. Pages crossfade (Chrome, Edge, Safari). Jumps within a page scroll smoothly. Numbers, the stepper's number and a pressed button don't move.
