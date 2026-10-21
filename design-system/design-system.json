@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T11:49:34Z",
+    "at": "2026-10-21T11:51:54Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Tokens everywhere: control heights are named tokens (pc-row-xs, pc-row-sm, pc-row, pc-row-lg; phones work them out from pc-row-touch), and every other number in the CSS is a token or a sum of tokens. Nothing looks different."
+    "note": "Combobox card: the several-values picker as a sheet on phones."
   },
   "layout": "files",
   "libraries": [],
