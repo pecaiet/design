@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T15:06:35Z",
+    "at": "2026-10-21T17:03:06Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Accordion answers and tree branches grow open and shrink closed (pecaiet.js), so what's below glides instead of jumping."
+    "note": "Motion gaps closed: a Select's arrow turns, a copy's tick and a busy button's spinner fade in, content that replaces a skeleton fades in, the collapsing sidebar stays visible while it slides out, and an error under a radio group grows its own gap too."
   },
   "layout": "files",
   "libraries": [],

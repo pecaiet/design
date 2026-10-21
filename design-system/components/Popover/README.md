@@ -9,4 +9,4 @@ A panel that opens from a button, on click, and can hold a link, a field or butt
 - A click outside or Escape closes it, and focus goes back to the button.
 - On phones it's a sheet from the bottom over a `.pc-popover-backdrop` (put right before the popover), with an x (`.pc-popover-close`) beside its title; the page behind doesn't scroll.
 - The Datepicker is a popover too.
-- Motion: it fades in and drops 4px from what opened it (200ms), and closes the same way backwards (pecaiet.js plays the closing when the app hides it). On phones the sheet slides up from the bottom while the page dims. One that opens upward (`.pc-popover-up`) rises instead.
+- Motion: it fades in where it opens (200ms) and fades out when it closes (pecaiet.js plays the closing when the app hides it). On phones the sheet slides up from the bottom while the page dims.

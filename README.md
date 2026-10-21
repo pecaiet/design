@@ -46,25 +46,26 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 - **Every other size** (tokens.json's further sections, in the Tokens `:root` here): `--pc-text-N` with its line `--pc-line-N` (nine text sizes; a line is named by its own value: `--pc-line-20` is the 20px line of 14px text), `--pc-size-12/16/20/24/32/48` (icons and fixed squares), `--pc-width-*`, `--pc-height-list/panel/sheet`, `--pc-border`, `--pc-border-2`, `--pc-row-xs/-sm/-lg` and `--pc-row-touch` (control heights; phones work theirs out from `--pc-row-touch`), `--pc-bar-2/4/6`, `--pc-dot-8/12`, `--pc-opacity-12` and `--pc-opacity-50` (faint and half, for fading and for mixing one colour into another), `--pc-weight-*`, `--pc-tracking-*`, `--pc-layer-*` (raised, tooltip, menu, drawer, sheet, toast, skip link). Corners add `--pc-radius-xs` (2px) and `--pc-radius-full` (round). Colours that stay the same in both themes: `--media`, `--media-scrim`, `--on-media`, `--on-media-foreground`, `--on-media-hover`, `--knob`, `--colour-gray` … `--colour-pink`.
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (cards, the raised pill: a toolbar tool under the pointer, the chosen segment; the slider's handle; a switch's knob), `--pc-raise-lg` (everything that opens over the page: menus, popovers, dialogs, drawers, toasts, tooltips, the skip link, the phone sidebar, a video's play button), `--pc-focus-offset` (keyboard focus on a chosen day or month), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
-- **Motion**: `--pc-motion-fast` (120ms) and `--pc-motion-base` (200ms), with `--pc-motion-ease`, `--pc-motion-distance` and the times worked out from base (`--pc-motion-wait`, `-spin`, `-slide`, `-pulse`). See Motion.
+- **Motion**: `--pc-motion-fast` (120ms) and `--pc-motion-base` (200ms), with `--pc-motion-ease` and the times worked out from base (`--pc-motion-wait`, `-spin`, `-slide`, `-pulse`). See Motion.
 
 ## Motion
 
-Two speeds and one curve, three kinds of motion, the same in every app (the design system's Motion card shows them playing):
+Two speeds and one curve, the same in every app (the design system's Motion card shows them playing). Changes are quick; then three kinds of motion, never two at once (nothing fades while it moves):
 
-- **Change** (`--pc-motion-fast`, 120ms): hover and focus colours, ticks, dots, arrows. Things that travel take `--pc-motion-base` (200ms): the switch's knob, the segmented pill, the tab line, a progress bar.
-- **Appear** (`--pc-motion-base`): menus, popovers, tooltips (after `--pc-motion-wait`, 0.4s), dialogs, toasts, field errors and new rows fade in while they move 4px (`--pc-motion-distance`) from where they come from (`--pc-enter`), and leave the same way backwards. Accordion answers and tree branches grow open and shrink closed (`pecaiet.js`).
-- **Slide** (`--pc-motion-base`): the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link come in from their edge.
+- **Change** (`--pc-motion-fast`, 120ms): hover and focus colours, ticks, dots, arrows (accordion, tree, Select), an icon swapped in a button (a copy's tick, the spinner at work; `pecaiet.js`).
+- **Fade** (`--pc-motion-base`, 200ms): what appears in place. Menus, popovers, tooltips (after `--pc-motion-wait`, 0.4s), dialogs, tab panels, carousel slides and content that takes a skeleton's place (`pecaiet.js`) fade in and out where they are.
+- **Grow** (`--pc-motion-base`): what takes room or gives it back, fading while it grows or shrinks, in one motion, so what's around it glides (`pecaiet.js`). Toasts and field errors whenever they appear; accordion answers and tree branches as they open and close; rows, chips and alerts only when the app says they're new (`Pecaiet.enter`, or a Turbo stream that adds them), so content that's only drawn again shows at once; whatever is removed (`Pecaiet.leave`). Table rows can't grow: they fade.
+- **Slide** (`--pc-motion-base`): the drawer, the sidebar and its phone sheet, the sheets on phones and the skip link come in from their edge (`--pc-enter`); the switch's knob, the segmented pill, the tab line and a progress bar slide to their new place.
 - **Off**: `data-motion="off"` on `<html>` makes everything instant (the spinner turns slowly); `data-motion="on"` keeps motion even when the device asks for less; with neither, the device decides. Settings › Preferences › Motion (On · Off) sets it.
 
-`pecaiet.js` does what CSS can't. With no calls it plays the closing of menus, popovers and sheets when the app hides them (`hidden`), the phone sidebar sliding out when the app takes `.pc-sidebar-sheet` off its frame, Escape on a dialog or drawer, accordion answers and tree branches growing open and shrinking closed (what's below glides), an alert's x (`.pc-alert-close`) and any `[data-pc-dismiss]`, the tab line, Turbo removals (`turbo-stream action="remove"` fades the target out first), smooth jumps to `#` links, and radios named `pc-theme` (dark/light/system) or `pc-motion` (on/off). For what only the app knows, one call:
+`pecaiet.js` does what CSS can't. With no calls it plays the closing of menus, popovers and sheets when the app hides them (`hidden`), the phone sidebar sliding out when the app takes `.pc-sidebar-sheet` off its frame, Escape on a dialog or drawer, accordion answers and tree branches growing open and shrinking closed (what's below glides), toasts and field errors growing in whenever they appear, icons swapped in a button and content that replaces a skeleton fading in, an alert's x (`.pc-alert-close`) and any `[data-pc-dismiss]`, the tab line, Turbo removals (`turbo-stream action="remove"` shrinks the target out first) and additions (rows, chips and alerts a stream adds grow in), a tree item's children growing in right after it opens, smooth jumps to `#` links, and radios named `pc-theme` (dark/light/system) or `pc-motion` (on/off). For what only the app knows, one call:
 
 ```js
-Pecaiet.leave(row)              // fades it out, closes its gap, removes it (await it in React before dropping it from state)
+Pecaiet.leave(row)              // shrinks it out while it fades, then removes it (await it in React before dropping it from state)
 Pecaiet.close(dialog)           // plays the closing, then closes (a <dialog>, or anything shown by removing hidden)
 Pecaiet.setTheme("dark")        // "dark" | "light" | "system", with a crossfade; idp's theme script calls this
 Pecaiet.setMotion("off")        // "on" | "off" | null (back to the device)
-Pecaiet.enter(el)               // fades something in the way it comes (also as a React ref)
+Pecaiet.enter(el)               // something the person just added: a row, chip or alert grows in, anything else fades in (also as a React ref)
 ```
 
 ## Rules for apps

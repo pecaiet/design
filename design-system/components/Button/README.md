@@ -9,8 +9,8 @@ A button that does something: four styles, three sizes, and the states every sty
 - A button that stays on (a filter, a view, Bold) carries `aria-pressed="true"`: soft teal (`primary-soft`, `primary-hover` words), an outline's edge teal. The same in a toolbar, where the raised pill only means "under the pointer".
 - Can't be used: the `disabled` attribute. It keeps its own shape, in grey: primary, outline and delete buttons turn one flat grey box (`muted` fill, `border` edge, `muted-foreground` words); a ghost button, which has no box, turns `muted-foreground` words at half strength, with no box (Previous in pagination, a toolbar's tool, an icon-only ghost). The not-allowed pointer on all. To say why, use `aria-disabled="true"` instead: it stays focusable, the tooltip goes on the button itself, and the app ignores the click. A link that goes nowhere (`<a class="pc-btn" aria-disabled="true">`) has no `href`.
 - Working: `aria-busy="true"`, a `.pc-spinner` in place of the icon (or before the words), and words that say what's happening ("Saving…"). It keeps its width and can't be pressed twice; icon-only, the spinner replaces the icon.
-- Copied: a copy button with words turns into a tick and "Copied" for two seconds; an icon-only one swaps its icon for a tick and its tooltip says "Copied". No toast.
+- Copied: a copy button with words turns into a tick and "Copied" for two seconds; an icon-only one swaps its icon for a tick (it fades in, with pecaiet.js) and its tooltip says "Copied". No toast.
 - `.pc-btn-full` stretches it to its container: forms on phones, the sign-in page. Words never wrap, so keep them short.
 - A button that goes to another page is an `<a class="pc-btn …">` with the same look.
 - Label with a verb and what it acts on: "Save email", "Delete account".
-- Motion: hover and focus colours fade (120ms); pressing doesn't move it. At work, its icon becomes the spinner (it fades in) and the words change.
+- Motion: hover and focus colours fade (120ms); pressing doesn't move it. At work, its icon becomes the spinner and the words change; the spinner fades in (120ms, with pecaiet.js), and so does any icon the app swaps in a button.

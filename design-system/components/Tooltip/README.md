@@ -10,4 +10,4 @@ A short hint on hover and keyboard focus: dark on light, light on dark.
 - Up to 256px wide, then it wraps. Keep it to one short sentence.
 - A button that can't be used and says why: `aria-disabled="true"` (not `disabled`), with the tooltip on the button itself.
 - Phones have no hover: never put needed information only in a tooltip; the button's name lives in its `aria-label`.
-- Motion: when the pointer rests on it for 0.4s (`--pc-motion-wait`) it fades in and moves 4px away from what it labels; keyboard focus shows it at once. It fades away at once.
+- Motion: when the pointer rests on it for 0.4s (`--pc-motion-wait`) it fades in where it is; keyboard focus shows it at once. It fades away at once.

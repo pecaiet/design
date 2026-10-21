@@ -11,4 +11,4 @@ A message in a page or form: something worked, something needs attention soon, o
 - With an action: an outline button with `.pc-alert-action` at the end (Unarchive).
 - A banner across the top of a page (offline, a trial ending): add `.pc-alert-banner` for no corners, edge to edge, one line; usually dismissible.
 - Errors say what went wrong and what to do next. Flash messages use this component.
-- Motion: its x (`.pc-alert-close`) closes it with pecaiet.js: it fades, then the gap it leaves closes smoothly. `Pecaiet.leave(alert)` does the same from the app.
+- Motion: its x (`.pc-alert-close`) closes it with pecaiet.js: it shrinks while it fades, in one motion, and what's below glides up. `Pecaiet.leave(alert)` does the same from the app; one the app adds (`Pecaiet.enter(alert)`, or a Turbo stream) grows in.

@@ -12,4 +12,4 @@ Choosing one value from a list: a button that looks like a field and opens our o
 - Picking applies the value, closes, and puts focus back on the button. Escape or a tap on the backdrop closes without a change. Up and Down move through the options, Enter picks.
 - When: six or more choices, or long ones. Two to five that should all be visible are Radio buttons; switching a view right away is a Segmented control; typing to find in a long list is the Combobox (this with search).
 - The app opens and closes it (toggles `hidden` and `aria-expanded`) and filters for search; the classes only style it.
-- Motion: its menu moves like every menu (Dropdown menu).
+- Motion: its menu fades like every menu (Dropdown menu), and its arrow turns up while the list is open (120ms).

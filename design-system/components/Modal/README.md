@@ -11,4 +11,4 @@ A small window over the page that asks one thing: a yes or no, or a few fields.
 - Long content: `.pc-dialog-content` scrolls; the title and the actions stay where they are.
 - Focus: opening moves it to the first field, or to Cancel for a dangerous confirmation; closing returns it to the button that opened the modal.
 - Phones: a sheet from the bottom over the dimmed page, like the menus and popovers; the buttons share the width. It grows with its content up to 85% of the screen, then the middle scrolls.
-- Motion: it fades in and rises 4px while the page dims (200ms); on phones the sheet slides up. Closing plays it backwards: CSS does it in Chrome and Edge, pecaiet.js everywhere else (Escape, or `Pecaiet.close(dialog)`).
+- Motion: it fades in while the page dims (200ms); on phones the sheet slides up. Closing plays it backwards: CSS does it in Chrome and Edge, pecaiet.js everywhere else (Escape, or `Pecaiet.close(dialog)`).

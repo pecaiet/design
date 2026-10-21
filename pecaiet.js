@@ -4,9 +4,11 @@
    so motion is still set in one place.
 
    Calls (on window.Pecaiet):
-     leave(el)          fade el out the way it came, close the gap it leaves, then remove it. Resolves when it's gone.
-                        { remove: false } plays it and leaves the removing to you.
-     enter(el)          fade el in the way it comes. Works as a React ref (null is ignored).
+     leave(el)          el shrinks out while it fades, in one motion (what's around it glides), then it's removed; a table row
+                        (it can't shrink) fades. Resolves when it's gone. { remove: false } plays it and leaves the removing to you.
+     enter(el)          something the person just added: a row, chip or alert grows in while it fades (what's below glides), a table
+                        row fades in, anything else fades in where it is. Works as a React ref (null is ignored). Content that's
+                        only drawn again doesn't move.
      close(el)          play the closing, then close: a <dialog> (close()) or anything shown by removing hidden (sets hidden).
      setTheme(mode)     "dark" | "light" | "system": the .dark class on <html>, remembered in the theme cookie, crossfading.
      setMotion(mode)    "on" | "off" (or null to follow the device again): data-motion on <html>, remembered in the motion cookie.
@@ -17,9 +19,13 @@
      - the phone sidebar (and the settings nav on phones) slides out when the app takes .pc-sidebar-sheet off its frame;
      - Escape on a dialog, the settings window or the drawer plays the closing;
      - accordion answers and tree branches grow open and shrink closed, the rows below gliding;
+     - toasts and field errors grow in whenever they appear after the page has loaded, even in a page drawn again (they're news);
      - an alert's x (.pc-alert-close) and any [data-pc-dismiss] button make their alert or toast leave;
      - the chosen tab's line slides to the next tab;
-     - Turbo: a removed row, alert or toast leaves first; rows and chips added after the page has loaded fade in (pecaiet.css);
+     - Turbo: a removed row, alert or toast leaves first; rows, chips and alerts a stream adds (append, prepend, before, after) grow in;
+     - a tree item's children grow in right after it opens;
+     - an icon swapped inside a button (a copy turning into a tick, the spinner at work) fades in;
+     - content that takes a skeleton's place (the app swaps it in, or a Turbo frame loads) fades in;
      - jumps within a page (#links, the skip link) scroll smoothly;
      - radios named pc-theme or pc-motion (values dark/light/system, on/off) set the theme or motion. */
 (() => {
@@ -41,46 +47,77 @@
     return v.endsWith("ms") ? parseFloat(v) : (parseFloat(v) || 0) * 1000;
   };
   const on = () => time("--pc-motion-base") > 0;
-  const play = (el, frames, options = {}) =>
-    el.animate(frames, { duration: time("--pc-motion-base"), easing: getComputedStyle(root).getPropertyValue("--pc-motion-ease").trim() || "ease-out", fill: "forwards", ...options });
-  // Where el comes from, as pecaiet.css says (--pc-enter, --pc-enter-opacity); 4px up when it doesn't say.
+  // Every motion reads what it needs first and only then changes the page: a style read after a change makes the browser work
+  // the styles out again, and a few of those in a row are what makes a motion start late.
+  const timing = () => ({ duration: time("--pc-motion-base"), easing: getComputedStyle(root).getPropertyValue("--pc-motion-ease").trim() || "ease-out" });
+  const play = (el, frames, t, more = {}) => el.animate(frames, { ...t, fill: "forwards", ...more });
+  // Where el comes from, as pecaiet.css says (--pc-enter, --pc-enter-opacity): an edge for what slides, else nowhere (it fades).
   const from = el => {
     const s = getComputedStyle(el);
-    return { opacity: s.getPropertyValue("--pc-enter-opacity").trim() || "0", translate: s.getPropertyValue("--pc-enter").trim() || `0 calc(-1 * ${s.getPropertyValue("--pc-motion-distance").trim() || "4px"})` };
+    return { opacity: s.getPropertyValue("--pc-enter-opacity").trim() || "0", translate: s.getPropertyValue("--pc-enter").trim() || "0 0" };
   };
   const shownFrame = { opacity: "1", translate: "0 0" };
 
-  // Grow open or shrink closed: height, padding and gap together with a fade, so what's below glides instead of jumping.
-  function grow(el, opening) {
-    const s = getComputedStyle(el), gap = parseFloat(getComputedStyle(el.parentElement || el).rowGap) || 0;
-    const full = { height: `${el.offsetHeight}px`, paddingTop: s.paddingTop, paddingBottom: s.paddingBottom, borderTopWidth: s.borderTopWidth, borderBottomWidth: s.borderBottomWidth, marginBottom: s.marginBottom, opacity: "1" };
-    const none = { height: "0px", paddingTop: "0px", paddingBottom: "0px", borderTopWidth: "0px", borderBottomWidth: "0px", marginBottom: `${-gap}px`, opacity: "0" };
-    el.style.overflow = "hidden";
-    const a = play(el, opening ? [none, full] : [full, none]);
-    return a.finished.then(() => a, () => a).finally(() => el.style.removeProperty("overflow"));
+  // The space el takes, and none of it: its height (its width, in a row such as chips) with min sizes, padding, borders and the gap
+  // beside it, so what's around it glides in the same motion. A one-column grid keeps its gap until the row is gone, so while it
+  // moves the grid's gaps become margins (data-pc-gaps, pecaiet.css) and the row's own gap closes with it. Only reads; start() changes.
+  function space(el) {
+    const p = el.parentElement, ps = getComputedStyle(p || el), s = getComputedStyle(el), extra = [];
+    // Heights and widths as the element counts them: with content-box sizing, without its padding and borders.
+    const inner = s.boxSizing === "content-box", px = v => parseFloat(v) || 0;
+    let start = () => {}, done = () => {};
+    if (p && /flex/.test(ps.display) && !ps.flexDirection.startsWith("column")) {
+      const gap = parseFloat(ps.columnGap) || 0;
+      return { extra, start, done,
+        full: { width: `${el.offsetWidth - (inner ? px(s.paddingLeft) + px(s.paddingRight) + px(s.borderLeftWidth) + px(s.borderRightWidth) : 0)}px`, minWidth: s.minWidth, paddingLeft: s.paddingLeft, paddingRight: s.paddingRight, borderLeftWidth: s.borderLeftWidth, borderRightWidth: s.borderRightWidth, marginRight: s.marginRight },
+        none: { width: "0px", minWidth: "0px", paddingLeft: "0px", paddingRight: "0px", borderLeftWidth: "0px", borderRightWidth: "0px", marginRight: `${-gap}px` } };
+    }
+    const full = { height: `${el.offsetHeight - (inner ? px(s.paddingTop) + px(s.paddingBottom) + px(s.borderTopWidth) + px(s.borderBottomWidth) : 0)}px`, minHeight: s.minHeight, paddingTop: s.paddingTop, paddingBottom: s.paddingBottom, borderTopWidth: s.borderTopWidth, borderBottomWidth: s.borderBottomWidth };
+    const none = { height: "0px", minHeight: "0px", paddingTop: "0px", paddingBottom: "0px", borderTopWidth: "0px", borderBottomWidth: "0px" };
+    const gap = p ? parseFloat(ps.rowGap) || 0 : 0;
+    if (gap && ps.display.includes("grid") && ps.gridTemplateColumns.trim().split(/\s+/).length === 1) {
+      start = () => { const n = +(p.dataset.pcGaps || 0); if (!n) p.style.setProperty("--pc-gaps", `${gap}px`); p.dataset.pcGaps = n + 1; };
+      done = () => { const left = +(p.dataset.pcGaps || 1) - 1; if (left) p.dataset.pcGaps = left; else { delete p.dataset.pcGaps; p.style.removeProperty("--pc-gaps"); } };
+      if (el.previousElementSibling) { full.marginTop = `${gap}px`; none.marginTop = "0px"; }
+      else if (el.nextElementSibling) extra.push([el.nextElementSibling, { marginTop: `${gap}px` }, { marginTop: "0px" }]);
+    } else if (gap) { full.marginBottom = s.marginBottom; none.marginBottom = `${-gap}px`; }
+    // Its own space above (an error under a group of choices) closes with it too.
+    if (px(s.marginTop) && !full.marginTop) { full.marginTop = s.marginTop; none.marginTop = "0px"; }
+    return { full, none, extra, start, done };
+  }
+  const clip = el => { el.style.overflow = "hidden"; el.style.whiteSpace = "nowrap"; };
+  const unclip = el => { el.style.removeProperty("overflow"); el.style.removeProperty("white-space"); };
+
+  // Grow open or shrink closed: the space and a fade together. Resolves at its end with settle(), which hands el back to the page.
+  function grow(el, opening, t, more = {}, fades = true, sp = space(el)) {
+    const o = fades ? [{ opacity: "0" }, { opacity: "1" }] : [{}, {}];
+    sp.start();
+    clip(el);
+    const runs = [play(el, opening ? [{ ...sp.none, ...o[0] }, { ...sp.full, ...o[1] }] : [{ ...sp.full, ...o[1] }, { ...sp.none, ...o[0] }], t, more),
+                  ...sp.extra.map(([other, a, b]) => play(other, opening ? [b, a] : [a, b], t, more))];
+    return Promise.all(runs.map(a => a.finished)).catch(() => {}).then(() => ({ settle: () => { unclip(el); runs.forEach(a => a.cancel()); sp.done(); } }));
   }
 
   async function leave(el, { remove = true } = {}) {
     if (!el?.isConnected) return;
-    if (on() && el.matches(".pc-tree-item")) await grow(el, false);
-    else if (on()) {
-      const fade = play(el, [shownFrame, from(el)]);
-      await fade.finished.catch(() => {});
-      if (el.tagName !== "TR" && el.parentElement) {
-        const s = getComputedStyle(el), gap = parseFloat(getComputedStyle(el.parentElement).rowGap) || 0;
-        el.style.overflow = "hidden";
-        await play(el, [
-          { height: `${el.offsetHeight}px`, paddingTop: s.paddingTop, paddingBottom: s.paddingBottom, borderTopWidth: s.borderTopWidth, borderBottomWidth: s.borderBottomWidth, marginBottom: s.marginBottom },
-          { height: "0px", paddingTop: "0px", paddingBottom: "0px", borderTopWidth: "0px", borderBottomWidth: "0px", marginBottom: `${-gap}px` },
-        ]).finished.catch(() => {});
-      }
-    }
-    if (remove) el.remove();
+    const t = timing(), gone = () => { if (remove) el.remove(); else el.style.setProperty("display", "none", "important"); };
+    if (!t.duration) return gone();
+    // Table rows can't shrink: they fade, then go.
+    if (el.tagName === "TR") { await play(el, [shownFrame, { opacity: "0" }], t).finished.catch(() => {}); return gone(); }
+    // Anything else shrinks while it fades, in one motion.
+    const shrink = await grow(el, false, t);
+    gone();
+    shrink.settle();
   }
 
+  // What takes room grows in; a table row (it can't grow) and anything else fade in where they are. Toasts and field errors are
+  // always news, so they grow in by themselves.
+  const GROWS = ".pc-file, .pc-tree-item, .pc-chip, .pc-sidebar-item, .pc-menu-item, .pc-alert, .pc-toast, .pc-field-error", NEWS = ".pc-toast, .pc-field-error";
   function enter(el) {
-    if (!el?.isConnected || !on()) return Promise.resolve();
-    const a = play(el, [from(el), shownFrame]);
+    const t = timing();
+    if (!el?.isConnected || !t.duration) return Promise.resolve();
+    if (el.matches(GROWS)) return grow(el, true, t).then(g => g.settle());
+    const a = play(el, [el.tagName === "TR" ? { opacity: "0" } : from(el), el.tagName === "TR" ? { opacity: "1" } : shownFrame], t);
     return a.finished.then(() => a.cancel(), () => {});
   }
 
@@ -89,19 +126,17 @@
   const displays = new WeakMap(), stops = new WeakMap();
   const backdropOf = el => el.previousElementSibling?.matches(".pc-menu-backdrop, .pc-popover-backdrop") ? el.previousElementSibling : null;
   function playOut(el) {
+    const t = timing(), sheet = el.matches(".pc-sidebar-sheet"), away = sheet ? null : from(el);
+    const bar = sheet ? el.querySelector(":scope > .pc-sidebar") : null, shade = sheet ? el.querySelector(":scope > .pc-sheet-backdrop") : backdropOf(el);
     const kept = [[el, displays.get(el)], [backdropOf(el), "block"]].filter(([k]) => k);
+    // Drawn again, the sheet would start its sliding-in animation over (a flash off screen): hold it off while it slides out.
+    bar?.style.setProperty("animation", "none");
     kept.forEach(([k, d]) => k.style.setProperty("display", d, "important"));
     const runs = [];
-    if (el.matches(".pc-sidebar-sheet")) {
-      const bar = el.querySelector(":scope > .pc-sidebar"), shade = el.querySelector(":scope > .pc-sheet-backdrop");
-      if (bar) runs.push(play(bar, [{ transform: "translateX(0)" }, { transform: "translateX(-100%)" }]));
-      if (shade) runs.push(play(shade, [{ opacity: "1" }, { opacity: "0" }]));
-    } else {
-      runs.push(play(el, [shownFrame, from(el)]));
-      const shade = backdropOf(el);
-      if (shade) runs.push(play(shade, [{ opacity: "1" }, { opacity: "0" }]));
-    }
-    const stop = () => { kept.forEach(([k]) => k.style.removeProperty("display")); runs.forEach(a => a.cancel()); stops.delete(el); };
+    if (bar) runs.push(play(bar, [{ transform: "translateX(0)" }, { transform: "translateX(-100%)" }], t));
+    if (away) runs.push(play(el, [shownFrame, away], t));
+    if (shade) runs.push(play(shade, [{ opacity: "1" }, { opacity: "0" }], t));
+    const stop = () => { kept.forEach(([k]) => k.style.removeProperty("display")); bar?.style.removeProperty("animation"); runs.forEach(a => a.cancel()); stops.delete(el); };
     stops.set(el, stop);
     Promise.all(runs.map(a => a.finished)).then(stop, () => {});
   }
@@ -109,12 +144,14 @@
   // while the sidebar slides out, then take it off again.
   const ours = new WeakSet();
   function sheetOut(frame) {
+    const t = timing(), bar = frame.querySelector(":scope > .pc-sidebar"), shade = frame.querySelector(":scope > .pc-sheet-backdrop");
+    // The class back on would start the sheet's sliding-in animation over (a flash off screen): hold it off while it slides out.
+    bar?.style.setProperty("animation", "none");
     ours.add(frame);
     frame.classList.add("pc-sidebar-sheet");
     frame.style.setProperty("display", "flex", "important");
-    const bar = frame.querySelector(":scope > .pc-sidebar"), shade = frame.querySelector(":scope > .pc-sheet-backdrop");
-    const runs = [bar && play(bar, [{ transform: "translateX(0)" }, { transform: "translateX(-100%)" }]), shade && play(shade, [{ opacity: "1" }, { opacity: "0" }])].filter(Boolean);
-    const stop = () => { ours.add(frame); frame.classList.remove("pc-sidebar-sheet"); frame.style.removeProperty("display"); runs.forEach(a => a.cancel()); stops.delete(frame); };
+    const runs = [bar && play(bar, [{ transform: "translateX(0)" }, { transform: "translateX(-100%)" }], t), shade && play(shade, [{ opacity: "1" }, { opacity: "0" }], t)].filter(Boolean);
+    const stop = () => { ours.add(frame); frame.classList.remove("pc-sidebar-sheet"); frame.style.removeProperty("display"); bar?.style.removeProperty("animation"); runs.forEach(a => a.cancel()); stops.delete(frame); };
     stops.set(frame, stop);
     Promise.all(runs.map(a => a.finished)).then(stop, () => {});
   }
@@ -140,8 +177,9 @@
     if (!el) return;
     if (el instanceof HTMLDialogElement) {
       if (!el.open) return;
-      if (on() && !CSS.supports("overlay", "auto")) {
-        const runs = [play(el, [shownFrame, from(el)]), play(el, [{ opacity: "1" }, { opacity: "0" }], { pseudoElement: "::backdrop" })];
+      const t = timing();
+      if (t.duration && !CSS.supports("overlay", "auto")) {
+        const away = from(el), runs = [play(el, [shownFrame, away], t), play(el, [{ opacity: "1" }, { opacity: "0" }], t, { pseudoElement: "::backdrop" })];
         await Promise.all(runs.map(a => a.finished)).catch(() => {});
         el.close();
         runs.forEach(a => a.cancel());
@@ -163,14 +201,17 @@
     const summary = e.target.closest(".pc-accordion-item > summary");
     if (summary) {
       const item = summary.parentElement, answer = item.querySelector(":scope > .pc-accordion-content");
-      if (!answer || !on() || item.dataset.pcClosing !== undefined) return;
+      if (!answer || item.dataset.pcClosing !== undefined) return;
+      const t = timing();
+      if (!t.duration) return;
       e.preventDefault();
       if (item.open) {
+        const sp = space(answer);
         item.dataset.pcClosing = "";
-        grow(answer, false).then(a => { item.open = false; delete item.dataset.pcClosing; a.cancel(); });
+        grow(answer, false, t, {}, true, sp).then(g => { item.open = false; delete item.dataset.pcClosing; g.settle(); });
       } else {
         item.open = true;
-        grow(answer, true).then(a => a.cancel());
+        grow(answer, true, t).then(g => g.settle());
       }
       return;
     }
@@ -193,17 +234,41 @@
     tabs.dataset.pcTabLine = "";
   }
   const watchTabs = scope => scope.querySelectorAll?.(".pc-tabs").forEach(t => { drawLine(t); lines.observe(t); });
+  // What counts as new: children inserted under a tree item within a second of that same item opening (a tree drawn again has new
+  // items, so it stays still), rows a Turbo stream adds, and every toast and field error (not in Turbo's preview of a cached page).
+  // Also faded in: an icon swapped inside a button that stays, and whatever is put where a skeleton was taken out.
+  const rows = [], swaps = [], loads = [], opened = new WeakMap();
+  const parentItem = n => { const level = +n.getAttribute("aria-level") || 1; let p = n.previousElementSibling; while (p && (+p.getAttribute("aria-level") || 1) >= level) p = p.previousElementSibling; return p; };
+  let adding = 0;
   new MutationObserver(changes => {
+    const skeletons = new Set(changes.filter(c => [...c.removedNodes].some(n => n instanceof Element && (n.matches(".pc-skeleton") || n.querySelector(".pc-skeleton")))).map(c => c.target));
     for (const c of changes) {
-      if (c.type === "attributes") { const tabs = c.target.closest?.(".pc-tabs"); if (tabs) drawLine(tabs); }
+      if (c.type === "attributes") {
+        if (c.attributeName === "aria-expanded") { if (c.target.getAttribute("aria-expanded") === "true" && c.target.matches?.(".pc-tree-item")) opened.set(c.target, performance.now()); continue; }
+        const tabs = c.target.closest?.(".pc-tabs"); if (tabs) drawLine(tabs);
+      }
       else c.addedNodes.forEach(n => {
         if (!(n instanceof Element)) return;
         if (n.matches(".pc-tabs")) watchTabs(n.parentElement); else watchTabs(n);
         if (n.matches(SHOWN)) remembered(n);
-        if (n.matches(".pc-tree-item") && root.dataset.pcReady !== undefined && on()) grow(n, true).then(a => a.cancel());
+        if (c.target.matches?.(".pc-btn") && n.matches("svg, .pc-spinner")) swaps.push(n);
+        else if (skeletons.has(c.target)) loads.push(n);
+        else if (n.matches(".pc-tree-item") && performance.now() - (opened.get(parentItem(n)) ?? -1e9) < 1000) rows.push(n);
+        else if (adding && (n.matches(GROWS) || n.tagName === "TR")) rows.push(n);
+        else if (!root.hasAttribute("data-turbo-preview")) rows.push(...(n.matches(NEWS) ? [n] : n.querySelectorAll(NEWS)));
       });
     }
-  }).observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-selected", "aria-current"] });
+    // New rows grow in together: every size is read first, then they all start. A table row fades in, and so does what took a
+    // skeleton's place; a swapped icon fades in at the quick speed.
+    if (!rows.length && !swaps.length && !loads.length) return;
+    const t = timing(), fast = time("--pc-motion-fast"), list = rows.splice(0), icons = swaps.splice(0), contents = loads.splice(0);
+    if (!t.duration) return;
+    const spaces = list.map(n => (n.tagName === "TR" ? null : space(n)));
+    const fadeIn = (n, more = {}) => { const a = play(n, [{ opacity: "0" }, { opacity: "1" }], t, more); a.finished.then(() => a.cancel(), () => {}); };
+    list.forEach((n, i) => { if (spaces[i]) grow(n, true, t, {}, true, spaces[i]).then(g => g.settle()); else fadeIn(n); });
+    contents.forEach(n => fadeIn(n));
+    icons.forEach(n => fadeIn(n, { duration: fast }));
+  }).observe(root, { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-selected", "aria-current", "aria-expanded"] });
 
   // Theme and motion, and the Settings radios that set them.
   function setTheme(mode) {
@@ -236,9 +301,10 @@
 
   // Turbo: removed things leave first; a new page isn't "added rows".
   addEventListener("turbo:before-stream-render", e => {
-    if (e.target.action !== "remove" || !on()) return;
-    const render = e.detail.render;
-    e.detail.render = async stream => { await Promise.all(stream.targetElements.map(t => leave(t, { remove: false }))); render(stream); };
+    const action = e.target.action, render = e.detail.render;
+    if (!on()) return;
+    if (action === "remove") e.detail.render = async stream => { await Promise.all(stream.targetElements.map(t => leave(t, { remove: false }))); render(stream); };
+    if (["append", "prepend", "before", "after"].includes(action)) e.detail.render = async stream => { adding++; try { await render(stream); } finally { setTimeout(() => adding--, 0); } };
   });
   addEventListener("turbo:before-render", notReady);
   addEventListener("turbo:load", () => { watchTabs(document); document.querySelectorAll(SHOWN).forEach(remembered); syncRadios(); ready(); });
@@ -246,7 +312,20 @@
   document.addEventListener("inertia:start", notReady);
   document.addEventListener("inertia:finish", ready);
 
-  const start = () => { watchTabs(document); document.querySelectorAll(SHOWN).forEach(remembered); syncRadios(); ready(); document.fonts?.ready.then(() => watchTabs(document)); };
+  // The browser sets up its animation machinery the first time a page animates, which made the first motion start late. Do it once
+  // when the page is idle, on an invisible square.
+  const warm = () => {
+    const w = document.createElement("div");
+    w.style.cssText = "position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none";
+    document.body.append(w);
+    getComputedStyle(w).getPropertyValue("--pc-enter");
+    w.offsetHeight;
+    w.animate([{ opacity: "0", translate: "0 0", height: "1px" }, { opacity: "0", translate: "0 1px", height: "0px" }], { duration: 1 }).finished.then(() => w.remove(), () => w.remove());
+  };
+  const start = () => {
+    watchTabs(document); document.querySelectorAll(SHOWN).forEach(remembered); syncRadios(); ready(); document.fonts?.ready.then(() => watchTabs(document));
+    (window.requestIdleCallback || setTimeout)(warm, { timeout: 1000 });
+  };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 
   window.Pecaiet = { enter, leave, close, setTheme, setMotion, motion };

@@ -7,4 +7,4 @@ Adding files from the device: an outline button that opens the file picker. The 
 - The chosen files show under it as File rows (`.pc-files`), each ending in an x to remove it. The button stays, to add more.
 - Keyboard focus lands on the hidden input and shows the button's focus ring; Enter or Space opens the picker. `disabled` on the input turns the button one flat grey, like any button that can't be used.
 - No drop area for now.
-- Motion: a file added after the page has loaded fades in and drops 4px; one removed with `Pecaiet.leave(row)` fades and its gap closes.
+- Motion: a file just added (`Pecaiet.enter(row)`, or a Turbo stream that adds it) grows in, the rows below gliding; one removed with `Pecaiet.leave(row)` shrinks while it fades, the rows below gliding up.

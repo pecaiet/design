@@ -9,4 +9,4 @@ Fields that send something: labels above, the action at the end, and errors wher
   - Each field with a problem gets `aria-invalid="true"` (a red border) and a `.pc-field-error` under it, in place of its hint, saying how to fix it: "Enter a name.", "Enter a URL that starts with https://.". Tie it to the field with `aria-describedby`.
   - The app moves focus to the first field with a problem.
   - A problem with the whole form ("Couldn't save. Try again.") is an error Alert at the top of the fields.
-- Motion: errors fade in under their fields; a button at work shows the spinner in place of its icon.
+- Motion: errors grow in under their fields, what's below gliding (pecaiet.js); a button at work shows the spinner in place of its icon.

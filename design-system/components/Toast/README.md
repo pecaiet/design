@@ -7,4 +7,4 @@ A short message after something happens: "Task deleted", "Couldn't save". Our pa
 - The icon says what kind it is: `data-tone="success"` (`check-circle`, teal), `data-tone="warning"` (`warning`, amber: offline, about to run out), `data-tone="error"` (`warning-circle`, red), otherwise news (`info`, muted).
 - `role="status"`; an error is `role="alert"`. It goes on its own after about five seconds, longer when it has an action, and never while it's under the pointer or has focus.
 - One short sentence. Something people must act on before going on is an Alert on the page or a Modal, not a toast.
-- Motion: it rises 4px as it fades in. Leaving (its x with `data-pc-dismiss`, or `Pecaiet.leave(toast)`), it fades and the toasts above it glide down.
+- Motion: it grows in while it fades in, so the toasts above glide up (pecaiet.js, whenever a toast appears). Leaving (its x with `data-pc-dismiss`, or `Pecaiet.leave(toast)`), it shrinks while it fades and the toasts above glide down.
