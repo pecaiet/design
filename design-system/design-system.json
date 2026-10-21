@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-20T21:25:37Z",
+    "at": "2026-10-21T09:46:17Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Final review: app bugs fixed (closed search on phones, Tailwind clashes, tooltips on click and in panel heads, focus you couldn't see, state clashes), contrast fixes, stale docs and card pictures; picks: dark hover a step lighter, a lighter dark sidebar pill, a track token, 40px phone menus, a darker field edge, ghost buttons that can't be used turn grey, Copied on the button, a secret in a read-only field, Settings' theme as a segmented control. The Review picks card is gone."
+    "note": "Light tints a step deeper; every size from a scale (spacing, text with its own line, sizes, widths, heights, edges, bars and dots, fading, weights, letter spacing, layers) as token families; the last review's fixes and picks: widths in six steps, motion fully off (spinner still), dark grey a step lighter, 40px toasts, 28px tooltips, tree rows like sidebar rows, 24px list indent. The picks cards are gone."
   },
   "layout": "files",
   "libraries": [],

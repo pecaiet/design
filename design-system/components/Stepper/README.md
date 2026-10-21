@@ -1,6 +1,6 @@
 # Stepper
 
-A number to change a step at a time: one 32px field with "−" at the start, the number in the middle and "+" at the end.
+A number to change a step at a time: one field as tall as the row with "−" at the start, the number in the middle and "+" at the end.
 
 - `.pc-stepper` holds a `<button>` with a Phosphor `minus` (`aria-label="Fewer"`), an `<input type="number" min max step value>` with its label, and a `<button>` with a `plus` (`aria-label="More"`), all inside one border like a text field.
 - At the lowest value "−" is `disabled`; at the highest, "+".

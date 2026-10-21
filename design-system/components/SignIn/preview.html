@@ -9,7 +9,7 @@
   .pv { display: block; padding: 18px 24px; font-family: var(--font-sans, Figtree, system-ui, sans-serif); color: var(--foreground); }
   .pv-cap { margin: 14px 0 8px; color: #566577; font-size: 12px; }
   .si-frame { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: 470px; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--background); color: var(--foreground); }
-  .si-aside { display: flex; flex-direction: column; padding: 24px 28px; background: var(--sidebar); }
+  .si-aside { display: flex; flex-direction: column; padding: 24px; background: var(--sidebar); }
   .si-hero { display: grid; gap: 14px; margin: auto 0; }
   .si-hero .pc-page-title { margin: 0; }
   .si-apps { display: grid; gap: 12px; margin: 4px 0 0; padding: 0; list-style: none; }
@@ -25,14 +25,14 @@
   .si-phones { display: grid; grid-template-columns: 360px 360px; gap: 24px; }
   .si-phone { display: flex; flex-direction: column; height: 540px; overflow: hidden; border: 1px solid var(--border); border-radius: 22px; background: var(--background); color: var(--foreground); }
   .si-phone-main { flex: 1; display: grid; place-items: center; }
-  .si-phone-foot { margin: 0; padding: 0 20px 16px; }
-  .si-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 10px 20px; background: var(--sidebar); }
+  .si-phone-foot { margin: 0; padding: 0 16px 16px; }
+  .si-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 8px 16px; background: var(--sidebar); }
   .si-theme { width: auto; }
-  .si-frame > .si-theme { position: absolute; top: 20px; right: 28px; }
-  .si-phone .si-form { padding: 24px 20px; }
+  .si-frame > .si-theme { position: absolute; top: 20px; right: 24px; }
+  .si-phone .si-form { padding: 24px 16px; }
 
   .si-frame { height: 520px; }
-  .si-aside { position: relative; isolation: isolate; overflow: hidden; padding: 24px clamp(40px, 7vw, 120px) 24px 28px; }
+  .si-aside { position: relative; isolation: isolate; overflow: hidden; padding: 24px clamp(40px, 7vw, 120px) 24px 24px; }
   .si-wash { position: absolute; inset: 0; z-index: -10; opacity: .22; }
   [data-theme="senin-dark"] .si-wash { opacity: .16; }
   .si-backdrop { position: absolute; right: -170px; bottom: -180px; z-index: -5; width: 520px; height: 520px; opacity: .14; }
@@ -48,7 +48,7 @@
   .si-main { display: flex; align-items: center; justify-content: flex-start; padding: 24px 40px 24px clamp(40px, 7vw, 120px); }
   .si-form { max-width: 400px; }
   .si-phone { position: relative; }
-  .si-bar { position: relative; isolation: isolate; overflow: hidden; gap: 12px; padding: 14px 20px; }
+  .si-bar { position: relative; isolation: isolate; overflow: hidden; gap: 12px; padding: 12px 16px; }
   .si-for { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 16px; line-height: 24px; font-weight: 600; white-space: nowrap; }
   .si-quiet { color: var(--muted-foreground); font-weight: 400; }
   .si-phone > .si-theme { position: absolute; top: 60px; right: 12px; }

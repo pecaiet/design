@@ -9,16 +9,16 @@
   html, body { margin: 0; height: 100%; }
   body { background: var(--background); color: var(--foreground); overflow: hidden; font-family: var(--font-sans, Figtree, system-ui, sans-serif); }
   .cover { position: relative; height: 288px; overflow: hidden; }
-  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art { position: absolute; top: 0; right: 0; width: 480px; height: 288px; overflow: hidden; }
   .art svg { display: block; width: 480px; height: 288px; }
   .teal { fill: var(--primary); }
-  .deep { fill: var(--sidebar-active-foreground); }
+  .deep { fill: var(--primary-hover); }
   .ink { fill: var(--foreground); }
   .pill { fill: var(--card); }
   .pill.on { fill: var(--primary); }
   .words { position: absolute; left: 24px; bottom: 24px; max-width: 440px; }
-  .name { margin: 0; font-size: 100px; line-height: .92; font-weight: 700; letter-spacing: -.02em; color: var(--foreground); }
-  .tag { margin: 10px 0 0 4px; font-size: 14px; line-height: 20px; color: var(--muted-foreground); }
+  .name { margin: 0; font-size: var(--pc-text-72); line-height: var(--pc-line-72); font-weight: 700; letter-spacing: var(--pc-tracking-tighter); color: var(--foreground); }
+  .tag { margin: 8px 0 0 4px; font-size: var(--pc-text-14); line-height: var(--pc-line-14); color: var(--muted-foreground); }
 </style>
 </head>
 <body>
@@ -26,7 +26,7 @@
 <div class="art" aria-hidden="true">
 <svg viewBox="0 0 480 288" width="480" height="288">
 <!--
-  blocks      primary teal 144x232 bled off the top (the brand colour, largest), sidebar-active-foreground deep teal 104x104, foreground ink 200x160 bled off the right; about 27% of 960x288
+  blocks      primary teal 144x232 bled off the top (the brand colour, largest), primary-hover deep teal 104x104, foreground ink 200x160 bled off the right; about 27% of 960x288
   arrangement one tall slab with two satellites, bottoms stepping down to the right; gutters pc-space-4 (16)
   pattern     pills, from "roomy, soft": sidebar rows drawn as 14-tall pills (rx 7) at the pc-row pitch (36), cut into the teal slab and the ink slab in card, one in primary as the row you are on
   scales      sides in pc-space-2 multiples; gutters pc-space-4; pitch pc-row; corners pc-radius-lg (14) on every block
@@ -46,7 +46,7 @@
 </div>
 <div class="words">
 <h1 class="name">Pecaiet</h1>
-<p class="tag">Roomy, soft and calm, across every Pe caiet app.</p>
+<p class="tag">Roomy, soft and calm, across every pe caiet app.</p>
 </div>
 </div>
 </body>
