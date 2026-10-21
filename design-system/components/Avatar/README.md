@@ -2,7 +2,7 @@
 
 Who someone is, as a circle: their letters or photo, or a person icon when there's nobody.
 
-- `<span class="pc-avatar">AC</span>`: a circle with a thin `border` on `card`, one or two letters, upper case, semibold, in `foreground`. Three sizes: 22px (the default, 10px letters) beside one line in a 32px row, `.pc-avatar-medium` 32px (14px) beside two lines, `.pc-avatar-large` 48px (22px) at the top of a person's page.
+- `<span class="pc-avatar">AC</span>`: a circle with a thin `border` on `card`, one or two letters, upper case, semibold, in `foreground`. Three sizes: 24px (the default, 10px letters) beside one line in a 32px row, `.pc-avatar-medium` 32px (14px) beside two lines, `.pc-avatar-large` 48px (22px) at the top of a person's page.
 - A photo: an `<img alt="">` inside fills the circle, with Image's faint edge. If it doesn't load, show the letters.
 - Nobody (a deleted account, or no email yet): `.pc-avatar-none`, the muted fill with Phosphor `user`.
 - A team, an app or a client: `.pc-avatar-square`, with 5, 10 or 14px corners by size.

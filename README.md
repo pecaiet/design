@@ -16,7 +16,7 @@ Import it right after Tailwind, in the app's main CSS file:
 That gives every app:
 
 - The colour tokens as CSS variables (`--primary`, `--sidebar`, …) and as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …). The shadcn names (`sidebar-accent`, `card-foreground`, `popover`, …) are kept as aliases.
-- Figtree as the default font (`--font-sans`), and four text sizes as utilities: `text-pc-title` (22), `text-pc-heading` (15), `text-pc-body` (14, the default), `text-pc-small` (12).
+- Figtree as the default font (`--font-sans`), and the type scale as utilities, each size with its own line height: `text-pc-title` (22/28), `text-pc-heading` (16/24), `text-pc-body` (14/20, the default), `text-pc-small` (12/16), `text-pc-tiny` (10/14); free steps `text-pc-18`, `text-pc-28`, `text-pc-40`; a hero's `text-pc-56` and `text-pc-72`.
 - Every component of the design system, in Tailwind's `components` layer. The reviewed ones have full sections below; the rest are listed under Draft components.
 
 Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
@@ -38,7 +38,8 @@ For a "System" choice, set the class from `prefers-color-scheme`, as idp's layou
 
 - **Colours**: `background`, `foreground`, `muted`, `track`, `muted-foreground`, `card`, `border`, `input`, `primary`, `primary-foreground`, `primary-hover`, `primary-soft`, `accent`, `sidebar`, `sidebar-hover`, `sidebar-active`, `sidebar-active-foreground`, `destructive`, `destructive-hover`, `destructive-foreground`, `destructive-soft`, `warning`, `warning-soft`, `ring`, `overlay`.
 - **Row height**: `--pc-row` (32px; 40px on phones, under 48rem wide) for every row and control: sidebar, menu, search and table rows, calendar days, buttons, inputs and selects. On phones fields also take 16px text, so iPhones don't zoom in.
-- **Spacing**: `--pc-space-1` 4px, `--pc-space-2` 8px, `--pc-space-3` 12px, `--pc-space-4` 16px, `--pc-space-6` 24px; the components use them for padding, margins and gaps.
+- **Spacing**: `--pc-space-0-5` 2px, `--pc-space-1` 4px, `--pc-space-1-5` 6px, `--pc-space-2` 8px, `--pc-space-2-5` 10px, `--pc-space-3` 12px, `--pc-space-4` 16px, `--pc-space-6` 24px, `--pc-space-8` 32px, `--pc-space-12` 48px (Tailwind's steps 0.5 to 12); the components use them for padding, margins and gaps.
+- **Text, icons, layers** (in the components part): `--pc-text-N` with `--pc-line-N` for the ten sizes, `--pc-icon-12/16/20/24`, `--pc-layer-*` (raised, tooltip, menu, drawer, overlay, toast, skip link). Corners add `--pc-radius-xs` (2px) and `--pc-radius-full` (round).
 - **Corners**: `--pc-radius-sm` (5px), `--pc-radius` (10px), `--pc-radius-lg` (14px).
 - **Shadows**: `--pc-raise` (cards, the raised pill: a toolbar tool under the pointer, the chosen segment; the slider's handle), `--pc-raise-lg` (menus, the phone sidebar), `--pc-focus` (keyboard focus on controls), `--pc-focus-inset` (keyboard focus on rows).
 - **Motion**: `--pc-motion-fast` and `--pc-motion-base`, both 0ms for now, so everything is instant. Set them (e.g. 120ms and 200ms) to turn motion on everywhere. Reduced motion always keeps 0.
@@ -63,7 +64,7 @@ Don't override:
 Tokens only:
 
 - Colours: only token colours (`bg-primary`, `text-muted-foreground`, `var(--border)`). No hex values, no Tailwind palette colours (`bg-teal-600`), no `dark:` colour pairs: the tokens switch by themselves.
-- Type: only `text-pc-title`, `text-pc-heading`, `text-pc-body`, `text-pc-small`. Not Tailwind's `text-xs`, `text-sm`, `text-lg`, ….
+- Type: only the `text-pc-*` sizes above. Not Tailwind's `text-xs`, `text-sm`, `text-lg`, ….
 - Motion: transitions use only `--pc-motion-fast`, `--pc-motion-base` and `--pc-motion-ease`, never their own durations.
 
 Markup:
@@ -365,14 +366,14 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, the icon first (required). One line takes the kind's colour; a longer one has a `.pc-alert-body` with a `.pc-alert-title` in the kind's colour over text in the text colour (or a lead line over a list of a form's errors). Optional `.pc-alert-action`, a `.pc-alert-close` x, and `.pc-alert-banner` for a banner across the top of a page.
 - **Code**: `.pc-code` inline; a secret shown once sits inside the notice that warns about it, as a read-only `.pc-input.pc-input-mono` in a `.pc-input-group` with a copy icon button at its end (after a click: a tick, and the tooltip says "Copied"); `.pc-code-block` for output.
 - **Card**: `.pc-card` with `.pc-card-header` (`.pc-card-title`, `.pc-card-description`, an optional `.pc-card-action` on the right), `.pc-card-content`, `.pc-card-footer` (an optional `.pc-card-footer-note` on its left). `.pc-card-rows` on the content for a table or rows (4px from the edge); `.pc-card-media` for an image on top; a `.pc-card-link` title makes the whole card clickable (hover grey, focus ring round the card). Cards in a row share their height. Never a card inside a card.
-- **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 15px semibold as a card's title.
+- **Heading**: `.pc-page-title` for the page; `.pc-section-title` (and `.pc-section-description`) for a section on a page that isn't in a card, the same 16px semibold as a card's title.
 - **Image**: `<img class="pc-image">` (10px corners, a faint edge inside); `.pc-image.pc-image-empty` with an `image` icon until it loads; `<figure class="pc-figure">` with a `<figcaption>` for a caption.
 - **List**: `<ul class="pc-list">` or `<ol class="pc-list">` (muted markers, 20px in, 4px apart); `<dl class="pc-details">` with `<dt>` and `<dd>` in turn for labels and values (a 160px muted label column; stacked on phones).
 - **Pagination**: `<nav class="pc-pagination">` of ghost buttons (Previous, `.pc-pagination-page` numbers with the current one `aria-current="page"` and outlined, `.pc-pagination-gap`, Next); `.pc-pagination-where` for the compact one; `.pc-pagination-bar` with a `.pc-pagination-count` or `.pc-pagination-size` first; `.pc-pagination-more` for Show more.
 - **Popover**: `.pc-popover-anchor` around the button and its `.pc-popover` (hidden until opened), 4px below and aligned to the start; `.pc-popover-end`, `.pc-popover-up`; `.pc-popover-head`, `.pc-popover-text`, `.pc-dialog-actions` inside; a sheet over a `.pc-popover-backdrop` on phones.
 - **Progress bar**: `<div class="pc-progress" role="progressbar" aria-valuenow>` with a `.pc-progress-fill` (6px, teal on the grey `track`); no `aria-valuenow` moves a third of the bar along it; `.pc-progress-error`, `.pc-progress-small`; `.pc-progress-head` with a `.pc-progress-value` above it.
 - **Progress indicator**: `<ol class="pc-steps">` of `<li class="pc-step">` (a 4px bar over each `.pc-step-label`; `aria-current="step"`, `data-state="done"` or `"error"`); `.pc-steps-compact` with a `.pc-steps-head` for phones; `.pc-steps-vertical` for a checklist.
-- **Quote**: `<figure class="pc-quote">` with a `<blockquote>` (a 2px line down its start) and a `<figcaption>` (`.pc-quote-name`, then the role in muted text); `.pc-quote-pull` (15px semibold), `.pc-quote-small` (a quoted reply).
+- **Quote**: `<figure class="pc-quote">` with a `<blockquote>` (a 2px line down its start) and a `<figcaption>` (`.pc-quote-name`, then the role in muted text); `.pc-quote-pull` (16px semibold), `.pc-quote-small` (a quoted reply).
 - **Rating**: `.pc-rating-star` (a `star` outline and a `star-fill` cut to `--fill`); `.pc-rating` with `.pc-rating-stars`, `.pc-rating-value`, `.pc-rating-count` to show one; `.pc-rating-input`, a radio group of five star labels, to set one.
 - **Segmented control**: `.pc-segmented` (`role="radiogroup"`) of `<label class="pc-btn pc-btn-ghost">`s around hidden radios; the chosen one lifts as a raised pill, the one under the pointer shows a pale pill; `.pc-segmented-full` stretches it.
 - **Separator**: `<hr class="pc-separator">` (1px, the border colour); `.pc-separator-bleed` to a panel's edges; `.pc-separator-vertical` (16px tall, between items in a row); `.pc-separator-text` with a word in the middle.

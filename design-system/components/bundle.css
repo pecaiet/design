@@ -5,13 +5,31 @@
 :root { --pc-motion-fast: 0ms; --pc-motion-base: 0ms; --pc-motion-ease: cubic-bezier(0.2, 0, 0, 1); }
 @media (prefers-reduced-motion: reduce) { :root { --pc-motion-fast: 0ms; --pc-motion-base: 0ms; } }
 
+/* Scales: every size in this file comes from one of these (spacing and corners come with the tokens). Each text size carries
+   its own line height; 56 and 72 are for a hero only. Icons come in four sizes. Layers stack in this order. */
+:root {
+  --pc-text-10: 10px; --pc-line-10: 14px;
+  --pc-text-12: 12px; --pc-line-12: 16px;
+  --pc-text-14: 14px; --pc-line-14: 20px;
+  --pc-text-16: 16px; --pc-line-16: 24px;
+  --pc-text-18: 18px; --pc-line-18: 24px;
+  --pc-text-22: 22px; --pc-line-22: 28px;
+  --pc-text-28: 28px; --pc-line-28: 36px;
+  --pc-text-40: 40px; --pc-line-40: 48px;
+  --pc-text-56: 56px; --pc-line-56: 64px;
+  --pc-text-72: 72px; --pc-line-72: 80px;
+  --pc-icon-12: 12px; --pc-icon-16: 16px; --pc-icon-20: 20px; --pc-icon-24: 24px;
+  --pc-layer-raised: 1; --pc-layer-tooltip: 20; --pc-layer-menu: 30; --pc-layer-drawer: 40; --pc-layer-overlay: 60;
+  --pc-layer-toast: 70; --pc-layer-skip-link: 100;
+}
+
 
 body { margin: 0; background: var(--background); color: var(--foreground); }
 
 .ui {
   font-family: var(--font-sans, Figtree, system-ui, sans-serif);
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: var(--pc-text-14);
+  line-height: var(--pc-line-14);
   color: var(--foreground);
   background: var(--background);
   -webkit-font-smoothing: antialiased;
@@ -19,56 +37,56 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .ui *, .ui *::before, .ui *::after { box-sizing: border-box; }
 /* Scrollbars: thin and muted, drawn by the browser, on every scroll area and the page itself. */
 * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--muted-foreground) 40%, transparent) transparent; }
-.pc-page-title { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
-.pc-page-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
+.pc-page-title { margin: 0; font-size: var(--pc-text-22); line-height: var(--pc-line-22); font-weight: 700; letter-spacing: -0.01em; }
+.pc-page-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 
 /* Sidebar */
 .pc-sidebar {
-  display: flex; flex-direction: column; gap: 1px;
-  width: 256px; flex-shrink: 0; padding: 10px var(--pc-space-2);
+  display: flex; flex-direction: column; gap: var(--pc-space-0-5);
+  width: 256px; flex-shrink: 0; padding: var(--pc-space-2-5) var(--pc-space-2);
   background: var(--sidebar); color: var(--foreground);
   overflow-y: auto;
 }
 .pc-sidebar > *, .pc-sidebar-section > *, .pc-sidebar-sub > * { flex-shrink: 0; }
-.pc-sidebar-section { display: flex; flex-direction: column; gap: 1px; margin-top: 10px; }
-.pc-sidebar-sub { display: flex; flex-direction: column; gap: 1px; padding-left: 20px; }
+.pc-sidebar-section { display: flex; flex-direction: column; gap: var(--pc-space-0-5); margin-top: var(--pc-space-2-5); }
+.pc-sidebar-sub { display: flex; flex-direction: column; gap: var(--pc-space-0-5); padding-left: var(--pc-space-6); }
 .pc-sidebar-item {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: var(--pc-space-2-5);
   width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2);
   border: 0; border-radius: var(--pc-radius);
   background: transparent; color: var(--foreground);
   font: inherit; text-align: left; text-decoration: none; cursor: pointer;
 }
-.pc-sidebar-item > svg { width: 16px; height: 16px; flex-shrink: 0; }
+.pc-sidebar-item > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; }
 .pc-sidebar-item:hover { background: var(--sidebar-hover); }
 .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
 .pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
 .pc-sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
 .pc-sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-sidebar-detail { margin-left: auto; font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.pc-sidebar-detail { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 400; font-variant-numeric: tabular-nums; }
 .pc-sidebar-detail-alert { color: var(--destructive); font-weight: 600; }
 .pc-sidebar-heading { font-weight: 600; cursor: default; }
 .pc-sidebar-item.pc-sidebar-heading:hover { background: none; }
-.pc-sidebar-mark { display: grid; place-items: center; width: 20px; height: 20px; flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--foreground); color: var(--background); font-size: 10px; font-weight: 700; }
+.pc-sidebar-mark { display: grid; place-items: center; width: 20px; height: 20px; flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--foreground); color: var(--background); font-size: var(--pc-text-10); line-height: var(--pc-line-10); font-weight: 700; }
 .pc-sidebar-item > .pc-kbd { margin-left: auto; }
 /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */
-.pc-sidebar-footer { position: sticky; bottom: -10px; z-index: 1; display: flex; flex-direction: column; gap: 1px; margin: auto -8px -10px; padding: var(--pc-space-2) var(--pc-space-2) 10px; background: var(--sidebar); }
+.pc-sidebar-footer { position: sticky; bottom: -10px; z-index: var(--pc-layer-raised); display: flex; flex-direction: column; gap: var(--pc-space-0-5); margin: auto -8px -10px; padding: var(--pc-space-2) var(--pc-space-2) var(--pc-space-2-5); background: var(--sidebar); }
 /* Avatar: a person (or a team, an app, a client) as a circle with a thin border on the card colour: one or two letters, or a photo
-   (an <img> inside fills it). 22px by default (10px letters), .pc-avatar-medium 32px (14px), .pc-avatar-large 48px (22px).
+   (an <img> inside fills it). 24px by default (10px letters), .pc-avatar-medium 32px (14px), .pc-avatar-large 48px (22px).
    .pc-avatar-none: nobody (a person icon, muted). .pc-avatar-square: a team, an app or a client. .pc-avatars overlaps several, with a
    .pc-avatar-more "+3"; .pc-avatar-status is the teal online dot; a small badge (.pc-badge.pc-badge-small) inside a 32 or 48px one sits at the bottom right, level with the dot, on a solid fill. Rings take the colour
    behind the avatar from --pc-avatar-ring (the page colour unless a surface sets it). */
-.pc-avatar { position: relative; display: grid; place-items: center; width: 22px; height: 22px; flex-shrink: 0; padding: 0; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--foreground); font-family: inherit; font-size: 10px; font-weight: 600; line-height: 1; }
+.pc-avatar { position: relative; display: grid; place-items: center; width: 24px; height: 24px; flex-shrink: 0; padding: 0; border: 1px solid var(--border); border-radius: var(--pc-radius-full); background: var(--card); color: var(--foreground); font-family: inherit; font-size: var(--pc-text-10); font-weight: 600; line-height: var(--pc-line-10); }
 .pc-card, .pc-dialog, .pc-drawer, .pc-popover, .pc-menu { --pc-avatar-ring: var(--card); }
 .pc-sidebar { --pc-avatar-ring: var(--sidebar); }
-.pc-avatar-medium { width: 32px; height: 32px; font-size: 14px; }
-.pc-avatar-large { width: 48px; height: 48px; font-size: 22px; }
+.pc-avatar-medium { width: 32px; height: 32px; font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
+.pc-avatar-large { width: 48px; height: 48px; font-size: var(--pc-text-22); line-height: var(--pc-line-22); }
 .pc-avatar > img { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); max-width: none; border-radius: inherit; object-fit: cover; outline: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent); outline-offset: -1px; }
-.pc-avatar > svg { width: 14px; height: 14px; }
-.pc-avatar-medium > svg { width: 16px; height: 16px; }
-.pc-avatar-large > svg { width: 24px; height: 24px; }
+.pc-avatar > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
+.pc-avatar-medium > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
+.pc-avatar-large > svg { width: var(--pc-icon-24); height: var(--pc-icon-24); }
 .pc-avatar-none, .pc-avatar-more { border-color: transparent; background: var(--muted); color: var(--muted-foreground); }
-.pc-avatar-medium.pc-avatar-more { font-size: 12px; }
+.pc-avatar-medium.pc-avatar-more { font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-avatar-square { border-radius: var(--pc-radius-sm); }
 .pc-avatar-medium.pc-avatar-square { border-radius: var(--pc-radius); }
 .pc-avatar-large.pc-avatar-square { border-radius: var(--pc-radius-lg); }
@@ -76,7 +94,7 @@ body { margin: 0; background: var(--background); color: var(--foreground); }
 .pc-avatars > .pc-avatar { box-shadow: 0 0 0 2px var(--pc-avatar-ring, var(--background)); }
 .pc-avatars > .pc-avatar + .pc-avatar { margin-left: -4px; }
 .pc-avatars > .pc-avatar-medium + .pc-avatar-medium { margin-left: -6px; }
-.pc-avatar-status { position: absolute; right: -1px; bottom: -1px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); box-shadow: 0 0 0 2px var(--pc-avatar-ring, var(--background)); }
+.pc-avatar-status { position: absolute; right: -1px; bottom: -1px; width: 8px; height: 8px; border-radius: var(--pc-radius-full); background: var(--primary); box-shadow: 0 0 0 2px var(--pc-avatar-ring, var(--background)); }
 .pc-avatar-medium > .pc-avatar-status { width: 10px; height: 10px; }
 .pc-avatar-large > .pc-avatar-status { right: 1px; bottom: 1px; width: 12px; height: 12px; }
 .pc-avatar > .pc-badge { position: absolute; right: -6px; bottom: -4px; outline: 2px solid var(--pc-avatar-ring, var(--background)); }
@@ -89,12 +107,12 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 
 /* Buttons */
 .pc-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--pc-space-1-5);
   height: var(--pc-row); padding: 0 var(--pc-space-3);
   border: 1px solid transparent; border-radius: var(--pc-radius);
   font: inherit; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
 }
-.pc-btn > svg { width: 16px; height: 16px; }
+.pc-btn > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn[aria-pressed="true"]:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
 .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
@@ -106,33 +124,33 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 /* Solid red: a delete that is the main action of its view (a dialog's Delete), .pc-btn-primary.pc-btn-destructive. */
 .pc-btn-primary.pc-btn-destructive { background: var(--destructive); border-color: var(--destructive); color: var(--destructive-foreground); }
 /* Sizes around the 32px row, and full width. */
-.pc-btn-small { height: calc(var(--pc-row) - 4px); padding: 0 10px; }
-.pc-btn-large { height: calc(var(--pc-row) + 8px); padding: 0 var(--pc-space-4); font-size: 15px; }
+.pc-btn-small { height: calc(var(--pc-row) - 4px); padding: 0 var(--pc-space-2-5); }
+.pc-btn-large { height: calc(var(--pc-row) + 8px); padding: 0 var(--pc-space-4); font-size: var(--pc-text-16); line-height: var(--pc-line-16); }
 .pc-btn-full { width: 100%; }
 
 /* Forms */
-.pc-field { display: grid; gap: 6px; }
-.pc-label { font-size: 12px; font-weight: 600; }
+.pc-field { display: grid; gap: var(--pc-space-1-5); }
+.pc-label { font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; }
 /* An optional field says so after its label: <span class="pc-label-optional">(optional)</span>. Required fields have no mark. */
 .pc-label-optional { color: var(--muted-foreground); font-weight: 400; }
 /* Fieldset: <fieldset class="pc-fieldset"> with a <legend class="pc-legend"> (it looks like .pc-label) over .pc-fieldset-options,
    the radios or checkboxes that belong together. No line, no box: the group reads as one more field. */
 .pc-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
-.pc-legend { margin-bottom: 6px; padding: 0; font-size: 12px; font-weight: 600; }
-.pc-fieldset-options { display: grid; gap: 10px; }
+.pc-legend { margin-bottom: var(--pc-space-1-5); padding: 0; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; }
+.pc-fieldset-options { display: grid; gap: var(--pc-space-2-5); }
 /* Two or three short choices side by side. */
-.pc-fieldset-options-row { display: flex; flex-wrap: wrap; gap: 10px var(--pc-space-6); }
+.pc-fieldset-options-row { display: flex; flex-wrap: wrap; gap: var(--pc-space-2-5) var(--pc-space-6); }
 /* Choices that each have a description sit in boxes: a thin border, the chosen one teal; the whole box picks it. */
 .pc-fieldset-boxes { gap: var(--pc-space-2); }
-.pc-fieldset-boxes > .pc-field { position: relative; padding: 10px var(--pc-space-3); border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); }
+.pc-fieldset-boxes > .pc-field { position: relative; padding: var(--pc-space-2-5) var(--pc-space-3); border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); }
 .pc-fieldset-boxes > .pc-field:has(:checked) { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--card)); }
 .pc-fieldset-boxes > .pc-field > .pc-check { display: flex; }
 .pc-fieldset-boxes > .pc-field > .pc-check::after { content: ""; position: absolute; inset: 0; }
 .pc-fieldset-boxes > .pc-field:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
 .pc-fieldset-boxes > .pc-field > .pc-check:has(> input:disabled) { opacity: 1; }
-.pc-fieldset-options + .pc-field-error { margin-top: 6px; }
+.pc-fieldset-options + .pc-field-error { margin-top: var(--pc-space-1-5); }
 .pc-input {
-  width: 100%; height: var(--pc-row); padding: 0 10px;
+  width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2-5);
   border: 1px solid var(--input); border-radius: var(--pc-radius);
   background: var(--card); color: var(--foreground); font: inherit;
 }
@@ -141,7 +159,7 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-checkbox {
   appearance: none; display: grid; place-content: center;
   width: 16px; height: 16px; margin: 0; flex-shrink: 0;
-  border: 1.5px solid var(--input); border-radius: var(--pc-radius-sm);
+  border: 1px solid var(--input); border-radius: var(--pc-radius-sm);
   background: var(--card); cursor: pointer;
 }
 .pc-checkbox:checked { background: var(--primary); border-color: var(--primary); }
@@ -150,23 +168,23 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 /* Half: a "pick all" box over a group when only some are ticked (set el.indeterminate = true in script; [aria-checked="mixed"]
    works too). A teal fill with a white dash. An error (aria-invalid="true") turns the border red. */
 .pc-checkbox:indeterminate, .pc-checkbox[aria-checked="mixed"] { background: var(--primary); border-color: var(--primary); }
-.pc-checkbox:indeterminate::after, .pc-checkbox[aria-checked="mixed"]::after { content: ""; width: 8px; height: 2px; border: 0; border-radius: 1px; background: var(--primary-foreground); transform: none; }
+.pc-checkbox:indeterminate::after, .pc-checkbox[aria-checked="mixed"]::after { content: ""; width: 8px; height: 2px; border: 0; border-radius: var(--pc-radius-xs); background: var(--primary-foreground); transform: none; }
 .pc-checkbox[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
 
 /* Cards, badges, tables */
 .pc-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
-.pc-card-header { display: grid; gap: 2px; padding: var(--pc-space-4) var(--pc-space-4) 0; }
-.pc-card-title, .pc-section-title { margin: 0; font-size: 15px; font-weight: 600; }
-.pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: 12px; }
+.pc-card-header { display: grid; gap: var(--pc-space-0-5); padding: var(--pc-space-4) var(--pc-space-4) 0; }
+.pc-card-title, .pc-section-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
+.pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-card-content { display: grid; flex: 1; gap: var(--pc-space-3); padding: var(--pc-space-4); }
 /* A header with nothing under it keeps 16px below; an action (.pc-card-action: a small button, a ⋯, a switch) sits on the right,
    centred on the title's line; the description then runs under both. */
 .pc-card-header:last-child { padding-bottom: var(--pc-space-4); }
 .pc-card-header:has(> .pc-card-action) { grid-template-columns: 1fr auto; column-gap: var(--pc-space-3); }
-.pc-card-action { position: relative; z-index: 1; grid-column: 2; grid-row: 1; display: flex; align-items: center; height: 20px; }
+.pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: 20px; }
 .pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1 / -1; }
 /* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
-.pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) 6px; }
+.pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) var(--pc-space-1-5); }
 /* An image on top, edge to edge in the card's corners. */
 .pc-card-media { display: block; width: 100%; aspect-ratio: 5 / 2; object-fit: cover; border-radius: calc(var(--pc-radius-lg) - 1px) calc(var(--pc-radius-lg) - 1px) 0 0; }
 /* A card you can click: its title is a .pc-card-link that covers the card, as a table row's link does. Under the pointer it
@@ -177,12 +195,12 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 .pc-card-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--pc-radius-lg); }
 .pc-card-link:focus-visible { outline: none; }
 .pc-card:has(.pc-card-link:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
-.pc-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 var(--pc-space-2); border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.pc-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 var(--pc-space-2); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; white-space: nowrap; }
 .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 1px var(--primary); }
 /* Rows are rounded pills 2px apart, no lines between them: every second row in the page colour, the one under the
    pointer in accent. The fills sit on the cells, rounded at the row's two ends. */
 .pc-table { width: 100%; border-collapse: separate; border-spacing: 0 2px; }
-.pc-table th { height: var(--pc-row); padding: 0 var(--pc-space-3); border-bottom: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; font-weight: 600; text-align: left; }
+.pc-table th { height: var(--pc-row); padding: 0 var(--pc-space-3); border-bottom: 1px solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; text-align: left; }
 .pc-table td { height: var(--pc-row); padding: var(--pc-space-1) var(--pc-space-3); }
 .pc-table tbody td:first-child { border-radius: var(--pc-radius) 0 0 var(--pc-radius); }
 .pc-table tbody td:last-child { border-radius: 0 var(--pc-radius) var(--pc-radius) 0; }
@@ -205,9 +223,9 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 /* A text area starts three lines tall and grows with what's written, up to ten lines, then scrolls inside. Where the browser can't
    grow it (field-sizing), it keeps a handle to drag it taller. */
 .pc-textarea {
-  width: 100%; min-height: 76px; max-height: 236px; padding: var(--pc-space-2) 10px;
+  width: 100%; min-height: 76px; max-height: 236px; padding: var(--pc-space-2) var(--pc-space-2-5);
   border: 1px solid var(--input); border-radius: var(--pc-radius);
-  background: var(--card); color: var(--foreground); font: inherit; line-height: 1.45; resize: none; field-sizing: content;
+  background: var(--card); color: var(--foreground); font: inherit; line-height: var(--pc-line-14); resize: none; field-sizing: content;
 }
 @supports not (field-sizing: content) { .pc-textarea { resize: vertical; } }
 .pc-textarea::placeholder { color: var(--muted-foreground); }
@@ -217,19 +235,19 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 /* Read-only: a value you can select and copy but not change: the muted fill, no border. */
 .pc-input[readonly] { border-color: transparent; background: var(--muted); }
 /* A machine value in a field (a secret, a key): the monospace at 12px. */
-.pc-input-mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; }
+.pc-input-mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 /* What the browser fills in keeps our colours instead of its yellow or blue. */
 .pc-input:is(:-webkit-autofill, :autofill) { -webkit-text-fill-color: var(--foreground); box-shadow: 0 0 0 100px var(--card) inset; caret-color: var(--foreground); }
 .pc-input:is(:-webkit-autofill, :autofill):focus-visible { box-shadow: 0 0 0 100px var(--card) inset, var(--pc-focus); }
-.pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: 12px; }
-.pc-field-error { margin: 0; color: var(--destructive); font-size: 12px; font-weight: 500; }
-.pc-check { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+.pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-field-error { margin: 0; color: var(--destructive); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 500; }
+.pc-check { display: inline-flex; align-items: center; gap: var(--pc-space-2-5); cursor: pointer; }
 /* With its words in a <span>, the box stays beside their first line when they wrap. */
 .pc-check:has(> span) { align-items: flex-start; }
 .pc-check:has(> span) > :is(.pc-checkbox, .pc-radio) { font: inherit; margin-top: max(0px, calc((1lh - var(--pc-space-4)) / 2)); }
 /* A hint or an error under a checkbox or radio lines up under its words (16px box + 10px gap). */
-.pc-field:has(> .pc-check) { gap: 2px; }
-.pc-check + .pc-field-hint, .pc-check + .pc-field-error { padding-left: 26px; }
+.pc-field:has(> .pc-check) { gap: var(--pc-space-0-5); }
+.pc-check + .pc-field-hint, .pc-check + .pc-field-error { padding-left: calc(var(--pc-space-4) + var(--pc-space-2-5)); }
 .pc-checkbox:disabled { opacity: 0.5; cursor: not-allowed; }
 /* A checkbox, radio or switch that can't be used fades with its words (the box itself only once). */
 .pc-check:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; }
@@ -237,15 +255,15 @@ button.pc-avatar:focus-visible { outline: 2px solid transparent; outline-offset:
 
 .pc-link { color: var(--foreground); font-weight: 500; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: color-mix(in srgb, var(--muted-foreground) 45%, transparent); text-underline-offset: 3px; }
 .pc-link:hover { text-decoration-color: var(--foreground); }
-.pc-link:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); border-radius: 2px; }
+.pc-link:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); border-radius: var(--pc-radius-xs); }
 button.pc-link { padding: 0; border: 0; background: none; font: inherit; font-weight: 500; cursor: pointer; }
-.pc-link > svg { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; }
+.pc-link > svg { display: inline-block; width: var(--pc-icon-16); height: var(--pc-icon-16); vertical-align: -2px; }
 .pc-link > svg:first-child { margin-right: var(--pc-space-1); }
-.pc-link > svg:last-child { margin-left: 3px; }
+.pc-link > svg:last-child { margin-left: var(--pc-space-1); }
 .pc-alert .pc-link { color: inherit; font-weight: 600; text-decoration-color: currentColor; }
 /* Quiet links stand alone in a muted place (a footer, breadcrumbs, a group's Clear): muted, no underline; under the pointer the
    text colour and an underline, as a link's. Their place says they're links. */
-.pc-link-quiet { border-radius: 2px; color: var(--muted-foreground); text-decoration: none; }
+.pc-link-quiet { border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
 .pc-link-quiet:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-link-quiet:focus-visible { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 
@@ -255,17 +273,17 @@ button.pc-link { padding: 0; border: 0; background: none; font: inherit; font-we
 /* Soft: a light teal tint over whatever is behind it (the sidebar or a card), so the pill always shows; the deeper teal keeps the text readable. */
 .pc-badge-soft { background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary-hover); }
 /* A small badge: 16px tall with 10px words, for tight spots such as on an avatar. */
-.pc-badge-small { height: 16px; padding: 0 5px; font-size: 10px; }
+.pc-badge-small { height: 16px; padding: 0 var(--pc-space-1); font-size: var(--pc-text-10); line-height: var(--pc-line-10); }
 
-.pc-alert { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 10px 14px; border-radius: var(--pc-radius); font-size: 14px; }
-.pc-alert > svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; }
+.pc-alert { display: flex; align-items: flex-start; gap: var(--pc-space-2-5); margin: 0; padding: var(--pc-space-2-5) var(--pc-space-3); border-radius: var(--pc-radius); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
+.pc-alert > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; margin-top: var(--pc-space-0-5); }
 .pc-alert-notice { background: var(--primary-soft); color: var(--foreground); }
 .pc-alert-notice > svg { color: var(--primary); }
 .pc-alert-error { background: var(--destructive-soft); color: var(--destructive); }
 .pc-alert-warning { background: var(--warning-soft); color: var(--warning); }
 
 .pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: 1px solid var(--border); }
-.pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: 12px; }
+.pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-table tbody tr:hover td { background: var(--accent); }
 .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
 .pc-row-link { color: inherit; font-weight: 600; text-decoration: none; }
@@ -284,24 +302,24 @@ button.pc-link { padding: 0; border: 0; background: none; font: inherit; font-we
 .pc-table .pc-table-check { width: 28px; padding-right: 0; }
 .pc-table .pc-table-num { text-align: right; font-variant-numeric: tabular-nums; }
 .pc-table .pc-table-actions { width: 32px; padding: 0 0 0 var(--pc-space-1); text-align: right; }
-.pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: 1; vertical-align: middle; }
+.pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: var(--pc-layer-raised); vertical-align: middle; }
 .pc-table tbody tr[aria-selected="true"] td { background: var(--primary-soft); }
 .pc-table-sort { display: inline-flex; align-items: center; gap: var(--pc-space-1); padding: 0; border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; cursor: pointer; }
-.pc-table-sort > svg { width: 12px; height: 12px; }
+.pc-table-sort > svg { width: var(--pc-icon-12); height: var(--pc-icon-12); }
 .pc-table th[aria-sort] .pc-table-sort { color: var(--foreground); }
 .pc-table-sort:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
-.pc-empty { display: grid; justify-items: center; gap: var(--pc-space-1); padding: 28px var(--pc-space-4); text-align: center; color: var(--muted-foreground); }
+.pc-empty { display: grid; justify-items: center; gap: var(--pc-space-1); padding: var(--pc-space-6) var(--pc-space-4); text-align: center; color: var(--muted-foreground); }
 .pc-empty-title { margin: 0; color: var(--foreground); font-weight: 600; }
 .pc-empty-description { margin: 0; }
 
 /* File: a file as a row, like a task or menu row: the file's icon, a .pc-file-name (cut off when long) and a .pc-file-size. .pc-files stacks
    them 2px apart. To download, the row is <a class="pc-file" href download>; under the pointer or keyboard focus its download icon
    (.pc-file-action) shows in place of the size. While editing it is a <div class="pc-file"> ending in a ghost icon button with an x. */
-.pc-files { display: grid; gap: 2px; }
-.pc-file { display: flex; align-items: center; gap: 10px; min-width: 0; height: var(--pc-row); padding: 0 10px; border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
-.pc-file > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+.pc-files { display: grid; gap: var(--pc-space-0-5); }
+.pc-file { display: flex; align-items: center; gap: var(--pc-space-2-5); min-width: 0; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
+.pc-file > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; color: var(--muted-foreground); }
 .pc-file-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-file-size { color: var(--muted-foreground); font-size: 12px; white-space: nowrap; }
+.pc-file-size { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); white-space: nowrap; }
 .pc-file > .pc-file-action { display: none; }
 a.pc-file:hover { background: var(--accent); }
 a.pc-file:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
@@ -314,48 +332,48 @@ div.pc-file { padding-right: 0; }
    <figure class="pc-figure"> adds a caption under it. */
 .pc-image { display: block; max-width: 100%; object-fit: cover; border-radius: var(--pc-radius); outline: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent); outline-offset: -1px; }
 .pc-image-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
-.pc-image-empty > svg { width: 20px; height: 20px; }
-.pc-figure { display: grid; gap: 6px; margin: 0; }
-.pc-figure > figcaption { color: var(--muted-foreground); font-size: 12px; }
+.pc-image-empty > svg { width: var(--pc-icon-20); height: var(--pc-icon-20); }
+.pc-figure { display: grid; gap: var(--pc-space-1-5); margin: 0; }
+.pc-figure > figcaption { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 
 /* Pagination: <nav class="pc-pagination" aria-label="Pages"> of ghost buttons: Previous and Next (with words, or arrows alone where room is
    short), the page numbers (.pc-pagination-page; the current one has aria-current="page" and an outline button's border), and
    .pc-pagination-gap ("…") for the pages left out. The compact one says .pc-pagination-where ("Page 5 of 20") between two arrows.
    An end that goes nowhere gets aria-disabled="true". .pc-pagination-bar puts a .pc-pagination-count ("41–60 of 134") or a
    .pc-pagination-size (rows per page) first and the pages at the end. .pc-pagination-more is a Show more button with its count. */
-.pc-pagination { display: flex; align-items: center; gap: 2px; }
-.pc-pagination > .pc-btn:not(.pc-btn-icon):first-child { padding-left: 6px; }
-.pc-pagination > .pc-btn:not(.pc-btn-icon):last-child { padding-right: 6px; }
+.pc-pagination { display: flex; align-items: center; gap: var(--pc-space-0-5); }
+.pc-pagination > .pc-btn:not(.pc-btn-icon):first-child { padding-left: var(--pc-space-1-5); }
+.pc-pagination > .pc-btn:not(.pc-btn-icon):last-child { padding-right: var(--pc-space-1-5); }
 .pc-pagination-page { font-weight: 500; font-variant-numeric: tabular-nums; }
 .pc-pagination-page[aria-current="page"] { border-color: var(--input); background: var(--card); font-weight: 600; }
 .pc-pagination-gap { display: inline-grid; place-items: center; width: 24px; color: var(--muted-foreground); }
 .pc-pagination-where { padding: 0 var(--pc-space-2); font-variant-numeric: tabular-nums; }
-.pc-pagination-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pc-pagination-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
 .pc-pagination-bar { display: flex; flex: 1; align-items: center; gap: var(--pc-space-3); min-width: 0; }
 .pc-pagination-bar > :first-child { margin-right: auto; }
-.pc-pagination-size { display: flex; align-items: center; gap: var(--pc-space-2); color: var(--muted-foreground); font-size: 12px; }
-.pc-pagination-size > .pc-picker-button { width: 72px; color: var(--foreground); font-size: 14px; }
+.pc-pagination-size { display: flex; align-items: center; gap: var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-pagination-size > .pc-picker-button { width: 72px; color: var(--foreground); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
 .pc-pagination-more { display: flex; align-items: center; gap: var(--pc-space-3); }
 
 /* Progress bar: <div class="pc-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"> holding a
    .pc-progress-fill as wide as what's done: 6px, round ends, teal on the track colour. With no aria-valuenow it can't tell how long:
    a third of the bar moves along it (still while motion is off). .pc-progress-error turns the fill red where it stopped;
    .pc-progress-small is 4px, for inside a row. .pc-progress-head puts what's happening and a .pc-progress-value above it. */
-.pc-progress { position: relative; height: 6px; overflow: hidden; border-radius: 999px; background: var(--track); }
+.pc-progress { position: relative; height: 6px; overflow: hidden; border-radius: var(--pc-radius-full); background: var(--track); }
 .pc-progress-fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--primary); }
 .pc-progress:not([aria-valuenow]) > .pc-progress-fill { left: 30%; width: 35%; animation: pc-progress-slide calc(var(--pc-motion-base) * 7) var(--pc-motion-ease) infinite; }
 .pc-progress-error > .pc-progress-fill { background: var(--destructive); }
 .pc-progress-small { height: 4px; }
 .pc-progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--pc-space-3); }
-.pc-progress-value { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pc-progress-value { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
 
 /* Progress indicator: <ol class="pc-steps"> of <li class="pc-step">, each a 4px bar over its .pc-step-label. Done steps
    (data-state="done") and the current one (aria-current="step", its label bold) are teal; the rest the track colour; data-state="error" is red,
    with a ! before its label. .pc-steps-compact (phones): the step's name and "Step 2 of 4" over the bars, labels hidden.
    .pc-steps-vertical: down the page, the bar beside each label. */
-.pc-steps { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.pc-step { display: flex; flex: 1; flex-direction: column; gap: var(--pc-space-2); min-width: 0; color: var(--muted-foreground); font-size: 12px; }
-.pc-step::before { content: ""; flex-shrink: 0; height: 4px; border-radius: 999px; background: var(--track); }
+.pc-steps { display: flex; gap: var(--pc-space-1-5); margin: 0; padding: 0; list-style: none; }
+.pc-step { display: flex; flex: 1; flex-direction: column; gap: var(--pc-space-2); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-step::before { content: ""; flex-shrink: 0; height: 4px; border-radius: var(--pc-radius-full); background: var(--track); }
 .pc-step[data-state="done"], .pc-step[aria-current="step"], .pc-step[data-state="error"] { color: var(--foreground); }
 .pc-step[data-state="done"]::before, .pc-step[aria-current="step"]::before { background: var(--primary); }
 .pc-step[data-state="error"]::before { background: var(--destructive); }
@@ -365,45 +383,45 @@ div.pc-file { padding-right: 0; }
 .pc-steps-compact { display: grid; gap: var(--pc-space-2); }
 .pc-steps-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--pc-space-3); }
 .pc-steps-now { font-weight: 600; }
-.pc-steps-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pc-steps-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
 .pc-steps-compact .pc-step { gap: 0; }
 .pc-steps-compact .pc-step-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.pc-steps-vertical { flex-direction: column; gap: 10px; }
-.pc-steps-vertical > .pc-step { flex-direction: row; align-items: center; gap: 10px; font-size: 14px; }
+.pc-steps-vertical { flex-direction: column; gap: var(--pc-space-2-5); }
+.pc-steps-vertical > .pc-step { flex-direction: row; align-items: center; gap: var(--pc-space-2-5); font-size: var(--pc-text-14); line-height: var(--pc-line-14); }
 .pc-steps-vertical > .pc-step::before { width: 4px; height: 20px; }
 
 /* Quote: <figure class="pc-quote"> with a <blockquote> (a 2px line down its start, the words in the text colour) and an optional
    <figcaption> under it: who said it (.pc-quote-name, then their role or the source in muted text), with an optional avatar.
-   .pc-quote-pull sets the words bigger (15px semibold), for a line pulled from the page; .pc-quote-small is muted 12px, for a
+   .pc-quote-pull sets the words bigger (16px semibold), for a line pulled from the page; .pc-quote-small is muted 12px, for a
    quoted reply. An inline quote is only curly quotes in the text. */
 .pc-quote { display: grid; gap: var(--pc-space-2); margin: 0; }
-.pc-quote > blockquote { margin: 0; padding-left: 14px; border-left: 2px solid var(--input); }
+.pc-quote > blockquote { margin: 0; padding-left: var(--pc-space-3); border-left: 2px solid var(--input); }
 .pc-quote > blockquote > p { margin: 0; }
-.pc-quote > figcaption { display: flex; align-items: center; gap: var(--pc-space-2); padding-left: var(--pc-space-4); color: var(--muted-foreground); font-size: 12px; }
+.pc-quote > figcaption { display: flex; align-items: center; gap: var(--pc-space-2); padding-left: var(--pc-space-4); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-quote-name { color: var(--foreground); font-weight: 600; }
-.pc-quote-pull > blockquote { font-size: 15px; font-weight: 600; }
-.pc-quote-small > blockquote { padding-left: 10px; color: var(--muted-foreground); font-size: 12px; }
+.pc-quote-pull > blockquote { font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
+.pc-quote-small > blockquote { padding-left: var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 
 /* Rating: teal stars; empty ones are outlines in the field-border colour. Each .pc-rating-star holds the outline, then the filled star,
    cut to --fill (0–100%). To show one: .pc-rating with .pc-rating-stars (role="img", aria-label "4.2 out of 5"), the number
    (.pc-rating-value) and how many rated (.pc-rating-count). To set one: .pc-rating-input, a radiogroup of five .pc-rating-star labels,
-   each around a hidden radio: 20px stars in 28px targets; the chosen star and those before it fill, and under the pointer the stars up
+   each around a hidden radio: 20px stars in targets as tall as a small button; the chosen star and those before it fill, and under the pointer the stars up
    to it fill lighter. */
 .pc-rating { display: inline-flex; align-items: center; gap: var(--pc-space-2); }
-.pc-rating-stars, .pc-rating-input { display: inline-flex; gap: 2px; }
+.pc-rating-stars, .pc-rating-input { display: inline-flex; gap: var(--pc-space-0-5); }
 .pc-rating-star { --fill: 100%; position: relative; display: inline-grid; place-items: center; flex-shrink: 0; width: 16px; height: 16px; }
-.pc-rating-star > svg { grid-area: 1 / 1; width: 16px; height: 16px; }
+.pc-rating-star > svg { grid-area: 1 / 1; width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-rating-star > svg:first-of-type { color: var(--input); }
 .pc-rating-star > svg:last-of-type { color: var(--primary); clip-path: inset(0 calc(100% - var(--fill)) 0 0); }
 .pc-rating-value { font-weight: 600; font-variant-numeric: tabular-nums; }
-.pc-rating-count { color: var(--muted-foreground); font-size: 12px; }
-.pc-rating-compact { gap: var(--pc-space-1); font-size: 12px; }
-.pc-rating-input > .pc-rating-star { --fill: 0%; width: 28px; height: 28px; border-radius: var(--pc-radius-sm); cursor: pointer; }
-.pc-rating-input > .pc-rating-star > svg { width: 20px; height: 20px; }
+.pc-rating-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-rating-compact { gap: var(--pc-space-1); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-rating-input > .pc-rating-star { --fill: 0%; width: calc(var(--pc-row) - 4px); height: calc(var(--pc-row) - 4px); border-radius: var(--pc-radius-sm); cursor: pointer; }
+.pc-rating-input > .pc-rating-star > svg { width: var(--pc-icon-20); height: var(--pc-icon-20); }
 .pc-rating-input > .pc-rating-star > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
 .pc-rating-input > .pc-rating-star:is(:has(input:checked), :has(~ .pc-rating-star input:checked)) { --fill: 100%; }
 .pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)) { --fill: 100%; }
-.pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: .55; }
+.pc-rating-input > .pc-rating-star:is(:hover, :has(~ .pc-rating-star:hover)):not(:has(input:checked), :has(~ .pc-rating-star input:checked)) > svg:last-of-type { opacity: 0.5; }
 .pc-rating-input > .pc-rating-star:has(input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
 /* Can't be used: half strength, the not-allowed pointer, no stars filling under it. */
 .pc-rating-input:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
@@ -412,16 +430,16 @@ div.pc-file { padding-right: 0; }
 /* List: bullets (<ul class="pc-list">) and numbers (<ol class="pc-list">) for a few short points: muted markers, 20px in, 4px apart.
    A label-and-value list is <dl class="pc-details">, <dt> and <dd> in turn: the label muted in a 160px column, the value beside it;
    on phones the label goes above its value. */
-.pc-list { display: grid; gap: var(--pc-space-1); margin: 0; padding-left: 20px; }
+.pc-list { display: grid; gap: var(--pc-space-1); margin: 0; padding-left: var(--pc-space-4); }
 ul.pc-list { list-style: disc; }
 ol.pc-list { list-style: decimal; }
 .pc-list > li::marker { color: var(--muted-foreground); }
-.pc-details { display: grid; grid-template-columns: 160px 1fr; gap: 10px var(--pc-space-4); margin: 0; }
+.pc-details { display: grid; grid-template-columns: 160px 1fr; gap: var(--pc-space-2-5) var(--pc-space-4); margin: 0; }
 .pc-details > dt { color: var(--muted-foreground); }
 .pc-details > dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
 @media (max-width: 47.99rem) {
-  .pc-details { grid-template-columns: 1fr; gap: 2px; }
-  .pc-details > dd { margin-bottom: 10px; }
+  .pc-details { grid-template-columns: 1fr; gap: var(--pc-space-0-5); }
+  .pc-details > dd { margin-bottom: var(--pc-space-2-5); }
 }
 
 /* File upload: <label class="pc-btn pc-btn-outline pc-file-upload"> with a paperclip, the words ("Attach files") and the real
@@ -433,9 +451,9 @@ ol.pc-list { list-style: decimal; }
 
 .pc-menu { display: flex; flex-direction: column; gap: var(--pc-space-1); min-width: 220px; padding: var(--pc-space-1); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-menu[hidden] { display: none; }
-.pc-menu-label { padding: 6px 10px; overflow: hidden; color: var(--muted-foreground); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-.pc-menu-item { display: flex; align-items: center; gap: 10px; width: 100%; height: var(--pc-row); padding: 0 10px; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
-.pc-menu-item > svg { width: 16px; height: 16px; color: var(--muted-foreground); }
+.pc-menu-label { padding: var(--pc-space-1-5) var(--pc-space-2-5); overflow: hidden; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); text-overflow: ellipsis; white-space: nowrap; }
+.pc-menu-item { display: flex; align-items: center; gap: var(--pc-space-2-5); width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
+.pc-menu-item > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); color: var(--muted-foreground); }
 .pc-menu-item:hover { background: var(--accent); }
 .pc-menu-item:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
 .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
@@ -448,7 +466,7 @@ ol.pc-list { list-style: decimal; }
 .pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; overflow-y: auto; }
 .pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
 .pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
-.pc-dialog-title { margin: 0; font-size: 15px; font-weight: 600; }
+.pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
 .pc-dialog-description { margin: var(--pc-space-1) 0 0; color: var(--muted-foreground); }
 /* The actions sit under a line from edge to edge, as in a Card's footer and the Drawer's. */
 .pc-dialog-actions { display: flex; justify-content: flex-end; gap: var(--pc-space-2); margin: 0 -16px -16px; padding: var(--pc-space-3) var(--pc-space-4); border-top: 1px solid var(--border); }
@@ -470,10 +488,10 @@ ol.pc-list { list-style: decimal; }
 .pc-modal-frame { display: flex; }
 .pc-modal-frame > .pc-sheet-backdrop { display: none; }
 .pc-modal-nav { width: 216px; }
-.pc-modal-nav-user { display: flex; align-items: center; gap: 10px; min-height: var(--pc-row); padding: 0 var(--pc-space-2); color: var(--muted-foreground); font-size: 12px; }
+.pc-modal-nav-user { display: flex; align-items: center; gap: var(--pc-space-2-5); min-height: var(--pc-row); padding: 0 var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-modal-nav-user > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-modal-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-.pc-modal-head { display: flex; align-items: center; gap: 6px; padding: var(--pc-space-4) var(--pc-space-4) var(--pc-space-4) var(--pc-space-6); }
+.pc-modal-head { display: flex; align-items: center; gap: var(--pc-space-1-5); padding: var(--pc-space-4) var(--pc-space-4) var(--pc-space-4) var(--pc-space-6); }
 .pc-modal-head > .pc-page-title-row { flex: 1; }
 .pc-modal-body { display: flex; flex-direction: column; gap: var(--pc-space-6); flex: 1; min-height: 0; padding: 0 var(--pc-space-6) var(--pc-space-6); overflow-y: auto; }
 @media (min-width: 48rem) {
@@ -484,7 +502,7 @@ ol.pc-list { list-style: decimal; }
   .pc-modal-frame { display: none; }
   .pc-modal-frame.pc-sidebar-sheet { display: flex; }
   .pc-modal-frame.pc-sidebar-sheet > .pc-sheet-backdrop { display: block; }
-  .pc-modal-head { padding: var(--pc-space-2) 6px var(--pc-space-3) var(--pc-space-4); }
+  .pc-modal-head { padding: var(--pc-space-2) var(--pc-space-1-5) var(--pc-space-3) var(--pc-space-4); }
   .pc-modal-body { padding: 0 var(--pc-space-4) calc(var(--pc-space-6) + env(safe-area-inset-bottom)); }
 }
 
@@ -501,24 +519,24 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Focus starts on the drawer itself (tabindex="-1", focused after showModal()), as in the Settings modal; Tab moves into it. */
 .pc-drawer:focus { outline: none; }
 .pc-drawer-beside { flex: 0 0 400px; border-left: 1px solid var(--border); }
-.pc-drawer-head { display: flex; align-items: center; gap: 6px; padding: var(--pc-space-3) 10px var(--pc-space-3) var(--pc-space-4); }
-.pc-drawer-title { flex: 1; min-width: 0; margin: 0; font-size: 15px; font-weight: 600; }
+.pc-drawer-head { display: flex; align-items: center; gap: var(--pc-space-1-5); padding: var(--pc-space-3) var(--pc-space-2-5) var(--pc-space-3) var(--pc-space-4); }
+.pc-drawer-title { flex: 1; min-width: 0; margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
 .pc-drawer-back { display: none; margin-left: -8px; }
 .pc-drawer-body { display: grid; align-content: start; gap: var(--pc-space-3); flex: 1; min-height: 0; padding: var(--pc-space-1) var(--pc-space-4) var(--pc-space-4); overflow-y: auto; }
 .pc-drawer-footer { display: flex; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: 1px solid var(--border); }
 @media (max-width: 47.99rem) {
   dialog.pc-drawer { width: 100%; border-left: 0; box-shadow: none; }
   .pc-drawer-footer { padding-bottom: calc(var(--pc-space-3) + env(safe-area-inset-bottom)); }
-  .pc-drawer-beside { position: fixed; inset: 0; z-index: 40; border-left: 0; }
+  .pc-drawer-beside { position: fixed; inset: 0; z-index: var(--pc-layer-drawer); border-left: 0; }
   .pc-drawer-beside .pc-drawer-back { display: inline-flex; }
   .pc-drawer-beside .pc-drawer-close { display: none; }
 }
 
 [data-pc-tooltip] { position: relative; }
 [data-pc-tooltip]::after {
-  content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; z-index: 20;
-  width: max-content; max-width: 240px; padding: 5px 9px; border-radius: var(--pc-radius); white-space: normal;
-  background: var(--foreground); color: var(--background); font-size: 12px; font-weight: 500; line-height: 1.35;
+  content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; z-index: var(--pc-layer-tooltip);
+  width: max-content; max-width: 240px; padding: var(--pc-space-1) var(--pc-space-2); border-radius: var(--pc-radius); white-space: normal;
+  background: var(--foreground); color: var(--background); font-size: var(--pc-text-12); font-weight: 500; line-height: var(--pc-line-12);
   box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
 }
 /* It shows after a short wait under the pointer, so moving across a toolbar doesn't flash them, and at once on keyboard focus. */
@@ -532,39 +550,39 @@ dialog.pc-drawer:not([open]) { display: none; }
 [data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; }
 
 /* The sidebar head: the app's logo (optional). */
-.pc-app-logo { display: inline-flex; align-items: center; gap: var(--pc-space-2); font-size: 15px; font-weight: 600; }
-.pc-app-logo-mark { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--pc-radius-sm); background: var(--primary); color: var(--primary-foreground); font-size: 12px; font-weight: 700; }
-.pc-sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-height: var(--pc-row); padding: 0 0 0 var(--pc-space-2); margin-bottom: var(--pc-space-4); }
+.pc-app-logo { display: inline-flex; align-items: center; gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
+.pc-app-logo-mark { display: grid; place-items: center; flex-shrink: 0; width: 24px; height: 24px; border-radius: var(--pc-radius-sm); background: var(--primary); color: var(--primary-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 700; }
+.pc-sidebar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--pc-space-1-5); min-height: var(--pc-row); padding: 0 0 0 var(--pc-space-2); margin-bottom: var(--pc-space-4); }
 /* The sidebar toggle lives in the page's title row, left of the title; its icon lines up with the page's left edge. */
-.pc-page-title-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.pc-page-title-row { display: flex; align-items: center; gap: var(--pc-space-1-5); min-width: 0; }
 .pc-page-title-row > .pc-sidebar-toggle { margin-left: -10px; }
 /* A description under a title row with the toggle lines up with the title, not the toggle. */
 .pc-page-title-row:has(> .pc-sidebar-toggle) + .pc-page-description { padding-left: calc(var(--pc-row) - var(--pc-space-1)); }
-.pc-sidebar-sheet { position: fixed; inset: 0; z-index: 40; display: flex; }
+.pc-sidebar-sheet { position: fixed; inset: 0; z-index: var(--pc-layer-drawer); display: flex; }
 .pc-sheet-backdrop { position: absolute; inset: 0; background: var(--overlay); }
 .pc-sidebar-sheet > .pc-sidebar { position: relative; width: min(280px, 85vw); height: 100%; box-shadow: var(--pc-raise-lg); }
 
 
 /* Page header: title, description, actions on the right */
 .pc-page-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--pc-space-3) var(--pc-space-4); }
-.pc-page-header-text { display: grid; gap: 2px; min-width: 0; }
+.pc-page-header-text { display: grid; gap: var(--pc-space-0-5); min-width: 0; }
 .pc-page-header-actions { display: flex; align-items: center; gap: var(--pc-space-2); }
 
 
-.pc-code { padding: 1px 6px; border-radius: var(--pc-radius-sm); background: var(--muted); box-shadow: inset 0 0 0 1px var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 0.9em; }
-.pc-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; }
+.pc-code { padding: var(--pc-space-0-5) var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: var(--muted); box-shadow: inset 0 0 0 1px var(--border); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 var(--pc-space-1-5); border: 1px solid color-mix(in srgb, var(--muted-foreground) 45%, transparent); border-radius: var(--pc-radius-sm); background: transparent; color: var(--muted-foreground); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 
 /* Fields with an icon, selects, radios, colour swatches, chips */
 .pc-input-group { position: relative; display: flex; align-items: center; }
-.pc-input-group > svg { position: absolute; left: 12px; width: 16px; height: 16px; color: var(--muted-foreground); pointer-events: none; }
-.pc-input-group:has(> svg) > .pc-input { padding-left: 36px; }
-/* An icon button at the end of a field (show the password, copy): 28px, muted, 2px from the edge; the text stops before it. */
-.pc-input-group-end > .pc-btn-icon { width: 28px; height: 28px; color: var(--muted-foreground); }
-.pc-input-group:has(> .pc-input-group-end > :is(.pc-btn-icon, .pc-spinner)) > .pc-input { padding-right: 36px; }
+.pc-input-group > svg { position: absolute; left: 12px; width: var(--pc-icon-16); height: var(--pc-icon-16); color: var(--muted-foreground); pointer-events: none; }
+.pc-input-group:has(> svg) > .pc-input { padding-left: calc(var(--pc-space-3) + var(--pc-icon-16) + var(--pc-space-2)); }
+/* An icon button at the end of a field (show the password, copy): as tall as a small button, muted, 2px from the edge; the text stops before it. */
+.pc-input-group-end > .pc-btn-icon { width: calc(var(--pc-row) - 4px); height: calc(var(--pc-row) - 4px); color: var(--muted-foreground); }
+.pc-input-group:has(> .pc-input-group-end > :is(.pc-btn-icon, .pc-spinner)) > .pc-input { padding-right: calc(var(--pc-row) + var(--pc-space-1)); }
 .pc-input-group:has(> .pc-input-group-end > :is(.pc-btn-icon, .pc-spinner)) > .pc-input-group-end { right: 2px; }
 /* A search field (type="search"): our own x (a ghost icon button, "Clear search") instead of the browser's; a spinner in its place while it looks. */
 .pc-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
-.pc-input-group-end > .pc-spinner { margin: 0 6px; color: var(--muted-foreground); }
+.pc-input-group-end > .pc-spinner { margin: 0 var(--pc-space-1-5); color: var(--muted-foreground); }
 .pc-input-group > .pc-input-group-end { position: absolute; right: 8px; display: flex; align-items: center; gap: var(--pc-space-1); }
 /* Words before or after the value (https://, kg, @pecaiet.ro): a .pc-input-addon inside the field, muted, the value right after it.
    The group then draws the field's edge, its focus ring, its error and its half strength. */
@@ -572,10 +590,10 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-input-group:has(> .pc-input-addon) > .pc-input { height: 100%; border: 0; border-radius: inherit; background: none; }
 .pc-input-group:has(> .pc-input-addon) > .pc-input:focus-visible { box-shadow: none; }
 .pc-input-addon { flex-shrink: 0; color: var(--muted-foreground); white-space: nowrap; }
-.pc-input-addon:first-child { padding-left: 10px; }
-.pc-input-addon:last-child { padding-right: 10px; }
-.pc-input-addon + .pc-input { padding-left: 2px; }
-.pc-input:has(+ .pc-input-addon) { padding-right: 2px; }
+.pc-input-addon:first-child { padding-left: var(--pc-space-2-5); }
+.pc-input-addon:last-child { padding-right: var(--pc-space-2-5); }
+.pc-input-addon + .pc-input { padding-left: var(--pc-space-0-5); }
+.pc-input:has(+ .pc-input-addon) { padding-right: var(--pc-space-0-5); }
 .pc-input-group:has(> .pc-input-addon):focus-within { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-input-group:has(> .pc-input-addon):has(> .pc-input[aria-invalid="true"]) { border-color: var(--destructive); }
 .pc-input-group:has(> .pc-input-addon):has(> .pc-input:disabled) { opacity: 0.5; cursor: not-allowed; }
@@ -583,39 +601,39 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* A field and its button side by side (Invite, Add): 8px apart, each its own shape. */
 .pc-input-row { display: flex; gap: var(--pc-space-2); }
 .pc-input-row > :is(.pc-input, .pc-input-group) { flex: 1; min-width: 0; }
-.pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1.5px solid var(--input); border-radius: 999px; background: var(--card); cursor: pointer; }
+.pc-radio { appearance: none; display: grid; place-content: center; width: 16px; height: 16px; margin: 0; flex-shrink: 0; border: 1px solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); cursor: pointer; }
 .pc-radio:checked { border-color: var(--primary); }
-.pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
+.pc-radio:checked::after { content: ""; width: 8px; height: 8px; border-radius: var(--pc-radius-full); background: var(--primary); }
 .pc-radio:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-radio:disabled { opacity: 0.5; cursor: not-allowed; }
 .pc-radio[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
-.pc-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: var(--muted); color: var(--foreground); font-size: 12px; font-weight: 600; white-space: nowrap; }
-.pc-chip:has(.pc-chip-remove) { padding-right: 3px; }
-.pc-chip > svg { width: 14px; height: 14px; color: var(--muted-foreground); }
-.pc-chip-remove { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted-foreground); cursor: pointer; }
-.pc-chip-remove > svg { width: 14px; height: 14px; }
+.pc-chip { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); height: calc(var(--pc-row) - 4px); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; white-space: nowrap; }
+.pc-chip:has(.pc-chip-remove) { padding-right: var(--pc-space-1); }
+.pc-chip > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); color: var(--muted-foreground); }
+.pc-chip-remove { display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: var(--pc-radius-full); background: none; color: var(--muted-foreground); cursor: pointer; }
+.pc-chip-remove > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-chip-remove:hover { background: var(--accent); color: var(--foreground); }
 .pc-chip-remove:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 .pc-chip-remove:disabled, .pc-chip-remove:disabled:hover { background: none; color: var(--muted-foreground); opacity: 0.5; cursor: not-allowed; }
 
 /* Alerts with an action, menus with checks and group labels */
 .pc-alert-action { margin-left: auto; flex-shrink: 0; }
-.pc-alert:has(.pc-alert-action) { align-items: center; padding-top: 6px; padding-bottom: 6px; }
+.pc-alert:has(.pc-alert-action) { align-items: center; padding-top: var(--pc-space-1-5); padding-bottom: var(--pc-space-1-5); }
 .pc-alert:has(.pc-alert-action) > svg { margin-top: 0; }
 /* Longer alerts: a .pc-alert-body with a .pc-alert-title (or a lead line) and the text or a list under it. The first line keeps the kind's
    colour (a notice's title teal); everything after it is in the text colour, easier to read. */
-.pc-alert-body { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.pc-alert-body { flex: 1; min-width: 0; display: grid; gap: var(--pc-space-0-5); }
 .pc-alert-body > p { margin: 0; }
-.pc-alert-body > ul { margin: var(--pc-space-1) 0 0; padding-left: 18px; list-style: disc; }
-.pc-alert-body li + li { margin-top: 2px; }
+.pc-alert-body > ul { margin: var(--pc-space-1) 0 0; padding-left: var(--pc-space-4); list-style: disc; }
+.pc-alert-body li + li { margin-top: var(--pc-space-0-5); }
 .pc-alert-title { font-weight: 600; }
 .pc-alert-notice .pc-alert-title { color: var(--primary-hover); }
 .pc-alert-body > :not(:first-child) { color: var(--foreground); }
 /* Dismissible: a ghost x at the end, in the alert's colour. */
-.pc-alert-close.pc-btn-icon { width: 28px; height: 28px; margin: -4px -8px -4px auto; color: inherit; opacity: 0.7; }
+.pc-alert-close.pc-btn-icon { width: calc(var(--pc-row) - 4px); height: calc(var(--pc-row) - 4px); margin: -4px -8px -4px auto; color: inherit; }
 .pc-alert-close.pc-btn-icon:hover { opacity: 1; background: color-mix(in srgb, currentColor 10%, transparent); color: inherit; }
 .pc-alert-action ~ .pc-alert-close.pc-btn-icon { margin-left: 0; }
-.pc-alert:has(> .pc-alert-close) { padding-right: 10px; }
+.pc-alert:has(> .pc-alert-close) { padding-right: var(--pc-space-2-5); }
 /* A banner across the top of a page: no corners, edge to edge, one line. */
 .pc-alert-banner { padding: var(--pc-space-2) var(--pc-space-4); border-radius: 0; align-items: center; }
 .pc-alert-banner > svg { margin-top: 0; }
@@ -625,7 +643,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-menu-item:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Popover and calendar */
-.pc-popover { display: grid; gap: 10px; padding: var(--pc-space-4); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+.pc-popover { display: grid; gap: var(--pc-space-2-5); padding: var(--pc-space-4); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 /* Popover: a panel that opens from a button, on click, and can hold a link, a field or buttons. .pc-popover-anchor wraps the button and the
    .pc-popover (hidden until opened; the button gets aria-expanded="true"). It opens 4px below, aligned to the button's start;
    .pc-popover-end aligns it to the end, .pc-popover-up opens it above. Inside: a .pc-popover-head (a .pc-dialog-title, and a
@@ -633,24 +651,24 @@ dialog.pc-drawer:not([open]) { display: none; }
    over a .pc-popover-backdrop (right before it), like the menus. */
 .pc-popover[hidden] { display: none; }
 .pc-popover-anchor { position: relative; display: inline-block; }
-.pc-popover-anchor > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; width: max-content; max-width: min(320px, calc(100vw - 32px)); }
+.pc-popover-anchor > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: var(--pc-layer-menu); width: max-content; max-width: min(320px, calc(100vw - 32px)); }
 .pc-popover-anchor > .pc-popover-end { left: auto; right: 0; }
 .pc-popover-anchor > .pc-popover-up { top: auto; bottom: calc(100% + 4px); }
-.pc-popover-head { display: flex; align-items: center; gap: 6px; }
+.pc-popover-head { display: flex; align-items: center; gap: var(--pc-space-1-5); }
 .pc-popover-head > .pc-dialog-title { flex: 1; min-width: 0; }
 .pc-popover-close { display: none; }
 .pc-popover-text { margin: 0; color: var(--muted-foreground); }
 .pc-popover-backdrop { display: none; }
 @media (max-width: 47.99rem) {
-  .pc-popover-anchor > .pc-popover { position: fixed; inset: auto 0 0; z-index: 60; width: auto; max-width: none; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-popover-anchor > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-overlay); width: auto; max-width: none; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-popover-close { display: inline-flex; }
-  .pc-popover-backdrop:has(+ .pc-popover:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+  .pc-popover-backdrop:has(+ .pc-popover:not([hidden])) { display: block; position: fixed; inset: 0; z-index: calc(var(--pc-layer-overlay) - 1); background: var(--overlay); }
   html:has(.pc-popover-anchor > .pc-popover:not([hidden])) { overflow: hidden; }
 }
-.pc-calendar { display: grid; gap: 6px; }
+.pc-calendar { display: grid; gap: var(--pc-space-1-5); }
 .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--pc-space-2); font-weight: 600; }
 .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, var(--pc-row)); gap: var(--pc-space-1); }
-.pc-calendar-weekday { display: grid; place-items: center; height: 26px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+.pc-calendar-weekday { display: grid; place-items: center; height: 24px; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; }
 .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
 .pc-calendar-day:hover { background: var(--accent); }
 .pc-calendar-day:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
@@ -666,18 +684,18 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: -4px 0 0 var(--pc-range); }
 .pc-calendar-day:is([data-range="start"], [data-range]:nth-child(7n+1)) { border-top-left-radius: var(--pc-radius); border-bottom-left-radius: var(--pc-radius); }
 .pc-calendar-day:is([data-range="end"], [data-range]:nth-child(7n)) { border-top-right-radius: var(--pc-radius); border-bottom-right-radius: var(--pc-radius); }
-.pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: -4px 0 0 var(--pc-range), inset 0 0 0 1.5px var(--primary); }
+.pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: -4px 0 0 var(--pc-range), inset 0 0 0 1px var(--primary); }
 /* A chosen (teal) day with keyboard focus: the ring goes outside, past a 2px gap, so it shows against the teal. */
 .pc-calendar .pc-calendar-day[aria-selected="true"]:focus-visible { box-shadow: 0 0 0 2px var(--background), 0 0 0 3px var(--ring); }
 /* A day that can't be picked: faded, no hover, skipped by the keyboard. */
 .pc-calendar-day[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .pc-calendar-day[aria-disabled="true"]:hover { background: none; }
 /* The month's name is a button that opens the twelve months (.pc-calendar-months); the arrows then change the year. */
-.pc-calendar-title { padding: 2px var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.pc-calendar-title { padding: var(--pc-space-0-5) var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
 .pc-calendar-title:hover { background: var(--accent); }
 .pc-calendar-title:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
 /* The twelve months take the day grid's width, so the popover keeps one width in both views. */
-.pc-calendar-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; min-width: calc(7 * var(--pc-row) + 6 * var(--pc-space-1)); }
+.pc-calendar-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--pc-space-1-5); min-width: calc(7 * var(--pc-row) + 6 * var(--pc-space-1)); }
 .pc-calendar-month { height: var(--pc-row); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; cursor: pointer; }
 .pc-calendar-month:hover { background: var(--accent); }
 .pc-calendar-month:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
@@ -690,50 +708,50 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Search: a dialog with the field on top and grouped results */
 .pc-search { width: min(560px, calc(100% - 32px)); padding: 0; overflow: hidden; }
 .pc-search-field { position: relative; display: flex; align-items: center; border-bottom: 1px solid var(--border); }
-.pc-search-field > svg { position: absolute; left: 16px; width: 16px; height: 16px; color: var(--muted-foreground); }
-.pc-search-field > input { width: 100%; height: 52px; padding: 0 var(--pc-space-4) 0 46px; border: 0; background: none; color: var(--foreground); font: inherit; }
+.pc-search-field > svg { position: absolute; left: 16px; width: var(--pc-icon-16); height: var(--pc-icon-16); color: var(--muted-foreground); }
+.pc-search-field > input { width: 100%; height: 48px; padding: 0 var(--pc-space-4) 0 calc(var(--pc-space-4) + var(--pc-icon-16) + var(--pc-space-3)); border: 0; background: none; color: var(--foreground); font: inherit; }
 .pc-search-field > input::placeholder { color: var(--muted-foreground); }
 .pc-search-field > input:focus-visible { outline: 2px solid transparent; outline-offset: -2px; }
 .pc-search-results { display: grid; gap: var(--pc-space-1); max-height: 360px; padding: var(--pc-space-1); overflow: auto; }
-.pc-search-result { display: flex; align-items: center; gap: 10px; height: var(--pc-row); padding: 0 10px; border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
-.pc-search-result > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
-.pc-search-group { display: flex; align-items: baseline; gap: var(--pc-space-2); padding: 14px var(--pc-space-2) 6px; color: var(--muted-foreground); font-size: 12px; font-weight: 600; }
+.pc-search-result { display: flex; align-items: center; gap: var(--pc-space-2-5); height: var(--pc-row); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
+.pc-search-result > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; color: var(--muted-foreground); }
+.pc-search-group { display: flex; align-items: baseline; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-2) var(--pc-space-1-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; }
 .pc-search-count { color: var(--muted-foreground); font-weight: 400; font-variant-numeric: tabular-nums; }
 .pc-search-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-search-place { display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 45%; color: var(--muted-foreground); font-size: 12px; }
-.pc-search-place > svg { width: 14px; height: 14px; flex-shrink: 0; }
+.pc-search-place { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); min-width: 0; max-width: 45%; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-search-place > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; }
 .pc-search-place > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pc-search-result:hover, .pc-search-result[aria-selected="true"] { background: var(--accent); }
 .pc-search-result:focus-visible { background: var(--accent); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
 .pc-search-result[data-done] > .pc-search-title { color: var(--muted-foreground); text-decoration: line-through; }
-.pc-search-footer { display: flex; gap: 14px; padding: var(--pc-space-2) 14px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 12px; }
+.pc-search-footer { display: flex; gap: var(--pc-space-3); padding: var(--pc-space-2) var(--pc-space-3); border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 /* The search window: the words that match in semibold (<mark class="pc-search-match">), a spinner at the end of the field while it looks,
    recent searches before typing with a .pc-search-group-action (Clear) at the end of their heading. On phones it fills the screen, the field at
    the top with a Cancel (.pc-search-cancel); the keys and the places go. */
 .pc-search-match { background: none; color: inherit; font-weight: 600; }
 .pc-search-field > .pc-spinner { position: absolute; right: 16px; color: var(--muted-foreground); }
-.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: 12px; font-weight: 500; text-decoration: none; cursor: pointer; }
+.pc-search-group-action { margin-left: auto; padding: 0; border: 0; background: none; color: var(--muted-foreground); font: inherit; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 500; text-decoration: none; cursor: pointer; }
 .pc-search-group-action:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-search-cancel { display: none; }
 @media (max-width: 47.99rem) {
   .pc-dialog.pc-search[open] { inset: 0; display: flex; flex-direction: column; width: auto; height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); border: 0; border-radius: 0; box-shadow: none; }
   .pc-search-results { flex: 1; max-height: none; }
-  .pc-search-cancel { display: inline-flex; flex-shrink: 0; margin-right: 6px; color: var(--primary); }
+  .pc-search-cancel { display: inline-flex; flex-shrink: 0; margin-right: var(--pc-space-1-5); color: var(--primary); }
   .pc-search-place, .pc-search-footer { display: none; }
 }
-.pc-code-block { max-height: 360px; margin: 0; padding: var(--pc-space-3) var(--pc-space-4); overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: 12px; line-height: 1.6; white-space: pre; }
+.pc-code-block { max-height: 360px; margin: 0; padding: var(--pc-space-3) var(--pc-space-4); overflow: auto; border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--muted); font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-12); white-space: pre; }
 
 /* Accordion: <details> items in a .pc-accordion; the browser opens and closes them. Rows like a menu's: 32px at least,
    rounded, 2px apart, no lines; the open question semibold, its answer muted and lined up with it. */
-.pc-accordion { display: flex; flex-direction: column; gap: 2px; }
-.pc-accordion-item > summary { display: flex; align-items: center; gap: var(--pc-space-2); min-height: var(--pc-row); padding: 6px 10px; border-radius: var(--pc-radius); cursor: pointer; list-style: none; }
+.pc-accordion { display: flex; flex-direction: column; gap: var(--pc-space-0-5); }
+.pc-accordion-item > summary { display: flex; align-items: center; gap: var(--pc-space-2); min-height: var(--pc-row); padding: var(--pc-space-1-5) var(--pc-space-2-5); border-radius: var(--pc-radius); cursor: pointer; list-style: none; }
 .pc-accordion-item > summary::-webkit-details-marker { display: none; }
-.pc-accordion-item > summary > svg { width: 16px; height: 16px; flex-shrink: 0; margin-left: auto; color: var(--muted-foreground); transition: transform var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-accordion-item > summary > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; margin-left: auto; color: var(--muted-foreground); transition: transform var(--pc-motion-fast) var(--pc-motion-ease); }
 .pc-accordion-item > summary:hover { background: var(--accent); }
 .pc-accordion-item > summary:focus-visible { outline: 2px solid transparent; outline-offset: 1px; background: var(--accent); box-shadow: var(--pc-focus-inset); }
 .pc-accordion-item[open] > summary { font-weight: 600; }
 .pc-accordion-item[open] > summary > svg { transform: rotate(180deg); }
-.pc-accordion-content { padding: 2px 10px 10px; color: var(--muted-foreground); line-height: 1.5; }
+.pc-accordion-content { padding: var(--pc-space-0-5) var(--pc-space-2-5) var(--pc-space-2-5); color: var(--muted-foreground); line-height: var(--pc-line-14); }
 .pc-accordion-item[aria-disabled="true"] { cursor: not-allowed; }
 .pc-accordion-item[aria-disabled="true"] > summary { opacity: 0.5; pointer-events: none; }
 /* In a card the questions line up with the card's title; the fill reaches past them. */
@@ -742,12 +760,12 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Breadcrumbs: where the page sits, above its title. Parents muted with no underline until the pointer is on them,
    the page you are on in the text colour, a small chevron between. Above a page header with the sidebar toggle it
    lines up with the title, like the page description. */
-.pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; color: var(--muted-foreground); font-size: 12px; font-weight: 500; }
-.pc-breadcrumbs > a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 2px; }
+.pc-breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: var(--pc-space-1-5); min-width: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 500; }
+.pc-breadcrumbs > a { color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: var(--pc-radius-xs); }
 .pc-breadcrumbs > a:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-breadcrumbs > a:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
 .pc-breadcrumbs > [aria-current="page"] { color: var(--foreground); }
-.pc-breadcrumbs > svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.7; }
+.pc-breadcrumbs > svg { width: var(--pc-icon-12); height: var(--pc-icon-12); flex-shrink: 0; }
 .pc-breadcrumbs:has(+ .pc-page-header .pc-sidebar-toggle) { padding-left: calc(var(--pc-row) - var(--pc-space-1)); }
 
 /* Button group: buttons side by side, 8px apart, each its own shape; they wrap when there is no room. */
@@ -755,7 +773,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Toolbar: ghost buttons in a quiet tray, 4px around them; the one under the pointer lifts as a raised pill. A tool that
    stays on (aria-pressed) is soft teal, like any button that stays on, and stays so under the pointer.
    A .pc-toolbar-divider separates groups of tools. */
-.pc-toolbar { display: inline-flex; align-items: center; gap: 2px; padding: var(--pc-space-1); border-radius: calc(var(--pc-radius) + 4px); background: var(--muted); }
+.pc-toolbar { display: inline-flex; align-items: center; gap: var(--pc-space-0-5); padding: var(--pc-space-1); border-radius: var(--pc-radius-lg); background: var(--muted); }
 .pc-toolbar > .pc-btn { height: calc(var(--pc-row) - 4px); }
 .pc-toolbar > .pc-btn-icon { width: calc(var(--pc-row) - 4px); }
 .pc-toolbar > .pc-btn:hover:not(:disabled, [aria-disabled="true"], :focus-visible) { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
@@ -765,7 +783,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 /* Segmented control: the toolbar's tray, for choosing exactly one of two to five options: a role="radiogroup" of .pc-btn.pc-btn-ghost
    labels, each around a radio kept out of sight. The options share the width evenly; the chosen one lifts as a raised pill, the one
    under the pointer shows a pale pill; the arrow keys move between them. .pc-segmented-full stretches it to its container. */
-.pc-segmented { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: var(--pc-space-1); border-radius: calc(var(--pc-radius) + 4px); background: var(--muted); }
+.pc-segmented { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--pc-space-0-5); padding: var(--pc-space-1); border-radius: var(--pc-radius-lg); background: var(--muted); }
 .pc-segmented-full { display: grid; }
 .pc-segmented > .pc-btn { position: relative; height: calc(var(--pc-row) - 4px); }
 .pc-segmented > .pc-btn > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
@@ -788,7 +806,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-separator { flex-shrink: 0; height: 1px; margin: 0; border: 0; background: var(--border); }
 .pc-separator-bleed { margin-inline: -16px; }
 .pc-separator-vertical { display: inline-block; width: 1px; height: 16px; vertical-align: middle; }
-.pc-separator-text { display: flex; align-items: center; gap: var(--pc-space-3); color: var(--muted-foreground); font-size: 12px; }
+.pc-separator-text { display: flex; align-items: center; gap: var(--pc-space-3); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-separator-text::before, .pc-separator-text::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
 /* Skeleton: blocks shaped like the content that's coming, in the border colour: .pc-skeleton on any box, sized by .pc-skeleton-line
@@ -798,12 +816,12 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-skeleton { display: block; flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--border); animation: pc-skeleton-pulse calc(var(--pc-motion-base) * 8) var(--pc-motion-ease) infinite; }
 .pc-skeleton-line { height: 10px; }
 .pc-skeleton-title { height: 14px; }
-.pc-skeleton-circle { width: 22px; height: 22px; border-radius: 999px; }
+.pc-skeleton-circle { width: 24px; height: 24px; border-radius: var(--pc-radius-full); }
 .pc-skeleton-control { height: var(--pc-row); border-radius: var(--pc-radius); }
 
 /* Skip link: <a class="pc-skip-link" href="#main">, first in the page and out of sight until it has keyboard focus; then a raised pill
    at the top left, 8px in, over the page, with the blue focus ring. The place it skips to gets tabindex="-1" so focus lands there. */
-.pc-skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; display: inline-flex; align-items: center; height: var(--pc-row); padding: 0 var(--pc-space-3); border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font-weight: 600; text-decoration: none; transform: translateY(calc(-100% - 16px)); }
+.pc-skip-link { position: fixed; top: 8px; left: 8px; z-index: var(--pc-layer-skip-link); display: inline-flex; align-items: center; height: var(--pc-row); padding: 0 var(--pc-space-3); border: 1px solid var(--border); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font-weight: 600; text-decoration: none; transform: translateY(calc(-100% - 16px)); }
 .pc-skip-link:focus { transform: none; outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-raise-lg), var(--pc-focus); }
 
 /* Stack: children one under another with the same space between them, from the spacing scale (pc-space-*): .pc-stack is 12px, the
@@ -816,23 +834,23 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-stack-6 { gap: var(--pc-space-6); }
 .pc-stack-row { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--pc-space-2); }
 
-/* Slider: <input type="range" class="pc-slider">: a 6px track like the Progress bar, teal up to the value, and an 18px handle in the card colour
+/* Slider: <input type="range" class="pc-slider">: a 6px track like the Progress bar, teal up to the value, and a 20px handle in the card colour
    with our border and lift. The app keeps --value (0–100%) in step with the value, for the teal part. Steps: step="…", and an optional
    .pc-slider-marks under it, one span per step. A range with two handles: .pc-slider-range around two sliders, with --from and --to. */
-.pc-slider { --value: 50%; display: block; width: 100%; height: 18px; margin: 0; background: transparent; cursor: pointer; appearance: none; }
-.pc-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(to right, var(--primary) var(--value), var(--track) var(--value)); }
-.pc-slider::-moz-range-track { height: 6px; border-radius: 999px; background: var(--track); }
-.pc-slider::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--primary); }
-.pc-slider::-webkit-slider-thumb { width: 18px; height: 18px; margin-top: -6px; border: 1px solid var(--input); border-radius: 999px; background: var(--card); box-shadow: var(--pc-raise); appearance: none; }
-.pc-slider::-moz-range-thumb { box-sizing: border-box; width: 18px; height: 18px; border: 1px solid var(--input); border-radius: 999px; background: var(--card); box-shadow: var(--pc-raise); }
+.pc-slider { --value: 50%; display: block; width: 100%; height: 20px; margin: 0; background: transparent; cursor: pointer; appearance: none; }
+.pc-slider::-webkit-slider-runnable-track { height: 6px; border-radius: var(--pc-radius-full); background: linear-gradient(to right, var(--primary) var(--value), var(--track) var(--value)); }
+.pc-slider::-moz-range-track { height: 6px; border-radius: var(--pc-radius-full); background: var(--track); }
+.pc-slider::-moz-range-progress { height: 6px; border-radius: var(--pc-radius-full); background: var(--primary); }
+.pc-slider::-webkit-slider-thumb { width: 20px; height: 20px; margin-top: -7px; border: 1px solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); appearance: none; }
+.pc-slider::-moz-range-thumb { box-sizing: border-box; width: 20px; height: 20px; border: 1px solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); }
 .pc-slider:focus-visible { outline: none; }
 .pc-slider:focus-visible::-webkit-slider-thumb { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-slider:focus-visible::-moz-range-thumb { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-slider:disabled { opacity: 0.5; cursor: not-allowed; }
 .pc-slider-marks { display: flex; justify-content: space-between; margin-top: -2px; padding: 0 var(--pc-space-2); }
-.pc-slider-marks > span { width: 2px; height: 2px; border-radius: 999px; background: var(--muted-foreground); }
-.pc-slider-range { --from: 20%; --to: 60%; position: relative; height: 18px; }
-.pc-slider-range::before { content: ""; position: absolute; top: 6px; right: 0; left: 0; height: 6px; border-radius: 999px; background: linear-gradient(to right, var(--track) var(--from), var(--primary) var(--from), var(--primary) var(--to), var(--track) var(--to)); }
+.pc-slider-marks > span { width: 2px; height: 2px; border-radius: var(--pc-radius-full); background: var(--muted-foreground); }
+.pc-slider-range { --from: 20%; --to: 60%; position: relative; height: 20px; }
+.pc-slider-range::before { content: ""; position: absolute; top: 7px; right: 0; left: 0; height: 6px; border-radius: var(--pc-radius-full); background: linear-gradient(to right, var(--track) var(--from), var(--primary) var(--from), var(--primary) var(--to), var(--track) var(--to)); }
 .pc-slider-range > .pc-slider { position: absolute; inset: 0; pointer-events: none; }
 .pc-slider-range > .pc-slider::-webkit-slider-runnable-track { background: transparent; }
 .pc-slider-range > .pc-slider::-moz-range-track, .pc-slider-range > .pc-slider::-moz-range-progress { background: transparent; }
@@ -840,13 +858,13 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-slider-range > .pc-slider::-moz-range-thumb { pointer-events: auto; }
 
 /* Spinner: Phosphor's circle-notch, turning, in the colour of the words around it: <span class="pc-spinner" role="status"
-   aria-label="Loading"> holding the svg. 16px beside 14px text, .pc-spinner-small 14px beside 12px, .pc-spinner-large 20px on its own.
+   aria-label="Loading"> holding the svg. 16px beside text, .pc-spinner-small 12px in tight spots, .pc-spinner-large 20px on its own.
    It turns even while motion is off, as it's the only way it says "working"; with reduced motion it turns slower. A button at work
    gets aria-busy="true": it keeps its width, its words change, and it can't be pressed again. */
-.pc-spinner { display: inline-flex; flex-shrink: 0; width: 16px; height: 16px; }
+.pc-spinner { display: inline-flex; flex-shrink: 0; width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-spinner > svg { width: 100%; height: 100%; animation: pc-spin 0.8s linear infinite; }
-.pc-spinner-small { width: 14px; height: 14px; }
-.pc-spinner-large { width: 20px; height: 20px; }
+.pc-spinner-small { width: var(--pc-icon-12); height: var(--pc-icon-12); }
+.pc-spinner-large { width: var(--pc-icon-20); height: var(--pc-icon-20); }
 .pc-btn[aria-busy="true"] { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .pc-spinner > svg { animation-duration: 2.4s; } }
 
@@ -857,8 +875,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-stepper > input { width: 48px; height: 100%; padding: 0; border: 0; background: transparent; color: var(--foreground); font: inherit; font-variant-numeric: tabular-nums; text-align: center; appearance: textfield; }
 .pc-stepper > input::-webkit-inner-spin-button, .pc-stepper > input::-webkit-outer-spin-button { margin: 0; appearance: none; }
 .pc-stepper > input:focus { outline: none; }
-.pc-stepper > button { display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: calc(var(--pc-radius) - 2px); background: none; color: var(--foreground); cursor: pointer; }
-.pc-stepper > button > svg { width: 16px; height: 16px; }
+.pc-stepper > button { display: inline-grid; place-items: center; width: calc(var(--pc-row) - 4px); height: calc(var(--pc-row) - 4px); padding: 0; border: 0; border-radius: calc(var(--pc-radius) - 2px); background: none; color: var(--foreground); cursor: pointer; }
+.pc-stepper > button > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-stepper > button:hover { background: var(--accent); }
 .pc-stepper > button:disabled { background: none; opacity: 0.5; cursor: not-allowed; }
 .pc-stepper:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; border-color: var(--background); box-shadow: var(--pc-focus); }
@@ -870,18 +888,18 @@ dialog.pc-drawer:not([open]) { display: none; }
    before the words and a .pc-tab-count after them. When they don't fit, the row scrolls sideways. */
 .pc-tabs { display: flex; gap: var(--pc-space-1); overflow-x: auto; scrollbar-width: none; box-shadow: inset 0 -1px 0 var(--border); }
 .pc-tabs::-webkit-scrollbar { display: none; }
-.pc-tab { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; gap: 6px; height: 36px; padding: 0 var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: var(--muted-foreground); font: inherit; font-weight: 500; white-space: nowrap; text-decoration: none; cursor: pointer; }
-.pc-tab > svg { width: 16px; height: 16px; }
+.pc-tab { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row); padding: 0 var(--pc-space-2); border: 0; border-radius: var(--pc-radius-sm); background: none; color: var(--muted-foreground); font: inherit; font-weight: 500; white-space: nowrap; text-decoration: none; cursor: pointer; }
+.pc-tab > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); }
 .pc-tab:hover, .pc-tab[aria-selected="true"], .pc-tab[aria-current="page"] { color: var(--foreground); }
 .pc-tab[aria-selected="true"], .pc-tab[aria-current="page"] { font-weight: 600; }
-.pc-tab[aria-selected="true"]::after, .pc-tab[aria-current="page"]::after { content: ""; position: absolute; right: 8px; bottom: 0; left: 8px; height: 2px; border-radius: 2px; background: var(--primary); }
+.pc-tab[aria-selected="true"]::after, .pc-tab[aria-current="page"]::after { content: ""; position: absolute; right: 8px; bottom: 0; left: 8px; height: 2px; border-radius: var(--pc-radius-xs); background: var(--primary); }
 .pc-tab:focus-visible { outline: 2px solid transparent; outline-offset: -2px; box-shadow: var(--pc-focus-inset); }
 .pc-tab:is(:disabled, [aria-disabled="true"]), .pc-tab:is(:disabled, [aria-disabled="true"]):hover { color: var(--muted-foreground); opacity: 0.5; cursor: not-allowed; }
-.pc-tab-count { padding: 0 6px; border-radius: 999px; background: var(--muted); color: var(--muted-foreground); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pc-tab-count { padding: 0 var(--pc-space-1-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; font-variant-numeric: tabular-nums; }
 .pc-tab-panel:focus-visible { outline: none; }
 
 /* A text area's count: .pc-field-count under it, on the right ("13 / 200"); data-state="over" turns it red. */
-.pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pc-field-count { justify-self: end; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
 .pc-field-count[data-state="over"] { color: var(--destructive); font-weight: 600; }
 
 /* Visually hidden: words for screen readers only, out of sight but still read out (the same as Tailwind's sr-only).
@@ -892,15 +910,15 @@ dialog.pc-drawer:not([open]) { display: none; }
    them, the newest at the bottom, 8px apart. A .pc-toast is our panel (card colour, border, the menus' lift): a 16px icon in its
    meaning's colour (data-tone="success" teal, "warning" amber, "error" red, otherwise muted), the words (.pc-toast-text), an optional action (a ghost
    button: Undo, Retry) and the x. role="status" (role="alert" for an error). */
-.pc-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 70; display: grid; justify-items: end; gap: var(--pc-space-2); width: min(380px, calc(100% - 32px)); }
-.pc-toast { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 6px 6px 6px 14px; border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
-.pc-toast > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+.pc-toasts { position: fixed; right: 16px; bottom: 16px; z-index: var(--pc-layer-toast); display: grid; justify-items: end; gap: var(--pc-space-2); width: min(380px, calc(100% - 32px)); }
+.pc-toast { display: flex; align-items: center; gap: var(--pc-space-2-5); width: 100%; min-height: calc(var(--pc-row) + 8px); padding: var(--pc-space-1-5) var(--pc-space-1-5) var(--pc-space-1-5) var(--pc-space-3); border: 1px solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
+.pc-toast > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; color: var(--muted-foreground); }
 .pc-toast[data-tone="success"] > svg { color: var(--primary); }
 .pc-toast[data-tone="error"] > svg { color: var(--destructive); }
 .pc-toast[data-tone="warning"] > svg { color: var(--warning); }
 .pc-toast-text { flex: 1; min-width: 0; }
-.pc-toast > .pc-btn { height: 28px; padding: 0 10px; }
-.pc-toast > .pc-btn-icon { width: 28px; padding: 0; }
+.pc-toast > .pc-btn { height: calc(var(--pc-row) - 4px); padding: 0 var(--pc-space-2-5); }
+.pc-toast > .pc-btn-icon { width: calc(var(--pc-row) - 4px); padding: 0; }
 @media (max-width: 47.99rem) { .pc-toasts { right: 8px; bottom: calc(8px + env(safe-area-inset-bottom)); left: 8px; width: auto; } }
 
 /* Footer: the bottom of a site's page (signed-out pages, a landing page); apps with a sidebar have none. A line across its top, link
@@ -909,21 +927,21 @@ dialog.pc-drawer:not([open]) { display: none; }
    across the full width in the border colour, its bottom cut off by the page's edge. */
 .pc-footer { overflow: hidden; padding: var(--pc-space-6) var(--pc-space-6) 0; border-top: 1px solid var(--border); background: var(--background); color: var(--muted-foreground); }
 .pc-footer-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--pc-space-4); }
-.pc-footer-heading { margin: 0 0 var(--pc-space-1); color: var(--foreground); font-size: 12px; font-weight: 600; }
-.pc-footer-link { display: block; width: fit-content; padding: 3px 0; border-radius: 2px; color: var(--muted-foreground); text-decoration: none; }
+.pc-footer-heading { margin: 0 0 var(--pc-space-1); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-weight: 600; }
+.pc-footer-link { display: block; width: fit-content; padding: var(--pc-space-0-5) 0; border-radius: var(--pc-radius-xs); color: var(--muted-foreground); text-decoration: none; }
 .pc-footer-link:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pc-footer-link:focus-visible { color: var(--foreground); outline: 2px solid transparent; outline-offset: 1px; box-shadow: inset 0 0 0 1px var(--background), var(--pc-focus); }
-.pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--pc-space-1) var(--pc-space-4); margin-top: 20px; padding-top: var(--pc-space-3); border-top: 1px solid var(--border); font-size: 12px; }
-.pc-footer-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pc-space-1) var(--pc-space-4); font-size: 12px; }
+.pc-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--pc-space-1) var(--pc-space-4); margin-top: var(--pc-space-6); padding-top: var(--pc-space-3); border-top: 1px solid var(--border); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-footer-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pc-space-1) var(--pc-space-4); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 .pc-footer-line > .pc-footer-link { padding: 0; }
-.pc-footer-word { display: block; width: 100%; height: auto; margin-top: 20px; color: var(--border); }
-@media (max-width: 47.99rem) { .pc-footer { padding: 20px var(--pc-space-4) 0; } }
+.pc-footer-word { display: block; width: 100%; height: auto; margin-top: var(--pc-space-6); color: var(--border); }
+@media (max-width: 47.99rem) { .pc-footer { padding: var(--pc-space-6) var(--pc-space-4) 0; } }
 
 /* Toggle: a switch for a setting that takes effect straight away, with no Save: <input type="checkbox" role="switch" class="pc-switch">,
    a 36×20 pill: off is the field-border colour with a white knob at the start; on is teal with the knob at the end. Its words sit in
    a <label class="pc-check"> beside it, or at the start of a settings row with the switch at the end. */
-.pc-switch { position: relative; flex-shrink: 0; width: 36px; height: 20px; margin: 0; border-radius: 999px; background: var(--input); cursor: pointer; appearance: none; }
-.pc-switch::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px #0003; transition: left var(--pc-motion-base) var(--pc-motion-ease); }
+.pc-switch { position: relative; flex-shrink: 0; width: 36px; height: 20px; margin: 0; border-radius: var(--pc-radius-full); background: var(--input); cursor: pointer; appearance: none; }
+.pc-switch::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: var(--pc-radius-full); background: #fff; box-shadow: 0 1px 2px #0003; transition: left var(--pc-motion-base) var(--pc-motion-ease); }
 .pc-switch:checked { background: var(--primary); }
 .pc-switch:checked::before { left: 18px; background: var(--primary-foreground); }
 .pc-switch:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
@@ -933,16 +951,16 @@ dialog.pc-drawer:not([open]) { display: none; }
    (role="treeitem", aria-level; aria-expanded on those that open). A .pc-tree-caret before anything that opens (caret-right,
    caret-down when open), a 16px icon, the .pc-tree-label and an optional .pc-tree-count. Each level starts 26px further in, and the
    row's fill starts there too, right under its parent's icon. The current item has aria-current="page": the active sidebar pill. */
-.pc-tree { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
-.pc-tree-item { --level: 0; display: flex; align-items: center; gap: 6px; height: var(--pc-row); margin-left: calc(var(--level) * 26px); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius); color: var(--foreground); text-decoration: none; cursor: pointer; }
+.pc-tree { display: grid; gap: var(--pc-space-0-5); margin: 0; padding: 0; list-style: none; }
+.pc-tree-item { --level: 0; display: flex; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row); margin-left: calc(var(--level) * 26px); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius); color: var(--foreground); text-decoration: none; cursor: pointer; }
 .pc-tree-item:has(> .pc-tree-caret) { padding-left: var(--pc-space-1); }
 .pc-tree-item[aria-level="2"] { --level: 1; }
 .pc-tree-item[aria-level="3"] { --level: 2; }
 .pc-tree-item[aria-level="4"] { --level: 3; }
-.pc-tree-item > svg, .pc-tree-caret > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+.pc-tree-item > svg, .pc-tree-caret > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; color: var(--muted-foreground); }
 .pc-tree-caret { display: inline-grid; place-items: center; flex-shrink: 0; width: 16px; }
 .pc-tree-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-tree-count { color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pc-tree-count { color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; }
 .pc-tree-item:hover { background: var(--sidebar-hover); }
 .pc-tree-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
 .pc-tree-item:focus-visible { background: var(--sidebar-hover); outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus-inset); }
@@ -955,22 +973,22 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--pc-radius); background: #000; }
 .pc-video::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 10%, transparent); pointer-events: none; }
 .pc-video > video { display: block; width: 100%; height: 100%; object-fit: contain; }
-.pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 999px; background: #fff; color: #1c2733; box-shadow: 0 2px 8px #0004; cursor: pointer; }
-.pc-video-play > svg { width: 20px; height: 20px; margin-left: 2px; }
+.pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: var(--pc-radius-full); background: #fff; color: #1c2733; box-shadow: 0 2px 8px #0004; cursor: pointer; }
+.pc-video-play > svg { width: var(--pc-icon-20); height: var(--pc-icon-20); margin-left: var(--pc-space-0-5); }
 .pc-video-play:hover { background: #e9eef4; }
 .pc-video-play:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus), 0 2px 8px #0004; }
-.pc-video-length { position: absolute; right: 8px; bottom: 8px; padding: 1px 6px; border-radius: var(--pc-radius-sm); background: #000a; color: #fff; font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
+.pc-video-length { position: absolute; right: 8px; bottom: 8px; padding: var(--pc-space-0-5) var(--pc-space-1-5); border-radius: var(--pc-radius-sm); background: #000a; color: #fff; font-size: var(--pc-text-12); line-height: var(--pc-line-12); font-variant-numeric: tabular-nums; pointer-events: none; }
 .pc-video[data-state="playing"] > .pc-video-play, .pc-video[data-state="playing"] > .pc-video-length { display: none; }
 .pc-video-empty { display: grid; place-items: center; background: var(--muted); color: var(--muted-foreground); }
-.pc-video-empty > svg { width: 20px; height: 20px; }
+.pc-video-empty > svg { width: var(--pc-icon-20); height: var(--pc-icon-20); }
 
 /* Carousel: one slide at a time (the app shows one and hides the others, no motion); dots under it pick one, the
    current long and strong, the others short and faint. */
-.pc-carousel-dots { display: flex; gap: 2px; }
-.pc-carousel-dot { display: grid; place-items: center; height: 24px; padding: 0 var(--pc-space-1); border: 0; border-radius: 999px; background: none; color: inherit; cursor: pointer; }
-.pc-carousel-dot::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--input); transition: width var(--pc-motion-fast) var(--pc-motion-ease), background-color var(--pc-motion-fast) var(--pc-motion-ease), opacity var(--pc-motion-fast) var(--pc-motion-ease); }
+.pc-carousel-dots { display: flex; gap: var(--pc-space-0-5); }
+.pc-carousel-dot { display: grid; place-items: center; height: 24px; padding: 0 var(--pc-space-1); border: 0; border-radius: var(--pc-radius-full); background: none; color: inherit; cursor: pointer; }
+.pc-carousel-dot::before { content: ""; width: 8px; height: 8px; border-radius: var(--pc-radius-full); background: var(--input); transition: width var(--pc-motion-fast) var(--pc-motion-ease), background-color var(--pc-motion-fast) var(--pc-motion-ease), opacity var(--pc-motion-fast) var(--pc-motion-ease); }
 .pc-carousel-dot:hover::before { background: var(--muted-foreground); }
-.pc-carousel-dot[aria-current="true"]::before { width: 24px; background: currentColor; opacity: 0.9; }
+.pc-carousel-dot[aria-current="true"]::before { width: 24px; background: currentColor; }
 .pc-carousel-dot:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
 
 /* Color picker: a row of swatches from a set that reads in light and dark, and at the end a rainbow ring (a colour
@@ -987,29 +1005,29 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-colour-purple { --pc-colour: #8e4ec6; }
 .pc-colour-pink { --pc-colour: #d6409f; }
 .pc-swatches { display: flex; flex-wrap: wrap; }
-.pc-swatch { position: relative; display: grid; place-items: center; width: var(--pc-row); height: var(--pc-row); border-radius: 999px; cursor: pointer; }
-.pc-swatch::before { content: ""; grid-area: 1 / 1; width: 20px; height: 20px; border-radius: 999px; background: var(--pc-colour); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12); outline: 2px solid transparent; outline-offset: 2px; }
+.pc-swatch { position: relative; display: grid; place-items: center; width: var(--pc-row); height: var(--pc-row); border-radius: var(--pc-radius-full); cursor: pointer; }
+.pc-swatch::before { content: ""; grid-area: 1 / 1; width: 20px; height: 20px; border-radius: var(--pc-radius-full); background: var(--pc-colour); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12); outline: 2px solid transparent; outline-offset: 2px; }
 .pc-swatch > input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .pc-swatch:hover::before { outline-color: var(--input); }
 .pc-swatch:has(> input:checked)::before { outline-color: var(--foreground); }
 .pc-swatch:has(> input:focus-visible) { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); }
 .pc-swatch-custom::before { background: radial-gradient(circle, var(--pc-colour) 6px, transparent 6.5px); box-shadow: none; }
 .pc-swatch-custom > input[type="radio"] { pointer-events: none; }
-.pc-swatch-ring { grid-area: 1 / 1; width: 20px; height: 20px; border-radius: 999px; background: conic-gradient(#e5484d, #f76b15, #ffd54a, #30a46c, #12a594, #0090ff, #8e4ec6, #d6409f, #e5484d); mask: radial-gradient(circle, transparent 7px, #000 7.5px); }
-.pc-swatch-custom > svg { grid-area: 1 / 1; width: 11px; height: 11px; }
+.pc-swatch-ring { grid-area: 1 / 1; width: 20px; height: 20px; border-radius: var(--pc-radius-full); background: conic-gradient(#e5484d, #f76b15, #ffd54a, #30a46c, #12a594, #0090ff, #8e4ec6, #d6409f, #e5484d); mask: radial-gradient(circle, transparent 7px, #000 7.5px); }
+.pc-swatch-custom > svg { grid-area: 1 / 1; width: var(--pc-icon-12); height: var(--pc-icon-12); }
 .pc-swatch-custom:has(> input[type="radio"]) > svg { display: none; }
 
 /* Date input: a Picker button with a calendar icon and the date, opening the Date picker in a popover under it; an x
    at the end clears the date. With nothing chosen the button says so in muted (.pc-picker-placeholder). */
 .pc-picker-button > .pc-picker-placeholder { color: var(--muted-foreground); }
-.pc-date > .pc-date-clear { position: absolute; top: 3px; right: 3px; width: calc(var(--pc-row) - 6px); height: calc(var(--pc-row) - 6px); color: var(--muted-foreground); }
+.pc-date > .pc-date-clear { position: absolute; top: 4px; right: 4px; width: calc(var(--pc-row) - 8px); height: calc(var(--pc-row) - 8px); color: var(--muted-foreground); }
 .pc-date > .pc-date-clear:hover { color: var(--foreground); }
-.pc-date:has(> .pc-date-clear) > .pc-picker-button { padding-right: calc(var(--pc-row) + 2px); }
+.pc-date:has(> .pc-date-clear) > .pc-picker-button { padding-right: calc(var(--pc-row) + var(--pc-space-0-5)); }
 /* One width, the day grid's: quick picks, reminders and the actions fit to it. */
-.pc-date > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; width: min-content; }
+.pc-date > .pc-popover { position: absolute; top: calc(100% + 4px); left: 0; z-index: var(--pc-layer-menu); width: min-content; }
 /* Phones: the Datepicker is a sheet from the bottom over a .pc-popover-backdrop, like the popovers; the month fills the width. */
 @media (max-width: 47.99rem) {
-  .pc-date > .pc-popover { position: fixed; inset: auto 0 0; z-index: 60; width: auto; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-date > .pc-popover { position: fixed; inset: auto 0 0; z-index: var(--pc-layer-overlay); width: auto; max-height: 85dvh; overflow-y: auto; padding-bottom: calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-date > .pc-popover .pc-calendar-grid { grid-template-columns: repeat(7, 1fr); }
   .pc-date > .pc-popover .pc-calendar-months { min-width: 0; }
   .pc-date > .pc-popover .pc-dialog-actions > .pc-btn { flex: 1; }
@@ -1033,56 +1051,56 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 /* Sidebar account: the row at the foot of the sidebar opens a menu upward, the sidebar's width. */
 .pc-sidebar-account { position: relative; }
-.pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: 30; min-width: 0; }
+.pc-sidebar-account-menu { position: absolute; left: 0; right: 0; bottom: calc(100% + 6px); z-index: var(--pc-layer-menu); min-width: 0; }
 /* App switcher: the sidebar head as a button that opens the apps, a menu as wide as the head, below it. */
 .pc-sidebar-head:has(> .pc-sidebar-apps) { padding: 0; }
 .pc-sidebar-apps { position: relative; flex: 1; min-width: 0; }
-.pc-sidebar-apps > .pc-sidebar-item { gap: var(--pc-space-2); font-size: 15px; font-weight: 600; }
-.pc-sidebar-apps-menu { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30; min-width: 0; }
+.pc-sidebar-apps > .pc-sidebar-item { gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-16); font-weight: 600; }
+.pc-sidebar-apps-menu { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: var(--pc-layer-menu); min-width: 0; }
 /* An app's mark is a square slot: a letter for now, an svg or img later. */
 .pc-app-logo-mark > img, .pc-app-logo-mark > svg { width: 100%; height: 100%; border-radius: inherit; }
-.pc-menu-item > .pc-app-logo-mark { width: 20px; height: 20px; border-radius: var(--pc-radius-sm); font-size: 10px; }
+.pc-menu-item > .pc-app-logo-mark { width: 20px; height: 20px; border-radius: var(--pc-radius-sm); font-size: var(--pc-text-10); line-height: var(--pc-line-10); }
 /* Where you are, in a menu of places (.pc-menu-places; the app switcher is one): a semibold name and a primary bar on the menu's left edge. */
 :is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"] { position: relative; font-weight: 600; }
-:is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"]::before { content: ""; position: absolute; top: 6px; bottom: 6px; left: -5px; width: 3px; border-radius: 0 3px 3px 0; background: var(--primary); }
+:is(.pc-sidebar-apps-menu, .pc-menu-places) .pc-menu-item[aria-current="page"]::before { content: ""; position: absolute; top: 6px; bottom: 6px; left: -5px; width: 3px; border-radius: 0 var(--pc-radius-xs) var(--pc-radius-xs) 0; background: var(--primary); }
 
 /* Picker: every choice is a button that opens a menu (a listbox), so options look the same everywhere and can search.
    The button looks like a field; the chosen option carries aria-selected="true" and a .pc-menu-check tick. */
 .pc-picker { position: relative; }
-.pc-picker-button { display: flex; align-items: center; gap: var(--pc-space-2); width: 100%; height: var(--pc-row); padding: 0 10px; border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
+.pc-picker-button { display: flex; align-items: center; gap: var(--pc-space-2); width: 100%; height: var(--pc-row); padding: 0 var(--pc-space-2-5); border: 1px solid var(--input); border-radius: var(--pc-radius); background: var(--card); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
 .pc-picker-button > span { flex: 1; width: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-picker-button > svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted-foreground); }
+.pc-picker-button > svg { width: var(--pc-icon-16); height: var(--pc-icon-16); flex-shrink: 0; color: var(--muted-foreground); }
 .pc-picker-button:focus-visible { outline: 2px solid transparent; outline-offset: 1px; box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-picker-button:disabled { opacity: 0.5; cursor: not-allowed; }
 /* Select (pc-picker): an error turns the button's border red. Options can start with a colour dot (.pc-menu-dot plus a .pc-colour-*) or a
    16px icon; a first "None" option (.pc-menu-none) is muted; a choice that can't be picked (aria-disabled="true") is half strength and says why
    at its end (.pc-menu-note). */
 .pc-picker-button[aria-invalid="true"] { border-color: var(--destructive); }
-.pc-menu-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: 999px; background: var(--pc-colour, var(--muted-foreground)); }
+.pc-menu-dot { width: 10px; height: 10px; flex-shrink: 0; border-radius: var(--pc-radius-full); background: var(--pc-colour, var(--muted-foreground)); }
 .pc-menu-item.pc-menu-none { color: var(--muted-foreground); }
 .pc-menu-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .pc-menu-item:is(:disabled, [aria-disabled="true"]):hover { background: none; }
-.pc-menu-note { margin-left: auto; color: var(--muted-foreground); font-size: 12px; }
-.pc-picker-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30; min-width: 100%; max-height: 320px; overflow-y: auto; }
+.pc-menu-note { margin-left: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
+.pc-picker-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: var(--pc-layer-menu); min-width: 100%; max-height: 320px; overflow-y: auto; }
 /* A search field at the top of a menu (the input with an icon), and the line when nothing matches. */
-.pc-menu > .pc-input-group { margin: var(--pc-space-1) var(--pc-space-1) 6px; }
-.pc-menu-empty { margin: 0; padding: 6px 10px; color: var(--muted-foreground); font-size: 12px; }
+.pc-menu > .pc-input-group { margin: var(--pc-space-1) var(--pc-space-1) var(--pc-space-1-5); }
+.pc-menu-empty { margin: 0; padding: var(--pc-space-1-5) var(--pc-space-2-5); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-12); }
 /* Phones: a menu that pops up (.pc-menu-pop) is a sheet at the bottom of the screen with the phone's 40px rows, over a backdrop
    (.pc-menu-backdrop, right before the menu; a tap on it or Escape closes). Its .pc-menu-title shows only there.
    .pc-menu-sheet makes a menu a sheet at any width. */
 .pc-menu-label.pc-menu-title { display: none; }
 .pc-menu-backdrop { display: none; }
 @media (max-width: 47.99rem) {
-  .pc-menu.pc-menu-pop { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 60; min-width: 0; max-height: 85dvh; overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+  .pc-menu.pc-menu-pop { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-overlay); min-width: 0; max-height: 85dvh; overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
   .pc-menu-pop > .pc-menu-label.pc-menu-title { display: block; }
   .pc-menu-pop .pc-menu-item[aria-current="page"]::before { left: -8px; }
-  .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+  .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: calc(var(--pc-layer-overlay) - 1); background: var(--overlay); }
   html:has(.pc-menu-pop:not([hidden])) { overflow: hidden; }
 }
-.pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 60; min-width: 0; max-height: 85dvh; overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
+.pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-overlay); min-width: 0; max-height: 85dvh; overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: 1px 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
 .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
 .pc-menu-sheet .pc-menu-item[aria-current="page"]::before { left: -8px; }
-.pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: 59; background: var(--overlay); }
+.pc-menu-backdrop:has(+ .pc-menu-sheet:not([hidden])) { display: block; position: fixed; inset: 0; z-index: calc(var(--pc-layer-overlay) - 1); background: var(--overlay); }
 /* While a sheet, a modal or a drawer over the page is open (the phone sidebar, a menu sheet, settings, a drawer) the page behind it doesn't scroll. */
 html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-drawer[open]) { overflow: hidden; }
 .pc-sidebar-item[aria-expanded="true"] { background: var(--sidebar-hover); }
@@ -1091,5 +1109,5 @@ html:has(.pc-sidebar-sheet, .pc-menu-sheet:not([hidden]), .pc-modal[open], .pc-d
    one is tapped. */
 @media (max-width: 47.99rem) {
   body { --pc-row: 40px; }
-  .pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input { font-size: 16px; }
+  .pc-input, .pc-textarea, .pc-stepper > input, .pc-search-field > input { font-size: var(--pc-text-16); line-height: var(--pc-line-16); }
 }
