@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T10:42:55Z",
+    "at": "2026-10-21T10:48:41Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Can't be used, B: a button keeps its own shape in grey; a box turns a flat grey box, a ghost button (Previous, a toolbar tool, an icon-only ghost) grey words at half strength with no box. The temporary can't-be-used cards are gone."
+    "note": "Widths from the scale only: the page column under the header is 960 (was 1120), the sign-in form 400 on every screen (was 360 on phones)."
   },
   "layout": "files",
   "libraries": [],
