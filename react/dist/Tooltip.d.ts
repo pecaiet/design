@@ -1,0 +1,16 @@
+import { type ReactElement } from 'react';
+export type TooltipProps = {
+    /** A few words, one short sentence at most. On an icon-only button, its name: the same words as its aria-label (Button's label
+     *  gives it one already). A shortcut goes after the name ("Search  ⌘K"). Never the only place for something people need. */
+    text: string;
+    /** Above by default. bottom near the top edge (a header, a toolbar at the top, a drawer's or window's head); left or right where
+     *  there's no room. */
+    side?: 'bottom' | 'left' | 'right';
+    /** The element it's about; it gets data-pc-tooltip. On something that can't be used, aria-disabled="true", not disabled. */
+    children: ReactElement<Record<string, unknown>>;
+};
+/** A short hint on hover (after 360ms) and at once on keyboard focus, drawn by pecaiet.css from data-pc-tooltip. */
+export declare function Tooltip({ text, side, children }: TooltipProps): ReactElement<Record<string, unknown>, string | import("react").JSXElementConstructor<any>>;
+/** Esc hides the tooltip under the pointer or on the focused element (data-pc-tooltip-hidden) until the pointer or focus leaves it.
+ *  Call it once, in the app's layout: it covers every data-pc-tooltip on the page, Buttons' too. */
+export declare function useTooltipEscape(): void;

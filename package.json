@@ -1,0 +1,43 @@
+{
+  "name": "@pecaiet/design",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "fonts.css",
+    "pecaiet.css",
+    "pecaiet.js",
+    "pecaiet.d.ts",
+    "react/dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./pecaiet.d.ts",
+      "default": "./pecaiet.js"
+    },
+    "./pecaiet.css": "./pecaiet.css",
+    "./fonts.css": "./fonts.css",
+    "./react": {
+      "types": "./react/dist/index.d.ts",
+      "default": "./react/dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p react"
+  },
+  "peerDependencies": {
+    "@inertiajs/react": "^3.9.1",
+    "@phosphor-icons/react": "^2.1.10",
+    "react": "^19.3.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@inertiajs/react": "^3.9.1",
+    "@phosphor-icons/react": "^2.1.10",
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@fontsource/figtree": "^5.3.0"
+  }
+}
