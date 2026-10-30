@@ -1,6 +1,6 @@
 {
   "name": "@pecaiet/design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "files": [
@@ -20,6 +20,10 @@
     "./react": {
       "types": "./react/dist/index.d.ts",
       "default": "./react/dist/index.js"
+    },
+    "./reference": {
+      "types": "./react/dist/reference/index.d.ts",
+      "default": "./react/dist/reference/index.js"
     }
   },
   "scripts": {

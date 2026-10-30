@@ -25,6 +25,30 @@ That gives every app:
 
 Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
 
+## Reference page
+
+`@pecaiet/design/reference` is every component as a living page, plus three example pages: an app, sign-in and an error. It's mounted at `/design`, and its links assume that path. An Inertia app keeps a route, a controller and one line per page:
+
+```ruby
+# config/routes.rb
+get "design(/:page)" => "design#show", as: :design
+
+# app/controllers/design_controller.rb
+class DesignController < ApplicationController
+  PAGES = { nil => 'Design', 'app' => 'Design/App', 'sign-in' => 'Design/SignIn', 'error' => 'Design/Error' }.freeze
+
+  def show
+    render(inertia: PAGES.fetch(params[:page]) { raise(ActionController::RoutingError, 'Not Found') })
+  end
+end
+```
+
+```tsx
+// app/frontend/pages/Design.tsx; Design/App.tsx, Design/SignIn.tsx and Design/Error.tsx the same way
+export { DesignPage as default } from '@pecaiet/design/reference'
+// DesignAppPage, DesignSignInPage, DesignErrorPage
+```
+
 ## Naming
 
 - Every class and every variable of our own starts with `pc-`: `.pc-btn`, `.pc-sidebar-item`, `--pc-row`, `--pc-raise`. Nothing an app defines can clash with them.
