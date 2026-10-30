@@ -31,7 +31,7 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
     rows: [
       { what: 'Menu, popover', looks: 'Fades in, and out when closed. On phones it’s a sheet that slides up instead.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Modal, settings window, search window', looks: 'Fades in while the page dims behind it. On phones a sheet (the search window: full screen).', time: '120ms', tryIt: ['Overlays', '#overlays'] },
-      { what: 'Tooltip', looks: 'Fades in after a wait under the pointer; at once on keyboard focus.', time: '120ms, after 360ms', tryIt: ['Overlays', '#overlays'] },
+      { what: 'Tooltip', looks: 'Fades in after a wait under the pointer; at once on keyboard focus.', time: '120ms, after 120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Tab panel, carousel slide', looks: 'The new one fades in.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Content replacing a skeleton', looks: 'Fades in where the skeleton was.', time: '120ms' },
       { what: 'Chip added or removed', looks: 'Fades in or out in place; the chips after it jump.', time: '120ms', tryIt: ['Data', '#data'], bends: true },
@@ -76,7 +76,7 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
 ]
 
 const CHECKS: { ok: boolean; title: string; detail: string }[] = [
-  { ok: true, title: 'One speed and one curve everywhere.', detail: 'The longer times (the tooltip’s wait, the loops) are fixed multiples of 120ms.' },
+  { ok: true, title: 'One speed and one curve everywhere.', detail: 'A tooltip waits 120ms too. Only the loops take longer, as fixed multiples of 120ms.' },
   { ok: true, title: 'The same kind of thing moves the same way everywhere.', detail: 'Every menu and popover fades on desktop and is a sliding sheet on phones; every slide comes from its own edge.' },
   { ok: false, title: 'Chips and table rows fade, then the rest jumps.', detail: 'Everything else that’s removed shrinks while what’s below glides. Chips: kept by choice. Table rows: HTML can’t shrink them.' },
   { ok: false, title: 'Checkbox and radio ticks fade in, but vanish at once.', detail: 'Unticking has no motion.' },

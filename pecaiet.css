@@ -282,7 +282,7 @@
      asks for less motion gets Off as well. The spinner keeps turning then, slowly, so loading still shows. */
   :root {
     --pc-motion-ease: cubic-bezier(0.5, 1, 0.89, 1);
-    --pc-motion-wait: calc(var(--pc-motion) * 3); --pc-motion-spin: calc(var(--pc-motion) * 7);
+    --pc-motion-wait: var(--pc-motion); --pc-motion-spin: calc(var(--pc-motion) * 7);
     --pc-motion-slide: calc(var(--pc-motion) * 12); --pc-motion-pulse: calc(var(--pc-motion) * 13); --pc-motion-spin-off: calc(var(--pc-motion) * 20);
   }
   [data-motion="off"] body {
@@ -801,7 +801,7 @@
     box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%);
     transition: opacity var(--pc-motion) var(--pc-motion-ease);
   }
-  /* It shows after the pointer rests on it (pc-motion-wait, 360ms), and at once on keyboard focus. */
+  /* It shows after the pointer rests on it (pc-motion-wait, 120ms, the one motion speed), and at once on keyboard focus. */
   [data-pc-tooltip]:hover::after { opacity: 1; transition-delay: var(--pc-motion-wait); }
   [data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:has(:focus-visible)::after { opacity: 1; transition-delay: 0s; }
   /* Above by default; data-pc-tooltip-side="bottom" near the top edge, "left" or "right" where there's no room. */
@@ -1416,6 +1416,7 @@
   /* Changes; opacity and translate ride along for whatever fades or slides in. */
   .pc-btn, .pc-link, .pc-breadcrumbs > a, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-switch, .pc-sidebar-item, .pc-menu-item, .pc-file, .pc-tab,
   .pc-accordion-item > summary, .pc-table tbody td, .pc-table tbody tr, .pc-search-result, .pc-calendar-day, .pc-chip, .pc-chip-remove, .pc-swatch,
+  button.pc-avatar, .pc-card, .pc-calendar-title, .pc-calendar-month, .pc-search-group-action, .pc-footer-link, .pc-video-play, .pc-stepper > button,
   .pc-tree-item, .pc-menu, .pc-popover, .pc-tab-panel, .pc-carousel-slide, .pc-menu-backdrop, .pc-popover-backdrop, .pc-sheet-backdrop {
     transition: background-color var(--pc-motion) var(--pc-motion-ease), color var(--pc-motion) var(--pc-motion-ease), border-color var(--pc-motion) var(--pc-motion-ease),
       box-shadow var(--pc-motion) var(--pc-motion-ease), text-decoration-color var(--pc-motion) var(--pc-motion-ease),

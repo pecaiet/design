@@ -9,7 +9,7 @@ export type TooltipProps = {
     /** The element it's about; it gets data-pc-tooltip. On something that can't be used, aria-disabled="true", not disabled. */
     children: ReactElement<Record<string, unknown>>;
 };
-/** A short hint on hover (after 360ms) and at once on keyboard focus, drawn by pecaiet.css from data-pc-tooltip. */
+/** A short hint on hover (after 120ms) and at once on keyboard focus, drawn by pecaiet.css from data-pc-tooltip. */
 export declare function Tooltip({ text, side, children }: TooltipProps): ReactElement<Record<string, unknown>, string | import("react").JSXElementConstructor<any>>;
 /** Esc hides the tooltip under the pointer or on the focused element (data-pc-tooltip-hidden) until the pointer or focus leaves it.
  *  Call it once, in the app's layout: it covers every data-pc-tooltip on the page, Buttons' too. */

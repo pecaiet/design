@@ -11,7 +11,7 @@ export type TooltipProps = {
   children: ReactElement<Record<string, unknown>>
 }
 
-/** A short hint on hover (after 360ms) and at once on keyboard focus, drawn by pecaiet.css from data-pc-tooltip. */
+/** A short hint on hover (after 120ms) and at once on keyboard focus, drawn by pecaiet.css from data-pc-tooltip. */
 export function Tooltip({ text, side, children }: TooltipProps) {
   return cloneElement(children, { 'data-pc-tooltip': text, 'data-pc-tooltip-side': side })
 }
