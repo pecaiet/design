@@ -14,7 +14,8 @@ import {
   Skeleton,
   Stack,
   VisuallyHidden,
-} from '../index'
+} from '../../react/src/index'
+import todo from '../../todo.svg'
 
 export function Content() {
   return (
@@ -61,7 +62,7 @@ export function Content() {
 
       <Card title="Image">
         <Stack row>
-          <Image src="/icon.png" alt="The app icon" width={96} height={96} caption="The app icon" />
+          <Image src={todo} alt="The todo mark" width={96} height={96} caption="The todo mark" />
           <Image alt="Nothing yet" width={96} height={72} />
         </Stack>
       </Card>

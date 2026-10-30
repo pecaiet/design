@@ -1,4 +1,4 @@
-import { Button, ErrorPage } from '../index'
+import { Button, ErrorPage } from '../../react/src/index'
 
 export function DesignErrorPage() {
   return (

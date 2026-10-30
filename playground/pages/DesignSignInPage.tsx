@@ -1,4 +1,4 @@
-import { Button, Link, SignIn as SignInPage, SignInPassword, TextInput } from '../index'
+import { Button, Link, SignIn as SignInPage, SignInPassword, TextInput } from '../../react/src/index'
 
 export function DesignSignInPage() {
   return (

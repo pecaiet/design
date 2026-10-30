@@ -48,29 +48,16 @@ createRoot(el).render(<ToastProvider><App {...props} /></ToastProvider>)
 - `ToastProvider`, once around the app, holds the toasts and hides every Phosphor icon from screen readers (one that must be read out takes `aria-hidden={false}`).
 - React, Inertia, Tailwind and `@phosphor-icons/react` are peer dependencies: the app installs them.
 
-## Reference page
+## Playground
 
-`@pecaiet/design/reference` is every component as a living page, plus three example pages: an app, sign-in and an error. It's mounted at `/design`, and its links assume that path. An Inertia app keeps a route, a controller and one line per page:
+Every React component as a living page, plus three example pages (an app, sign-in and an error), here in the repo and in no app:
 
-```ruby
-# config/routes.rb
-get "design(/:page)" => "design#show", as: :design
-
-# app/controllers/design_controller.rb
-class DesignController < ApplicationController
-  PAGES = { nil => 'Design', 'app' => 'Design/App', 'sign-in' => 'Design/SignIn', 'error' => 'Design/Error' }.freeze
-
-  def show
-    render(inertia: PAGES.fetch(params[:page]) { raise(ActionController::RoutingError, 'Not Found') })
-  end
-end
+```bash
+npm install
+npm run dev   # then open http://localhost:5173/design
 ```
 
-```tsx
-// app/frontend/pages/Design.tsx; Design/App.tsx, Design/SignIn.tsx and Design/Error.tsx the same way
-export { DesignPage as default } from '@pecaiet/design/reference'
-// DesignAppPage, DesignSignInPage, DesignErrorPage
-```
+It uses the components' source (`react/src`), so a change shows at once, with no build. There's no Rails: `playground/vite.config.ts` answers Inertia's visits between the pages itself. The playground isn't in the package.
 
 ## Naming
 

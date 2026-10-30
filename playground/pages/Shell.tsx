@@ -1,4 +1,4 @@
-import { AppLogo, Card, Footer, Header, Link, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../index'
+import { AppLogo, Card, Footer, Header, Link, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../../react/src/index'
 import { CaretRight } from '@phosphor-icons/react'
 
 const ACCOUNT = { email: 'ana@example.com', settingsHref: '/design/app', signOutHref: '/design' }

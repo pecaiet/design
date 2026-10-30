@@ -12,7 +12,7 @@ import {
   Stack,
   Textarea,
   TextInput,
-} from '../index'
+} from '../../react/src/index'
 import { CaretDown, CaretRight, Copy, DotsThree, DownloadSimple, Plus, TextB } from '@phosphor-icons/react'
 import { useState } from 'react'
 

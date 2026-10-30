@@ -24,7 +24,8 @@ import {
   Stack,
   Stepper,
   Toggle,
-} from '../index'
+} from '../../react/src/index'
+import todo from '../../todo.svg'
 import { Kanban, List as ListIcon, Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 
@@ -132,7 +133,7 @@ export function Forms() {
       <Card title="Files">
         <Stack>
           <Files>
-            <FileRow href="/icon.png" name="Brand guide.pdf" size="240 KB" />
+            <FileRow href={todo} name="Brand guide.pdf" size="240 KB" />
           </Files>
           <FileUpload label="Attachments" hint="PDF or image" multiple>
             <Files>

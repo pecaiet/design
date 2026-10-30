@@ -1,4 +1,4 @@
-import { Heading, SkipLink, Stack } from '../index'
+import { Heading, SkipLink, Stack } from '../../react/src/index'
 import type { ReactNode } from 'react'
 import { Basics } from './Basics'
 import { Content } from './Content'
@@ -18,7 +18,6 @@ const SECTIONS: { id: string; title: string; body: ReactNode }[] = [
 
 // Every component of @pecaiet/design, as a living reference.
 export function DesignPage() {
-  // Tokens, not Tailwind classes: an app's Tailwind doesn't look in node_modules, so it wouldn't build them.
   return (
     <main style={{ maxWidth: 'var(--pc-width-960)', marginInline: 'auto', padding: 'var(--pc-space-8)' }}>
       <SkipLink href="#basics">Skip to the components</SkipLink>

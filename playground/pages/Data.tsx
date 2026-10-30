@@ -19,7 +19,7 @@ import {
   Th,
   Toolbar,
   ToolbarDivider,
-} from '../index'
+} from '../../react/src/index'
 import { CalendarDots, DotsThree, SortAscending, TextB, TextItalic } from '@phosphor-icons/react'
 import { useState } from 'react'
 

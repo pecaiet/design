@@ -11,8 +11,8 @@ import {
   Stack,
   TextInput,
   TodoMark,
-} from '../index'
-import { usePhone } from '../shell'
+} from '../../react/src/index'
+import { usePhone } from '../../react/src/shell'
 import { CalendarDots, Devices, Gear, Palette, Plus, Tray, UserCircle } from '@phosphor-icons/react'
 import { useState } from 'react'
 
@@ -59,7 +59,6 @@ export function DesignAppPage() {
       }
       account={ACCOUNT}
     >
-      {/* Tokens, not Tailwind classes: an app's Tailwind doesn't look in node_modules. */}
       <div style={{ padding: phone ? 'var(--pc-space-4)' : 'var(--pc-space-8)' }}>
         <Stack gap={6}>
           <PageHeader

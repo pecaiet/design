@@ -1,0 +1,4 @@
+/* As an app's main CSS file: Tailwind, then the fonts and pecaiet.css from this repo. */
+@import "tailwindcss";
+@import "../fonts.css";
+@import "../pecaiet.css";

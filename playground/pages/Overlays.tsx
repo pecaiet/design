@@ -29,7 +29,7 @@ import {
   TreeView,
   useToast,
   Video,
-} from '../index'
+} from '../../react/src/index'
 import { Archive, CheckSquare, DotsThree, Folder, ListChecks, PencilSimple, Trash } from '@phosphor-icons/react'
 import { useState } from 'react'
 
