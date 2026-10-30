@@ -1,4 +1,4 @@
-import { CheckCircle, Info, Warning, WarningCircle, X } from '@phosphor-icons/react'
+import { CheckCircle, IconContext, Info, Warning, WarningCircle, X, type IconProps } from '@phosphor-icons/react'
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { leave } from './motion'
@@ -30,8 +30,12 @@ export function useToast() {
 
 export type ToastProviderProps = { children: ReactNode }
 
+// Icons are decoration: the words or the button's aria-label say what they mean. One that must be read out takes aria-hidden={false}.
+const QUIET_ICONS: IconProps = { 'aria-hidden': true }
+
 /** Holds the toasts over the page at the bottom right (across the bottom on phones), the newest at the bottom. Put it once around
- *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. */
+ *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. It also hides every Phosphor icon
+ *  under it from screen readers. */
 export function ToastProvider({ children }: ToastProviderProps) {
   const [toasts, setToasts] = useState<(ToastOptions & { id: number })[]>([])
   const elements = useRef(new Map<number, HTMLDivElement>())
@@ -56,22 +60,24 @@ export function ToastProvider({ children }: ToastProviderProps) {
   }, [])
 
   return (
-    <Toasts value={toast}>
-      {children}
-      <div className="pc-toasts">
-        {toasts.map(({ id, ...options }) => (
-          <Toast
-            key={id}
-            {...options}
-            ref={element => {
-              if (element) elements.current.set(id, element)
-              else elements.current.delete(id)
-            }}
-            onDismiss={() => toast.dismiss(id)}
-          />
-        ))}
-      </div>
-    </Toasts>
+    <IconContext value={QUIET_ICONS}>
+      <Toasts value={toast}>
+        {children}
+        <div className="pc-toasts">
+          {toasts.map(({ id, ...options }) => (
+            <Toast
+              key={id}
+              {...options}
+              ref={element => {
+                if (element) elements.current.set(id, element)
+                else elements.current.delete(id)
+              }}
+              onDismiss={() => toast.dismiss(id)}
+            />
+          ))}
+        </div>
+      </Toasts>
+    </IconContext>
   )
 }
 

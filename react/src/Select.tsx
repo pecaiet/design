@@ -1,6 +1,7 @@
-import { CaretDown, Check, MagnifyingGlass } from '@phosphor-icons/react'
-import { Fragment, useEffect, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
+import { CaretDown, CaretUpDown, Check, MagnifyingGlass } from '@phosphor-icons/react'
+import { Fragment, useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
 import { cx } from './cx'
+import { DropdownMenu, MenuItem } from './DropdownMenu'
 import { FieldMessage, useField, type Labelled } from './Field'
 import { InputGroup } from './InputGroup'
 import { moveFocus, typeAhead, useOutside } from './popup'
@@ -143,7 +144,56 @@ export function Select<V extends Value = string>({
   )
 }
 
-const choices = (menu: HTMLElement | null) => [...(menu?.querySelectorAll<HTMLElement>('[role="option"]:not([aria-disabled="true"])') ?? [])]
+export type PlaceSelectProps = Labelled & {
+  /** Where you can go, each a page of the app: a list, a workspace. */
+  places: { label: string; href: string; icon?: ReactNode }[]
+  /** The href of where you are: its name shows on the button, and the primary bar marks it in the list. */
+  current: string
+  /** What the phone sheet shows first and the list's name; the label (or aria-label) by default. */
+  title?: string
+  id?: string
+  className?: string
+}
+
+/** A Select of places instead of values (switching list or workspace): the button shows where you are, with the up-down caret, and
+ *  its list holds links, where you are marked by a primary bar and a semibold name, no tick. Picking one goes there. */
+export function PlaceSelect({ label, 'aria-label': ariaLabel, places, current, title, id, className }: PlaceSelectProps) {
+  const auto = useId()
+  const buttonId = id ?? auto
+  const labelId = `${buttonId}-label`
+  const here = places.find(place => place.href === current)
+  return (
+    <div className={cx('pc-field', className)}>
+      {label && <span className="pc-label" id={labelId}>{label}</span>}
+      <DropdownMenu
+        places
+        title={title ?? (typeof label === 'string' ? label : ariaLabel)}
+        className="pc-picker"
+        menuClassName="pc-picker-menu"
+        trigger={
+          <button
+            id={buttonId}
+            className="pc-picker-button"
+            type="button"
+            aria-labelledby={label ? `${labelId} ${buttonId}` : undefined}
+            aria-label={ariaLabel && (here ? `${ariaLabel}: ${here.label}` : ariaLabel)}
+          >
+            <span>{here?.label}</span>
+            <CaretUpDown />
+          </button>
+        }
+      >
+        {places.map(place => (
+          <MenuItem key={place.href} href={place.href} icon={place.icon} current={place.href === current}>
+            {place.label}
+          </MenuItem>
+        ))}
+      </DropdownMenu>
+    </div>
+  )
+}
+
+const choices =(menu: HTMLElement | null) => [...(menu?.querySelectorAll<HTMLElement>('[role="option"]:not([aria-disabled="true"])') ?? [])]
 
 type PickerMenuProps<V extends Value> = {
   menu: RefObject<HTMLDivElement | null>

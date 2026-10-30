@@ -2,7 +2,7 @@ import { User } from '@phosphor-icons/react'
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
 import { cx } from './cx'
 
-export type AvatarProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
+export type AvatarProps = Omit<HTMLAttributes<HTMLElement>, 'children'> & {
   /** One or two letters, upper case. Without letters or a photo it shows nobody (a person icon). */
   initials?: string
   /** A photo filling the circle; the letters show if it doesn't load. */
@@ -15,26 +15,27 @@ export type AvatarProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
   online?: boolean
   /** A small badge at the bottom right, on a 32 or 48px avatar: <Badge small variant="primary">Pro</Badge>. */
   badge?: ReactNode
-  /** On its own (a stack, an assignee): who it is, read out and shown as a tooltip. Beside the name or email, leave it out. */
+  /** On its own (a stack, an assignee): who it is, read out and shown as a tooltip. Beside the name or email, leave it out. As a
+   *  button (onClick): what a click does, "Assigned to ana@example.com. Change". */
   label?: string
 }
 
-export function Avatar({ initials, src, size, square, online, badge, label, className, ...span }: AvatarProps) {
+/** With onClick it's a button (an assignee you can change): a ring in the input colour under the pointer, the blue one on focus. */
+export function Avatar({ initials, src, size, square, online, badge, label, className, ...element }: AvatarProps) {
   const [broken, setBroken] = useState<string>()
   const photo = src && broken !== src
   const nobody = !photo && !initials
-  const named = label ? { role: 'img', 'aria-label': label, 'data-pc-tooltip': label } : { 'aria-hidden': true }
-  return (
-    <span
-      {...span}
-      {...named}
-      className={cx('pc-avatar', size && `pc-avatar-${size}`, nobody && 'pc-avatar-none', square && 'pc-avatar-square', className)}
-    >
+  const look = cx('pc-avatar', size && `pc-avatar-${size}`, nobody && 'pc-avatar-none', square && 'pc-avatar-square', className)
+  const inside = (
+    <>
       {photo ? <img src={src} alt="" onError={() => setBroken(src)} /> : nobody ? <User /> : initials}
       {online && <span className="pc-avatar-status" />}
       {badge}
-    </span>
+    </>
   )
+  if (element.onClick) return <button {...element} type="button" className={look} aria-label={label}>{inside}</button>
+  const named = label ? { role: 'img', 'aria-label': label, 'data-pc-tooltip': label } : { 'aria-hidden': true }
+  return <span {...element} {...named} className={look}>{inside}</span>
 }
 
 export type AvatarsProps = HTMLAttributes<HTMLSpanElement> & {
@@ -42,14 +43,16 @@ export type AvatarsProps = HTMLAttributes<HTMLSpanElement> & {
   label: string
   /** How many more there are than the avatars shown: "+3". */
   more?: number
+  /** The avatars' size, for the "+3" to match them. */
+  size?: AvatarProps['size']
 }
 
 /** Several people, overlapping, each ringed in the colour behind it. */
-export function Avatars({ label, more, children, className, ...span }: AvatarsProps) {
+export function Avatars({ label, more, size, children, className, ...span }: AvatarsProps) {
   return (
     <span {...span} className={cx('pc-avatars', className)} role="group" aria-label={label}>
       {children}
-      {more ? <span className="pc-avatar pc-avatar-more" role="img" aria-label={`${more} more`}>+{more}</span> : null}
+      {more ? <span className={cx('pc-avatar', size && `pc-avatar-${size}`, 'pc-avatar-more')} role="img" aria-label={`${more} more`}>+{more}</span> : null}
     </span>
   )
 }

@@ -22,5 +22,6 @@ export type ToastProviderProps = {
     children: ReactNode;
 };
 /** Holds the toasts over the page at the bottom right (across the bottom on phones), the newest at the bottom. Put it once around
- *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. */
+ *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. It also hides every Phosphor icon
+ *  under it from screen readers. */
 export declare function ToastProvider({ children }: ToastProviderProps): import("react").JSX.Element;

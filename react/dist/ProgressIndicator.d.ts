@@ -12,10 +12,11 @@ export type ProgressIndicatorProps = Omit<ComponentPropsWithRef<'ol'>, 'children
     compact?: false;
     vertical?: boolean;
 }
-/** On phones and in narrow places: the step's name and "Step 2 of 4" over the bars; the names are kept for screen readers. */
+/** In narrow places: the step's name and "Step 2 of 4" over the bars; the names are kept for screen readers. Below 48rem it's
+ *  compact on its own, unless it's vertical. */
  | {
     compact: true;
     vertical?: never;
 });
 /** Where someone is in a few steps. It only shows where they are: moving between steps is the page's own buttons. */
-export declare function ProgressIndicator({ steps, compact, vertical, className, ...ol }: ProgressIndicatorProps): import("react").JSX.Element;
+export declare function ProgressIndicator({ steps, compact: narrow, vertical, className, ...ol }: ProgressIndicatorProps): import("react").JSX.Element;

@@ -2,6 +2,7 @@ import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import { Fragment, type ComponentPropsWithRef, type HTMLAttributes, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
+import { usePhone } from './shell'
 
 export type PaginationProps = Omit<ComponentPropsWithRef<'nav'>, 'children'> & {
   /** The page you're on, from 1. */
@@ -13,13 +14,15 @@ export type PaginationProps = Omit<ComponentPropsWithRef<'nav'>, 'children'> & {
   /** Previous, the page numbers and Next. arrows: Previous and Next as arrows alone, where room is short. numbers={false}:
    *  only the two ends, when the page number doesn't matter (a log, search results; in a PaginationBar). */
   | { compact?: false; arrows?: boolean; numbers?: boolean }
-  /** For a narrow card, and below 48rem: "Page 5 of 20" between two arrows. */
+  /** For a narrow card: "Page 5 of 20" between two arrows. Below 48rem it's compact on its own, unless numbers={false}. */
   | { compact: true; arrows?: never; numbers?: never }
 )
 
 /** Moving through pages: the first and last pages and the ones either side of the one you're on (seven or fewer: all of them),
  *  "…" for the rest. An end that goes nowhere is turned off. */
-export function Pagination({ page, pages, href, compact, arrows, numbers = true, className, ...nav }: PaginationProps) {
+export function Pagination({ page, pages, href, compact: narrow, arrows, numbers = true, className, ...nav }: PaginationProps) {
+  const phone = usePhone()
+  const compact = narrow || (phone && numbers)
   const shown = pages <= 7
     ? Array.from({ length: pages }, (_, i) => i + 1)
     : [1, page - 1, page, page + 1, pages].filter((n, i, all) => n >= 1 && n <= pages && all.indexOf(n) === i)

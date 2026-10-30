@@ -45,7 +45,7 @@ export { Rating, RatingInput } from './Rating';
 export { SearchInput } from './SearchInput';
 export { SearchWindow } from './SearchWindow';
 export { SegmentedControl } from './SegmentedControl';
-export { Select } from './Select';
+export { PlaceSelect, Select } from './Select';
 export { Separator } from './Separator';
 export { SettingsModal } from './SettingsModal';
 export { SidebarAccount } from './SidebarAccount';

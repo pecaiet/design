@@ -8,6 +8,7 @@ import {
   DateInput,
   Datepicker,
   type DateRange,
+  Dialog,
   Drawer,
   DropdownMenu,
   Link,
@@ -15,6 +16,7 @@ import {
   MenuLabel,
   MenuSeparator,
   Modal,
+  PlaceSelect,
   Popover,
   SearchWindow,
   Select,
@@ -41,6 +43,7 @@ const LABELS = ['Home', 'Work', 'Errands', 'Health'].map(label => ({ value: labe
 export function Overlays() {
   const toast = useToast()
   const [modal, setModal] = useState(false)
+  const [bare, setBare] = useState(false)
   const [drawer, setDrawer] = useState(false)
   const [search, setSearch] = useState(false)
   const [query, setQuery] = useState('')
@@ -95,6 +98,9 @@ export function Overlays() {
           <Button variant="outline" onClick={() => setModal(true)}>
             Open modal
           </Button>
+          <Button variant="outline" onClick={() => setBare(true)}>
+            Open a dialog of your own
+          </Button>
           <Button variant="outline" onClick={() => setDrawer(true)}>
             Open drawer
           </Button>
@@ -126,6 +132,19 @@ export function Overlays() {
         >
           <TextInput label="Name" defaultValue="Birthday present" />
         </Modal>
+        <Dialog kind="dialog" open={bare} onClose={() => setBare(false)} aria-labelledby="design-shortcuts">
+          <div className="pc-dialog-body">
+            <div>
+              <h2 className="pc-dialog-title" id="design-shortcuts">Keyboard shortcuts</h2>
+              <p className="pc-dialog-description">The Dialog under the Modal, for a window the Modal doesn’t fit.</p>
+            </div>
+            <div className="pc-dialog-actions">
+              <Button variant="primary" onClick={() => setBare(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </Dialog>
         <Drawer
           open={drawer}
           onClose={() => setDrawer(false)}
@@ -165,6 +184,14 @@ export function Overlays() {
         <Stack>
           <Select label="Colour" options={COLOURS} value={colour} onChange={setColour} none="No colour" />
           <Combobox label="List" search="Search lists" options={LABELS} value={list} onChange={setList} />
+          <PlaceSelect
+            label="Go to list"
+            current="/design"
+            places={[
+              { label: 'Inbox', href: '/design' },
+              { label: 'Work', href: '/design/app' },
+            ]}
+          />
           <Combobox
             multiple
             label="Labels"
@@ -189,9 +216,7 @@ export function Overlays() {
         <Stack gap={4}>
           <Datepicker value={day} onChange={setDay} />
           <DateInput label="Due" value={due} onChange={setDue} name="due_on" />
-          <Popover trigger={<Button variant="outline">Pick a range</Button>} title="Dates">
-            <Datepicker range value={range} onChange={setRange} />
-          </Popover>
+          <DateInput range label="Away" value={range} onChange={setRange} name="away" />
         </Stack>
       </Card>
 

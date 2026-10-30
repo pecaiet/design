@@ -7,8 +7,8 @@ import { usePhone } from './shell';
 import { AccountItems } from './SidebarAccount';
 import { SidebarItem } from './SidebarItem';
 /** The bar across the top of a page without a sidebar (only pe caiet's root page): the logo, and the account row whose menu opens
- *  down from it, aligned to its right edge (a sheet on phones). 72px tall and 28px from the edges; on phones 52px and 20px, in the
- *  sidebar colour. */
+ *  down from it, aligned to its right edge (a sheet on phones). 72px tall and 24px from the edges, so the logo sits where it sits on
+ *  the sign-in page; on phones 48px and 16px, in the sidebar colour. */
 export function Header({ logo, account, style, ...header }) {
     const phone = usePhone();
     return (_jsxs("header", { ...header, style: {
@@ -18,7 +18,7 @@ export function Header({ logo, account, style, ...header }) {
             justifyContent: 'space-between',
             alignItems: 'center',
             columnGap: 'var(--pc-space-2-5)',
-            ...(phone ? { height: '52px', padding: '0 20px', background: 'var(--sidebar)' } : { height: '72px', padding: '0 28px' }),
+            ...(phone ? { height: '48px', padding: '0 16px', background: 'var(--sidebar)' } : { height: '72px', padding: '0 24px' }),
             ...style,
         }, children: [logo ?? _jsx(AppLogo, { mark: _jsx(PeCaietMark, {}), children: "pe caiet" }), _jsx(DropdownMenu, { align: "end", trigger: _jsx(SidebarItem, { icon: _jsx(Avatar, { initials: account.email.charAt(0).toUpperCase() }), iconAfter: _jsx(CaretUpDown, {}), children: account.email }), children: _jsx(AccountItems, { ...account }) })] }));
 }

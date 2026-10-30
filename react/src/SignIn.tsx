@@ -99,7 +99,7 @@ export function SignedOut({ apps = APPS, onSubmit, paused, children, style, ...d
           overflow: 'hidden',
           background: 'var(--sidebar)',
           // Desktop: the hero ends 7% of the window (40–120px) before the divider, as far as the form starts after it.
-          padding: phone ? '14px 20px' : '24px clamp(40px, 7vw, 120px) 24px 28px',
+          padding: phone ? '12px 16px' : '24px clamp(40px, 7vw, 120px) 24px 24px',
         }}
       >
         <div key={current} data-app={current} style={{ position: 'absolute', inset: 0, zIndex: -10, background: `color-mix(in srgb, ${app.colour} ${dark ? 16 : 22}%, transparent)` }} />
@@ -137,11 +137,11 @@ export function SignedOut({ apps = APPS, onSubmit, paused, children, style, ...d
         )}
         {!phone && <p className="pc-muted" style={SMALL}>© pe caiet</p>}
       </aside>
-      <ThemeSwitch style={{ position: 'absolute', ...(phone ? { top: '60px', right: '12px' } : { top: '20px', right: '28px' }) }} />
-      <main style={phone ? { display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 20px' } : { display: 'flex', alignItems: 'center', padding: '96px 40px 96px clamp(40px, 7vw, 120px)' }}>
+      <ThemeSwitch style={{ position: 'absolute', ...(phone ? { top: '60px', right: '12px' } : { top: '20px', right: '24px' }) }} />
+      <main style={phone ? { display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 16px' } : { display: 'flex', alignItems: 'center', padding: '96px 40px 96px clamp(40px, 7vw, 120px)' }}>
         {onSubmit ? <form style={COLUMN} onSubmit={onSubmit}>{children}</form> : <div style={COLUMN}>{children}</div>}
       </main>
-      {phone && <p className="pc-muted" style={{ ...SMALL, padding: '0 20px 20px' }}>© pe caiet</p>}
+      {phone && <p className="pc-muted" style={{ ...SMALL, padding: '0 16px 16px' }}>© pe caiet</p>}
     </div>
   )
 }
@@ -194,10 +194,7 @@ export function SignInPassword({ label = 'Password', forgotHref, hint, error, id
   const field = useField(id, error || hint, error, input['aria-describedby'])
   return (
     <div className={cx('pc-field', className)}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--pc-space-2)' }}>
-        <Label htmlFor={field.fieldId}>{label}</Label>
-        <Link href={forgotHref} style={SMALL}>Forgot password?</Link>
-      </div>
+      <Label htmlFor={field.fieldId} action={<Link href={forgotHref}>Forgot password?</Link>}>{label}</Label>
       <input
         {...input}
         type="password"

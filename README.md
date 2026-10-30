@@ -23,7 +23,30 @@ That gives every app:
 - Figtree as the default font (`--font-sans`), and the type scale as utilities, each size with its own line height: `text-pc-title` (22/28), `text-pc-heading` (16/24), `text-pc-body` (14/20, the default), `text-pc-small` (12/16), `text-pc-tiny` (10/14); free steps `text-pc-28`, `text-pc-40`; a hero's `text-pc-56` and `text-pc-72`.
 - Every component of the design system, in Tailwind's `components` layer. The reviewed ones have full sections below; the rest are listed under Draft components.
 
-Figtree itself isn't bundled yet: until it is, load it in the app or the system font is used.
+Figtree comes self-hosted in `fonts.css`, the four weights `pecaiet.css` uses: import it next to it (`@import "@pecaiet/design/fonts.css";`). Without it the system font is used.
+
+## React
+
+`@pecaiet/design/react` has a typed component for the designed components, for the Inertia apps. They render the classes below, so `pecaiet.css` draws them and `pecaiet.js` moves them:
+
+```css
+/* the app's main CSS file */
+@import "tailwindcss";
+@import "@pecaiet/design/fonts.css";
+@import "@pecaiet/design/pecaiet.css";
+```
+
+```tsx
+// app/frontend/entrypoints/inertia.tsx
+import '@pecaiet/design'
+import { ToastProvider } from '@pecaiet/design/react'
+// …
+createRoot(el).render(<ToastProvider><App {...props} /></ToastProvider>)
+```
+
+- `import '@pecaiet/design'` loads `pecaiet.js`. The components need it: the theme switch, closings and what grows in go through it.
+- `ToastProvider`, once around the app, holds the toasts and hides every Phosphor icon from screen readers (one that must be read out takes `aria-hidden={false}`).
+- React, Inertia, Tailwind and `@phosphor-icons/react` are peer dependencies: the app installs them.
 
 ## Reference page
 

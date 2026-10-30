@@ -6,9 +6,10 @@ import { cx } from './cx';
 import { Datepicker } from './Datepicker';
 import { FieldMessage, useField } from './Field';
 import { useOutside } from './popup';
+const iso = (date) => date ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}` : '';
 /** A date in a form: a button that looks like a field and opens the Datepicker under it (a sheet on phones). No typing. Picking a
  *  day fills it, closes it and puts focus back on the button; Esc closes it without a change; the x clears it. */
-export function DateInput({ label, 'aria-label': ariaLabel, value, onChange, placeholder = 'No date', done, quickPicks, children, min, max, disabledDays, format, locale, name, hint, error, optional, disabled, id, className, }) {
+export function DateInput({ label, 'aria-label': ariaLabel, placeholder, children, min, max, disabledDays, format, locale, name, hint, error, optional, disabled, id, className, ...choice }) {
     const field = useField(id, error || hint, error);
     const [open, setOpen] = useState(false);
     // Each opening starts the calendar afresh, on the chosen month.
@@ -21,11 +22,17 @@ export function DateInput({ label, 'aria-label': ariaLabel, value, onChange, pla
         button.current?.focus();
     };
     useOutside(open, panel, button, () => setOpen(false));
-    const shown = value && (format ? format(value) : `${new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(value)}, ${new Intl.DateTimeFormat(locale, {
+    const short = (date) => format ? format(date) : `${new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(date)}, ${new Intl.DateTimeFormat(locale, {
         day: 'numeric',
         month: 'short',
-        year: value.getFullYear() === new Date().getFullYear() ? undefined : 'numeric',
-    }).format(value)}`);
+        year: date.getFullYear() === new Date().getFullYear() ? undefined : 'numeric',
+    }).format(date)}`;
+    // A range on its way shows its start and a dash.
+    const shown = choice.range
+        ? choice.value.start && `${short(choice.value.start)} – ${choice.value.end ? short(choice.value.end) : '…'}`
+        : choice.value && short(choice.value);
+    const clear = () => (choice.range ? choice.onChange({ start: null, end: null }) : choice.onChange(null));
+    const calendar = { min, max, disabledDays, locale, autoFocus: open, children };
     return (_jsxs("div", { className: cx('pc-field', className), children: [label && (_jsxs("span", { className: "pc-label", id: labelId, children: [label, optional && _jsxs(_Fragment, { children: [" ", _jsx("span", { className: "pc-label-optional", children: "(optional)" })] })] })), _jsxs("div", { className: "pc-picker pc-date", onKeyDown: event => {
                     if (event.key !== 'Escape' || !open)
                         return;
@@ -37,15 +44,17 @@ export function DateInput({ label, 'aria-label': ariaLabel, value, onChange, pla
                             if (!open)
                                 setOpened(opened + 1);
                             setOpen(!open);
-                        }, children: [_jsx(CalendarDots, {}), shown ? _jsx("span", { children: shown }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder })] }), value && !disabled && (_jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: "Clear date", className: "pc-date-clear", onClick: () => {
-                            onChange(null);
+                        }, children: [_jsx(CalendarDots, {}), shown ? _jsx("span", { children: shown }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder ?? (choice.range ? 'No dates' : 'No date') })] }), shown && !disabled && (_jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: choice.range ? 'Clear dates' : 'Clear date', className: "pc-date-clear", onClick: () => {
+                            clear();
                             button.current?.focus();
-                        } })), _jsx("div", { className: "pc-popover-backdrop" }), _jsxs("div", { ref: panel, id: `${field.fieldId}-popover`, className: "pc-popover", role: "dialog", "aria-labelledby": label ? labelId : undefined, "aria-label": ariaLabel, hidden: !open, children: [_jsx(Datepicker, { value: value, onChange: date => {
-                                    onChange(date);
-                                    if (!done)
+                        } })), _jsx("div", { className: "pc-popover-backdrop" }), _jsxs("div", { ref: panel, id: `${field.fieldId}-popover`, className: "pc-popover", role: "dialog", "aria-labelledby": label ? labelId : undefined, "aria-label": ariaLabel, hidden: !open, children: [choice.range ? (_jsx(Datepicker, { ...calendar, range: true, value: choice.value, onChange: choice.onChange }, opened)) : (_jsx(Datepicker, { ...calendar, value: choice.value, onChange: date => {
+                                    choice.onChange(date);
+                                    if (!choice.done)
                                         close();
-                                }, quickPicks: quickPicks, min: min, max: max, disabledDays: disabledDays, locale: locale, autoFocus: open, children: children }, opened), done && (_jsxs("div", { className: "pc-dialog-actions", children: [_jsx(Button, { variant: "outline", onClick: () => {
-                                            onChange(null);
-                                            close();
-                                        }, children: "Clear date" }), _jsx(Button, { variant: "primary", onClick: close, children: "Done" })] }))] }), name && (_jsx("input", { type: "hidden", name: name, value: value ? `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}` : '' }))] }), _jsx(FieldMessage, { id: field.messageId, hint: hint, error: error })] }));
+                                }, quickPicks: choice.quickPicks }, opened)), (choice.range || choice.done) && (_jsxs("div", { className: "pc-dialog-actions", children: [_jsx(Button, { variant: "outline", onClick: () => {
+                                            clear();
+                                            // A range stays open to be picked again; one date is done.
+                                            if (!choice.range)
+                                                close();
+                                        }, children: choice.range ? 'Clear' : 'Clear date' }), _jsx(Button, { variant: "primary", onClick: close, children: "Done" })] }))] }), name && (choice.range ? (_jsxs(_Fragment, { children: [_jsx("input", { type: "hidden", name: `${name}[start]`, value: iso(choice.value.start) }), _jsx("input", { type: "hidden", name: `${name}[end]`, value: iso(choice.value.end) })] })) : _jsx("input", { type: "hidden", name: name, value: iso(choice.value) }))] }), _jsx(FieldMessage, { id: field.messageId, hint: hint, error: error })] }));
 }

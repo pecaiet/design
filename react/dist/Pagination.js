@@ -3,9 +3,12 @@ import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import { Fragment } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
+import { usePhone } from './shell';
 /** Moving through pages: the first and last pages and the ones either side of the one you're on (seven or fewer: all of them),
  *  "…" for the rest. An end that goes nowhere is turned off. */
-export function Pagination({ page, pages, href, compact, arrows, numbers = true, className, ...nav }) {
+export function Pagination({ page, pages, href, compact: narrow, arrows, numbers = true, className, ...nav }) {
+    const phone = usePhone();
+    const compact = narrow || (phone && numbers);
     const shown = pages <= 7
         ? Array.from({ length: pages }, (_, i) => i + 1)
         : [1, page - 1, page, page + 1, pages].filter((n, i, all) => n >= 1 && n <= pages && all.indexOf(n) === i);

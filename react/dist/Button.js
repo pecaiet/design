@@ -12,7 +12,8 @@ export function Button({ variant, destructive, size, full, pressed, busy, disabl
         'data-pc-tooltip': disabledReason ?? label,
     };
     const inner = (_jsxs(_Fragment, { children: [busy ? _jsx(Spinner, { label: "Working" }) : icon, children, iconAfter] }));
-    // aria-disabled keeps it focusable, so the click has to be ignored here.
+    // aria-disabled and aria-busy keep it focusable, so the click has to be ignored here: the CSS only stops the pointer, and Enter
+    // or Space still click.
     const ignore = (event) => event.preventDefault();
     if (element.href !== undefined) {
         // A link that goes nowhere has no href.
@@ -21,5 +22,5 @@ export function Button({ variant, destructive, size, full, pressed, busy, disabl
         return _jsx(InertiaLink, { ...element, ...shared, children: inner });
     }
     const { type = 'button', onClick, ...button } = element;
-    return (_jsx("button", { ...button, ...shared, type: type, onClick: disabledReason ? ignore : onClick, children: inner }));
+    return (_jsx("button", { ...button, ...shared, type: type, onClick: disabledReason || busy ? ignore : onClick, children: inner }));
 }

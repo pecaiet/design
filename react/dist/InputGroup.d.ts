@@ -26,9 +26,13 @@ type Inside =
     icon?: never;
     end?: never;
 };
-export type InputGroupProps = Field & Labelled & Inside;
+export type InputGroupProps = Field & Labelled & Inside & {
+    /** Quick add (with a Plus icon): Enter hands over what's typed, trimmed, and empties the field. A field with a value prop empties
+     *  it in onAdd. */
+    onAdd?: (words: string) => void;
+};
 /** A text field with something inside it. Without a label, hint or error it's the bare group, ready for an InputRow. */
-export declare function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, id, className, ...input }: InputGroupProps): import("react").JSX.Element;
+export declare function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, onAdd, id, className, ...input }: InputGroupProps): import("react").JSX.Element;
 export type PasswordInputProps = Omit<Field, 'type' | 'mono'> & Labelled & {
     /** current-password to sign in, new-password to set one. */
     autoComplete: 'current-password' | 'new-password';

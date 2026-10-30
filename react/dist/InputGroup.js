@@ -6,10 +6,22 @@ import { cx } from './cx';
 import { FieldMessage, useField } from './Field';
 import { Label } from './Label';
 /** A text field with something inside it. Without a label, hint or error it's the bare group, ready for an InputRow. */
-export function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, id, className, ...input }) {
+export function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, onAdd, id, className, ...input }) {
     const field = useField(id, error || hint, error, input['aria-describedby']);
     const wrapped = Boolean(label || hint || error);
-    const group = (_jsxs("div", { className: cx('pc-input-group', !wrapped && className), children: [icon, before && _jsx("span", { className: "pc-input-addon", children: before }), _jsx("input", { ...input, className: cx('pc-input', mono && 'pc-input-mono'), id: field.fieldId, "aria-describedby": field.describedBy, "aria-invalid": field.invalid ?? input['aria-invalid'] }), after && _jsx("span", { className: "pc-input-addon", children: after }), end && _jsx("span", { className: "pc-input-group-end", children: end })] }));
+    const group = (_jsxs("div", { className: cx('pc-input-group', !wrapped && className), children: [icon, before && _jsx("span", { className: "pc-input-addon", children: before }), _jsx("input", { ...input, className: cx('pc-input', mono && 'pc-input-mono'), id: field.fieldId, "aria-describedby": field.describedBy, "aria-invalid": field.invalid ?? input['aria-invalid'], onKeyDown: onAdd ? event => {
+                    input.onKeyDown?.(event);
+                    if (event.key !== 'Enter' || event.defaultPrevented || event.nativeEvent.isComposing)
+                        return;
+                    // Enter adds, and never sends a form around it.
+                    event.preventDefault();
+                    const words = event.currentTarget.value.trim();
+                    if (!words)
+                        return;
+                    onAdd(words);
+                    if (input.value === undefined)
+                        event.currentTarget.value = '';
+                } : input.onKeyDown }), after && _jsx("span", { className: "pc-input-addon", children: after }), end && _jsx("span", { className: "pc-input-group-end", children: end })] }));
     if (!wrapped)
         return group;
     return (_jsxs("div", { className: cx('pc-field', className), children: [label && _jsx(Label, { htmlFor: field.fieldId, optional: optional, children: label }), group, _jsx(FieldMessage, { id: field.messageId, hint: hint, error: error })] }));

@@ -45,7 +45,7 @@ export { Rating, RatingInput, type RatingInputProps, type RatingProps } from './
 export { SearchInput, type SearchInputProps } from './SearchInput'
 export { SearchWindow, type SearchGroup, type SearchResult, type SearchWindowProps } from './SearchWindow'
 export { SegmentedControl, type SegmentedControlProps } from './SegmentedControl'
-export { Select, type SelectOption, type SelectProps } from './Select'
+export { PlaceSelect, Select, type PlaceSelectProps, type SelectOption, type SelectProps } from './Select'
 export { Separator, type SeparatorProps } from './Separator'
 export { SettingsModal, type SettingsModalProps, type SettingsSection } from './SettingsModal'
 export { SidebarAccount, type Account, type SidebarAccountProps } from './SidebarAccount'

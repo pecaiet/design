@@ -1,4 +1,4 @@
-import { Heading, Stack } from '../index'
+import { Heading, SkipLink, Stack } from '../index'
 import type { ReactNode } from 'react'
 import { Basics } from './Basics'
 import { Content } from './Content'
@@ -21,6 +21,7 @@ export function DesignPage() {
   // Tokens, not Tailwind classes: an app's Tailwind doesn't look in node_modules, so it wouldn't build them.
   return (
     <main style={{ maxWidth: 'var(--pc-width-960)', marginInline: 'auto', padding: 'var(--pc-space-8)' }}>
+      <SkipLink href="#basics">Skip to the components</SkipLink>
       <Stack gap={6}>
         <Heading page>Design</Heading>
         <Stack row>
@@ -32,7 +33,7 @@ export function DesignPage() {
           ))}
         </Stack>
         {SECTIONS.map(section => (
-          <section key={section.id} id={section.id}>
+          <section key={section.id} id={section.id} tabIndex={-1}>
             <Stack gap={6}>
               <Heading>{section.title}</Heading>
               {section.body}

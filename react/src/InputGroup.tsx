@@ -23,10 +23,14 @@ type Inside =
    *  the focus ring and the error. */
   | { before?: ReactNode; after?: ReactNode; icon?: never; end?: never }
 
-export type InputGroupProps = Field & Labelled & Inside
+export type InputGroupProps = Field & Labelled & Inside & {
+  /** Quick add (with a Plus icon): Enter hands over what's typed, trimmed, and empties the field. A field with a value prop empties
+   *  it in onAdd. */
+  onAdd?: (words: string) => void
+}
 
 /** A text field with something inside it. Without a label, hint or error it's the bare group, ready for an InputRow. */
-export function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, id, className, ...input }: InputGroupProps) {
+export function InputGroup({ label, hint, error, optional, mono, icon, end, before, after, onAdd, id, className, ...input }: InputGroupProps) {
   const field = useField(id, error || hint, error, input['aria-describedby'])
   const wrapped = Boolean(label || hint || error)
   const group = (
@@ -39,6 +43,16 @@ export function InputGroup({ label, hint, error, optional, mono, icon, end, befo
         id={field.fieldId}
         aria-describedby={field.describedBy}
         aria-invalid={field.invalid ?? input['aria-invalid']}
+        onKeyDown={onAdd ? event => {
+          input.onKeyDown?.(event)
+          if (event.key !== 'Enter' || event.defaultPrevented || event.nativeEvent.isComposing) return
+          // Enter adds, and never sends a form around it.
+          event.preventDefault()
+          const words = event.currentTarget.value.trim()
+          if (!words) return
+          onAdd(words)
+          if (input.value === undefined) event.currentTarget.value = ''
+        } : input.onKeyDown}
       />
       {after && <span className="pc-input-addon">{after}</span>}
       {end && <span className="pc-input-group-end">{end}</span>}

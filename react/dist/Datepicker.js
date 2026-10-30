@@ -24,10 +24,22 @@ const sameDay = (a, b) => Boolean(a && b && sameMonth(a, b) && a.getDate() === b
  *  arrow keys move by day and week, Page Up and Down by month (with Shift, by year), Home and End to the week's ends, Enter picks.
  *  The month's name opens the twelve months. Put it in a Popover, or use the DateInput. */
 export function Datepicker({ min, max, disabledDays, autoFocus, locale, children, className, ...choice }) {
+    const off = (date) => (min !== undefined && date < midnight(min)) || (max !== undefined && date > midnight(max)) || Boolean(disabledDays?.(date));
+    // The first day from date, walking by step, that can be picked; none within that many steps: null.
+    const nearest = (date, step, steps) => {
+        let day = date;
+        for (let tries = 0; off(day) && tries < steps; tries++)
+            day = addDays(day, step);
+        return off(day) ? null : day;
+    };
     const today = midnight(new Date());
-    const anchor = (choice.range ? choice.value.start : choice.value) ?? today;
-    const [month, setMonth] = useState(() => firstOf(anchor));
-    const [focus, setFocus] = useState(() => midnight(anchor));
+    // The chosen day, else today; if that can't be picked, the next one that can (min after today).
+    const start = () => {
+        const day = midnight((choice.range ? choice.value.start : choice.value) ?? today);
+        return nearest(day, 1, 366) ?? day;
+    };
+    const [month, setMonth] = useState(() => firstOf(start()));
+    const [focus, setFocus] = useState(start);
     const [view, setView] = useState('days');
     const [preview, setPreview] = useState(null);
     const root = useRef(null);
@@ -42,7 +54,6 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
         monthYear: new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }),
         year: new Intl.DateTimeFormat(locale, { year: 'numeric' }),
     }), [locale]);
-    const off = (date) => (min !== undefined && date < midnight(min)) || (max !== undefined && date > midnight(max)) || Boolean(disabledDays?.(date));
     // After a key (or a view change) moved it, the day or month that takes focus gets it.
     useEffect(() => {
         if (!moved.current)
@@ -78,29 +89,29 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
         else
             choice.onChange(date < start ? { start: date, end: start } : { start, end: date });
     };
+    // Days that can't be picked are skipped: the arrows go on past them; Home and End stop at the week's first and last that can be;
+    // Page Up and Down land on the nearest one after, else before.
     const dayKeys = (event) => {
         const step = DAY_STEPS[event.key];
         let next;
-        if (step) {
-            // Days that can't be picked are skipped.
-            next = addDays(focus, step);
-            for (let tries = 0; off(next) && tries < 60; tries++)
-                next = addDays(next, step);
-        }
+        if (step)
+            next = nearest(addDays(focus, step), step, 60);
         else if (event.key === 'Home')
-            next = monday(focus);
+            next = nearest(monday(focus), 1, 6);
         else if (event.key === 'End')
-            next = addDays(monday(focus), 6);
-        else if (event.key === 'PageUp' || event.key === 'PageDown')
-            next = addMonths(focus, (event.key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1));
+            next = nearest(addDays(monday(focus), 6), -1, 6);
+        else if (event.key === 'PageUp' || event.key === 'PageDown') {
+            const target = addMonths(focus, (event.key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1));
+            next = nearest(target, 1, 31) ?? nearest(target, -1, 31);
+        }
         else
             return;
         event.preventDefault();
-        if (step && off(next))
+        if (!next)
             return;
         moved.current = true;
         go(next);
-        if (picking && !off(next))
+        if (picking)
             setPreview(next);
     };
     const monthKeys = (event) => {

@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CheckCircle, Info, Warning, WarningCircle, X } from '@phosphor-icons/react';
+import { CheckCircle, IconContext, Info, Warning, WarningCircle, X } from '@phosphor-icons/react';
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from './Button';
 import { leave } from './motion';
@@ -12,8 +12,11 @@ export function useToast() {
         throw new Error('useToast needs a ToastProvider around the app.');
     return toast;
 }
+// Icons are decoration: the words or the button's aria-label say what they mean. One that must be read out takes aria-hidden={false}.
+const QUIET_ICONS = { 'aria-hidden': true };
 /** Holds the toasts over the page at the bottom right (across the bottom on phones), the newest at the bottom. Put it once around
- *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. */
+ *  the app. Something people must act on before going on is an Alert or a Modal, not a toast. It also hides every Phosphor icon
+ *  under it from screen readers. */
 export function ToastProvider({ children }) {
     const [toasts, setToasts] = useState([]);
     const elements = useRef(new Map());
@@ -36,12 +39,12 @@ export function ToastProvider({ children }) {
         };
         return Object.assign(show, { dismiss });
     }, []);
-    return (_jsxs(Toasts, { value: toast, children: [children, _jsx("div", { className: "pc-toasts", children: toasts.map(({ id, ...options }) => (_jsx(Toast, { ...options, ref: element => {
-                        if (element)
-                            elements.current.set(id, element);
-                        else
-                            elements.current.delete(id);
-                    }, onDismiss: () => toast.dismiss(id) }, id))) })] }));
+    return (_jsx(IconContext, { value: QUIET_ICONS, children: _jsxs(Toasts, { value: toast, children: [children, _jsx("div", { className: "pc-toasts", children: toasts.map(({ id, ...options }) => (_jsx(Toast, { ...options, ref: element => {
+                            if (element)
+                                elements.current.set(id, element);
+                            else
+                                elements.current.delete(id);
+                        }, onDismiss: () => toast.dismiss(id) }, id))) })] }) }));
 }
 function Toast({ text, tone, action, duration, onDismiss, ref }) {
     const left = useRef(duration ?? (action ? 10000 : 5000));

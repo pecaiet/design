@@ -174,6 +174,11 @@ export function Basics() {
               <Avatar initials="AD" label="andrei@example.com" />
               <Avatar initials="AL" label="alina@example.com" />
             </Avatars>
+            <Avatars label="Ana, Andrei and 5 more" more={5} size="medium">
+              <Avatar initials="AN" size="medium" label="ana@example.com" />
+              <Avatar initials="AD" size="medium" label="andrei@example.com" />
+            </Avatars>
+            <Avatar initials="AC" size="medium" label="Assigned to ana@example.com. Change" onClick={() => {}} />
           </Stack>
           <Stack row>
             <Spinner size="small" />

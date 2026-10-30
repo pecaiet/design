@@ -1,5 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { cx } from './cx'
+import { usePhone } from './shell'
 
 export type ProgressIndicatorProps = Omit<ComponentPropsWithRef<'ol'>, 'children'> & {
   /** Three to five, named with a noun or a short verb ("Account", "Add your profile"). current: the one they're on (teal, its
@@ -8,12 +9,15 @@ export type ProgressIndicatorProps = Omit<ComponentPropsWithRef<'ol'>, 'children
 } & (
   /** vertical: down the page, for a checklist, the bar beside each name. */
   | { compact?: false; vertical?: boolean }
-  /** On phones and in narrow places: the step's name and "Step 2 of 4" over the bars; the names are kept for screen readers. */
+  /** In narrow places: the step's name and "Step 2 of 4" over the bars; the names are kept for screen readers. Below 48rem it's
+   *  compact on its own, unless it's vertical. */
   | { compact: true; vertical?: never }
 )
 
 /** Where someone is in a few steps. It only shows where they are: moving between steps is the page's own buttons. */
-export function ProgressIndicator({ steps, compact, vertical, className, ...ol }: ProgressIndicatorProps) {
+export function ProgressIndicator({ steps, compact: narrow, vertical, className, ...ol }: ProgressIndicatorProps) {
+  const phone = usePhone()
+  const compact = narrow || (phone && !vertical)
   const list = (
     <ol aria-label="Steps" {...ol} className={cx('pc-steps', vertical && 'pc-steps-vertical', !compact && className)}>
       {steps.map(({ label, state }, i) => (

@@ -46,6 +46,23 @@ export type SelectProps<V extends Value = string> = Labelled & PickerProps<V>;
  *  Enter picks and puts focus back on the button, Esc or the dimmed page close it without a change. Two to five choices that
  *  should all be seen are radios; typing to find in a long list is the Combobox. */
 export declare function Select<V extends Value = string>({ label, 'aria-label': ariaLabel, options, value, onChange, placeholder, none, search, empty, title, name, hint, error, optional, disabled, id, className, }: SelectProps<V>): import("react").JSX.Element;
+export type PlaceSelectProps = Labelled & {
+    /** Where you can go, each a page of the app: a list, a workspace. */
+    places: {
+        label: string;
+        href: string;
+        icon?: ReactNode;
+    }[];
+    /** The href of where you are: its name shows on the button, and the primary bar marks it in the list. */
+    current: string;
+    /** What the phone sheet shows first and the list's name; the label (or aria-label) by default. */
+    title?: string;
+    id?: string;
+    className?: string;
+};
+/** A Select of places instead of values (switching list or workspace): the button shows where you are, with the up-down caret, and
+ *  its list holds links, where you are marked by a primary bar and a semibold name, no tick. Picking one goes there. */
+export declare function PlaceSelect({ label, 'aria-label': ariaLabel, places, current, title, id, className }: PlaceSelectProps): import("react").JSX.Element;
 type PickerMenuProps<V extends Value> = {
     menu: RefObject<HTMLDivElement | null>;
     id: string;

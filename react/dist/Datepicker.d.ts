@@ -19,7 +19,7 @@ type Choice =
     quickPicks?: QuickPick[];
 }
 /** A range: the first day picked starts it, the second ends it, with the days up to the one under the pointer shown on the way.
- *  Clear and Done belong to the popover around it. */
+ *  Clear and Done belong to the popover around it: the DateInput with range has them. */
  | {
     range: true;
     value: DateRange;

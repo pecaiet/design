@@ -11,6 +11,8 @@ import {
   InputGroup,
   InputRow,
   Kbd,
+  Label,
+  Link,
   PasswordInput,
   RadioButton,
   Rating,
@@ -35,6 +37,7 @@ export function Forms() {
   const [colour, setColour] = useState<ColorPickerProps['value']>('teal')
   const [stars, setStars] = useState(4)
   const [files, setFiles] = useState(['Contract.pdf', 'Plan.png'])
+  const [added, setAdded] = useState('')
 
   return (
     <>
@@ -57,10 +60,23 @@ export function Forms() {
         </Stack>
       </Card>
 
-      <Card title="Input group, password, copy, search">
+      <Card title="Label, input group, password, copy, search">
         <Stack>
+          <div className="pc-field">
+            <Label htmlFor="design-recovery" optional action={<Link href="/design">Why we ask</Link>}>
+              Recovery email
+            </Label>
+            <input id="design-recovery" className="pc-input" type="email" placeholder="ana@example.com" />
+          </div>
           <InputGroup label="Website" before="https://" placeholder="example.com" />
-          <InputGroup icon={<Plus />} aria-label="New task" placeholder="Add a task" end={<Kbd>⌘K</Kbd>} />
+          <InputGroup
+            icon={<Plus />}
+            aria-label="New task"
+            placeholder="Add a task"
+            end={<Kbd>⌘K</Kbd>}
+            onAdd={setAdded}
+            hint={added && `Added “${added}”.`}
+          />
           <PasswordInput label="Password" autoComplete="current-password" defaultValue="correct-horse-7" />
           <CopyInput label="Client ID" value="pc_7f3a9c2e41" copyLabel="Copy client ID" />
           <InputRow>
@@ -74,6 +90,15 @@ export function Forms() {
       <Card title="Slider, stepper, segmented, colour, rating">
         <Stack gap={4}>
           <Slider label="Volume" defaultValue={60} format={value => `${value}%`} />
+          <Slider
+            label="Remind me"
+            max={7}
+            step={1}
+            defaultValue={3}
+            marks
+            ends={['On the day', 'A week before']}
+            format={days => (days === 0 ? 'On the day' : `${days} days before`)}
+          />
           <SliderRange
             label="Due in"
             max={14}

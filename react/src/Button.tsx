@@ -57,7 +57,8 @@ export function Button({ variant, destructive, size, full, pressed, busy, disabl
       {iconAfter}
     </>
   )
-  // aria-disabled keeps it focusable, so the click has to be ignored here.
+  // aria-disabled and aria-busy keep it focusable, so the click has to be ignored here: the CSS only stops the pointer, and Enter
+  // or Space still click.
   const ignore = (event: MouseEvent) => event.preventDefault()
 
   if (element.href !== undefined) {
@@ -67,7 +68,7 @@ export function Button({ variant, destructive, size, full, pressed, busy, disabl
   }
   const { type = 'button', onClick, ...button } = element
   return (
-    <button {...button} {...shared} type={type} onClick={disabledReason ? ignore : onClick}>
+    <button {...button} {...shared} type={type} onClick={disabledReason || busy ? ignore : onClick}>
       {inner}
     </button>
   )

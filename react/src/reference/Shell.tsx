@@ -1,4 +1,4 @@
-import { Card, Footer, Header, Link, PeCaietWord, Stack, ThemeSwitch, TodoWord } from '../index'
+import { AppLogo, Card, Footer, Header, Link, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../index'
 import { CaretRight } from '@phosphor-icons/react'
 
 const ACCOUNT = { email: 'ana@example.com', settingsHref: '/design/app', signOutHref: '/design' }
@@ -17,6 +17,13 @@ export function Shell() {
           <Link href="/design/error" iconAfter={<CaretRight />}>
             Error page
           </Link>
+        </Stack>
+      </Card>
+
+      <Card title="App logo">
+        <Stack row>
+          <AppLogo mark={<PeCaietMark />}>pe caiet</AppLogo>
+          <AppLogo mark={<TodoMark />}>todo</AppLogo>
         </Stack>
       </Card>
 

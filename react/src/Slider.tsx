@@ -7,27 +7,39 @@ export type SliderProps = Omit<ComponentPropsWithRef<'input'>, 'type' | 'childre
   step?: number
   value?: number
   defaultValue?: number
-  /** The value in words, beside the label: value => `${value}%`, "3 days before". It's read out too. */
+  /** The value in words, beside the label: value => `${value}%`, "3 days before". It's read out too. The number by default. */
   format?: (value: number) => ReactNode
   /** A mark under it at each step. */
   marks?: boolean
+  /** Words under both ends, when the ends need names: ['On the day', 'A week before']. */
+  ends?: [ReactNode, ReactNode]
 } & (
   /** Over it, with the value in words on the right. aria-label can say more ("Remind me, days before"). */
   | { label: ReactNode; 'aria-label'?: string }
   | { label?: never; 'aria-label': string }
 )
 
+// No class in pecaiet.css yet for the words at the ends: the design system's card draws them muted at 12px, at either end.
+const ENDS: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  color: 'var(--muted-foreground)',
+  fontSize: 'var(--pc-text-12)',
+  lineHeight: 'var(--pc-line-16)',
+}
+
 /** "About this much" in a range, by dragging a handle; teal up to the value. For an exact number, a TextInput or a Stepper. */
-export function Slider({ label, min = 0, max = 100, step, value, defaultValue, format, marks, onChange, id, style, className, ...input }: SliderProps) {
+export function Slider({ label, min = 0, max = 100, step, value, defaultValue, format, marks, ends, onChange, id, style, className, ...input }: SliderProps) {
   const auto = useId()
   const labelId = `${id ?? auto}-label`
   const [moved, setMoved] = useState(() => defaultValue ?? min + (max - min) / 2)
   const current = value ?? moved
-  const words = format?.(current)
+  const words = format ? format(current) : current
+  const bare = !label && !marks && !ends
   const slider = (
     <input
       {...input}
-      className={cx('pc-slider', !label && !marks && className)}
+      className={cx('pc-slider', bare && className)}
       type="range"
       id={id}
       min={min}
@@ -44,19 +56,25 @@ export function Slider({ label, min = 0, max = 100, step, value, defaultValue, f
       }}
     />
   )
-  if (!label && !marks) return slider
+  if (bare) return slider
   return (
     <div className={cx('pc-field', className)}>
       {label && (
         <div className="pc-progress-head">
           <span className="pc-label" id={labelId}>{label}</span>
-          {words !== undefined && <span className="pc-progress-value">{words}</span>}
+          <span className="pc-progress-value">{words}</span>
         </div>
       )}
       {slider}
       {marks && (
         <div className="pc-slider-marks" aria-hidden="true">
           {Array.from({ length: Math.round((max - min) / (step ?? 1)) + 1 }, (_, i) => <span key={i} />)}
+        </div>
+      )}
+      {ends && (
+        <div style={ENDS}>
+          <span>{ends[0]}</span>
+          <span>{ends[1]}</span>
         </div>
       )}
     </div>
@@ -73,7 +91,7 @@ export type SliderRangeProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange' |
   value?: [number, number]
   defaultValue?: [number, number]
   onChange?: (value: [number, number]) => void
-  /** The range in words: ([from, to]) => `${from} to ${to} days`. */
+  /** The range in words: ([from, to]) => `${from} to ${to} days`. The two numbers by default. */
   format?: (value: [number, number]) => ReactNode
   disabled?: boolean
 }
@@ -91,7 +109,7 @@ export function SliderRange({ label, min = 0, max = 100, step, value, defaultVal
     <div className={cx('pc-field', className)}>
       <div className="pc-progress-head">
         <span className="pc-label">{label}</span>
-        {format && <span className="pc-progress-value">{format([from, to])}</span>}
+        <span className="pc-progress-value">{format ? format([from, to]) : `${from}–${to}`}</span>
       </div>
       <div {...div} className="pc-slider-range" style={{ '--from': percent(from), '--to': percent(to), ...style } as CSSProperties}>
         <input

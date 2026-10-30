@@ -13,10 +13,11 @@ export function useField(id: string | undefined, message: ReactNode, error: Reac
   }
 }
 
-/** The error under a field, or its hint when there's no error. */
+/** The error under a field, or its hint when there's no error. The keys make an error a new node, never the hint's reused, so
+ *  pecaiet.js sees it added and grows it in. */
 export function FieldMessage({ id, hint, error }: { id: string; hint?: ReactNode; error?: ReactNode }) {
-  if (error) return <p className="pc-field-error" id={id}>{error}</p>
-  if (hint) return <p className="pc-field-hint" id={id}>{hint}</p>
+  if (error) return <p key="error" className="pc-field-error" id={id}>{error}</p>
+  if (hint) return <p key="hint" className="pc-field-hint" id={id}>{hint}</p>
   return null
 }
 

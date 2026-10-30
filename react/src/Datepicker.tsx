@@ -17,7 +17,7 @@ type Choice =
   /** One date: picking a day (or a quick pick) calls onChange with it. */
   | { range?: false; value: Date | null; onChange: (value: Date) => void; quickPicks?: QuickPick[] }
   /** A range: the first day picked starts it, the second ends it, with the days up to the one under the pointer shown on the way.
-   *  Clear and Done belong to the popover around it. */
+   *  Clear and Done belong to the popover around it: the DateInput with range has them. */
   | { range: true; value: DateRange; onChange: (value: DateRange) => void; quickPicks?: never }
 
 export type DatepickerProps = Choice & {
@@ -60,10 +60,23 @@ const sameDay = (a: Date | null | undefined, b: Date | null | undefined) => Bool
  *  arrow keys move by day and week, Page Up and Down by month (with Shift, by year), Home and End to the week's ends, Enter picks.
  *  The month's name opens the twelve months. Put it in a Popover, or use the DateInput. */
 export function Datepicker({ min, max, disabledDays, autoFocus, locale, children, className, ...choice }: DatepickerProps) {
+  const off = (date: Date) =>
+    (min !== undefined && date < midnight(min)) || (max !== undefined && date > midnight(max)) || Boolean(disabledDays?.(date))
+  // The first day from date, walking by step, that can be picked; none within that many steps: null.
+  const nearest = (date: Date, step: number, steps: number) => {
+    let day = date
+    for (let tries = 0; off(day) && tries < steps; tries++) day = addDays(day, step)
+    return off(day) ? null : day
+  }
+
   const today = midnight(new Date())
-  const anchor = (choice.range ? choice.value.start : choice.value) ?? today
-  const [month, setMonth] = useState(() => firstOf(anchor))
-  const [focus, setFocus] = useState(() => midnight(anchor))
+  // The chosen day, else today; if that can't be picked, the next one that can (min after today).
+  const start = () => {
+    const day = midnight((choice.range ? choice.value.start : choice.value) ?? today)
+    return nearest(day, 1, 366) ?? day
+  }
+  const [month, setMonth] = useState(() => firstOf(start()))
+  const [focus, setFocus] = useState(start)
   const [view, setView] = useState<'days' | 'months'>('days')
   const [preview, setPreview] = useState<Date | null>(null)
   const root = useRef<HTMLDivElement>(null)
@@ -79,9 +92,6 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
     monthYear: new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }),
     year: new Intl.DateTimeFormat(locale, { year: 'numeric' }),
   }), [locale])
-
-  const off = (date: Date) =>
-    (min !== undefined && date < midnight(min)) || (max !== undefined && date > midnight(max)) || Boolean(disabledDays?.(date))
 
   // After a key (or a view change) moved it, the day or month that takes focus gets it.
   useEffect(() => {
@@ -115,22 +125,23 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
     else choice.onChange(date < start ? { start: date, end: start } : { start, end: date })
   }
 
+  // Days that can't be picked are skipped: the arrows go on past them; Home and End stop at the week's first and last that can be;
+  // Page Up and Down land on the nearest one after, else before.
   const dayKeys = (event: KeyboardEvent) => {
     const step = DAY_STEPS[event.key]
-    let next: Date
-    if (step) {
-      // Days that can't be picked are skipped.
-      next = addDays(focus, step)
-      for (let tries = 0; off(next) && tries < 60; tries++) next = addDays(next, step)
-    } else if (event.key === 'Home') next = monday(focus)
-    else if (event.key === 'End') next = addDays(monday(focus), 6)
-    else if (event.key === 'PageUp' || event.key === 'PageDown') next = addMonths(focus, (event.key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1))
-    else return
+    let next: Date | null
+    if (step) next = nearest(addDays(focus, step), step, 60)
+    else if (event.key === 'Home') next = nearest(monday(focus), 1, 6)
+    else if (event.key === 'End') next = nearest(addDays(monday(focus), 6), -1, 6)
+    else if (event.key === 'PageUp' || event.key === 'PageDown') {
+      const target = addMonths(focus, (event.key === 'PageUp' ? -1 : 1) * (event.shiftKey ? 12 : 1))
+      next = nearest(target, 1, 31) ?? nearest(target, -1, 31)
+    } else return
     event.preventDefault()
-    if (step && off(next)) return
+    if (!next) return
     moved.current = true
     go(next)
-    if (picking && !off(next)) setPreview(next)
+    if (picking) setPreview(next)
   }
 
   const monthKeys = (event: KeyboardEvent) => {

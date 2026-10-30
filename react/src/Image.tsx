@@ -10,30 +10,38 @@ export type ImageProps = Omit<ComponentPropsWithRef<'img'>, 'alt' | 'children'> 
 }
 
 /** Give it a size or an aspect ratio (width and height, or aspect-ratio) so the page doesn't jump; the picture fills that box.
- *  Without a src yet, or when it can't load, a muted box with an image icon takes its place, the same size. */
-export function Image({ alt, caption, src, width, height, style, onError, className, ...img }: ImageProps) {
+ *  While it loads, without a src yet, or when it can't load, a muted box with an image icon takes its place, the same size. */
+export function Image({ alt, caption, src, width, height, style, onLoad, onError, className, ...img }: ImageProps) {
   const [broken, setBroken] = useState<string>()
+  const [loaded, setLoaded] = useState<string>()
   const empty = !src || broken === src
   const named = alt ? { role: 'img', 'aria-label': alt } : { 'aria-hidden': true }
-  const picture = empty ? (
-    <div {...named} className={cx('pc-image', 'pc-image-empty', !caption && className)} style={{ width, height, ...style }}>
-      <ImageIcon />
-    </div>
-  ) : (
+  const photo = (waiting: boolean) => (
     <img
       {...img}
-      className={cx('pc-image', !caption && className)}
+      className={waiting ? undefined : cx('pc-image', !caption && className)}
       src={src}
-      alt={alt}
+      alt={waiting ? '' : alt}
       width={width}
       height={height}
-      style={style}
+      // While it loads it sits unseen over the muted box, so it still loads when it's lazy.
+      style={waiting ? { position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0 } : style}
+      onLoad={event => {
+        setLoaded(src)
+        onLoad?.(event)
+      }}
       onError={event => {
         setBroken(src)
         onError?.(event)
       }}
     />
   )
+  const picture = empty || loaded !== src ? (
+    <div {...named} className={cx('pc-image', 'pc-image-empty', !caption && className)} style={{ position: 'relative', width, height, ...style }}>
+      <ImageIcon />
+      {!empty && photo(true)}
+    </div>
+  ) : photo(false)
   if (!caption) return picture
   return (
     <figure className={cx('pc-figure', className)}>

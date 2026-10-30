@@ -13,7 +13,7 @@ export type PaginationProps = Omit<ComponentPropsWithRef<'nav'>, 'children'> & {
     arrows?: boolean;
     numbers?: boolean;
 }
-/** For a narrow card, and below 48rem: "Page 5 of 20" between two arrows. */
+/** For a narrow card: "Page 5 of 20" between two arrows. Below 48rem it's compact on its own, unless numbers={false}. */
  | {
     compact: true;
     arrows?: never;
@@ -21,7 +21,7 @@ export type PaginationProps = Omit<ComponentPropsWithRef<'nav'>, 'children'> & {
 });
 /** Moving through pages: the first and last pages and the ones either side of the one you're on (seven or fewer: all of them),
  *  "…" for the rest. An end that goes nowhere is turned off. */
-export declare function Pagination({ page, pages, href, compact, arrows, numbers, className, ...nav }: PaginationProps): import("react").JSX.Element;
+export declare function Pagination({ page, pages, href, compact: narrow, arrows, numbers, className, ...nav }: PaginationProps): import("react").JSX.Element;
 export type PaginationBarProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & {
     /** Where you are, first: "81–100 of 394". */
     count: ReactNode;

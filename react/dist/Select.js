@@ -1,7 +1,8 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretDown, Check, MagnifyingGlass } from '@phosphor-icons/react';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { CaretDown, CaretUpDown, Check, MagnifyingGlass } from '@phosphor-icons/react';
+import { Fragment, useEffect, useId, useRef, useState } from 'react';
 import { cx } from './cx';
+import { DropdownMenu, MenuItem } from './DropdownMenu';
 import { FieldMessage, useField } from './Field';
 import { InputGroup } from './InputGroup';
 import { moveFocus, typeAhead, useOutside } from './popup';
@@ -43,6 +44,15 @@ export function Select({ label, 'aria-label': ariaLabel, options, value, onChang
                                 close();
                             },
                         }, search: search, empty: empty }), name && _jsx("input", { type: "hidden", name: name, value: value ?? '' })] }), _jsx(FieldMessage, { id: field.messageId, hint: hint, error: error })] }));
+}
+/** A Select of places instead of values (switching list or workspace): the button shows where you are, with the up-down caret, and
+ *  its list holds links, where you are marked by a primary bar and a semibold name, no tick. Picking one goes there. */
+export function PlaceSelect({ label, 'aria-label': ariaLabel, places, current, title, id, className }) {
+    const auto = useId();
+    const buttonId = id ?? auto;
+    const labelId = `${buttonId}-label`;
+    const here = places.find(place => place.href === current);
+    return (_jsxs("div", { className: cx('pc-field', className), children: [label && _jsx("span", { className: "pc-label", id: labelId, children: label }), _jsx(DropdownMenu, { places: true, title: title ?? (typeof label === 'string' ? label : ariaLabel), className: "pc-picker", menuClassName: "pc-picker-menu", trigger: _jsxs("button", { id: buttonId, className: "pc-picker-button", type: "button", "aria-labelledby": label ? `${labelId} ${buttonId}` : undefined, "aria-label": ariaLabel && (here ? `${ariaLabel}: ${here.label}` : ariaLabel), children: [_jsx("span", { children: here?.label }), _jsx(CaretUpDown, {})] }), children: places.map(place => (_jsx(MenuItem, { href: place.href, icon: place.icon, current: place.href === current, children: place.label }, place.href))) })] }));
 }
 const choices = (menu) => [...(menu?.querySelectorAll('[role="option"]:not([aria-disabled="true"])') ?? [])];
 /** The list a picker opens: the phone sheet's title, the search, the options in their groups, and the keys that move through them.
