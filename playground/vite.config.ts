@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
-import { page, ROUTES } from './routes'
+import { page, ROUTES } from './routes.ts'
 
 // No Rails here: an Inertia visit (a request with the X-Inertia header) to one of the routes gets its page back as JSON, the way
 // Rails would answer it. Every other request, a reload too, gets index.html, and main.tsx reads the address.
@@ -19,4 +19,5 @@ const inertia: Plugin = {
   },
 }
 
-export default defineConfig({ plugins: [react(), tailwindcss(), inertia] })
+// Its own port, so it doesn't land wherever is free after another project's dev server.
+export default defineConfig({ plugins: [react(), tailwindcss(), inertia], server: { port: 5180 } })

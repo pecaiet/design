@@ -458,7 +458,8 @@ ol.pc-list { list-style: decimal; }
 .pc-dialog::backdrop { background: var(--overlay); }
 .pc-dialog-body { display: grid; gap: var(--pc-space-4); max-height: calc(100dvh - 2 * var(--pc-space-8)); }
 /* What sits between the text and the actions (fields, an error, longer text); it scrolls when it doesn't fit, the title and actions stay. */
-.pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; overflow-y: auto; }
+/* It scrolls, so it keeps 8px of room inside its edges for a field's focus ring and gives it back with a negative margin. */
+.pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; margin: calc(-1 * var(--pc-space-2)); padding: var(--pc-space-2); overflow-y: auto; }
 .pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
 .pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
 .pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
@@ -703,12 +704,14 @@ dialog.pc-drawer:not([open]) { display: none; }
 
 
 /* Search: a dialog with the field on top and grouped results */
-.pc-search { width: min(var(--pc-width-560), calc(100% - 2 * var(--pc-space-4))); padding: 0; overflow: hidden; }
+/* Near the top, where the eye already is, not in the middle; on phones it fills the screen. */
+.pc-search { width: min(var(--pc-width-560), calc(100% - 2 * var(--pc-space-4))); margin-top: calc(2 * var(--pc-size-48)); padding: 0; overflow: hidden; }
 .pc-search-field { position: relative; display: flex; align-items: center; border-bottom: var(--pc-border) solid var(--border); }
+/* Alone in the window (nothing typed, or no results yet), its line would sit on the window's own edge. */
+.pc-search-field:last-child { border-bottom: 0; }
 .pc-search-field > svg { position: absolute; left: var(--pc-space-4); width: var(--pc-size-16); height: var(--pc-size-16); color: var(--muted-foreground); }
 .pc-search-field > input { width: 100%; height: var(--pc-size-48); padding: 0 var(--pc-space-4) 0 calc(var(--pc-space-4) + var(--pc-size-16) + var(--pc-space-3)); border: 0; background: none; color: var(--foreground); font: inherit; }
 .pc-search-field > input::placeholder { color: var(--muted-foreground); }
-.pc-search-field:has(> input:focus-visible) { box-shadow: var(--pc-focus-inset); }
 .pc-search-field > input:focus-visible { outline: var(--pc-focus-outline); outline-offset: calc(-1 * var(--pc-border-2)); }
 .pc-search-results { display: grid; gap: var(--pc-space-1); max-height: var(--pc-height-list); padding: var(--pc-space-1); overflow: auto; }
 .pc-search-result { display: flex; align-items: center; gap: var(--pc-space-2-5); height: var(--pc-row); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius); color: inherit; text-decoration: none; }
@@ -732,7 +735,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-search-group-action:hover { color: var(--foreground); text-decoration: underline; text-decoration-thickness: var(--pc-border); text-underline-offset: var(--pc-underline-offset); }
 .pc-search-cancel { display: none; }
 @media (max-width: 47.99rem) {
-  .pc-dialog.pc-search[open] { inset: 0; display: flex; flex-direction: column; width: auto; height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); border: 0; border-radius: 0; box-shadow: none; }
+  .pc-dialog.pc-search[open] { inset: 0; margin: 0; display: flex; flex-direction: column; width: auto; height: 100dvh; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); border: 0; border-radius: 0; box-shadow: none; }
   .pc-search-results { flex: 1; max-height: none; }
   .pc-search-cancel { display: inline-flex; flex-shrink: 0; margin-right: var(--pc-space-1-5); color: var(--primary); }
   .pc-search-place, .pc-search-footer { display: none; }

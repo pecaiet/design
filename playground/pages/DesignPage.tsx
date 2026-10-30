@@ -4,6 +4,7 @@ import { Basics } from './Basics'
 import { Content } from './Content'
 import { Data } from './Data'
 import { Forms } from './Forms'
+import { Motion } from './Motion'
 import { Overlays } from './Overlays'
 import { Shell } from './Shell'
 
@@ -14,6 +15,7 @@ const SECTIONS: { id: string; title: string; body: ReactNode }[] = [
   { id: 'data', title: 'Data', body: <Data /> },
   { id: 'overlays', title: 'Overlays', body: <Overlays /> },
   { id: 'shell', title: 'App shell', body: <Shell /> },
+  { id: 'motion', title: 'Motion', body: <Motion /> },
 ]
 
 // Every component of @pecaiet/design, as a living reference.

@@ -88,14 +88,15 @@
     if (px(s.marginTop) && !full.marginTop) { full.marginTop = s.marginTop; none.marginTop = "0px"; }
     return { full, none, extra, start, done };
   }
-  const clip = el => { el.style.overflow = "hidden"; el.style.whiteSpace = "nowrap"; };
+  // Clipped while it moves; only an item shrinking sideways keeps its words on one line, since only its width changes.
+  const clip = (el, sideways) => { el.style.overflow = "hidden"; if (sideways) el.style.whiteSpace = "nowrap"; };
   const unclip = el => { el.style.removeProperty("overflow"); el.style.removeProperty("white-space"); };
 
   // Grow open or shrink closed: the space and a fade together. Resolves at its end with settle(), which hands el back to the page.
   function grow(el, opening, t, more = {}, fades = true, sp = space(el)) {
     const o = fades ? [{ opacity: "0" }, { opacity: "1" }] : [{}, {}];
     sp.start();
-    clip(el);
+    clip(el, "width" in sp.full);
     const runs = [play(el, opening ? [{ ...sp.none, ...o[0] }, { ...sp.full, ...o[1] }] : [{ ...sp.full, ...o[1] }, { ...sp.none, ...o[0] }], t, more),
                   ...sp.extra.map(([other, a, b]) => play(other, opening ? [b, a] : [a, b], t, more))];
     return Promise.all(runs.map(a => a.finished)).catch(() => {}).then(() => ({ settle: () => { unclip(el); runs.forEach(a => a.cancel()); sp.done(); } }));
