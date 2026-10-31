@@ -680,7 +680,8 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range); }
 .pc-calendar-day:is([data-range="start"], [data-range]:nth-child(7n+1)) { border-top-left-radius: var(--pc-radius); border-bottom-left-radius: var(--pc-radius); }
 .pc-calendar-day:is([data-range="end"], [data-range]:nth-child(7n)) { border-top-right-radius: var(--pc-radius); border-bottom-right-radius: var(--pc-radius); }
-.pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range), inset 0 0 0 var(--pc-border) var(--primary); }
+.pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: inset 0 0 0 var(--pc-border) var(--primary); }
+.pc-calendar .pc-calendar-day[data-range][data-range-preview]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range), inset 0 0 0 var(--pc-border) var(--primary); }
 /* A chosen (teal) day with keyboard focus: the ring goes outside, past a 2px gap, so it shows against the teal. */
 .pc-calendar .pc-calendar-day[aria-selected="true"]:focus-visible { box-shadow: var(--pc-focus-offset); }
 .pc-calendar .pc-calendar-day[data-range]:not([aria-selected="true"]):focus-visible { box-shadow: var(--pc-focus-inset); }
