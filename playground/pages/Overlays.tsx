@@ -1,6 +1,7 @@
 import {
   Accordion,
   AccordionItem,
+  Avatar,
   Button,
   Card,
   Carousel,
@@ -16,10 +17,12 @@ import {
   MenuLabel,
   MenuSeparator,
   Modal,
+  NavigationModal,
   PlaceSelect,
   Popover,
   SearchWindow,
   Select,
+  SidebarItem,
   Stack,
   TabLinks,
   TabPanel,
@@ -30,7 +33,7 @@ import {
   useToast,
   Video,
 } from '../../react/src/index'
-import { Archive, CheckSquare, DotsThree, Folder, ListChecks, PencilSimple, Trash } from '@phosphor-icons/react'
+import { Archive, CheckSquare, Devices, DotsThree, Folder, ListChecks, PencilSimple, SlidersHorizontal, Trash, UserCircle } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 const COLOURS = [
@@ -39,11 +42,18 @@ const COLOURS = [
   { value: 'blue', label: 'Blue', colour: 'blue' as const },
 ]
 const LABELS = ['Home', 'Work', 'Errands', 'Health'].map(label => ({ value: label.toLowerCase(), label }))
+const SECTIONS = [
+  { label: 'Account', icon: <UserCircle /> },
+  { label: 'Sessions', icon: <Devices /> },
+  { label: 'Preferences', icon: <SlidersHorizontal /> },
+]
 
 export function Overlays() {
   const toast = useToast()
   const [modal, setModal] = useState(false)
   const [bare, setBare] = useState(false)
+  const [navModal, setNavModal] = useState(false)
+  const [section, setSection] = useState('Account')
   const [drawer, setDrawer] = useState(false)
   const [search, setSearch] = useState(false)
   const [query, setQuery] = useState('')
@@ -101,6 +111,9 @@ export function Overlays() {
           <Button variant="outline" onClick={() => setBare(true)}>
             Open a dialog of your own
           </Button>
+          <Button variant="outline" onClick={() => setNavModal(true)}>
+            Open navigation modal
+          </Button>
           <Button variant="outline" onClick={() => setDrawer(true)}>
             Open drawer
           </Button>
@@ -132,6 +145,38 @@ export function Overlays() {
         >
           <TextInput label="Name" defaultValue="Birthday present" />
         </Modal>
+        <NavigationModal
+          open={navModal}
+          onClose={() => setNavModal(false)}
+          title="Settings"
+          heading={section}
+          closeLabel="Close settings"
+          items={SECTIONS.map(each => (
+            <SidebarItem
+              key={each.label}
+              href={`/design?section=${each.label.toLowerCase()}`}
+              icon={each.icon}
+              current={each.label === section}
+              onClick={event => {
+                // Each row is its own address in an app; here it only switches the section, so the playground stays put.
+                event.preventDefault()
+                setSection(each.label)
+              }}
+            >
+              {each.label}
+            </SidebarItem>
+          ))}
+          footer={
+            <>
+              <Avatar initials="A" />
+              <span>ana@example.com</span>
+            </>
+          }
+        >
+          <Card title={section} description="The app’s own content for this row, stacked in a body that scrolls on its own.">
+            <TextInput label="Name" defaultValue="Ana Pop" />
+          </Card>
+        </NavigationModal>
         <Dialog kind="dialog" open={bare} onClose={() => setBare(false)} aria-labelledby="design-shortcuts">
           <div className="pc-dialog-body">
             <div>

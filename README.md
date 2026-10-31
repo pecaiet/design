@@ -364,9 +364,9 @@ Every menu that pops up (pickers, the account menu, the app switcher, row action
 - Actions: every item is a verb, Delete last after a divider, in red; one that opens another choice ends in "…". A `.pc-menu-label.pc-menu-title` names the thing acted on ("Birthday present"), shown only in the sheet.
 - No drag handle: nothing to swipe.
 
-## Settings modal
+## Navigation modal
 
-A big window over the page with its own nav, for settings: not a plain modal. Each section has its own address (`/settings/account`). Opened from a link in the app it opens over the page you are on, and closing goes back there; an address typed in opens it over the home page.
+A big window over the page with its own nav: `Navigation`, inside a modal (settings, an account, help). Not a plain modal. In React it is `NavigationModal`, and the app gives every word: `title` (the nav's head), `items` (`SidebarItem` rows), an optional `footer` (who is signed in), `heading` (the shown row's name) and `closeLabel`; it draws the markup below and opens the nav's sheet on phones. Each section has its own address (`/settings/account`). Opened from a link in the app it opens over the page you are on, and closing goes back there; an address typed in opens it over the home page.
 
 ```html
 <dialog class="pc-modal" tabindex="-1" aria-labelledby="settings-title">
@@ -390,7 +390,7 @@ A big window over the page with its own nav, for settings: not a plain modal. Ea
 ```
 
 - Open it with `showModal()`, then focus the window itself (`tabindex="-1"`) so no row lights up on open; Tab moves in. The browser keeps focus inside and dims the page with `::backdrop`. The page behind doesn't scroll while it is open.
-- Desktop: up to 960 × 640, centred; the nav is a 216px column in the sidebar's colour, with no line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
+- Desktop: up to 960 × 640, centred; the nav is a 256px column (`pc-width-256`) in the sidebar's colour, with no line on its right; the toggle is hidden. The body scrolls on its own and stacks the section's cards.
 - Phones (below 48rem): it fills the screen and the nav is hidden. The toggle opens `.pc-modal-frame` as a `.pc-sidebar-sheet`, like the app's sidebar; the backdrop or Escape closes the sheet first.
 - The close button, Escape and a click on the dimmed page around it leave the modal, back to the page under it. The click counts only when the press started there too, so selecting text and letting go outside doesn't close it.
 

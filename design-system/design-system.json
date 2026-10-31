@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-31T09:11:06Z",
-    "by": "Claude",
+    "at": "2026-10-31T19:16:06Z",
+    "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v0.7.0: the bundle (pecaiet.js) and bundle.css with every motion change since, the new -none shadow tokens, and the README and guidelines that describe them (focus rings fade without growing, field errors, drawers beside the page, search icons, images, unticks)."
+    "note": "Brought up to design v2.0.0: the Navigation modal (NavigationModal: Navigation inside a modal, every word from the app) replaces the Settings modal, with the same look. Earlier today: the Sign in, Error page and Email pages removed, bundle.css with the 1.0.1 focus edge."
   },
   "layout": "files",
   "libraries": [],

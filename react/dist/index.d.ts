@@ -33,6 +33,7 @@ export { Details, List, type DetailsProps, type ListProps } from './List';
 export { Dialog, Modal, type DialogProps, type ModalProps } from './Modal';
 export { close, enter, leave } from './motion';
 export { Navigation, SidebarToggle, useSidebar, type NavigationProps, type SidebarToggleProps } from './Navigation';
+export { NavigationModal, type NavigationModalProps } from './NavigationModal';
 export { PageHeader, type PageHeaderProps } from './PageHeader';
 export { Pagination, PaginationBar, PaginationMore, type PaginationBarProps, type PaginationMoreProps, type PaginationProps } from './Pagination';
 export { Popover, type PopoverProps } from './Popover';
@@ -46,7 +47,6 @@ export { SearchWindow, type SearchGroup, type SearchResult, type SearchWindowPro
 export { SegmentedControl, type SegmentedControlProps } from './SegmentedControl';
 export { PlaceSelect, Select, type PlaceSelectProps, type SelectOption, type SelectProps } from './Select';
 export { Separator, type SeparatorProps } from './Separator';
-export { SettingsModal, type SettingsModalProps, type SettingsSection } from './SettingsModal';
 export { SidebarAccount, type Account, type SidebarAccountProps } from './SidebarAccount';
 export { SidebarItem, SidebarSection, type SidebarItemProps, type SidebarSectionProps } from './SidebarItem';
 export { Skeleton, type SkeletonProps } from './Skeleton';
