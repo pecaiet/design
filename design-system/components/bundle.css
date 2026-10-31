@@ -106,7 +106,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
   font: inherit; font-weight: var(--pc-weight-semibold); white-space: nowrap; text-decoration: none; cursor: pointer;
 }
 .pc-btn > svg { width: var(--pc-size-16); height: var(--pc-size-16); }
-.pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn[aria-pressed="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-btn:focus-visible, .pc-btn:focus-visible:hover, .pc-btn:is([aria-pressed="true"], [aria-current="page"], [aria-disabled="true"], .pc-btn-primary.pc-btn-destructive):focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-btn-primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
 .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
 .pc-btn-ghost { background: transparent; color: var(--foreground); }
@@ -148,7 +148,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
   background: var(--card); color: var(--foreground); font: inherit;
 }
 .pc-input::placeholder { color: var(--muted-foreground); }
-.pc-input:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-input:focus-visible, .pc-input:is([aria-invalid="true"], [readonly]):focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-checkbox {
   appearance: none; display: grid; place-content: center;
   width: var(--pc-size-16); height: var(--pc-size-16); margin: 0; flex-shrink: 0;
@@ -160,7 +160,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-checkbox::before, .pc-checkbox::after { content: ""; grid-area: 1 / 1; opacity: 0; }
 .pc-checkbox:checked:not(:indeterminate, [aria-checked="mixed"])::after { opacity: 1; }
 .pc-checkbox::after { width: var(--pc-dot-8); height: var(--pc-bar-4); border-left: var(--pc-border-2) solid var(--primary-foreground); border-bottom: var(--pc-border-2) solid var(--primary-foreground); transform: translateY(calc(-1 * var(--pc-border))) rotate(-45deg); }
-.pc-checkbox:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-checkbox:focus-visible, .pc-checkbox:is(:indeterminate, [aria-checked="mixed"], [aria-invalid="true"]:not(:checked)):focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 /* Half: a "pick all" box over a group when only some are ticked (set el.indeterminate = true in script; [aria-checked="mixed"]
    works too). A teal fill with a dash in primary-foreground. An error (aria-invalid="true") turns the border red. */
 .pc-checkbox:indeterminate, .pc-checkbox[aria-checked="mixed"] { background: var(--primary); border-color: var(--primary); }
@@ -226,7 +226,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 }
 @supports not (field-sizing: content) { .pc-textarea { resize: vertical; } }
 .pc-textarea::placeholder { color: var(--muted-foreground); }
-.pc-textarea:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-textarea:focus-visible, .pc-textarea[aria-invalid="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-input:disabled, .pc-textarea:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-input[aria-invalid="true"], .pc-textarea[aria-invalid="true"] { border-color: var(--destructive); }
 /* Read-only: a value you can select and copy but not change: the muted fill, no border. */
@@ -595,7 +595,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-input-addon:last-child { padding-right: var(--pc-space-2-5); }
 .pc-input-addon + .pc-input { padding-left: var(--pc-space-0-5); }
 .pc-input:has(+ .pc-input-addon) { padding-right: var(--pc-space-0-5); }
-.pc-input-group:has(> .pc-input-addon):focus-within { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+.pc-input-group:has(> .pc-input-addon):focus-within, .pc-input-group:has(> .pc-input-addon):has(> .pc-input[aria-invalid="true"]):focus-within { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
 .pc-input-group:has(> .pc-input-addon):has(> .pc-input[aria-invalid="true"]) { border-color: var(--destructive); }
 .pc-input-group:has(> .pc-input-addon):has(> .pc-input:disabled) { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-input-group:has(> .pc-input-addon) > .pc-input:disabled { opacity: 1; }
@@ -606,7 +606,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-radio:checked { border-color: var(--primary); }
 .pc-radio::after { content: ""; width: var(--pc-dot-8); height: var(--pc-dot-8); border-radius: var(--pc-radius-full); background: var(--primary); opacity: 0; }
 .pc-radio:checked::after { opacity: 1; }
-.pc-radio:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-radio:focus-visible, .pc-radio[aria-invalid="true"]:not(:checked):focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-radio:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-radio[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
 .pc-chip { display: inline-flex; align-items: center; gap: var(--pc-space-1-5); height: var(--pc-row-sm); padding: 0 var(--pc-space-2-5); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
@@ -1092,7 +1092,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-picker-button > svg { width: var(--pc-size-16); height: var(--pc-size-16); flex-shrink: 0; color: var(--muted-foreground); }
 /* Its arrow turns up while the list is open; a place picker's up-down caret stays. */
 .pc-picker:not(:has(> .pc-menu-places)) > .pc-picker-button[aria-expanded="true"] > svg:last-child { rotate: 180deg; }
-.pc-picker-button:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-picker-button:focus-visible, .pc-picker-button[aria-invalid="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-picker-button:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 /* Select (pc-picker): an error turns the button's border red. Options can start with a colour dot (.pc-menu-dot plus a .pc-colour-*) or a
    16px icon; a first "None" option (.pc-menu-none) is muted; a choice that can't be picked (aria-disabled="true") is half strength and says why
@@ -1112,7 +1112,7 @@ dialog.pc-drawer:not([open]) { display: none; }
 .pc-picker-field > .pc-chip ~ .pc-picker-placeholder { display: none; }
 .pc-picker-field > svg { position: absolute; top: calc((var(--pc-row) - var(--pc-size-16)) / 2 - var(--pc-border)); right: var(--pc-space-2-5); width: var(--pc-size-16); height: var(--pc-size-16); color: var(--muted-foreground); }
 .pc-picker-field[aria-expanded="true"] > svg { rotate: 180deg; }
-.pc-picker-field:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
+.pc-picker-field:focus-visible, .pc-picker-field[aria-invalid="true"]:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
 .pc-picker-field[aria-invalid="true"] { border-color: var(--destructive); }
 .pc-picker-field[aria-disabled="true"] { opacity: var(--pc-opacity-50); cursor: not-allowed; }
 .pc-picker-field[aria-disabled="true"] .pc-chip-remove { pointer-events: none; }
