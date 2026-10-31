@@ -1,6 +1,8 @@
 import { ImageIcon } from '@phosphor-icons/react'
-import { useState, type ComponentPropsWithRef, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
+import { enter } from './motion'
+import { assign } from './popup'
 
 export type ImageProps = Omit<ComponentPropsWithRef<'img'>, 'alt' | 'children'> & {
   /** What's in the picture; "" for a picture that's only decoration. */
@@ -11,14 +13,23 @@ export type ImageProps = Omit<ComponentPropsWithRef<'img'>, 'alt' | 'children'> 
 
 /** Give it a size or an aspect ratio (width and height, or aspect-ratio) so the page doesn't jump; the picture fills that box.
  *  While it loads, without a src yet, or when it can't load, a muted box with an image icon takes its place, the same size. */
-export function Image({ alt, caption, src, width, height, style, onLoad, onError, className, ...img }: ImageProps) {
+export function Image({ alt, caption, src, width, height, style, onLoad, onError, className, ref, ...img }: ImageProps) {
   const [broken, setBroken] = useState<string>()
   const [loaded, setLoaded] = useState<string>()
   const empty = !src || broken === src
   const named = alt ? { role: 'img', 'aria-label': alt } : { 'aria-hidden': true }
+  // Loaded, it takes the muted box's place and fades in, like content after a skeleton.
+  const own = useRef<HTMLImageElement>(null)
+  useLayoutEffect(() => {
+    if (loaded && loaded === src) enter(own.current)
+  }, [loaded])
   const photo = (waiting: boolean) => (
     <img
       {...img}
+      ref={node => {
+        if (!waiting) own.current = node
+        assign(ref, node)
+      }}
       className={waiting ? undefined : cx('pc-image', !caption && className)}
       src={src}
       alt={waiting ? '' : alt}

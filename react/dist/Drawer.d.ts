@@ -17,7 +17,8 @@ type Kind =
     back?: never;
 } & Omit<DialogProps, 'kind' | 'title' | 'children'>)
 /** Beside the page, the last thing in the page's row (as tall as the page); nothing is dimmed, so the next row can be opened.
- *  Show it or leave it out yourself. On phones it fills the screen and back ("Back to America") shows in place of the x. */
+ *  Show it or leave it out yourself: it slides in from the right while the page narrows, and its x or back slides it out before
+ *  onClose. On phones it fills the screen and back ("Back to America") shows in place of the x. */
  | ({
     beside: true;
     back: string;

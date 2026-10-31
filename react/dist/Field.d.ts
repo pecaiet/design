@@ -7,7 +7,7 @@ export declare function useField(id: string | undefined, message: ReactNode, err
     invalid: boolean | undefined;
 };
 /** The error under a field, or its hint when there's no error. An error takes the hint's line, turning red; with no hint it's new,
- *  and pecaiet.js grows it in. */
+ *  and pecaiet.js grows it in. Gone with no hint to take its line, it shrinks out while what's below glides up. */
 export declare function FieldMessage({ id, hint, error }: {
     id: string;
     hint?: ReactNode;

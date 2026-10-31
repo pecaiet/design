@@ -8,4 +8,4 @@ A square box with its label: on, off, or half when it stands for a group that's 
 - No change under the pointer, like every other field. Keyboard focus is the blue ring; disabled is half strength, the box and its words together.
 - An error (a box that has to be ticked, left empty): `aria-invalid="true"` and a `.pc-field-error` under the words, tied with `aria-describedby`. The border turns red.
 - The label says what turning it on means: "Admin", "Confidential client". Task rows and tables use the same box.
-- Motion: the tick (or the "some" dash) fades in and the box's colour fades (120ms).
+- Motion: the tick (or the "some" dash) fades in when ticked and out when unticked, and the box's colour fades (120ms).

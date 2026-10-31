@@ -7,10 +7,10 @@
 
    Calls (on window.Pecaiet):
      leave(el)          el shrinks out while it fades, in one motion (what's around it glides), then it's removed; a table row
-                        (it can't shrink) and a chip fade out where they are. Resolves when it's gone. { remove: false } plays
+                        (it can't shrink) and a chip fade out where they are; a drawer beside the page slides out. Resolves when it's gone. { remove: false } plays
                         it and leaves the removing to you.
      enter(el)          something the person just added: a row or alert grows in while it fades (what's below glides); a table
-                        row, a chip and anything else fade in where they are. Works as a React ref (null is ignored). Content
+                        row, a chip and anything else fade in where they are; a drawer beside the page slides in. Works as a React ref (null is ignored). Content
                         that's only drawn again doesn't move.
      close(el)          play the closing, then close: a <dialog> (close()) or anything shown by removing hidden (sets hidden).
      setTheme(mode)     "dark" | "light" | "system": the .dark class on <html>, remembered in the theme cookie, crossfading.
@@ -27,7 +27,8 @@
      - the chosen tab's line slides to the next tab;
      - Turbo: a removed row, chip, alert or toast leaves first; rows, chips and alerts a stream adds (append, prepend, before, after) come in;
      - a tree item's rows, at any depth, grow in right after it opens;
-     - an icon swapped inside a button (a copy turning into a tick, the spinner at work, a sort arrow) fades in;
+     - an icon swapped inside a button (a copy turning into a tick, the spinner at work, a sort arrow) fades in, and so does what
+       comes at a field's end (a search's spinner, then its x);
      - content that takes a skeleton's place (the app swaps it in, or a Turbo frame loads) fades in;
      - jumps within a page (#links, the skip link) scroll smoothly;
      - radios named pc-theme or pc-motion (values dark/light/system, on/off) set the theme or motion. */
@@ -103,10 +104,21 @@
   }
 
 
+  // A drawer beside the page slides: on a wide screen by its own width at its right margin, so the page narrows and widens with it
+  // (as with the sidebar); on phones, where it covers the page, from the right edge. Its row clips it on the way.
+  function slide(el, opening, t) {
+    const p = el.parentElement, over = getComputedStyle(el).position === "fixed";
+    const away = over ? { translate: "100% 0" } : { marginRight: `${-el.offsetWidth}px` }, here = over ? { translate: "0 0" } : { marginRight: "0px" };
+    if (p) p.style.overflowX = "clip";
+    const a = play(el, opening ? [away, here] : [here, away], t);
+    return a.finished.catch(() => {}).then(() => { p?.style.removeProperty("overflow-x"); return a; });
+  }
+
   async function leave(el, { remove = true } = {}) {
     if (!el?.isConnected) return;
     const t = timing(), gone = () => { if (remove) el.remove(); else el.style.setProperty("display", "none", "important"); };
     if (!t.duration) return gone();
+    if (el.matches(".pc-drawer-beside")) { await slide(el, false, t); return gone(); }
     // Table rows can't shrink, and chips keep their shape: they fade, then go.
     if (el.tagName === "TR" || el.matches(".pc-chip")) { await play(el, [shownFrame, { opacity: "0" }], t).finished.catch(() => {}); return gone(); }
     // Anything else shrinks while it fades, in one motion.
@@ -122,6 +134,7 @@
     const t = timing();
     if (!el?.isConnected || !t.duration) return Promise.resolve();
     if (el.matches(GROWS)) return grow(el, true, t).then(g => g.settle());
+    if (el.matches(".pc-drawer-beside")) return slide(el, true, t).then(a => a.cancel());
     const a = play(el, [el.tagName === "TR" ? { opacity: "0" } : from(el), el.tagName === "TR" ? { opacity: "1" } : shownFrame], t);
     return a.finished.then(() => a.cancel(), () => {});
   }
@@ -251,7 +264,8 @@
   const watchTabs = scope => scope.querySelectorAll?.(".pc-tabs").forEach(t => { drawLine(t); lines.observe(t); });
   // What counts as new: rows inserted under a tree item, at any depth, within a second of that item opening (a tree drawn again has new
   // items, so it stays still), rows a Turbo stream adds, and every toast and field error (not in Turbo's preview of a cached page).
-  // Also faded in: an icon swapped inside a button that stays (a sort button's arrow too), and whatever is put where a skeleton was taken out.
+  // Also faded in: an icon swapped inside a button that stays (a sort button's arrow too), what comes at a field's end (a search's
+  // spinner and x), and whatever is put where a skeleton was taken out.
   const rows = [], fades = [], opened = new WeakMap();
   const parentItem = n => { const level = +n.getAttribute("aria-level") || 1; let p = n.previousElementSibling; while (p && (+p.getAttribute("aria-level") || 1) >= level) p = p.previousElementSibling; return p; };
   const underOpened = n => { for (let p = parentItem(n); p; p = parentItem(p)) if (performance.now() - (opened.get(p) ?? -1e9) < 1000) return true; return false; };
@@ -267,7 +281,7 @@
         if (!(n instanceof Element)) return;
         if (n.matches(".pc-tabs")) watchTabs(n.parentElement); else watchTabs(n);
         if (n.matches(SHOWN)) remembered(n);
-        if ((c.target.matches?.(".pc-btn, .pc-table-sort") && n.matches("svg, .pc-spinner")) || skeletons.has(c.target)) fades.push(n);
+        if ((c.target.matches?.(".pc-btn, .pc-table-sort") && n.matches("svg, .pc-spinner")) || c.target.matches?.(".pc-input-group-end") || n.matches(".pc-input-group-end") || skeletons.has(c.target)) fades.push(n);
         else if (n.matches(".pc-tree-item") && underOpened(n)) rows.push(n);
         else if (adding && (n.matches(GROWS + ", .pc-chip") || n.tagName === "TR")) rows.push(n);
         else if (!root.hasAttribute("data-turbo-preview")) rows.push(...(n.matches(NEWS) ? [n] : n.querySelectorAll(NEWS)));

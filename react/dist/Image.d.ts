@@ -7,4 +7,4 @@ export type ImageProps = Omit<ComponentPropsWithRef<'img'>, 'alt' | 'children'> 
 };
 /** Give it a size or an aspect ratio (width and height, or aspect-ratio) so the page doesn't jump; the picture fills that box.
  *  While it loads, without a src yet, or when it can't load, a muted box with an image icon takes its place, the same size. */
-export declare function Image({ alt, caption, src, width, height, style, onLoad, onError, className, ...img }: ImageProps): import("react").JSX.Element;
+export declare function Image({ alt, caption, src, width, height, style, onLoad, onError, className, ref, ...img }: ImageProps): import("react").JSX.Element;
