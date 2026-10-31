@@ -38,6 +38,11 @@
   --pc-focus: 0 0 0 1px var(--ring), 0 0 6px 1px #1e40af99;
   --pc-focus-inset: inset 0 0 0 1px var(--ring), 0 0 6px 1px #1e40af99;
   --pc-focus-offset: 0 0 0 2px #ffffff, 0 0 0 3px #2563eb, 0 0 6px 3px #1e40af99;
+  /* The same shapes, invisible: what a control has at rest, so a ring or a lift fades in and out instead of growing. */
+  --pc-raise-none: 0 1px 2px transparent, 0 2px 8px transparent;
+  --pc-focus-none: 0 0 0 1px transparent, 0 0 6px 1px transparent;
+  --pc-focus-inset-none: inset 0 0 0 1px transparent, 0 0 6px 1px transparent;
+  --pc-focus-offset-none: 0 0 0 2px transparent, 0 0 0 3px transparent, 0 0 6px 3px transparent;
   /* Colours that stay the same in both themes: a video's, a switch's knob, the colours a person gives a list. */
   --media: #000000;
   --media-scrim: #000000aa;
@@ -179,6 +184,7 @@
   --pc-focus: 0 0 0 1px var(--ring), 0 0 6px 1px #2563eb99;
   --pc-focus-inset: inset 0 0 0 1px var(--ring), 0 0 6px 1px #2563eb99;
   --pc-focus-offset: 0 0 0 2px #1a222b, 0 0 0 3px #60a5fa, 0 0 6px 3px #2563eb99;
+  --pc-raise-none: 0 1px 3px transparent;
 }
 
 /* shadcn-style names, kept so existing utilities (bg-sidebar-accent, text-card-foreground, ...) still work.
@@ -351,7 +357,7 @@
   .pc-avatar-medium.pc-avatar-square { border-radius: var(--pc-radius); }
   .pc-avatar-large.pc-avatar-square { border-radius: var(--pc-radius-lg); }
   .pc-avatars { display: inline-flex; }
-  .pc-avatars > .pc-avatar { box-shadow: 0 0 0 var(--pc-border-2) var(--pc-avatar-ring, var(--background)); }
+  .pc-avatars > .pc-avatar { box-shadow: 0 0 0 var(--pc-border-2) var(--pc-avatar-ring, var(--background)), var(--pc-focus-none); }
   .pc-avatars > .pc-avatar + .pc-avatar { margin-left: calc(-1 * var(--pc-space-1)); }
   .pc-avatars > .pc-avatar-medium + .pc-avatar-medium { margin-left: calc(-1 * var(--pc-space-1-5)); }
   .pc-avatar-status { position: absolute; right: calc(-1 * var(--pc-border)); bottom: calc(-1 * var(--pc-border)); width: var(--pc-dot-8); height: var(--pc-dot-8); border-radius: var(--pc-radius-full); background: var(--primary); box-shadow: 0 0 0 var(--pc-border-2) var(--pc-avatar-ring, var(--background)); }
@@ -360,9 +366,9 @@
   .pc-avatar-large > .pc-badge { bottom: calc(-1 * var(--pc-border)); }
   .pc-avatar > .pc-badge-outline { background: var(--pc-avatar-ring, var(--background)); }
   .pc-avatar > .pc-badge-soft { background: color-mix(in srgb, var(--primary) var(--pc-opacity-12), var(--pc-avatar-ring, var(--background))); }
-  button.pc-avatar { cursor: pointer; }
-  button.pc-avatar:hover { box-shadow: 0 0 0 var(--pc-border-2) var(--input); }
-  button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
+  button.pc-avatar { cursor: pointer; box-shadow: 0 0 0 var(--pc-border-2) transparent, var(--pc-focus-none); }
+  button.pc-avatar:hover { box-shadow: 0 0 0 var(--pc-border-2) var(--input), var(--pc-focus-none); }
+  button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: 0 0 0 var(--pc-border-2) transparent, var(--pc-focus); }
 
   /* Buttons */
   .pc-btn {
@@ -431,7 +437,7 @@
   .pc-checkbox[aria-invalid="true"]:not(:checked) { border-color: var(--destructive); }
 
   /* Cards, badges, tables */
-  .pc-card { display: flex; flex-direction: column; background: var(--card); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-raise); }
+  .pc-card { display: flex; flex-direction: column; background: var(--card); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); box-shadow: var(--pc-focus-none), var(--pc-raise); }
   .pc-card-header { display: grid; gap: var(--pc-space-0-5); padding: var(--pc-space-4) var(--pc-space-4) 0; }
   .pc-card-title, .pc-section-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
   .pc-card-description, .pc-section-description { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
@@ -453,7 +459,7 @@
   .pc-card-link { color: inherit; text-decoration: none; }
   .pc-card-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--pc-radius-lg); }
   .pc-card-link:focus-visible { outline: none; }
-  .pc-card:has(.pc-card-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+  .pc-card:has(.pc-card-link:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus), var(--pc-raise-none); }
   .pc-badge { display: inline-flex; align-items: center; height: var(--pc-size-20); padding: 0 var(--pc-space-2); border-radius: var(--pc-radius-full); background: var(--muted); color: var(--foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); white-space: nowrap; }
   .pc-badge-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: inset 0 0 0 var(--pc-border) var(--primary); }
   /* Rows are rounded pills 2px apart, no lines between them: every second row in the page colour, the one under the
@@ -495,7 +501,7 @@
   /* A machine value in a field (a secret, a key): the monospace at 12px. */
   .pc-input-mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
   /* What the browser fills in keeps our colours instead of its yellow or blue. */
-  .pc-input:is(:-webkit-autofill, :autofill) { -webkit-text-fill-color: var(--foreground); box-shadow: 0 0 0 100px var(--card) inset; caret-color: var(--foreground); }
+  .pc-input:is(:-webkit-autofill, :autofill) { -webkit-text-fill-color: var(--foreground); box-shadow: 0 0 0 100px var(--card) inset, var(--pc-focus-none); caret-color: var(--foreground); }
   .pc-input:is(:-webkit-autofill, :autofill):focus-visible { box-shadow: 0 0 0 100px var(--card) inset, var(--pc-focus); }
   .pc-field-hint { margin: 0; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
   .pc-field-error { margin: 0; color: var(--destructive); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-medium); }
@@ -928,9 +934,12 @@
   .pc-calendar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--pc-space-2); font-weight: var(--pc-weight-semibold); }
   .pc-calendar-grid { display: grid; grid-template-columns: repeat(7, var(--pc-row)); gap: var(--pc-space-1); }
   .pc-calendar-weekday { display: grid; place-items: center; height: var(--pc-size-24); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
-  .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
+  /* A day's shadows are all there at rest, invisible until used, so they fade rather than grow: the band's join to the day before
+     (--strip), keyboard focus, the picking outline (--edge), and a chosen day's focus ring. */
+  .pc-calendar-day { display: grid; place-items: center; height: var(--pc-row); padding: 0; border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; font-variant-numeric: tabular-nums; cursor: pointer;
+    --strip: transparent; --edge: transparent; box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--strip), var(--pc-focus-inset-none), inset 0 0 0 var(--pc-border) var(--edge), var(--pc-focus-offset-none); }
   .pc-calendar-day:hover { background: var(--accent); }
-  .pc-calendar-day:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
+  .pc-calendar-day:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--strip), var(--pc-focus-inset), inset 0 0 0 var(--pc-border) var(--edge), var(--pc-focus-offset-none); }
   .pc-calendar-day[aria-current="date"] { color: var(--primary); font-weight: var(--pc-weight-bold); }
   .pc-calendar-day[aria-current="date"]:not([aria-selected="true"]):is(:hover, :focus-visible) { color: var(--primary-hover); }
   .pc-calendar-day[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: var(--pc-weight-semibold); }
@@ -940,15 +949,12 @@
   .pc-calendar { --pc-range: color-mix(in srgb, var(--primary) var(--pc-opacity-12), var(--card)); }
   .pc-calendar-day[data-range] { border-radius: 0; }
   .pc-calendar-day[data-range="mid"] { background: var(--pc-range); }
-  .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range); }
+  .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)) { --strip: var(--pc-range); }
   .pc-calendar-day:is([data-range="start"], [data-range]:nth-child(7n+1)) { border-top-left-radius: var(--pc-radius); border-bottom-left-radius: var(--pc-radius); }
   .pc-calendar-day:is([data-range="end"], [data-range]:nth-child(7n)) { border-top-right-radius: var(--pc-radius); border-bottom-right-radius: var(--pc-radius); }
-  .pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); box-shadow: inset 0 0 0 var(--pc-border) var(--primary); }
-  .pc-calendar .pc-calendar-day[data-range][data-range-preview]:not([data-range="start"]):not(:nth-child(7n+1)) { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range), inset 0 0 0 var(--pc-border) var(--primary); }
+  .pc-calendar .pc-calendar-day[data-range][data-range-preview] { background: var(--pc-range); --edge: var(--primary); }
   /* A chosen (teal) day with keyboard focus: the ring goes outside, past a 2px gap, so it shows against the teal. */
-  .pc-calendar .pc-calendar-day[aria-selected="true"]:focus-visible { box-shadow: var(--pc-focus-offset); }
-  .pc-calendar .pc-calendar-day[data-range]:not([aria-selected="true"]):focus-visible { box-shadow: var(--pc-focus-inset); }
-  .pc-calendar .pc-calendar-day[data-range]:not([data-range="start"]):not(:nth-child(7n+1)):not([aria-selected="true"]):focus-visible { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 var(--pc-range), var(--pc-focus-inset); }
+  .pc-calendar .pc-calendar-day[aria-selected="true"]:focus-visible { box-shadow: calc(-1 * var(--pc-space-1)) 0 0 transparent, var(--pc-focus-inset-none), inset 0 0 0 var(--pc-border) var(--edge), var(--pc-focus-offset); }
   /* A day that can't be picked: faded, no hover, skipped by the keyboard. */
   .pc-calendar-day[aria-disabled="true"] { opacity: var(--pc-opacity-50); cursor: not-allowed; }
   .pc-calendar-day[aria-disabled="true"]:hover { background: none; }
@@ -958,11 +964,11 @@
   .pc-calendar-title:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
   /* The twelve months take the day grid's width, so the popover keeps one width in both views. */
   .pc-calendar-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--pc-space-1-5); min-width: calc(7 * var(--pc-row) + 6 * var(--pc-space-1)); }
-  .pc-calendar-month { height: var(--pc-row); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; cursor: pointer; }
+  .pc-calendar-month { height: var(--pc-row); border: 0; border-radius: var(--pc-radius); background: none; color: inherit; font: inherit; cursor: pointer; box-shadow: var(--pc-focus-inset-none), var(--pc-focus-offset-none); }
   .pc-calendar-month:hover { background: var(--accent); }
-  .pc-calendar-month:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
+  .pc-calendar-month:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset), var(--pc-focus-offset-none); }
   .pc-calendar-month[aria-selected="true"] { background: var(--primary); color: var(--primary-foreground); font-weight: var(--pc-weight-semibold); }
-  .pc-calendar-month[aria-selected="true"]:focus-visible { box-shadow: var(--pc-focus-offset); }
+  .pc-calendar-month[aria-selected="true"]:focus-visible { box-shadow: var(--pc-focus-inset-none), var(--pc-focus-offset); }
 
   /* Search: a dialog with the field on top and grouped results */
   /* Near the top, where the eye already is, not in the middle; on phones it fills the screen. */
@@ -1038,8 +1044,11 @@
   .pc-toolbar { display: inline-flex; align-items: center; gap: var(--pc-space-0-5); padding: var(--pc-space-1); border-radius: var(--pc-radius-lg); background: var(--muted); }
   .pc-toolbar > .pc-btn { height: var(--pc-row-sm); }
   .pc-toolbar > .pc-btn-icon { width: var(--pc-row-sm); }
-  .pc-toolbar > .pc-btn:hover:not(:disabled, [aria-disabled="true"], :focus-visible) { background: var(--sidebar-active); box-shadow: var(--pc-raise); }
-  .pc-toolbar > .pc-btn[aria-pressed="true"]:hover:not(:disabled, [aria-disabled="true"], :focus-visible) { background: var(--primary-soft); box-shadow: none; }
+  /* Its lift is there at rest, invisible, and keyboard focus fades it out (zero specificity on the toolbar, so the focus ring wins). */
+  :where(.pc-toolbar) > .pc-btn { box-shadow: var(--pc-focus-none), var(--pc-raise-none); }
+  :where(.pc-toolbar) > .pc-btn:focus-visible { box-shadow: var(--pc-focus), var(--pc-raise-none); }
+  .pc-toolbar > .pc-btn:hover:not(:disabled, [aria-disabled="true"], :focus-visible) { background: var(--sidebar-active); box-shadow: var(--pc-focus-none), var(--pc-raise); }
+  .pc-toolbar > .pc-btn[aria-pressed="true"]:hover:not(:disabled, [aria-disabled="true"], :focus-visible) { background: var(--primary-soft); box-shadow: var(--pc-focus-none), var(--pc-raise-none); }
   .pc-toolbar-divider { width: var(--pc-border); height: var(--pc-size-16); margin: 0 var(--pc-space-1); background: var(--border); }
 
   /* Segmented control: the toolbar's tray, for choosing exactly one of two to five options: a role="radiogroup" of .pc-btn.pc-btn-ghost
@@ -1049,7 +1058,7 @@
   .pc-segmented-full { display: grid; }
   .pc-segmented > .pc-btn { position: relative; height: var(--pc-row-sm); }
   .pc-segmented > .pc-btn > input { position: absolute; width: var(--pc-border); height: var(--pc-border); margin: 0; opacity: 0; pointer-events: none; }
-  .pc-segmented > .pc-btn:hover { background: color-mix(in srgb, var(--sidebar-active) var(--pc-opacity-50), transparent); box-shadow: none; color: var(--foreground); }
+  .pc-segmented > .pc-btn:hover { background: color-mix(in srgb, var(--sidebar-active) var(--pc-opacity-50), transparent); box-shadow: var(--pc-focus-none); color: var(--foreground); }
   .pc-segmented > .pc-btn:has(> input:checked) { color: var(--foreground); }
   /* The chosen pill is one shape that slides between the options (they share one width; up to five). */
   .pc-segmented::before { content: ""; position: absolute; top: var(--pc-space-1); left: var(--pc-space-1); z-index: -1; width: calc((100% - 2 * var(--pc-space-1) - (var(--n, 1) - 1) * var(--pc-space-0-5)) / var(--n, 1));
@@ -1067,7 +1076,7 @@
   .pc-segmented > .pc-btn:has(> input:checked):hover { background: none; }
   .pc-segmented > .pc-btn:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); }
   .pc-segmented > .pc-btn:has(> input:disabled) { color: var(--muted-foreground); cursor: not-allowed; }
-  .pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: none; }
+  .pc-segmented > .pc-btn:has(> input:disabled:not(:checked)) { background: none; box-shadow: var(--pc-focus-none); }
 
   /* A button that can't be used keeps its own shape, in grey: a button with a box (primary, outline, delete) turns one flat grey
      box; a ghost button, which has no box, turns grey words at half strength, with no box. The not-allowed pointer, nothing under
@@ -1077,7 +1086,7 @@
     background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed;
   }
   .pc-btn-ghost:is(:disabled, [aria-disabled="true"]), .pc-btn-ghost:is(:disabled, [aria-disabled="true"]):hover {
-    background: none; border-color: transparent; box-shadow: none; opacity: var(--pc-opacity-50);
+    background: none; border-color: transparent; box-shadow: var(--pc-focus-none); opacity: var(--pc-opacity-50);
   }
 
   /* Separator: a 1px line in the border colour, the same line as every divider (menus, footers, table headers, the toolbar).
@@ -1121,11 +1130,11 @@
   .pc-slider::-webkit-slider-runnable-track { height: var(--pc-bar-6); border-radius: var(--pc-radius-full); background: linear-gradient(to right, var(--primary) var(--value), var(--track) var(--value)); }
   .pc-slider::-moz-range-track { height: var(--pc-bar-6); border-radius: var(--pc-radius-full); background: var(--track); }
   .pc-slider::-moz-range-progress { height: var(--pc-bar-6); border-radius: var(--pc-radius-full); background: var(--primary); }
-  .pc-slider::-webkit-slider-thumb { width: var(--pc-size-20); height: var(--pc-size-20); margin-top: calc((var(--pc-bar-6) - var(--pc-size-20)) / 2); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); appearance: none; }
-  .pc-slider::-moz-range-thumb { box-sizing: border-box; width: var(--pc-size-20); height: var(--pc-size-20); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-raise); }
+  .pc-slider::-webkit-slider-thumb { width: var(--pc-size-20); height: var(--pc-size-20); margin-top: calc((var(--pc-bar-6) - var(--pc-size-20)) / 2); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-focus-none), var(--pc-raise); appearance: none; }
+  .pc-slider::-moz-range-thumb { box-sizing: border-box; width: var(--pc-size-20); height: var(--pc-size-20); border: var(--pc-border) solid var(--input); border-radius: var(--pc-radius-full); background: var(--card); box-shadow: var(--pc-focus-none), var(--pc-raise); }
   .pc-slider:focus-visible { outline: none; }
-  .pc-slider:focus-visible::-webkit-slider-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
-  .pc-slider:focus-visible::-moz-range-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus); }
+  .pc-slider:focus-visible::-webkit-slider-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus), var(--pc-raise-none); }
+  .pc-slider:focus-visible::-moz-range-thumb { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); border-color: var(--background); box-shadow: var(--pc-focus), var(--pc-raise-none); }
   .pc-slider:disabled { opacity: var(--pc-opacity-50); cursor: not-allowed; }
   .pc-slider-marks { display: flex; justify-content: space-between; margin-top: calc(-1 * var(--pc-space-0-5)); padding: 0 calc((var(--pc-size-20) - var(--pc-bar-2)) / 2); }
   .pc-slider-marks > span { width: var(--pc-bar-2); height: var(--pc-bar-2); border-radius: var(--pc-radius-full); background: var(--muted-foreground); }
@@ -1259,7 +1268,7 @@
   .pc-video { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--pc-radius); background: var(--media); }
   .pc-video::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 var(--pc-border) color-mix(in srgb, var(--foreground) var(--pc-opacity-12), transparent); pointer-events: none; }
   .pc-video > video { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: var(--pc-size-48); height: var(--pc-size-48); padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: var(--pc-radius-full); background: var(--on-media); color: var(--on-media-foreground); box-shadow: var(--pc-raise-lg); cursor: pointer; }
+  .pc-video-play { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: var(--pc-size-48); height: var(--pc-size-48); padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: var(--pc-radius-full); background: var(--on-media); color: var(--on-media-foreground); box-shadow: var(--pc-focus-none), var(--pc-raise-lg); cursor: pointer; }
   .pc-video-play > svg { width: var(--pc-size-20); height: var(--pc-size-20); margin-left: var(--pc-space-0-5); }
   .pc-video-play:hover { background: var(--on-media-hover); }
   .pc-video-play:focus-visible { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus), var(--pc-raise-lg); }
@@ -1426,6 +1435,13 @@
       box-shadow var(--pc-motion) var(--pc-motion-ease), text-decoration-color var(--pc-motion) var(--pc-motion-ease),
       opacity var(--pc-motion) var(--pc-motion-ease), translate var(--pc-motion) var(--pc-motion-ease), visibility var(--pc-motion) var(--pc-motion-ease);
   }
+  /* Rings and lifts that come and go are there at rest, invisible, so a change only fades their colour: nothing grows. Zero
+     specificity, so a shadow a control has of its own wins (it lists its ring too). */
+  :where(.pc-btn, .pc-input, .pc-textarea, .pc-checkbox, .pc-radio, .pc-switch, .pc-link, .pc-link-quiet, .pc-breadcrumbs > a, .pc-footer-link,
+    .pc-table-sort, .pc-chip-remove, .pc-picker-button, .pc-picker-field, .pc-input-group:has(> .pc-input-addon), .pc-stepper,
+    .pc-rating-input > .pc-rating-star, .pc-swatch, .pc-carousel-dot, .pc-calendar-title) { box-shadow: var(--pc-focus-none); }
+  :where(.pc-sidebar-item, a.pc-file, .pc-menu-item, .pc-search-result, .pc-accordion-item > summary, .pc-tab, .pc-tree-item) { box-shadow: var(--pc-focus-inset-none); }
+  :where(.pc-row-link)::after { box-shadow: var(--pc-focus-inset-none); }
   /* Outlines don't fade: under every focus ring is an outline only Windows' high-contrast mode draws, and fading it would start it in
      the text colour (a flash on Tab). The swatch's ring is its one visible outline, so it fades on its own. */
   .pc-swatch::before { transition: outline-color var(--pc-motion) var(--pc-motion-ease); }
