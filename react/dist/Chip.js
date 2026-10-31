@@ -1,11 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { X } from '@phosphor-icons/react';
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { cx } from './cx';
 import { enter as fadeIn, leave } from './motion';
 export function Chip({ icon, enter, onRemove, removeLabel, children, className, ...span }) {
     const ref = useRef(null);
-    useEffect(() => {
+    // Before the first paint, so it never shows at full size first.
+    useLayoutEffect(() => {
         if (enter)
             fadeIn(ref.current);
     }, []);

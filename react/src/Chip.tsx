@@ -1,5 +1,5 @@
 import { X } from '@phosphor-icons/react'
-import { useEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react'
 import { cx } from './cx'
 import { enter as fadeIn, leave } from './motion'
 
@@ -20,7 +20,8 @@ export type ChipProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
 export function Chip({ icon, enter, onRemove, removeLabel, children, className, ...span }: ChipProps) {
   const ref = useRef<HTMLSpanElement>(null)
 
-  useEffect(() => {
+  // Before the first paint, so it never shows at full size first.
+  useLayoutEffect(() => {
     if (enter) fadeIn(ref.current)
   }, [])
 

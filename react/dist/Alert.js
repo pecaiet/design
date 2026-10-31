@@ -1,13 +1,14 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { CheckCircle, Warning, WarningCircle, X } from '@phosphor-icons/react';
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
 import { enter as grow, leave } from './motion';
 const ICONS = { notice: _jsx(CheckCircle, {}), warning: _jsx(Warning, {}), error: _jsx(WarningCircle, {}) };
 export function Alert({ kind, icon, title, items, action, onDismiss, banner, enter, children, className, ...element }) {
     const ref = useRef(null);
-    useEffect(() => {
+    // Before the first paint, so it never shows at full size first.
+    useLayoutEffect(() => {
         if (enter)
             grow(ref.current);
     }, []);

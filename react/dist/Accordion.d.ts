@@ -11,11 +11,11 @@ export type AccordionItemProps = Omit<ComponentPropsWithRef<'details'>, 'childre
     summary: ReactNode;
     /** The answer. */
     children?: ReactNode;
-    /** Open at first. Passed with onOpenChange it follows the app; it changes only when its value does, so the motion isn't cut short. */
+    /** Open at first. Passed with onOpenChange it follows the app, and a change from the app grows or shrinks it, like a press. */
     open?: boolean;
     /** It opened or closed (the toggle event, after pecaiet.js has played it). */
     onOpenChange?: (open: boolean) => void;
     /** Coming later: half strength, and it doesn't open. */
     disabled?: boolean;
 };
-export declare function AccordionItem({ summary, children, open, onOpenChange, disabled, className, ...details }: AccordionItemProps): import("react").JSX.Element;
+export declare function AccordionItem({ summary, children, open, onOpenChange, disabled, className, ref, ...details }: AccordionItemProps): import("react").JSX.Element;

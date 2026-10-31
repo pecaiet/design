@@ -1,6 +1,7 @@
 import { CaretDown } from '@phosphor-icons/react'
-import { createContext, useContext, useId, type ComponentPropsWithRef, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useId, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
+import { assign } from './popup'
 
 const Name = createContext<string | undefined>(undefined)
 
@@ -25,7 +26,7 @@ export type AccordionItemProps = Omit<ComponentPropsWithRef<'details'>, 'childre
   summary: ReactNode
   /** The answer. */
   children?: ReactNode
-  /** Open at first. Passed with onOpenChange it follows the app; it changes only when its value does, so the motion isn't cut short. */
+  /** Open at first. Passed with onOpenChange it follows the app, and a change from the app grows or shrinks it, like a press. */
   open?: boolean
   /** It opened or closed (the toggle event, after pecaiet.js has played it). */
   onOpenChange?: (open: boolean) => void
@@ -33,14 +34,24 @@ export type AccordionItemProps = Omit<ComponentPropsWithRef<'details'>, 'childre
   disabled?: boolean
 }
 
-export function AccordionItem({ summary, children, open, onOpenChange, disabled, className, ...details }: AccordionItemProps) {
+export function AccordionItem({ summary, children, open, onOpenChange, disabled, className, ref, ...details }: AccordionItemProps) {
   const name = useContext(Name)
+  // React sets open only at first; a later change from the app plays as a press on the question, so pecaiet.js grows or shrinks it.
+  const [first] = useState(open)
+  const own = useRef<HTMLDetailsElement>(null)
+  useEffect(() => {
+    if (open !== undefined && own.current && own.current.open !== open) own.current.querySelector('summary')?.click()
+  }, [open])
   return (
     <details
       name={name}
       {...details}
+      ref={node => {
+        own.current = node
+        assign(ref, node)
+      }}
       className={cx('pc-accordion-item', className)}
-      open={open}
+      open={first}
       aria-disabled={disabled || undefined}
       onToggle={event => onOpenChange?.(event.currentTarget.open)}
     >

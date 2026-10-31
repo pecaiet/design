@@ -29,9 +29,10 @@ export type FooterProps = Content & Omit<ComponentPropsWithRef<'footer'>, 'child
 
 /** The bottom of a signed-out or landing page (apps with a sidebar have none): links, then the app's word, big and faint. */
 export function Footer({ groups, links, copyright, language, word, className, ...footer }: FooterProps) {
-  const link = ({ label, href }: FooterLink) => external(href)
-    ? <a key={href} className="pc-footer-link" href={href}>{label}</a>
-    : <InertiaLink key={href} className="pc-footer-link" href={href}>{label}</InertiaLink>
+  // Keyed by place: two links can go to the same address.
+  const link = ({ label, href }: FooterLink, i: number) => external(href)
+    ? <a key={i} className="pc-footer-link" href={href}>{label}</a>
+    : <InertiaLink key={i} className="pc-footer-link" href={href}>{label}</InertiaLink>
 
   return (
     <footer {...footer} className={cx('pc-footer', className)}>

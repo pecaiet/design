@@ -26,8 +26,8 @@
      - an alert's x (.pc-alert-close) and any [data-pc-dismiss] button make their alert or toast leave;
      - the chosen tab's line slides to the next tab;
      - Turbo: a removed row, chip, alert or toast leaves first; rows, chips and alerts a stream adds (append, prepend, before, after) come in;
-     - a tree item's children grow in right after it opens;
-     - an icon swapped inside a button (a copy turning into a tick, the spinner at work) fades in;
+     - a tree item's rows, at any depth, grow in right after it opens;
+     - an icon swapped inside a button (a copy turning into a tick, the spinner at work, a sort arrow) fades in;
      - content that takes a skeleton's place (the app swaps it in, or a Turbo frame loads) fades in;
      - jumps within a page (#links, the skip link) scroll smoothly;
      - radios named pc-theme or pc-motion (values dark/light/system, on/off) set the theme or motion. */
@@ -249,11 +249,12 @@
     tabs.dataset.pcTabLine = "";
   }
   const watchTabs = scope => scope.querySelectorAll?.(".pc-tabs").forEach(t => { drawLine(t); lines.observe(t); });
-  // What counts as new: children inserted under a tree item within a second of that same item opening (a tree drawn again has new
+  // What counts as new: rows inserted under a tree item, at any depth, within a second of that item opening (a tree drawn again has new
   // items, so it stays still), rows a Turbo stream adds, and every toast and field error (not in Turbo's preview of a cached page).
-  // Also faded in: an icon swapped inside a button that stays, and whatever is put where a skeleton was taken out.
+  // Also faded in: an icon swapped inside a button that stays (a sort button's arrow too), and whatever is put where a skeleton was taken out.
   const rows = [], fades = [], opened = new WeakMap();
   const parentItem = n => { const level = +n.getAttribute("aria-level") || 1; let p = n.previousElementSibling; while (p && (+p.getAttribute("aria-level") || 1) >= level) p = p.previousElementSibling; return p; };
+  const underOpened = n => { for (let p = parentItem(n); p; p = parentItem(p)) if (performance.now() - (opened.get(p) ?? -1e9) < 1000) return true; return false; };
   let adding = 0;
   new MutationObserver(changes => {
     const skeletons = new Set(changes.filter(c => [...c.removedNodes].some(n => n instanceof Element && (n.matches(".pc-skeleton") || n.querySelector(".pc-skeleton")))).map(c => c.target));
@@ -266,8 +267,8 @@
         if (!(n instanceof Element)) return;
         if (n.matches(".pc-tabs")) watchTabs(n.parentElement); else watchTabs(n);
         if (n.matches(SHOWN)) remembered(n);
-        if ((c.target.matches?.(".pc-btn") && n.matches("svg, .pc-spinner")) || skeletons.has(c.target)) fades.push(n);
-        else if (n.matches(".pc-tree-item") && performance.now() - (opened.get(parentItem(n)) ?? -1e9) < 1000) rows.push(n);
+        if ((c.target.matches?.(".pc-btn, .pc-table-sort") && n.matches("svg, .pc-spinner")) || skeletons.has(c.target)) fades.push(n);
+        else if (n.matches(".pc-tree-item") && underOpened(n)) rows.push(n);
         else if (adding && (n.matches(GROWS + ", .pc-chip") || n.tagName === "TR")) rows.push(n);
         else if (!root.hasAttribute("data-turbo-preview")) rows.push(...(n.matches(NEWS) ? [n] : n.querySelectorAll(NEWS)));
       });

@@ -8,4 +8,4 @@ How far a long task has got: a 6px bar, teal on the grey `track`, filling as it 
 - Done: the bar full, and the words say so ("Uploaded"). An error: `.pc-progress-error` turns the fill red where it stopped, and a `.pc-field-error` under it says what to do.
 - Inside a row (a file uploading): `.pc-progress-small`, 4px.
 - For steps someone goes through (Account, Profile, …), use the Progress indicator; for a short wait with nothing to measure, a Spinner.
-- Motion: the fill glides to its new value (120ms).
+- Motion: the fill glides to its new value, and fades to red on an error (120ms).

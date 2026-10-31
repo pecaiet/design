@@ -17,10 +17,10 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
     title: 'Change: a colour or a small mark',
     description: 'Hover, focus, a tick, an icon swapped in a button.',
     rows: [
-      { what: 'Hover and focus', looks: 'Buttons, links, fields, rows, tabs and chips fade their fill, text, border and ring to the new colour.', time: '120ms', tryIt: ['Basics', '#basics'] },
-      { what: 'Checkbox and radio tick', looks: 'Fades in when ticked; disappears at once when unticked.', time: '120ms', tryIt: ['Basics', '#basics'], bends: true },
-      { what: 'Icon swapped in a button', looks: 'A copy turning into a tick, an icon turning into the spinner: the new icon fades in.', time: '120ms', tryIt: ['Basics', '#basics'] },
-      { what: 'Arrows', looks: 'The accordion’s, the tree’s and the Select’s arrow turns.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
+      { what: 'Hover and focus', looks: 'Buttons, links, fields, rows, tabs and chips fade their fill, text, border and ring to the new colour. Error red, disabled dimming and a quiet link’s underline fade the same way.', time: '120ms', tryIt: ['Basics', '#basics'] },
+      { what: 'Checkbox and radio tick', looks: 'The tick, or a checkbox’s “some” dash, fades in; unticking is instant.', time: '120ms', tryIt: ['Basics', '#basics'], bends: true },
+      { what: 'Icon swapped in a button', looks: 'A copy turning into a tick, an icon turning into the spinner, a sort arrow, a file row’s download icon: the new icon fades in.', time: '120ms', tryIt: ['Basics', '#basics'] },
+      { what: 'Arrows', looks: 'The accordion’s, the tree’s, the Select’s and the Combobox’s arrow turns. A place picker’s up-down caret stays.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Carousel dots', looks: 'The chosen dot widens and turns teal.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Rating stars, colour swatches', looks: 'The star fills in; the swatch’s ring fades.', time: '120ms', tryIt: ['Forms', '#forms'] },
     ],
@@ -34,6 +34,7 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
       { what: 'Tooltip', looks: 'Fades in after a wait under the pointer; at once on keyboard focus.', time: '120ms, after 120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Tab panel, carousel slide', looks: 'The new one fades in.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
       { what: 'Content replacing a skeleton', looks: 'Fades in where the skeleton was.', time: '120ms' },
+      { what: 'Video play button', looks: 'Fades out, with the length, when the video starts.', time: '120ms' },
       { what: 'Chip added or removed', looks: 'Fades in or out in place; the chips after it jump.', time: '120ms', tryIt: ['Data', '#data'], bends: true },
       { what: 'Table row added or removed', looks: 'Fades; the rows below jump. A table row can’t shrink.', time: '120ms', bends: true },
     ],
@@ -44,8 +45,8 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
     rows: [
       { what: 'Row, file, sidebar or menu item, alert being added', looks: 'Grows from nothing while it fades in; what’s below glides down. Only when the app says it’s new, so a page drawn again never moves row by row.', time: '120ms', tryIt: ['Forms', '#forms'] },
       { what: 'Anything removed', looks: 'An alert’s ×, a toast’s ×, a row: shrinks to nothing while it fades out; what’s below glides up.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
-      { what: 'Toast, field error', looks: 'Always grow in when they appear: they’re news.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
-      { what: 'Accordion answer, tree branch', looks: 'Grows open and shrinks closed; the rows below glide.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
+      { what: 'Toast, field error', looks: 'Always grow in when they appear: they’re news. An error that replaces a hint takes its line and fades to red.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
+      { what: 'Accordion answer, tree branch', looks: 'Grows open and shrinks closed; the rows below glide. One open at a time: the open one shrinks while the new one grows.', time: '120ms', tryIt: ['Overlays', '#overlays'] },
     ],
   },
   {
@@ -68,7 +69,8 @@ const KINDS: { title: string; description: string; rows: Row[] }[] = [
       { what: 'Spinner', looks: 'Turns, without easing.', time: '0.84s a turn (×7)', tryIt: ['Basics', '#basics'] },
       { what: 'Skeleton', looks: 'Pulses to half strength and back.', time: '1.56s (×13)', tryIt: ['Content', '#content'] },
       { what: 'Unknown progress', looks: 'A bar slides across, again and again.', time: '1.44s (×12)', tryIt: ['Data', '#data'] },
-      { what: 'Page to page, light ↔ dark', looks: 'The whole page crossfades. Firefox changes at once.', time: '120ms', tryIt: ['App shell', '#shell'], bends: true },
+      { what: 'Light ↔ dark', looks: 'The whole page crossfades. Firefox changes at once.', time: '120ms', tryIt: ['App shell', '#shell'], bends: true },
+      { what: 'Page to page', looks: 'Shows at once, going back the same as forward.', time: '0', tryIt: ['The app', '/design/app'] },
       { what: 'Jump to a section', looks: 'A # link or the skip link scrolls smoothly.', time: 'the browser’s', tryIt: 'The links at the top' },
       { what: 'Motion off', looks: 'Settings, or a device that asks for less: everything is instant, and the spinner still turns, slowly.', time: '0 (spinner 2.4s)', tryIt: ['The app’s settings', '/design/app'] },
     ],
@@ -80,7 +82,8 @@ const CHECKS: { ok: boolean; title: string; detail: string }[] = [
   { ok: true, title: 'The same kind of thing moves the same way everywhere.', detail: 'Every menu and popover fades on desktop and is a sliding sheet on phones; every slide comes from its own edge.' },
   { ok: false, title: 'Chips and table rows fade, then the rest jumps.', detail: 'Everything else that’s removed shrinks while what’s below glides. Chips: kept by choice. Table rows: HTML can’t shrink them.' },
   { ok: false, title: 'Checkbox and radio ticks fade in, but vanish at once.', detail: 'Unticking has no motion.' },
-  { ok: false, title: 'The page crossfade needs Chrome, Edge or Safari.', detail: 'Firefox has no view transitions, so its pages and theme change at once.' },
+  { ok: false, title: 'The light ↔ dark crossfade needs Chrome, Edge or Safari.', detail: 'Firefox has no view transitions, so its theme changes at once.' },
+  { ok: false, title: 'A file list jumps 6px when its first file comes or its last goes.', detail: 'The row grows or shrinks, but the gap above the list comes and goes with the list itself, at once.' },
 ]
 
 // Jumps within the page stay plain links: an Inertia visit would ask the server again.

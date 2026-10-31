@@ -6,7 +6,7 @@ Questions or sections that open to show more, one under another.
 - Closed: the question in the text colour, the chevron pointing down. Open (`open`): the question semibold, the chevron up, and the answer under it in `muted-foreground`, lined up with the question.
 - Rows like a menu's: at least `pc-row` (32px) tall and wrapping long questions, rounded, 2px apart, no lines between them. Under the pointer `accent`; keyboard focus the blue ring inside the row.
 - Something coming later: `aria-disabled="true"` on the item and `tabindex="-1"` on its summary: half strength, no pointer, it doesn't open.
-- Several can be open at once. To keep one open at a time, give the items the same `name`; the browser closes the others.
+- Several can be open at once. To keep one open at a time, give the items the same `name`; the browser closes the others (with pecaiet.js the open one shrinks closed while the new one grows).
 - In a card it sits in `.pc-card-content`, and the questions line up with the card's title.
 - For FAQs and optional detail; never to hide something people need to finish a task.
 - Motion: with pecaiet.js the answer grows open (120ms), its words fading in, and the questions below glide down; closing shrinks it back. The arrow turns with it. Without the script it opens and closes at once.

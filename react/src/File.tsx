@@ -1,5 +1,5 @@
 import { DownloadSimple, FileIcon, FileImage, FilePdf, FileText, FileXls, X } from '@phosphor-icons/react'
-import { useEffect, useRef, type ComponentPropsWithoutRef, type ComponentPropsWithRef, type HTMLAttributes, type ReactNode, type Ref } from 'react'
+import { useLayoutEffect, useRef, type ComponentPropsWithoutRef, type ComponentPropsWithRef, type HTMLAttributes, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
 import { enter as grow, leave } from './motion'
@@ -39,7 +39,8 @@ export type FileRowProps = Kind & {
 export function FileRow({ name, size, icon, enter, className, ...element }: FileRowProps) {
   const ref = useRef<HTMLElement>(null)
 
-  useEffect(() => {
+  // Before the first paint, so it never shows at full size first.
+  useLayoutEffect(() => {
     if (enter) grow(ref.current)
   }, [])
 

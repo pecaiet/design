@@ -1,5 +1,5 @@
 import { CheckCircle, Warning, WarningCircle, X } from '@phosphor-icons/react'
-import { useEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
+import { useLayoutEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
 import { enter as grow, leave } from './motion'
@@ -28,7 +28,8 @@ export type AlertProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
 export function Alert({ kind, icon, title, items, action, onDismiss, banner, enter, children, className, ...element }: AlertProps) {
   const ref = useRef<HTMLElement>(null)
 
-  useEffect(() => {
+  // Before the first paint, so it never shows at full size first.
+  useLayoutEffect(() => {
     if (enter) grow(ref.current)
   }, [])
 

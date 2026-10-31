@@ -1,6 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { DownloadSimple, FileIcon, FileImage, FilePdf, FileText, FileXls, X } from '@phosphor-icons/react';
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
 import { enter as grow, leave } from './motion';
@@ -17,7 +17,8 @@ export function Files({ className, ...div }) {
 /** A file as a row, like a task or menu row: its icon, its name and its size. */
 export function FileRow({ name, size, icon, enter, className, ...element }) {
     const ref = useRef(null);
-    useEffect(() => {
+    // Before the first paint, so it never shows at full size first.
+    useLayoutEffect(() => {
         if (enter)
             grow(ref.current);
     }, []);
