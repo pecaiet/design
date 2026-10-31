@@ -4,14 +4,11 @@ import { createRoot } from 'react-dom/client'
 import '../pecaiet.js'
 import { SegmentedControl, ToastProvider } from '../react/src/index'
 import './app.css'
-import { DesignAppPage, DesignErrorPage, DesignPage, DesignSignInPage } from './pages'
+import { DesignPage } from './pages'
 import { page } from './routes'
 
 const PAGES: Record<string, ComponentType> = {
   Design: DesignPage,
-  'Design/App': DesignAppPage,
-  'Design/SignIn': DesignSignInPage,
-  'Design/Error': DesignErrorPage,
 }
 
 const SPEED = 'pc-playground-speed'

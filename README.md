@@ -47,15 +47,11 @@ createRoot(el).render(<ToastProvider><App {...props} /></ToastProvider>)
 - `import '@pecaiet/design'` loads `pecaiet.js`. The components need it: the theme switch, closings and what grows in go through it.
 - `ToastProvider`, once around the app, holds the toasts and hides every Phosphor icon from screen readers (one that must be read out takes `aria-hidden={false}`).
 - React, Inertia, Tailwind and `@phosphor-icons/react` are peer dependencies: the app installs them.
-- Components, never pages: the app builds its pages from them. Signed-out pages (sign in, sign up, an error) put their own column inside `SignedOut`, set as the pages' Inertia layout so the left half stays as it is from one page to the next:
-
-```tsx
-SignUp.layout = (page: ReactNode) => <SignedOut>{page}</SignedOut>
-```
+- Components, never pages: the app builds its pages from them, sign-in and error pages included. A component has no content of its own: every word, row and picture in it comes from the app. `Navigation` passes (the app gives it the rows, the account and the page); a sign-in page with its own apps and slogan would not.
 
 ## Playground
 
-Every React component as a living page, plus three example pages (an app, sign-in and an error), here in the repo and in no app:
+Every React component as a living page, here in the repo and in no app. There are no example pages: apps build their own.
 
 ```bash
 npm install

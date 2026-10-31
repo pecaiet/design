@@ -1,25 +1,10 @@
-import { AppLogo, Card, Footer, Header, Link, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../../react/src/index'
-import { CaretRight } from '@phosphor-icons/react'
+import { AppLogo, Card, Footer, Header, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../../react/src/index'
 
-const ACCOUNT = { email: 'ana@example.com', settingsHref: '/design/app', signOutHref: '/design' }
+const ACCOUNT = { email: 'ana@example.com', settingsHref: '/design?settings', signOutHref: '/design' }
 
 export function Shell() {
   return (
     <>
-      <Card title="Whole pages" description="They take the whole window, so each has its own address.">
-        <Stack>
-          <Link href="/design/app" iconAfter={<CaretRight />}>
-            The app shell: sidebar, page header, settings window
-          </Link>
-          <Link href="/design/sign-in" iconAfter={<CaretRight />}>
-            Sign in
-          </Link>
-          <Link href="/design/error" iconAfter={<CaretRight />}>
-            Error page
-          </Link>
-        </Stack>
-      </Card>
-
       <Card title="App logo">
         <Stack row>
           <AppLogo mark={<PeCaietMark />}>pe caiet</AppLogo>

@@ -2,9 +2,6 @@
 export const ROUTES: Record<string, string> = {
   '/': 'Design',
   '/design': 'Design',
-  '/design/app': 'Design/App',
-  '/design/sign-in': 'Design/SignIn',
-  '/design/error': 'Design/Error',
 }
 
 /** The page Inertia expects for an address, as Rails would send it: no props, no flash, nothing remembered. */

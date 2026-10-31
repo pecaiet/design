@@ -49,7 +49,6 @@ export { Separator } from './Separator';
 export { SettingsModal } from './SettingsModal';
 export { SidebarAccount } from './SidebarAccount';
 export { SidebarItem, SidebarSection } from './SidebarItem';
-export { SignedOut, SignInPassword } from './SignIn';
 export { Skeleton } from './Skeleton';
 export { SkipLink } from './SkipLink';
 export { Slider, SliderRange } from './Slider';

@@ -189,7 +189,7 @@ export function Overlays() {
             current="/design"
             places={[
               { label: 'Inbox', href: '/design' },
-              { label: 'Work', href: '/design/app' },
+              { label: 'Work', href: '/design?list=work' },
             ]}
           />
           <Combobox
