@@ -110,7 +110,7 @@ Setup:
 
 - Import `tailwindcss` in full, then `pecaiet.css`, once, at the top of the app's main CSS file. The components rely on Tailwind's base reset (box-sizing, button reset).
 - Never edit the copy inside an app. Change this repo, then update the app.
-- Point each app at a tag (`v0.1.0`), not at whatever is latest.
+- Point each app at this repo, not a tag (`"@pecaiet/design": "github:pecaiet/design"`), so `npm update @pecaiet/design` brings the newest. Every release is tagged (`v0.7.0`), so an app can go back to one if a change breaks it.
 
 Don't override:
 

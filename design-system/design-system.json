@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-21T19:10:34Z",
+    "at": "2026-10-31T09:11:06Z",
     "by": "Claude",
     "via": "Claude Code",
-    "note": "Motion linked: the bundle (components/bundle.js) is now pecaiet.js, so every card plays the same motion as the apps; the Motion card plays each kind live on real components (Play, Play all); the Motion guideline and the README link the motion playground, and the playground links back."
+    "note": "Brought up to design v0.7.0: the bundle (pecaiet.js) and bundle.css with every motion change since, the new -none shadow tokens, and the README and guidelines that describe them (focus rings fade without growing, field errors, drawers beside the page, search icons, images, unticks)."
   },
   "layout": "files",
   "libraries": [],
