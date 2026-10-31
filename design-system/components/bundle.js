@@ -210,11 +210,21 @@
       const t = timing();
       if (!t.duration) return;
       e.preventDefault();
-      if (item.open) {
-        const sp = space(answer);
-        item.dataset.pcClosing = "";
-        grow(answer, false, t, {}, true, sp).then(g => { item.open = false; delete item.dataset.pcClosing; g.settle(); });
-      } else {
+      // Its name comes off while it shrinks, so the one opening in its group doesn't shut it at once.
+      const shut = (details, content) => {
+        const sp = space(content), name = details.getAttribute("name");
+        details.dataset.pcClosing = "";
+        details.removeAttribute("name");
+        grow(content, false, t, {}, true, sp).then(g => { details.open = false; if (name) details.setAttribute("name", name); delete details.dataset.pcClosing; g.settle(); });
+      };
+      if (item.open) shut(item, answer);
+      else {
+        // One open at a time (a shared name): the open one shrinks closed while this one grows open.
+        const name = item.getAttribute("name");
+        if (name) document.getElementsByName(name).forEach(other => {
+          const a = other !== item && other.open && other.querySelector(":scope > .pc-accordion-content");
+          if (a) shut(other, a);
+        });
         item.open = true;
         grow(answer, true, t).then(g => g.settle());
       }

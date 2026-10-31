@@ -12,12 +12,12 @@ export function useField(id, message, error, ...describedBy) {
         invalid: error ? true : undefined,
     };
 }
-/** The error under a field, or its hint when there's no error. The keys make an error a new node, never the hint's reused, so
- *  pecaiet.js sees it added and grows it in. */
+/** The error under a field, or its hint when there's no error. An error takes the hint's line, turning red; with no hint it's new,
+ *  and pecaiet.js grows it in. */
 export function FieldMessage({ id, hint, error }) {
     if (error)
-        return _jsx("p", { className: "pc-field-error", id: id, children: error }, "error");
+        return _jsx("p", { className: "pc-field-error", id: id, children: error });
     if (hint)
-        return _jsx("p", { className: "pc-field-hint", id: id, children: hint }, "hint");
+        return _jsx("p", { className: "pc-field-hint", id: id, children: hint });
     return null;
 }

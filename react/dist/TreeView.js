@@ -10,6 +10,7 @@ import { assign } from './popup';
 export function TreeView({ label, items, expanded, defaultExpanded = [], onExpandedChange, onSelect, className, ref, ...ul }) {
     const [own, setOwn] = useState(defaultExpanded);
     const [focused, setFocused] = useState();
+    const [closing, setClosing] = useState();
     const list = useRef(null);
     const open = expanded ?? own;
     const rows = [];
@@ -25,11 +26,14 @@ export function TreeView({ label, items, expanded, defaultExpanded = [], onExpan
         const { item, level } = rows[index];
         const opening = !open.includes(item.id);
         if (!opening) {
-            // Its rows shrink out first, the rows below gliding up; opening, pecaiet.js grows the new rows in by itself.
+            // Its caret turns at the start (data-pc-closing) while its rows shrink out, the rows below gliding up; opening, pecaiet.js
+            // grows the new rows in by itself.
+            setClosing(item.id);
             const inside = [];
             for (let i = index + 1; i < rows.length && rows[i].level > level; i++)
                 inside.push(leave(element(i) ?? null));
             await Promise.all(inside);
+            setClosing(undefined);
         }
         const next = opening ? [...open, item.id] : open.filter(id => id !== item.id);
         if (expanded === undefined)
@@ -83,7 +87,7 @@ export function TreeView({ label, items, expanded, defaultExpanded = [], onExpan
             assign(ref, node);
         }, className: cx('pc-tree', className), role: "tree", "aria-label": label, onKeyDown: keys, children: rows.map((row, index) => {
             const opens = Boolean(row.item.children?.length);
-            return (_jsxs("li", { className: "pc-tree-item", role: "treeitem", "aria-level": row.level, "aria-setsize": row.size, "aria-posinset": row.position, "aria-expanded": opens ? open.includes(row.item.id) : undefined, "aria-current": row.item.current ? 'page' : undefined, tabIndex: row === tabbable ? 0 : -1, onFocus: () => setFocused(row.item.id), onClick: event => {
+            return (_jsxs("li", { className: "pc-tree-item", role: "treeitem", "aria-level": row.level, "aria-setsize": row.size, "aria-posinset": row.position, "aria-expanded": opens ? open.includes(row.item.id) : undefined, "data-pc-closing": closing === row.item.id ? '' : undefined, "aria-current": row.item.current ? 'page' : undefined, tabIndex: row === tabbable ? 0 : -1, onFocus: () => setFocused(row.item.id), onClick: event => {
                     if (opens && event.target.closest('.pc-tree-caret'))
                         toggle(index);
                     else

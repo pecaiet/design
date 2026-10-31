@@ -6,8 +6,8 @@ export declare function useField(id: string | undefined, message: ReactNode, err
     describedBy: string | undefined;
     invalid: boolean | undefined;
 };
-/** The error under a field, or its hint when there's no error. The keys make an error a new node, never the hint's reused, so
- *  pecaiet.js sees it added and grows it in. */
+/** The error under a field, or its hint when there's no error. An error takes the hint's line, turning red; with no hint it's new,
+ *  and pecaiet.js grows it in. */
 export declare function FieldMessage({ id, hint, error }: {
     id: string;
     hint?: ReactNode;
