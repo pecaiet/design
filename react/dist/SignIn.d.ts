@@ -21,31 +21,10 @@ export type SignedOutProps = Omit<ComponentPropsWithRef<'div'>, 'children' | 'on
     /** The right half's column, 400px at most, 16px apart. */
     children: ReactNode;
 };
-/** The signed-out layout under SignIn and ErrorPage: the two halves, the light/dark switch, the phone bar. Not exported from the package. */
+/** The signed-out layout: the left half shows one pe caiet app at a time, the right half the app's column (a form, a card); on
+ *  phones the left half is a bar with the logo. Also the light/dark switch. Use it as the Inertia layout of every signed-out page,
+ *  so the left half stays as it is while the right half changes. */
 export declare function SignedOut({ apps, onSubmit, paused, children, style, ...div }: SignedOutProps): import("react").JSX.Element;
-type Message = 
-/** Above the fields, when something went wrong ("Wrong email or password…"); mark the field at fault with aria-invalid. The left
- *  half stays on the first app while it shows. */
-{
-    error?: ReactNode;
-    notice?: never;
-}
-/** Above the fields, after a step worked ("Password reset instructions sent…"). */
- | {
-    notice?: ReactNode;
-    error?: never;
-};
-export type SignInProps = Omit<SignedOutProps, 'paused'> & Message & {
-    /** The page's title: "Sign in", "Create an account", "Reset your password", "Choose a new password". */
-    title: ReactNode;
-    /** The muted line under it: the switch to the other page ("New here? <Link>Create an account</Link>"), or what happens next. */
-    description?: ReactNode;
-    /** The fields (TextInput, SignInPassword), then the main button, full width (<Button variant="primary" full type="submit">). */
-    children: ReactNode;
-};
-/** A signed-out page (sign in, create an account, reset or choose a password): the left half shows one pe caiet app at a time, the
- *  right half the form; on phones the left half is a bar with the logo and the form fills the width. */
-export declare function SignIn({ title, description, error, notice, children, ...layout }: SignInProps): import("react").JSX.Element;
 export type SignInPasswordProps = Omit<ComponentPropsWithRef<'input'>, 'children' | 'type'> & {
     /** "Password" unless you say otherwise. */
     label?: ReactNode;
@@ -58,4 +37,3 @@ export type SignInPasswordProps = Omit<ComponentPropsWithRef<'input'>, 'children
 };
 /** The sign-in form's password: its label row ends in "Forgot password?". */
 export declare function SignInPassword({ label, forgotHref, hint, error, id, className, autoComplete, ...input }: SignInPasswordProps): import("react").JSX.Element;
-export {};

@@ -1,5 +1,4 @@
 import { cloneElement, useEffect, useRef, useState, type ComponentPropsWithRef, type CSSProperties, type FormEventHandler, type ReactElement, type ReactNode } from 'react'
-import { Alert } from './Alert'
 import { AppLogo, PeCaietMark, TodoMark } from './AppLogo'
 import { cx } from './cx'
 import { FieldMessage, useField } from './Field'
@@ -39,7 +38,9 @@ export type SignedOutProps = Omit<ComponentPropsWithRef<'div'>, 'children' | 'on
   children: ReactNode
 }
 
-/** The signed-out layout under SignIn and ErrorPage: the two halves, the light/dark switch, the phone bar. Not exported from the package. */
+/** The signed-out layout: the left half shows one pe caiet app at a time, the right half the app's column (a form, a card); on
+ *  phones the left half is a bar with the logo. Also the light/dark switch. Use it as the Inertia layout of every signed-out page,
+ *  so the left half stays as it is while the right half changes. */
 export function SignedOut({ apps = APPS, onSubmit, paused, children, style, ...div }: SignedOutProps) {
   const phone = usePhone()
   const dark = useDark()
@@ -143,38 +144,6 @@ export function SignedOut({ apps = APPS, onSubmit, paused, children, style, ...d
       </main>
       {phone && <p className="pc-muted" style={{ ...SMALL, padding: '0 16px 16px' }}>© pe caiet</p>}
     </div>
-  )
-}
-
-type Message =
-  /** Above the fields, when something went wrong ("Wrong email or password…"); mark the field at fault with aria-invalid. The left
-   *  half stays on the first app while it shows. */
-  | { error?: ReactNode; notice?: never }
-  /** Above the fields, after a step worked ("Password reset instructions sent…"). */
-  | { notice?: ReactNode; error?: never }
-
-export type SignInProps = Omit<SignedOutProps, 'paused'> & Message & {
-  /** The page's title: "Sign in", "Create an account", "Reset your password", "Choose a new password". */
-  title: ReactNode
-  /** The muted line under it: the switch to the other page ("New here? <Link>Create an account</Link>"), or what happens next. */
-  description?: ReactNode
-  /** The fields (TextInput, SignInPassword), then the main button, full width (<Button variant="primary" full type="submit">). */
-  children: ReactNode
-}
-
-/** A signed-out page (sign in, create an account, reset or choose a password): the left half shows one pe caiet app at a time, the
- *  right half the form; on phones the left half is a bar with the logo and the form fills the width. */
-export function SignIn({ title, description, error, notice, children, ...layout }: SignInProps) {
-  return (
-    <SignedOut {...layout} paused={Boolean(error)}>
-      <div style={{ display: 'grid', gap: 'var(--pc-space-1)' }}>
-        <h1 className="pc-page-title">{title}</h1>
-        {description && <p className="pc-muted">{description}</p>}
-      </div>
-      {error && <Alert kind="error">{error}</Alert>}
-      {notice && <Alert kind="notice">{notice}</Alert>}
-      {children}
-    </SignedOut>
   )
 }
 
