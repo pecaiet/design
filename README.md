@@ -264,7 +264,7 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 
 <main>
   <div class="pc-page-title-row">
-    <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…text-outdent…</svg></button>
+    <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…sidebar-simple…</svg></button>
     <h1 class="pc-page-title">America</h1>
   </div>
 </main>
@@ -272,7 +272,7 @@ Always a sidebar. One toggle opens and closes it on desktop and phones, and it s
 
 - The head is the App switcher: the current app, and a menu of the others.
 - The footer always sits at the bottom, and stays pinned while the rows scroll. The account row is always last.
-- Closed (desktop): `data-state="closed"` on the `.pc-sidebar`. The toggle shows Phosphor `text-indent`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
+- Closed (desktop): `data-state="closed"` on the `.pc-sidebar`. The toggle keeps its icon, Phosphor `sidebar-simple`, with `aria-label="Open sidebar"` and `aria-expanded="false"`.
 - Remember the desktop choice per person; phones always start closed.
 - Phones: open it as a sheet over a dimmed page. A tap on the backdrop or Escape closes it. While it is open the page behind it doesn't scroll.
 
@@ -312,7 +312,7 @@ The top of a page: its title, an optional line about it, and, on some pages, the
 <div class="pc-page-header">
   <div class="pc-page-header-text">
     <div class="pc-page-title-row">
-      <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…text-outdent…</svg></button>
+      <button class="pc-btn pc-btn-ghost pc-btn-icon pc-sidebar-toggle" type="button" aria-label="Close sidebar" aria-expanded="true"><svg>…sidebar-simple…</svg></button>
       <h1 class="pc-page-title">OAuth clients</h1>
     </div>
     <p class="pc-page-description">Apps that sign in with this IdP.</p>
@@ -324,7 +324,7 @@ The top of a page: its title, an optional line about it, and, on some pages, the
 ```
 
 - The description is optional; it lines up with the title, not the toggle.
-- The toggle and the title never move: open, the toggle shows `text-outdent`; closed, `text-indent`.
+- The toggle and the title never move, and the toggle shows `sidebar-simple` open and closed.
 - Actions: at most one primary button. A page about one thing (a list, a client) can have its ⋯ menu here.
 - A page without an action leaves out `.pc-page-header-actions`.
 - When the action doesn't fit beside the title, at any width, it moves to the next row, under the title.

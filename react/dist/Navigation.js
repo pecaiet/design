@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { TextIndentIcon, TextOutdentIcon } from '@phosphor-icons/react';
+import { SidebarSimpleIcon } from '@phosphor-icons/react';
 import { createContext, useContext, useId, useRef, useState } from 'react';
 import { AppSwitcher } from './AppSwitcher';
 import { Button } from './Button';
@@ -10,13 +10,13 @@ import { SidebarAccount } from './SidebarAccount';
 export const SidebarContext = createContext(null);
 /** The sidebar around this page, for a toggle of your own: open, and toggle(). Null outside a Navigation. */
 export const useSidebar = () => useContext(SidebarContext);
-/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). Open, it points left
- *  (text-outdent, "Close sidebar"); closed, right (text-indent, "Open sidebar"). Nothing outside a Navigation. */
+/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). The same icon open
+ *  and closed (sidebar-simple); its label says which way it goes ("Close sidebar", "Open sidebar"). Nothing outside a Navigation. */
 export function SidebarToggle({ className }) {
     const sidebar = useContext(SidebarContext);
     if (!sidebar)
         return null;
-    return (_jsx(Button, { variant: "ghost", icon: sidebar.open ? _jsx(TextOutdentIcon, {}) : _jsx(TextIndentIcon, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, "data-pc-tooltip-side": "bottom", onClick: sidebar.toggle }));
+    return (_jsx(Button, { variant: "ghost", icon: _jsx(SidebarSimpleIcon, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, "data-pc-tooltip-side": "bottom", onClick: sidebar.toggle }));
 }
 // Desktop: sticky and one screen tall; the rows scroll inside it when they don't fit.
 const FRAME = { position: 'sticky', top: 0, display: 'flex', flexShrink: 0, alignSelf: 'flex-start', height: '100dvh' };

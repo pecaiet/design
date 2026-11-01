@@ -15,8 +15,8 @@ export declare const useSidebar: () => Sidebar | null;
 export type SidebarToggleProps = {
     className?: string;
 };
-/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). Open, it points left
- *  (text-outdent, "Close sidebar"); closed, right (text-indent, "Open sidebar"). Nothing outside a Navigation. */
+/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). The same icon open
+ *  and closed (sidebar-simple); its label says which way it goes ("Close sidebar", "Open sidebar"). Nothing outside a Navigation. */
 export declare function SidebarToggle({ className }: SidebarToggleProps): import("react").JSX.Element | null;
 export type NavigationProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & {
     /** The head: the app switcher, with the app you are in. */

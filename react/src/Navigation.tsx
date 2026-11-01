@@ -1,4 +1,4 @@
-import { TextIndentIcon, TextOutdentIcon } from '@phosphor-icons/react'
+import { SidebarSimpleIcon } from '@phosphor-icons/react'
 import { createContext, useContext, useId, useRef, useState, type ComponentPropsWithRef, type CSSProperties, type ReactNode } from 'react'
 import { AppSwitcher, type AppSwitcherProps } from './AppSwitcher'
 import { Button } from './Button'
@@ -24,15 +24,15 @@ export type SidebarToggleProps = {
   className?: string
 }
 
-/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). Open, it points left
- *  (text-outdent, "Close sidebar"); closed, right (text-indent, "Open sidebar"). Nothing outside a Navigation. */
+/** The one toggle that opens and closes the sidebar, first in the page's title row (PageHeader puts it there). The same icon open
+ *  and closed (sidebar-simple); its label says which way it goes ("Close sidebar", "Open sidebar"). Nothing outside a Navigation. */
 export function SidebarToggle({ className }: SidebarToggleProps) {
   const sidebar = useContext(SidebarContext)
   if (!sidebar) return null
   return (
     <Button
       variant="ghost"
-      icon={sidebar.open ? <TextOutdentIcon /> : <TextIndentIcon />}
+      icon={<SidebarSimpleIcon />}
       label={sidebar.open ? 'Close sidebar' : 'Open sidebar'}
       className={cx('pc-sidebar-toggle', className)}
       aria-expanded={sidebar.open}
