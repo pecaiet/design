@@ -35,10 +35,10 @@
     "logo"
   ],
   "lastChange": {
-    "at": "2026-10-31T19:16:06Z",
+    "at": "2026-11-01T09:04:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v2.0.0: the Navigation modal (NavigationModal: Navigation inside a modal, every word from the app) replaces the Settings modal, with the same look. Earlier today: the Sign in, Error page and Email pages removed, bundle.css with the 1.0.1 focus edge."
+    "note": "Brought up to design v2.0.1: a hidden tooltip shrinks to nothing once it has faded, so an unseen tooltip near the edge never widens the page."
   },
   "layout": "files",
   "libraries": [],
