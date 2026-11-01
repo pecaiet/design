@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { SidebarSimpleIcon } from '@phosphor-icons/react';
-import { createContext, useContext, useId, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
 import { AppSwitcher } from './AppSwitcher';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -39,6 +39,11 @@ export function Navigation({ switcher, items, actions, account, children, style,
     const [sheet, setSheet] = useState(false);
     const sheetOpen = phone && sheet;
     useSheet(sheetOpen, () => setSheet(false), frame, id);
+    // Grown past the breakpoint with the sheet open: forget it, so a phone width later starts closed as always.
+    useEffect(() => {
+        if (!phone)
+            setSheet(false);
+    }, [phone]);
     const toggle = () => {
         if (phone)
             return setSheet(!sheet);

@@ -180,7 +180,8 @@
       if (c.attributeName === "class") {
         if (ours.delete(el)) continue;
         const was = (c.oldValue || "").split(/\s+/).includes("pc-sidebar-sheet"), is = el.classList.contains("pc-sidebar-sheet");
-        if (was && !is && on()) sheetOut(el);
+        // Only on a phone: at the flip to desktop the app takes the class off and lays the frame out itself, so nothing slides.
+        if (was && !is && on() && matchMedia("(max-width: 47.99rem)").matches) sheetOut(el);
         else if (is && !was) stops.get(el)?.();
         continue;
       }
