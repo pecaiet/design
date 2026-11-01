@@ -8,8 +8,8 @@ import { SidebarItem } from './SidebarItem'
 export type Account = {
   /** Who is signed in. People have an email, not a name: it's the row's label, and its first letter the avatar. */
   email: string
-  /** Settings: the settings window's first section (/settings/account), opened over the page you are on. */
-  settingsHref: string
+  /** Settings: the settings window's first section (/settings/account), opened over the page you are on. Leave it out for no Settings. */
+  settingsHref?: string
   /** Sign out, last and in red: an Inertia DELETE to this address (/session). */
   signOutHref: string
 } & (
@@ -19,16 +19,17 @@ export type Account = {
   | { backHref: string; adminHref?: never }
 )
 
-/** The account menu's items, in the sidebar and in the Header: Settings, Admin panel, then Sign out in red. Nothing else. */
+/** The account menu's items, in the sidebar and in the Header: Settings, Admin panel, then Sign out in red. Nothing else; the line
+ *  above Sign out only when something is above it. */
 export function AccountItems({ settingsHref, signOutHref, adminHref, backHref }: Account) {
   return (
     <>
-      <MenuItem href={settingsHref} icon={<GearIcon />}>Settings</MenuItem>
+      {settingsHref && <MenuItem href={settingsHref} icon={<GearIcon />}>Settings</MenuItem>}
       {adminHref && <MenuItem href={adminHref} icon={<ShieldIcon />}>Admin panel</MenuItem>}
       {backHref && (external(backHref)
         ? <a className="pc-menu-item" role="menuitem" tabIndex={-1} href={backHref}><ArrowLeftIcon />Back to pe caiet</a>
         : <MenuItem href={backHref} icon={<ArrowLeftIcon />}>Back to pe caiet</MenuItem>)}
-      <MenuSeparator />
+      {(settingsHref || adminHref || backHref) && <MenuSeparator />}
       <MenuItem href={signOutHref} method="delete" as="button" destructive icon={<SignOutIcon />}>Sign out</MenuItem>
     </>
   )
