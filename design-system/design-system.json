@@ -42,10 +42,10 @@
     "appicons"
   ],
   "lastChange": {
-    "at": "2026-11-01T16:20:00Z",
+    "at": "2026-11-01T17:40:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v3.2.0: the sidebar toggle shows sidebar-simple open and closed (its label says which way it goes); the account menu's Settings shows only when the app gives it (v3.1.0)."
+    "note": "Brought up to design v3.3.0: SidebarSection kind=\"group\", a small grey semibold label naming a set of pages (Account), its rows in line with the rows above."
   },
   "layout": "files",
   "libraries": [],
