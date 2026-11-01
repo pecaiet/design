@@ -125,7 +125,7 @@ export function Data() {
           <Breadcrumbs
             parents={[
               { label: 'Users', href: '/design' },
-              { label: 'ana@example.com', href: '/design' },
+              { label: 'ana@example.com', href: '/design?user=ana' },
             ]}
             current="Edit"
           />

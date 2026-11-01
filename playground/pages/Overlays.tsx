@@ -283,7 +283,7 @@ export function Overlays() {
             label="Settings"
             tabs={[
               { href: '/design', label: 'Account', current: true },
-              { href: '/design', label: 'Sessions' },
+              { href: '/design?tab=sessions', label: 'Sessions' },
             ]}
           />
           <Accordion>
