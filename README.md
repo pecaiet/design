@@ -187,6 +187,14 @@ One row of the sidebar: a link (`<a>`) when it opens a page, a `<button>` when i
 <a class="pc-sidebar-item" href="/lists/7"><svg>…</svg><span class="pc-sidebar-label">Q3 launch</span><span class="pc-sidebar-detail">Work</span></a>
 <button class="pc-sidebar-item" type="button"><svg>…</svg><span class="pc-sidebar-label">Search</span><span class="pc-kbd">/</span></button>
 
+<!-- Group: a small grey label over a set of pages; its rows stay in line (React: <SidebarSection kind="group">) -->
+<div class="pc-sidebar-section pc-sidebar-group">
+  <div class="pc-sidebar-item pc-sidebar-heading"><span class="pc-sidebar-label">Account</span></div>
+  <div class="pc-sidebar-sub">
+    <a class="pc-sidebar-item" href="/profile"><svg>…user-circle…</svg><span class="pc-sidebar-label">Profile</span></a>
+  </div>
+</div>
+
 <!-- Heading (not clickable) with nested rows -->
 <div class="pc-sidebar-section">
   <div class="pc-sidebar-item pc-sidebar-heading"><span class="pc-sidebar-mark">W</span><span class="pc-sidebar-label">Work</span></div>
@@ -200,6 +208,7 @@ One row of the sidebar: a link (`<a>`) when it opens a page, a `<button>` when i
 - A row is one colour, the text colour (no bold, no muted parts). Only a number that needs attention stays red. Fills mark state: the hover fill under the pointer, the flat pill (no shadow) on the page you are on.
 - A long label is cut with an ellipsis; the detail stays.
 - Buttons are never "the page you're on".
+- Two kinds of section: a folder (bold heading, optional letter tile or icon, rows a step to the right) for things that hold things, like a space's lists; a group (small grey label, no icon, rows in line with those above) for naming a set of pages, like Account.
 
 ## Sidebar account
 

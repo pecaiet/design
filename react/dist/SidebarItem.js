@@ -14,8 +14,8 @@ export function SidebarItem({ icon, mark, detail, alert, shortcut, iconAfter, ch
     const { current, href, type = 'button', ...button } = element;
     return _jsx("button", { ...button, type: type, className: look, children: inner });
 }
-/** A heading with the rows nested under it (a space and its lists). */
-export function SidebarSection({ heading, icon, mark, children, className, ...div }) {
+/** A heading with rows under it: a folder (a space and its lists) or a group (a set of pages). */
+export function SidebarSection({ heading, kind, icon, mark, children, className, ...div }) {
     const id = useId();
-    return (_jsxs("div", { role: "group", "aria-labelledby": id, ...div, className: cx('pc-sidebar-section', className), children: [_jsxs("div", { className: "pc-sidebar-item pc-sidebar-heading", children: [mark ? _jsx("span", { className: "pc-sidebar-mark", children: mark }) : icon, _jsx("span", { className: "pc-sidebar-label", id: id, children: heading })] }), _jsx("div", { className: "pc-sidebar-sub", children: children })] }));
+    return (_jsxs("div", { role: "group", "aria-labelledby": id, ...div, className: cx('pc-sidebar-section', kind === 'group' && 'pc-sidebar-group', className), children: [_jsxs("div", { className: "pc-sidebar-item pc-sidebar-heading", children: [mark ? _jsx("span", { className: "pc-sidebar-mark", children: mark }) : icon, _jsx("span", { className: "pc-sidebar-label", id: id, children: heading })] }), _jsx("div", { className: "pc-sidebar-sub", children: children })] }));
 }

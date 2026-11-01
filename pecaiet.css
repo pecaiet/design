@@ -334,6 +334,10 @@
   .pc-sidebar-detail-alert { color: var(--destructive); font-weight: var(--pc-weight-semibold); }
   .pc-sidebar-heading { font-weight: var(--pc-weight-semibold); cursor: default; }
   .pc-sidebar-item.pc-sidebar-heading:hover { background: none; }
+  /* A group (SidebarSection kind="group"): a small grey label naming a set of pages (Account), its rows in line with the rows above. */
+  .pc-sidebar-group { margin-top: var(--pc-space-4); }
+  .pc-sidebar-group > .pc-sidebar-heading { height: auto; padding-block: var(--pc-space-1); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-semibold); }
+  .pc-sidebar-group > .pc-sidebar-sub { padding-left: 0; }
   .pc-sidebar-mark { display: grid; place-items: center; width: var(--pc-size-20); height: var(--pc-size-20); flex-shrink: 0; border-radius: var(--pc-radius-sm); background: var(--foreground); color: var(--background); font-size: var(--pc-text-10); line-height: var(--pc-line-14); font-weight: var(--pc-weight-bold); }
   .pc-sidebar-item > .pc-kbd { margin-left: auto; }
   /* The footer (New list, the account row) always sits at the bottom: pushed down when the rows are short, pinned while they scroll. */

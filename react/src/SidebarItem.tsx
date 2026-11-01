@@ -51,18 +51,24 @@ export function SidebarItem({ icon, mark, detail, alert, shortcut, iconAfter, ch
   return <button {...button} type={type} className={look}>{inner}</button>
 }
 
-export type SidebarSectionProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & Lead & {
-  /** Names the rows under it: bold, not clickable. */
+type Kind =
+  /** A folder (the default): the heading row-sized and bold, with an optional icon or letter tile; its rows a step to the right. */
+  | (Lead & { kind?: 'folder' })
+  /** A group: a small grey label naming a set of pages ("Account"); its rows in line with the rows above. No icon. */
+  | { kind: 'group'; icon?: never; mark?: never }
+
+export type SidebarSectionProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & Kind & {
+  /** Names the rows under it. Not clickable. */
   heading: ReactNode
-  /** Its rows (SidebarItems), a step to the right. */
+  /** Its rows (SidebarItems). */
   children: ReactNode
 }
 
-/** A heading with the rows nested under it (a space and its lists). */
-export function SidebarSection({ heading, icon, mark, children, className, ...div }: SidebarSectionProps) {
+/** A heading with rows under it: a folder (a space and its lists) or a group (a set of pages). */
+export function SidebarSection({ heading, kind, icon, mark, children, className, ...div }: SidebarSectionProps) {
   const id = useId()
   return (
-    <div role="group" aria-labelledby={id} {...div} className={cx('pc-sidebar-section', className)}>
+    <div role="group" aria-labelledby={id} {...div} className={cx('pc-sidebar-section', kind === 'group' && 'pc-sidebar-group', className)}>
       <div className="pc-sidebar-item pc-sidebar-heading">
         {mark ? <span className="pc-sidebar-mark">{mark}</span> : icon}
         <span className="pc-sidebar-label" id={id}>{heading}</span>

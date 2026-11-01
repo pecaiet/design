@@ -57,12 +57,23 @@ export type SidebarItemProps = Lead & Detail & Tag & {
 };
 /** One row of the sidebar: a link when it opens a page, a button when it does something. */
 export declare function SidebarItem({ icon, mark, detail, alert, shortcut, iconAfter, children, className, ...element }: SidebarItemProps): import("react").JSX.Element;
-export type SidebarSectionProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & Lead & {
-    /** Names the rows under it: bold, not clickable. */
+type Kind = 
+/** A folder (the default): the heading row-sized and bold, with an optional icon or letter tile; its rows a step to the right. */
+(Lead & {
+    kind?: 'folder';
+})
+/** A group: a small grey label naming a set of pages ("Account"); its rows in line with the rows above. No icon. */
+ | {
+    kind: 'group';
+    icon?: never;
+    mark?: never;
+};
+export type SidebarSectionProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & Kind & {
+    /** Names the rows under it. Not clickable. */
     heading: ReactNode;
-    /** Its rows (SidebarItems), a step to the right. */
+    /** Its rows (SidebarItems). */
     children: ReactNode;
 };
-/** A heading with the rows nested under it (a space and its lists). */
-export declare function SidebarSection({ heading, icon, mark, children, className, ...div }: SidebarSectionProps): import("react").JSX.Element;
+/** A heading with rows under it: a folder (a space and its lists) or a group (a set of pages). */
+export declare function SidebarSection({ heading, kind, icon, mark, children, className, ...div }: SidebarSectionProps): import("react").JSX.Element;
 export {};
