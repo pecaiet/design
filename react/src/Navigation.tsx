@@ -37,7 +37,6 @@ export function SidebarToggle({ className }: SidebarToggleProps) {
       className={cx('pc-sidebar-toggle', className)}
       aria-expanded={sidebar.open}
       aria-controls={sidebar.id}
-      data-pc-tooltip-side="bottom"
       onClick={sidebar.toggle}
     />
   )

@@ -1,8 +1,8 @@
 import { cloneElement, useEffect, type ReactElement } from 'react'
 
 export type TooltipProps = {
-  /** A few words, one short sentence at most. On an icon-only button, its name: the same words as its aria-label (Button's label
-   *  gives it one already). A shortcut goes after the name ("Search  ⌘K"). Never the only place for something people need. */
+  /** A few words, one short sentence at most. On an icon-only button, its name: the same words as its aria-label (Button's tooltip
+   *  gives it one from its label). A shortcut goes after the name ("Search  ⌘K"). Never the only place for something people need. */
   text: string
   /** Above by default. bottom near the top edge (a header, a toolbar at the top, a drawer's or window's head); left or right where
    *  there's no room. */

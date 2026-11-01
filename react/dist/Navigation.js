@@ -16,7 +16,7 @@ export function SidebarToggle({ className }) {
     const sidebar = useContext(SidebarContext);
     if (!sidebar)
         return null;
-    return (_jsx(Button, { variant: "ghost", icon: _jsx(SidebarSimpleIcon, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, "data-pc-tooltip-side": "bottom", onClick: sidebar.toggle }));
+    return (_jsx(Button, { variant: "ghost", icon: _jsx(SidebarSimpleIcon, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, onClick: sidebar.toggle }));
 }
 // Desktop: sticky and one screen tall; the rows scroll inside it when they don't fit.
 const FRAME = { position: 'sticky', top: 0, display: 'flex', flexShrink: 0, alignSelf: 'flex-start', height: '100dvh' };

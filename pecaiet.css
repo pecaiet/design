@@ -558,6 +558,8 @@
   .pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
   .pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
   .pc-table tbody tr:hover td { background: var(--accent); }
+  /* On that accent row a ghost button's hover and open fill go a step darker, so they still show. */
+  .pc-table tbody tr:hover .pc-btn-ghost:is(:hover, [aria-haspopup][aria-expanded="true"]) { background: var(--track); }
   .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
   .pc-row-link { color: inherit; font-weight: var(--pc-weight-semibold); text-decoration: none; }
   .pc-row-link::after { content: ""; position: absolute; inset: 0; }
@@ -575,6 +577,8 @@
   .pc-table .pc-table-num { text-align: right; font-variant-numeric: tabular-nums; }
   .pc-table .pc-table-actions { width: calc(var(--pc-row) + var(--pc-space-1)); padding: 0 0 0 var(--pc-space-1); text-align: right; }
   .pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: var(--pc-layer-raised); vertical-align: middle; }
+  /* The cell whose ⋯ menu is open rises to the menu's layer: the raised cells of the rows below stay under the menu. */
+  .pc-table .pc-table-actions > :has(.pc-menu:not([hidden])) { z-index: var(--pc-layer-menu); }
   .pc-table tbody tr[aria-selected="true"] td { background: var(--primary-soft); }
   .pc-table-sort { display: inline-flex; align-items: center; gap: var(--pc-space-1); padding: 0; border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; cursor: pointer; }
   .pc-table-sort > svg { width: var(--pc-size-12); height: var(--pc-size-12); }

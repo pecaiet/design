@@ -160,12 +160,12 @@ Updating:
 <button class="pc-btn pc-btn-ghost" type="button">Sign out</button>
 <button class="pc-btn pc-btn-destructive" type="button">Delete account</button>
 <button class="pc-btn pc-btn-primary pc-btn-destructive" type="button">Delete user</button>
-<button class="pc-btn pc-btn-ghost pc-btn-icon" type="button" aria-label="More" data-pc-tooltip="More"><svg>…</svg></button>
+<button class="pc-btn pc-btn-ghost pc-btn-icon" type="button" aria-label="More"><svg>…</svg></button>
 ```
 
 - One solid button per view: the main action, `pc-btn-primary` (teal) or, for a delete that can't be undone, `pc-btn-primary pc-btn-destructive` (solid red, a confirming dialog's Delete). A red outline (`pc-btn-destructive`) on a page opens that dialog; what can come back gets no red button, only an icon or menu item and Undo.
 - Sizes: `pc-btn-small` (28px), the 32px default, `pc-btn-large` (40px); `pc-btn-full` takes the full width. Icons are 16px in every size.
-- `pc-btn-icon` is square; it needs an `aria-label` and the same words as a tooltip.
+- `pc-btn-icon` is square; it needs an `aria-label`. A tooltip with the same words (`data-pc-tooltip`; React: `tooltip`) only where the icon alone isn't clear, such as a copy button whose tooltip turns into "Copied". Not on a close, a clear, a sidebar toggle or a ⋯.
 - `aria-pressed="true"`: a button that stays on, soft teal.
 - `disabled`: its own shape in grey (a flat grey box; a ghost button grey words, no box), not-allowed pointer; `aria-disabled="true"` instead when a tooltip says why (the app ignores the click).
 - `aria-busy="true"` with a `.pc-spinner` while it works.
@@ -414,7 +414,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Carousel**: `.pc-carousel-dots` holding one `<button class="pc-carousel-dot">` per slide, the current one `aria-current="true"` (long); the app shows one slide and hides the others, with no motion.
 - **Color picker**: `.pc-swatches` (`role="radiogroup"`) of `<label class="pc-swatch pc-colour-red" data-pc-tooltip="Red">` around a radio, from the set `.pc-colour-gray`, `-red`, `-orange`, `-yellow`, `-green`, `-teal`, `-blue`, `-purple`, `-pink`; the chosen one ringed in the text colour. Last, the colour well `.pc-swatch .pc-swatch-custom`: an `<input type="color">`, a `.pc-swatch-ring` (rainbow) and a `plus`, opening the device's own chooser. A picked colour fills the ring's middle: the app's script adds its radio (`value` the hex) to the well and sets `--pc-colour` on it.
 - **Dropdown menu**: `.pc-menu` holding `.pc-menu-item` (`.pc-menu-item-destructive` for delete, last), `.pc-menu-separator`, `.pc-menu-label`, `.pc-menu-check` for the current choice.
-- **Tooltip**: `data-pc-tooltip="Text"` on any element, ink (dark on light, light on dark); every icon-only button gets one with its name. `data-pc-tooltip-side="bottom|left|right"` where there's no room above; a 120ms wait under the pointer, at once on keyboard focus; `data-pc-tooltip-hidden` hides it (Escape). On a button that can't be used, use `aria-disabled="true"` and put it on the button.
+- **Tooltip**: `data-pc-tooltip="Text"` on any element, ink (dark on light, light on dark); an icon-only button gets one only when asked (React: Button's `tooltip`), not for its name alone. `data-pc-tooltip-side="bottom|left|right"` where there's no room above; a 120ms wait under the pointer, at once on keyboard focus; `data-pc-tooltip-hidden` hides it (Escape). On a button that can't be used, use `aria-disabled="true"` and put it on the button.
 - **Modal**: `<dialog class="pc-dialog">` with `.pc-dialog-body`, `.pc-dialog-title`, `.pc-dialog-description`, an optional `.pc-dialog-content` (fields, an error, longer text; it scrolls when it doesn't fit) and `.pc-dialog-actions`. No x; on phones a sheet from the bottom with the buttons sharing the width.
 - **Date input**: `.pc-picker.pc-date` holding a `.pc-picker-button` (a `calendar-dots` icon, then the date in a `<span>`, or `<span class="pc-picker-placeholder">No date</span>`), a `.pc-btn-ghost.pc-btn-icon.pc-date-clear` to clear it, and the Datepicker `.pc-popover` dropping under it.
 - **Datepicker**: `.pc-calendar` (`.pc-calendar-head`, `.pc-calendar-grid`, `.pc-calendar-weekday`, `.pc-calendar-day`, `.pc-calendar-day-outside`) in a `.pc-popover`; today (`aria-current="date"`) has its number in bold teal, chosen days (`aria-selected="true"`) are filled teal; a range uses `data-range="start|mid|end"` (one soft teal band) and `data-range-preview` while picking the end; `aria-disabled="true"` days are faded; `.pc-calendar-title` opens `.pc-calendar-months`; inside a `.pc-date` it's a sheet on phones.

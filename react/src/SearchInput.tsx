@@ -46,7 +46,7 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
       />
       {(busy || text) && (
         <span className="pc-input-group-end">
-          {busy ? <Spinner label="Searching" /> : <Button variant="ghost" icon={<XIcon />} label="Clear search" data-pc-tooltip-side="left" onClick={clear} />}
+          {busy ? <Spinner label="Searching" /> : <Button variant="ghost" icon={<XIcon />} label="Clear search" onClick={clear} />}
         </span>
       )}
     </div>

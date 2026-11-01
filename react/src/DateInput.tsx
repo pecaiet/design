@@ -119,7 +119,7 @@ export function DateInput({
           {shown ? <span>{shown}</span> : <span className="pc-picker-placeholder">{placeholder ?? (choice.range ? 'No dates' : 'No date')}</span>}
         </button>
         {shown && !disabled && (
-          <Button variant="ghost" icon={<XIcon />} label={choice.range ? 'Clear dates' : 'Clear date'} data-pc-tooltip-side="left" className="pc-date-clear" onClick={() => {
+          <Button variant="ghost" icon={<XIcon />} label={choice.range ? 'Clear dates' : 'Clear date'} className="pc-date-clear" onClick={() => {
             clear()
             button.current?.focus()
           }} />

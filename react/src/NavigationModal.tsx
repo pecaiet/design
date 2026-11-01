@@ -55,7 +55,7 @@ export function NavigationModal({ title, items, footer, heading, closeLabel, chi
             </SidebarContext>
             <h2 className="pc-page-title">{heading}</h2>
           </div>
-          <Button variant="ghost" icon={<XIcon />} label={closeLabel} data-pc-tooltip-side="bottom" onClick={onClose} />
+          <Button variant="ghost" icon={<XIcon />} label={closeLabel} onClick={onClose} />
         </div>
         <div className="pc-modal-body">{children}</div>
       </section>

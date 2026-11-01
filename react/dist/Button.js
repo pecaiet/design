@@ -2,14 +2,16 @@ import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-run
 import { Link as InertiaLink } from '@inertiajs/react';
 import { cx } from './cx';
 import { Spinner } from './Spinner';
-export function Button({ variant, destructive, size, full, pressed, busy, disabledReason, icon, iconAfter, label, children, className, ...element }) {
+export function Button({ variant, destructive, size, full, pressed, busy, disabledReason, icon, iconAfter, label, tooltip, children, className, ...element }) {
+    // A reason, or the label when asked for; otherwise a tooltip put on by Tooltip stays as it is.
+    const tip = disabledReason ?? (tooltip ? label : undefined);
     const shared = {
         className: cx('pc-btn', `pc-btn-${variant}`, destructive && 'pc-btn-destructive', size && `pc-btn-${size}`, label && 'pc-btn-icon', full && 'pc-btn-full', className),
         'aria-label': label,
         'aria-pressed': pressed,
         'aria-busy': busy || undefined,
         'aria-disabled': disabledReason ? true : undefined,
-        'data-pc-tooltip': disabledReason ?? label,
+        ...(tip ? { 'data-pc-tooltip': tip } : {}),
     };
     const inner = (_jsxs(_Fragment, { children: [busy ? _jsx(Spinner, { label: "Working" }) : icon, children, iconAfter] }));
     // aria-disabled and aria-busy keep it focusable, so the click has to be ignored here: the CSS only stops the pointer, and Enter

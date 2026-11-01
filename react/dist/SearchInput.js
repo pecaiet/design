@@ -28,5 +28,5 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
                 }, className: "pc-input", type: "search", placeholder: placeholder ?? input['aria-label'], onChange: event => {
                     setTyped(event.target.value);
                     onChange?.(event);
-                } }), (busy || text) && (_jsx("span", { className: "pc-input-group-end", children: busy ? _jsx(Spinner, { label: "Searching" }) : _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Clear search", "data-pc-tooltip-side": "left", onClick: clear }) }))] }));
+                } }), (busy || text) && (_jsx("span", { className: "pc-input-group-end", children: busy ? _jsx(Spinner, { label: "Searching" }) : _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Clear search", onClick: clear }) }))] }));
 }

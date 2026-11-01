@@ -22,9 +22,9 @@ type Look = {
 
 type Content =
   /** icon before the words when it adds or does something, iconAfter when it opens a menu or goes to the next step. */
-  | { children: ReactNode; icon?: ReactNode; iconAfter?: ReactNode; label?: never }
-  /** Icon only: label is its aria-label and its tooltip. */
-  | { children?: never; icon: ReactNode; iconAfter?: never; label: string }
+  | { children: ReactNode; icon?: ReactNode; iconAfter?: ReactNode; label?: never; tooltip?: never }
+  /** Icon only: label is its aria-label. tooltip shows the label as a tooltip too, only where the icon alone isn't clear. */
+  | { children?: never; icon: ReactNode; iconAfter?: never; label: string; tooltip?: boolean }
 
 type Tag =
   | (Omit<ComponentPropsWithRef<'button'>, 'children'> & { href?: never })
@@ -33,7 +33,9 @@ type Tag =
 
 export type ButtonProps = Look & Content & Tag
 
-export function Button({ variant, destructive, size, full, pressed, busy, disabledReason, icon, iconAfter, label, children, className, ...element }: ButtonProps) {
+export function Button({ variant, destructive, size, full, pressed, busy, disabledReason, icon, iconAfter, label, tooltip, children, className, ...element }: ButtonProps) {
+  // A reason, or the label when asked for; otherwise a tooltip put on by Tooltip stays as it is.
+  const tip = disabledReason ?? (tooltip ? label : undefined)
   const shared = {
     className: cx(
       'pc-btn',
@@ -48,7 +50,7 @@ export function Button({ variant, destructive, size, full, pressed, busy, disabl
     'aria-pressed': pressed,
     'aria-busy': busy || undefined,
     'aria-disabled': disabledReason ? true : undefined,
-    'data-pc-tooltip': disabledReason ?? label,
+    ...(tip ? { 'data-pc-tooltip': tip } : {}),
   }
   const inner = (
     <>

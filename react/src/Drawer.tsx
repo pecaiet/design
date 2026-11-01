@@ -42,10 +42,10 @@ export function Drawer({ title, children, footer, ...props }: DrawerProps) {
     <>
       <div className="pc-drawer-head">
         {props.back && (
-          <Button variant="ghost" icon={<CaretLeftIcon />} label={props.back} className="pc-drawer-back" data-pc-tooltip-side="bottom" onClick={close} />
+          <Button variant="ghost" icon={<CaretLeftIcon />} label={props.back} className="pc-drawer-back" onClick={close} />
         )}
         <h2 className="pc-drawer-title" id={id}>{title}</h2>
-        <Button variant="ghost" icon={<XIcon />} label="Close" className="pc-drawer-close" data-pc-tooltip-side="bottom" onClick={close} />
+        <Button variant="ghost" icon={<XIcon />} label="Close" className="pc-drawer-close" onClick={close} />
       </div>
       <div className="pc-drawer-body">{children}</div>
       {footer && <div className="pc-drawer-footer">{footer}</div>}

@@ -16,7 +16,7 @@ type Field = Omit<ComponentPropsWithRef<'input'>, 'children'> & {
 }
 
 type Inside =
-  /** icon: 16px, first (MagnifyingGlass, Plus for quick add). end: a <Kbd> hint, a ghost icon Button with its tooltip (clear,
+  /** icon: 16px, first (MagnifyingGlass, Plus for quick add). end: a <Kbd> hint, a ghost icon Button (clear,
    *  copy) or a Spinner while it checks. */
   | { icon?: ReactNode; end?: ReactNode; before?: never; after?: never }
   /** Words before or after the value, inside the field and muted (https://, kg, @pecaiet.ro): the group then draws the edge,
@@ -85,7 +85,6 @@ export function PasswordInput(props: PasswordInputProps) {
           variant="ghost"
           icon={shown ? <EyeSlashIcon /> : <EyeIcon />}
           label={shown ? 'Hide password' : 'Show password'}
-          data-pc-tooltip-side="left"
           onClick={() => setShown(!shown)}
         />
       }
@@ -122,7 +121,7 @@ export function CopyInput({ copyLabel, value, ...props }: CopyInputProps) {
       {...props}
       value={value}
       readOnly
-      end={<Button variant="ghost" icon={copied ? <CheckIcon /> : <CopyIcon />} label={copied ? 'Copied' : copyLabel} data-pc-tooltip-side="left" onClick={copy} />}
+      end={<Button variant="ghost" icon={copied ? <CheckIcon /> : <CopyIcon />} label={copied ? 'Copied' : copyLabel} tooltip data-pc-tooltip-side="left" onClick={copy} />}
     />
   )
 }
