@@ -1,4 +1,4 @@
-import { AppLogo, Card, Footer, Header, PeCaietMark, PeCaietWord, Stack, ThemeSwitch, TodoMark, TodoWord } from '../../react/src/index'
+import { AccountsMark, AppLogo, Card, Footer, Header, PeCaietMark, Stack, ThemeSwitch, TodoMark } from '../../react/src/index'
 
 const ACCOUNT = { email: 'ana@example.com', settingsHref: '/design?settings', signOutHref: '/design' }
 
@@ -9,6 +9,7 @@ export function Shell() {
         <Stack row>
           <AppLogo mark={<PeCaietMark />}>pe caiet</AppLogo>
           <AppLogo mark={<TodoMark />}>todo</AppLogo>
+          <AppLogo mark={<AccountsMark />}>accounts</AppLogo>
         </Stack>
       </Card>
 
@@ -23,7 +24,6 @@ export function Shell() {
       <Card title="Footer" rows>
         <Stack gap={6}>
           <Footer
-            word={<PeCaietWord />}
             copyright="© 2026 pe caiet"
             language="English"
             groups={[
@@ -44,7 +44,6 @@ export function Shell() {
             ]}
           />
           <Footer
-            word={<TodoWord />}
             copyright="© 2026 todo"
             links={[
               { label: 'Privacy', href: '/design' },

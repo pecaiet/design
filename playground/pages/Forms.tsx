@@ -25,7 +25,7 @@ import {
   Stepper,
   Toggle,
 } from '../../react/src/index'
-import todo from '../../todo.svg'
+import todo from '../../appicons/todo.svg'
 import { Kanban, List as ListIcon, Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 

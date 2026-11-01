@@ -1,6 +1,6 @@
 export { Accordion, AccordionItem } from './Accordion';
 export { Alert } from './Alert';
-export { AppLogo, IdpMark, PeCaietMark, PeCaietWord, TodoMark, TodoWord } from './AppLogo';
+export { AccountsMark, AppLogo, PeCaietMark, TodoMark } from './AppLogo';
 export { AppSwitcher } from './AppSwitcher';
 export { Avatar, Avatars } from './Avatar';
 export { Badge } from './Badge';

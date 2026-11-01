@@ -15,7 +15,7 @@ import {
   Stack,
   VisuallyHidden,
 } from '../../react/src/index'
-import todo from '../../todo.svg'
+import todo from '../../appicons/todo.svg'
 
 export function Content() {
   return (

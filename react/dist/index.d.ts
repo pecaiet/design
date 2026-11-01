@@ -1,6 +1,6 @@
 export { Accordion, AccordionItem, type AccordionItemProps, type AccordionProps } from './Accordion';
 export { Alert, type AlertProps } from './Alert';
-export { AppLogo, IdpMark, PeCaietMark, PeCaietWord, TodoMark, TodoWord, type AppLogoProps, type MarkProps } from './AppLogo';
+export { AccountsMark, AppLogo, PeCaietMark, TodoMark, type AppLogoProps, type MarkProps } from './AppLogo';
 export { AppSwitcher, type AppSwitcherProps, type SwitcherApp } from './AppSwitcher';
 export { Avatar, Avatars, type AvatarProps, type AvatarsProps } from './Avatar';
 export { Badge, type BadgeProps } from './Badge';

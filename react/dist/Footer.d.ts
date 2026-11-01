@@ -25,9 +25,8 @@ type Content =
     language?: never;
 };
 export type FooterProps = Content & Omit<ComponentPropsWithRef<'footer'>, 'children'> & {
-    /** The app's word, last: <PeCaietWord />, <TodoWord />, or a new app's drawn the same way. It fills the width in the border
-     *  colour, cut off by the page's bottom edge. */
-    word: ReactElement<SVGProps<SVGSVGElement>>;
+    /** The app's word, last, if it has one. It fills the width in the border colour, cut off by the page's bottom edge. */
+    word?: ReactElement<SVGProps<SVGSVGElement>>;
 };
 /** The bottom of a signed-out or landing page (apps with a sidebar have none): links, then the app's word, big and faint. */
 export declare function Footer({ groups, links, copyright, language, word, className, ...footer }: FooterProps): import("react").JSX.Element;

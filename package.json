@@ -1,9 +1,10 @@
 {
   "name": "@pecaiet/design",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "files": [
+    "appicons",
     "fonts.css",
     "pecaiet.css",
     "pecaiet.js",
@@ -17,9 +18,14 @@
     },
     "./pecaiet.css": "./pecaiet.css",
     "./fonts.css": "./fonts.css",
+    "./appicons/*": "./appicons/*",
     "./react": {
       "types": "./react/dist/index.d.ts",
       "default": "./react/dist/index.js"
+    },
+    "./icons": {
+      "types": "./react/dist/icons.d.ts",
+      "default": "./react/dist/icons.js"
     }
   },
   "scripts": {
@@ -28,13 +34,11 @@
   },
   "peerDependencies": {
     "@inertiajs/react": "^3.9.1",
-    "@phosphor-icons/react": "^2.1.10",
     "react": "^19.3.1",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@inertiajs/react": "^3.9.1",
-    "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
@@ -46,6 +50,7 @@
     "vite": "^8.3.5"
   },
   "dependencies": {
-    "@fontsource/figtree": "^5.3.0"
+    "@fontsource/figtree": "^5.3.0",
+    "@phosphor-icons/react": "2.1.10"
   }
 }

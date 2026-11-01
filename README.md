@@ -46,7 +46,7 @@ createRoot(el).render(<ToastProvider><App {...props} /></ToastProvider>)
 
 - `import '@pecaiet/design'` loads `pecaiet.js`. The components need it: the theme switch, closings and what grows in go through it.
 - `ToastProvider`, once around the app, holds the toasts and hides every Phosphor icon from screen readers (one that must be read out takes `aria-hidden={false}`).
-- React, Inertia, Tailwind and `@phosphor-icons/react` are peer dependencies: the app installs them.
+- React, Inertia and Tailwind are peer dependencies: the app installs them. Phosphor comes with design, pinned here: the app imports every icon from `@pecaiet/design/icons` (`import { Trash } from '@pecaiet/design/icons'`) and never installs Phosphor itself.
 - Components, never pages: the app builds its pages from them, sign-in and error pages included. A component has no content of its own: every word, row and picture in it comes from the app. `Navigation` passes (the app gives it the rows, the account and the page); a sign-in page with its own apps and slogan would not.
 
 ## Playground
@@ -130,7 +130,7 @@ Markup:
 
 - Set states with the attributes above, never with classes like `.active` or `.is-open`.
 - Follow the snippets below: element order and wrappers matter (the label needs `.pc-sidebar-label` for its ellipsis).
-- Icons: Phosphor, regular weight, inline `<svg fill="currentColor">` (or `@phosphor-icons/react`), no size classes: the CSS sizes them (16px beside text of any size).
+- Icons: Phosphor only, nothing drawn here or in an app. The one exception is the app icons in `appicons/` (one per app, named after it), and they live only here: apps use them from this package. Phosphor icons are regular weight, inline `<svg fill="currentColor">` (or, in React, from `@pecaiet/design/icons`), no size classes: the CSS sizes them (16px beside text of any size).
 - Dark mode is `.dark` on `<html>` only; no `prefers-color-scheme` rules in app CSS.
 
 Updating:
@@ -232,19 +232,19 @@ The sidebar head as a button: the current app's mark and name, and the menu of a
   <div class="pc-sidebar-apps">
     <div class="pc-menu pc-sidebar-apps-menu" role="menu" hidden>
       <div class="pc-menu-label">Switch app</div>
-      <a class="pc-menu-item" role="menuitem" href="…"><span class="pc-app-logo-mark"><img src="todo.svg" alt=""></span>todo</a>
+      <a class="pc-menu-item" role="menuitem" href="…"><span class="pc-app-logo-mark"><img src="appicons/todo.svg" alt=""></span>todo</a>
       <div class="pc-menu-separator"></div>
-      <a class="pc-menu-item" role="menuitem" href="/" aria-current="page"><span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span>pe caiet<svg class="pc-menu-end">…squares-four…</svg></a>
+      <a class="pc-menu-item" role="menuitem" href="/" aria-current="page"><span class="pc-app-logo-mark"><img src="appicons/pecaiet.svg" alt=""></span>pe caiet<svg class="pc-menu-end">…squares-four…</svg></a>
     </div>
     <button class="pc-sidebar-item" type="button" aria-haspopup="menu" aria-expanded="false">
-      <span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span><span class="pc-sidebar-label">pe caiet</span><svg>…caret-up-down…</svg>
+      <span class="pc-app-logo-mark"><img src="appicons/pecaiet.svg" alt=""></span><span class="pc-sidebar-label">pe caiet</span><svg>…caret-up-down…</svg>
     </button>
   </div>
 </div>
 ```
 
 - The apps first, then pe caiet under a divider. The app you are in has `aria-current="page"`: a primary bar on the menu's left edge.
-- `.pc-app-logo-mark` is a square slot: the app's square `<img>` or `<svg>` (`pe-caiet.svg`, `todo.svg` in this repo) fills it, 24px in the head and 20px in the menu. A letter works as a stand-in.
+- `.pc-app-logo-mark` is a square slot: the app's square `<img>` or `<svg>` (`appicons/`: `pecaiet.svg`, `todo.svg`, `accounts.svg`; in React `PeCaietMark`, `TodoMark`, `AccountsMark`) fills it, 24px in the head and 20px in the menu. A letter works as a stand-in.
 - `.pc-menu-end` pushes a muted icon or text to the end of a menu row.
 - It opens and closes like the account menu.
 
@@ -289,7 +289,7 @@ A page without a sidebar: the logo on the left and the account row on the right.
 
 ```html
 <header><!-- the app's layout: a row, the logo left, the account pushed right -->
-  <span class="pc-app-logo"><span class="pc-app-logo-mark"><img src="pe-caiet.svg" alt=""></span>pe caiet</span>
+  <span class="pc-app-logo"><span class="pc-app-logo-mark"><img src="appicons/pecaiet.svg" alt=""></span>pe caiet</span>
   <div><!-- relative, so the menu opens from here -->
     <div class="pc-menu-backdrop"></div>
     <div class="pc-menu pc-menu-pop" role="menu" hidden><!-- the account menu: Settings, Admin panel, Sign out --></div>
@@ -421,7 +421,7 @@ In `pecaiet.css` and usable now, but not reviewed yet: their look or class names
 - **Fieldset**: `<fieldset class="pc-fieldset">` with a `<legend class="pc-legend">` (it looks like a field's label) over a `.pc-fieldset-options` of radios or checkboxes; `.pc-fieldset-options-row` puts two or three short choices side by side, `.pc-fieldset-boxes` puts choices with a description in boxes (the chosen one teal). Radios in a group share one `name`; `aria-invalid="true"` turns them red.
 - **File**: `.pc-files` of `.pc-file` rows (the file's icon, `.pc-file-name`, `.pc-file-size`): `<a class="pc-file" href download>` with a `.pc-file-action` download icon shown on hover and focus, or a `<div class="pc-file">` ending in an x button while editing.
 - **File upload**: `<label class="pc-btn pc-btn-outline pc-file-upload">` with a `paperclip`, the words and a hidden `<input type="file">` inside; the chosen files show under it as File rows.
-- **Footer**: `<footer class="pc-footer">` with `.pc-footer-groups` of `<nav class="pc-footer-group">` (a `.pc-footer-heading` over `.pc-footer-link` links), a `.pc-footer-bottom` line (or only a `.pc-footer-line`), then the app's word, `pe-caiet-word.svg` or `todo-word.svg` pasted inline as `<svg class="pc-footer-word" aria-hidden="true">`, in the border colour and cut off by the bottom edge.
+- **Footer**: `<footer class="pc-footer">` with `.pc-footer-groups` of `<nav class="pc-footer-group">` (a `.pc-footer-heading` over `.pc-footer-link` links), a `.pc-footer-bottom` line (or only a `.pc-footer-line`), then, if the app has one, its word as `<svg class="pc-footer-word" aria-hidden="true">`, in the border colour and cut off by the bottom edge.
 - **Form**: the fields in a `.pc-card-content`, 12px apart, and Cancel then the action on the right in the `.pc-card-footer`; errors show when the action is pressed, as `aria-invalid="true"` and a `.pc-field-error` under each field with a problem.
 - **Badge and chip**: `.pc-badge` (`-primary`, `-soft`, `-outline`, `-warning`, `-destructive`), `.pc-badge-small` (16px, 10px words) in any style; `-soft` is a light teal tint over whatever is behind it, for a quiet label; `.pc-chip` with an optional `.pc-chip-remove` button.
 - **Alert**: `.pc-alert` with `.pc-alert-notice`, `.pc-alert-warning` or `.pc-alert-error`, the icon first (required). One line takes the kind's colour; a longer one has a `.pc-alert-body` with a `.pc-alert-title` in the kind's colour over text in the text colour (or a lead line over a list of a form's errors). Optional `.pc-alert-action`, a `.pc-alert-close` x, and `.pc-alert-banner` for a banner across the top of a page.
