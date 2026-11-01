@@ -12,7 +12,7 @@ type Name =
     label: string;
 };
 export type PopoverProps = Name & {
-    /** The button that opens it, on click: it gets aria-haspopup="dialog", aria-expanded (it keeps its hover fill while open) and the
+    /** The button that opens it, on click: it gets aria-haspopup="dialog", aria-expanded and the
      *  click; its own ref and handlers stay. */
     trigger: ReactElement<TriggerProps>;
     /** The title's heading level, under the page's own: h3 by default. */

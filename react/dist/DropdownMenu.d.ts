@@ -16,8 +16,8 @@ type Placement =
     up?: never;
 };
 export type DropdownMenuProps = Placement & {
-    /** The button that opens it: a Button (a ⋯ icon button), a sidebar row. It gets aria-haspopup, aria-expanded (it keeps its hover
-     *  fill while open) and the click; its own ref and handlers stay. */
+    /** The button that opens it: a Button (a ⋯ icon button), a sidebar row. It gets aria-haspopup, aria-expanded and the click; its own
+     *  ref and handlers stay. */
     trigger: ReactElement<TriggerProps>;
     /** MenuItems, with MenuSeparator and MenuLabel between groups. Delete last, after a separator. */
     children: ReactNode;

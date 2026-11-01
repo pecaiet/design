@@ -10,7 +10,7 @@ type Field = Omit<ComponentPropsWithRef<'input'>, 'children'> & {
     mono?: boolean;
 };
 type Inside = 
-/** icon: 16px, first (MagnifyingGlass, Plus for quick add). end: a <Kbd> hint, a ghost icon Button with its tooltip (clear,
+/** icon: 16px, first (MagnifyingGlass, Plus for quick add). end: a <Kbd> hint, a ghost icon Button (clear,
  *  copy) or a Spinner while it checks. */
 {
     icon?: ReactNode;

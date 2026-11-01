@@ -387,8 +387,6 @@
   .pc-btn-outline { background: var(--card); border-color: var(--input); color: var(--foreground); }
   .pc-btn-ghost { background: transparent; color: var(--foreground); }
   .pc-btn-ghost:hover, .pc-btn-outline:hover { background: var(--accent); color: var(--foreground); }
-  /* A button that opens a menu or popover keeps its hover fill while it's open. */
-  .pc-btn:is(.pc-btn-ghost, .pc-btn-outline)[aria-haspopup][aria-expanded="true"] { background: var(--accent); }
   .pc-btn-destructive { background: transparent; border-color: var(--destructive); color: var(--destructive); }
   /* Solid red: a delete that is the main action of its view (a dialog's Delete), .pc-btn-primary.pc-btn-destructive. */
   .pc-btn-primary.pc-btn-destructive { background: var(--destructive); border-color: var(--destructive); color: var(--destructive-foreground); }
@@ -557,9 +555,10 @@
 
   .pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
   .pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
-  .pc-table tbody tr:hover td { background: var(--accent); }
-  /* On that accent row a ghost button's hover and open fill go a step darker, so they still show. */
-  .pc-table tbody tr:hover .pc-btn-ghost:is(:hover, [aria-haspopup][aria-expanded="true"]) { background: var(--track); }
+  /* Only a row that opens something (a row link) turns accent under the pointer; the others stay still. */
+  .pc-table tbody tr:has(.pc-row-link):hover td { background: var(--accent); }
+  /* On that accent row a ghost button under the pointer turns card, the sidebar's active pill, so it still shows. */
+  .pc-table tbody tr:has(.pc-row-link):hover .pc-btn-ghost:hover { background: var(--card); }
   .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
   .pc-row-link { color: inherit; font-weight: var(--pc-weight-semibold); text-decoration: none; }
   .pc-row-link::after { content: ""; position: absolute; inset: 0; }
@@ -727,6 +726,8 @@
   .pc-file-upload:has(> input:focus-visible) { outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus); border-color: var(--background); }
   .pc-file-upload:has(> input:disabled) { background: var(--muted); border-color: var(--border); color: var(--muted-foreground); cursor: not-allowed; }
 
+  /* Opened with the mouse, the menu itself holds focus and nothing in it is lit: no ring on the menu. */
+  .pc-menu:focus { outline: none; }
   .pc-menu { display: flex; flex-direction: column; gap: var(--pc-space-1); min-width: var(--pc-width-256); padding: var(--pc-space-1); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
   .pc-menu[hidden] { display: none; }
   .pc-menu-label { padding: var(--pc-space-1-5) var(--pc-space-2-5); overflow: hidden; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); text-overflow: ellipsis; white-space: nowrap; }

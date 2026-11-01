@@ -21,6 +21,8 @@ export function DropdownMenu({ trigger, children, title, places, sheet, open: sh
     const menu = useRef(null);
     const button = useRef(null);
     const last = useRef(false);
+    // Opened from the keyboard (Enter, Space, an arrow): the first item takes focus. From the mouse, the menu itself does.
+    const keyboard = useRef(false);
     const id = useId();
     const buttonId = trigger.props.id ?? `${id}-button`;
     const phone = useSyncExternalStore(watchPhone, () => matchMedia(PHONE).matches, () => false);
@@ -29,13 +31,17 @@ export function DropdownMenu({ trigger, children, title, places, sheet, open: sh
         button.current?.focus();
     };
     useOutside(open, menu, button, () => setOpen(false));
-    // Opening moves focus to the first item (the last, from the Up arrow).
+    // Opening from the keyboard moves focus to the first item (the last, from the Up arrow); from the mouse, to the menu itself, so
+    // nothing is lit until the pointer or an arrow picks a row.
     useEffect(() => {
         if (!open)
             return;
         const list = items(menu.current);
-        const first = last.current ? list.at(-1) : list[0];
-        first?.focus();
+        if (keyboard.current)
+            (last.current ? list.at(-1) : list[0])?.focus();
+        else
+            menu.current?.focus();
+        keyboard.current = false;
         last.current = false;
     }, [open]);
     const keys = (event) => {
@@ -58,13 +64,17 @@ export function DropdownMenu({ trigger, children, title, places, sheet, open: sh
                 event.preventDefault();
                 event.stopPropagation();
                 close();
-            }, children: [_jsx("div", { className: "pc-menu-backdrop" }), _jsxs("div", { ref: menu, id: `${id}-menu`, className: cx('pc-menu', sheet ? 'pc-menu-sheet' : 'pc-menu-pop', places && 'pc-menu-places', menuClassName), role: "menu", "aria-label": title, "aria-labelledby": title ? undefined : buttonId, hidden: !open, style: placed, onKeyDown: keys, children: [title && _jsx("div", { className: "pc-menu-label pc-menu-title", children: title }), children] }), withTrigger(trigger, {
+            }, children: [_jsx("div", { className: "pc-menu-backdrop" }), _jsxs("div", { ref: menu, id: `${id}-menu`, className: cx('pc-menu', sheet ? 'pc-menu-sheet' : 'pc-menu-pop', places && 'pc-menu-places', menuClassName), role: "menu", tabIndex: -1, "aria-label": title, "aria-labelledby": title ? undefined : buttonId, hidden: !open, style: placed, onKeyDown: keys, children: [title && _jsx("div", { className: "pc-menu-label pc-menu-title", children: title }), children] }), withTrigger(trigger, {
                     ref: button,
                     id: buttonId,
                     'aria-haspopup': 'menu',
                     'aria-expanded': open,
                     'aria-controls': `${id}-menu`,
-                    onClick: () => setOpen(!open),
+                    onClick: event => {
+                        // A click from Enter or Space has no pointer detail.
+                        keyboard.current = event.detail === 0;
+                        setOpen(!open);
+                    },
                     onKeyDown: event => {
                         if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp')
                             return;
@@ -73,6 +83,7 @@ export function DropdownMenu({ trigger, children, title, places, sheet, open: sh
                         if (open)
                             return (event.key === 'ArrowUp' ? list.at(-1) : list[0])?.focus();
                         last.current = event.key === 'ArrowUp';
+                        keyboard.current = true;
                         setOpen(true);
                     },
                 })] }) }));
