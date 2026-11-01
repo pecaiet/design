@@ -85,6 +85,7 @@ export function PasswordInput(props: PasswordInputProps) {
           variant="ghost"
           icon={shown ? <EyeSlash /> : <Eye />}
           label={shown ? 'Hide password' : 'Show password'}
+          data-pc-tooltip-side="left"
           onClick={() => setShown(!shown)}
         />
       }
@@ -121,7 +122,7 @@ export function CopyInput({ copyLabel, value, ...props }: CopyInputProps) {
       {...props}
       value={value}
       readOnly
-      end={<Button variant="ghost" icon={copied ? <Check /> : <Copy />} label={copied ? 'Copied' : copyLabel} onClick={copy} />}
+      end={<Button variant="ghost" icon={copied ? <Check /> : <Copy />} label={copied ? 'Copied' : copyLabel} data-pc-tooltip-side="left" onClick={copy} />}
     />
   )
 }
