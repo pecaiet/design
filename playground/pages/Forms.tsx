@@ -26,7 +26,7 @@ import {
   Toggle,
 } from '../../react/src/index'
 import todo from '../../appicons/todo.svg'
-import { Kanban, List as ListIcon, Plus } from '@phosphor-icons/react'
+import { KanbanIcon, ListIcon, PlusIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 export function Forms() {
@@ -71,7 +71,7 @@ export function Forms() {
           </div>
           <InputGroup label="Website" before="https://" placeholder="example.com" />
           <InputGroup
-            icon={<Plus />}
+            icon={<PlusIcon />}
             aria-label="New task"
             placeholder="Add a task"
             end={<Kbd>⌘K</Kbd>}
@@ -121,7 +121,7 @@ export function Forms() {
             onChange={setView}
             options={[
               { value: 'list', label: 'List', icon: <ListIcon /> },
-              { value: 'board', label: 'Board', icon: <Kanban /> },
+              { value: 'board', label: 'Board', icon: <KanbanIcon /> },
             ]}
           />
           <ColorPicker label="Colour" value={colour} onChange={setColour} />

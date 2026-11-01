@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react'
+import { XIcon } from '@phosphor-icons/react'
 import { useEffect, useId, useRef, type ReactElement, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -88,7 +88,7 @@ export function Popover({ trigger, title, label, titleAs: Title = 'h3', text, ch
         {title && (
           <div className="pc-popover-head">
             <Title className="pc-dialog-title" id={`${id}-title`}>{title}</Title>
-            <Button variant="ghost" icon={<X />} label="Close" className="pc-popover-close" onClick={close} />
+            <Button variant="ghost" icon={<XIcon />} label="Close" className="pc-popover-close" onClick={close} />
           </div>
         )}
         {text && <p className="pc-popover-text">{text}</p>}

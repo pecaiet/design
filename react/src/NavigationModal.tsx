@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react'
+import { XIcon } from '@phosphor-icons/react'
 import { useId, useRef, useState, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -55,7 +55,7 @@ export function NavigationModal({ title, items, footer, heading, closeLabel, chi
             </SidebarContext>
             <h2 className="pc-page-title">{heading}</h2>
           </div>
-          <Button variant="ghost" icon={<X />} label={closeLabel} data-pc-tooltip-side="bottom" onClick={onClose} />
+          <Button variant="ghost" icon={<XIcon />} label={closeLabel} data-pc-tooltip-side="bottom" onClick={onClose} />
         </div>
         <div className="pc-modal-body">{children}</div>
       </section>

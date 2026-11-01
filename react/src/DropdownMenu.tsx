@@ -1,5 +1,5 @@
 import { Link as InertiaLink, type InertiaLinkProps } from '@inertiajs/react'
-import { Check } from '@phosphor-icons/react'
+import { CheckIcon } from '@phosphor-icons/react'
 import {
   cloneElement,
   createContext,
@@ -208,7 +208,7 @@ export function MenuItem({ icon, destructive, end, children, className, ...eleme
       {icon}
       {children}
       {after}
-      {checked && <Check className="pc-menu-check" />}
+      {checked && <CheckIcon className="pc-menu-check" />}
     </button>
   )
 }

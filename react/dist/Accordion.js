@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
 import { cx } from './cx';
 import { assign } from './popup';
@@ -22,5 +22,5 @@ export function AccordionItem({ summary, children, open, onOpenChange, disabled,
     return (_jsxs("details", { name: name, ...details, ref: node => {
             own.current = node;
             assign(ref, node);
-        }, className: cx('pc-accordion-item', className), open: first, "aria-disabled": disabled || undefined, onToggle: event => onOpenChange?.(event.currentTarget.open), children: [_jsxs("summary", { tabIndex: disabled ? -1 : undefined, onClick: disabled ? event => event.preventDefault() : undefined, children: [summary, _jsx(CaretDown, {})] }), !disabled && _jsx("div", { className: "pc-accordion-content", children: children })] }));
+        }, className: cx('pc-accordion-item', className), open: first, "aria-disabled": disabled || undefined, onToggle: event => onOpenChange?.(event.currentTarget.open), children: [_jsxs("summary", { tabIndex: disabled ? -1 : undefined, onClick: disabled ? event => event.preventDefault() : undefined, children: [summary, _jsx(CaretDownIcon, {})] }), !disabled && _jsx("div", { className: "pc-accordion-content", children: children })] }));
 }

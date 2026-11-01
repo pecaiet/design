@@ -1,4 +1,4 @@
-import { TextIndent, TextOutdent } from '@phosphor-icons/react'
+import { TextIndentIcon, TextOutdentIcon } from '@phosphor-icons/react'
 import { createContext, useContext, useId, useRef, useState, type ComponentPropsWithRef, type CSSProperties, type ReactNode } from 'react'
 import { AppSwitcher, type AppSwitcherProps } from './AppSwitcher'
 import { Button } from './Button'
@@ -32,7 +32,7 @@ export function SidebarToggle({ className }: SidebarToggleProps) {
   return (
     <Button
       variant="ghost"
-      icon={sidebar.open ? <TextOutdent /> : <TextIndent />}
+      icon={sidebar.open ? <TextOutdentIcon /> : <TextIndentIcon />}
       label={sidebar.open ? 'Close sidebar' : 'Open sidebar'}
       className={cx('pc-sidebar-toggle', className)}
       aria-expanded={sidebar.open}

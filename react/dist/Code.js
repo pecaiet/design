@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Info } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { cx } from './cx';
 import { CopyInput } from './InputGroup';
 /** A machine value in running text: an ID, an error code. */
@@ -16,5 +16,5 @@ export function Kbd({ className, ...span }) {
 }
 /** A secret shown once: the warning and the value together in one notice, with no separate label. */
 export function Secret({ value, children, className }) {
-    return (_jsxs("div", { className: cx('pc-alert', 'pc-alert-notice', className), role: "status", children: [_jsx(Info, {}), _jsxs("div", { style: { display: 'grid', gap: 'var(--pc-space-2)', flex: 1, minWidth: 0 }, children: [_jsx("span", { children: children }), _jsx(CopyInput, { mono: true, value: value, "aria-label": "Secret", copyLabel: "Copy secret" })] })] }));
+    return (_jsxs("div", { className: cx('pc-alert', 'pc-alert-notice', className), role: "status", children: [_jsx(InfoIcon, {}), _jsxs("div", { style: { display: 'grid', gap: 'var(--pc-space-2)', flex: 1, minWidth: 0 }, children: [_jsx("span", { children: children }), _jsx(CopyInput, { mono: true, value: value, "aria-label": "Secret", copyLabel: "Copy secret" })] })] }));
 }

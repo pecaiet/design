@@ -1,4 +1,4 @@
-import { CircleNotch } from '@phosphor-icons/react'
+import { CircleNotchIcon } from '@phosphor-icons/react'
 import { cx } from './cx'
 
 export type SpinnerProps = {
@@ -12,7 +12,7 @@ export type SpinnerProps = {
 export function Spinner({ label = 'Loading', size, className }: SpinnerProps) {
   return (
     <span className={cx('pc-spinner', size && `pc-spinner-${size}`, className)} role="status" aria-label={label}>
-      <CircleNotch aria-hidden="true" />
+      <CircleNotchIcon aria-hidden="true" />
     </span>
   )
 }

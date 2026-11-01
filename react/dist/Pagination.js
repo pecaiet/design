@@ -1,5 +1,5 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -14,7 +14,7 @@ export function Pagination({ page, pages, href, compact: narrow, arrows, numbers
         : [1, page - 1, page, page + 1, pages].filter((n, i, all) => n >= 1 && n <= pages && all.indexOf(n) === i);
     const end = (next) => {
         const to = next ? page + 1 : page - 1;
-        const icon = next ? _jsx(CaretRight, {}) : _jsx(CaretLeft, {});
+        const icon = next ? _jsx(CaretRightIcon, {}) : _jsx(CaretLeftIcon, {});
         const words = next ? 'Next' : 'Previous';
         const off = to < 1 || to > pages;
         if (compact || arrows) {

@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Minus, Plus } from '@phosphor-icons/react';
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { cx } from './cx';
 import { FieldMessage, useField } from './Field';
@@ -24,7 +24,7 @@ export function Stepper({ label, hint, error, optional, id, className, onChange,
         // stepUp() changes the value without an input event: send one, so onChange runs as if the number was typed.
         element.dispatchEvent(new Event('input', { bubbles: true }));
     };
-    const stepper = (_jsxs("div", { className: cx('pc-stepper', !wrapped && className), children: [_jsx("button", { type: "button", tabIndex: -1, "aria-label": "Fewer", disabled: input.disabled || (input.min !== undefined && current <= input.min), onClick: () => step(false), children: _jsx(Minus, {}) }), _jsx("input", { ...input, ref: element => {
+    const stepper = (_jsxs("div", { className: cx('pc-stepper', !wrapped && className), children: [_jsx("button", { type: "button", tabIndex: -1, "aria-label": "Fewer", disabled: input.disabled || (input.min !== undefined && current <= input.min), onClick: () => step(false), children: _jsx(MinusIcon, {}) }), _jsx("input", { ...input, ref: element => {
                     own.current = element;
                     if (typeof ref === 'function')
                         ref(element);
@@ -33,7 +33,7 @@ export function Stepper({ label, hint, error, optional, id, className, onChange,
                 }, type: "number", id: field.fieldId, "aria-describedby": field.describedBy, "aria-invalid": field.invalid ?? input['aria-invalid'], onChange: event => {
                     setTyped(event.target.value);
                     onChange?.(event);
-                } }), _jsx("button", { type: "button", tabIndex: -1, "aria-label": "More", disabled: input.disabled || (input.max !== undefined && current >= input.max), onClick: () => step(true), children: _jsx(Plus, {}) })] }));
+                } }), _jsx("button", { type: "button", tabIndex: -1, "aria-label": "More", disabled: input.disabled || (input.max !== undefined && current >= input.max), onClick: () => step(true), children: _jsx(PlusIcon, {}) })] }));
     if (!wrapped)
         return stepper;
     return (_jsxs("div", { className: cx('pc-field', className), children: [label && _jsx(Label, { htmlFor: field.fieldId, optional: optional, children: label }), stepper, _jsx(FieldMessage, { id: field.messageId, hint: hint, error: error })] }));

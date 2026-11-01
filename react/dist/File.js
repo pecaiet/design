@@ -1,14 +1,14 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { DownloadSimple, FileIcon, FileImage, FilePdf, FileText, FileXls, X } from '@phosphor-icons/react';
+import { DownloadSimpleIcon, FileIcon, FileImageIcon, FilePdfIcon, FileTextIcon, FileXlsIcon, XIcon } from '@phosphor-icons/react';
 import { useLayoutEffect, useRef } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
 import { enter as grow, leave } from './motion';
 const KINDS = [
-    [/\.pdf$/i, _jsx(FilePdf, {})],
-    [/\.(xlsx?|csv|ods|numbers)$/i, _jsx(FileXls, {})],
-    [/\.(png|jpe?g|gif|webp|avif|heic|svg)$/i, _jsx(FileImage, {})],
-    [/\.(txt|md|rtf|docx?|odt|pages)$/i, _jsx(FileText, {})],
+    [/\.pdf$/i, _jsx(FilePdfIcon, {})],
+    [/\.(xlsx?|csv|ods|numbers)$/i, _jsx(FileXlsIcon, {})],
+    [/\.(png|jpe?g|gif|webp|avif|heic|svg)$/i, _jsx(FileImageIcon, {})],
+    [/\.(txt|md|rtf|docx?|odt|pages)$/i, _jsx(FileTextIcon, {})],
 ];
 /** FileRows, 2px apart. */
 export function Files({ className, ...div }) {
@@ -26,12 +26,12 @@ export function FileRow({ name, size, icon, enter, className, ...element }) {
     const inner = (_jsxs(_Fragment, { children: [icon ?? KINDS.find(([ending]) => ending.test(name))?.[1] ?? _jsx(FileIcon, {}), _jsx("span", { className: "pc-file-name", children: name }), _jsx("span", { className: "pc-file-size", children: size })] }));
     if (element.href !== undefined) {
         const { onRemove, download = true, ...link } = element;
-        return (_jsxs("a", { ...link, ref: ref, className: look, download: download, children: [inner, _jsx(DownloadSimple, { className: "pc-file-action" })] }));
+        return (_jsxs("a", { ...link, ref: ref, className: look, download: download, children: [inner, _jsx(DownloadSimpleIcon, { className: "pc-file-action" })] }));
     }
     const { onRemove, href, ...div } = element;
     const remove = async () => {
         await leave(ref.current);
         onRemove();
     };
-    return (_jsxs("div", { ...div, ref: ref, className: look, children: [inner, _jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: `Remove ${name}`, onClick: remove })] }));
+    return (_jsxs("div", { ...div, ref: ref, className: look, children: [inner, _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: `Remove ${name}`, onClick: remove })] }));
 }

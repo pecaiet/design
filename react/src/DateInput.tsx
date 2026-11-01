@@ -1,4 +1,4 @@
-import { CalendarDots, X } from '@phosphor-icons/react'
+import { CalendarDotsIcon, XIcon } from '@phosphor-icons/react'
 import { useRef, useState, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -115,11 +115,11 @@ export function DateInput({
             setOpen(!open)
           }}
         >
-          <CalendarDots />
+          <CalendarDotsIcon />
           {shown ? <span>{shown}</span> : <span className="pc-picker-placeholder">{placeholder ?? (choice.range ? 'No dates' : 'No date')}</span>}
         </button>
         {shown && !disabled && (
-          <Button variant="ghost" icon={<X />} label={choice.range ? 'Clear dates' : 'Clear date'} data-pc-tooltip-side="left" className="pc-date-clear" onClick={() => {
+          <Button variant="ghost" icon={<XIcon />} label={choice.range ? 'Clear dates' : 'Clear date'} data-pc-tooltip-side="left" className="pc-date-clear" onClick={() => {
             clear()
             button.current?.focus()
           }} />

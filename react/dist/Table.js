@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Link as InertiaLink } from '@inertiajs/react';
-import { CaretDown, CaretUp } from '@phosphor-icons/react';
+import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { cx } from './cx';
 import { EmptyState } from './EmptyState';
 /** Rows of records, usually in a Card's content with rows. Write the thead and tbody; a row's cells are Td, TableCheck first and
@@ -9,7 +9,7 @@ export function Table({ className, ...table }) {
     return _jsx("table", { ...table, className: cx('pc-table', className) });
 }
 export function Th({ num, onSort, sort, children, className, ...th }) {
-    return (_jsx("th", { ...th, className: cx(num && 'pc-table-num', className) || undefined, "aria-sort": sort, children: onSort ? (_jsxs("button", { className: "pc-table-sort", type: "button", onClick: onSort, children: [children, sort === 'ascending' && _jsx(CaretUp, {}), sort === 'descending' && _jsx(CaretDown, {})] })) : children }));
+    return (_jsx("th", { ...th, className: cx(num && 'pc-table-num', className) || undefined, "aria-sort": sort, children: onSort ? (_jsxs("button", { className: "pc-table-sort", type: "button", onClick: onSort, children: [children, sort === 'ascending' && _jsx(CaretUpIcon, {}), sort === 'descending' && _jsx(CaretDownIcon, {})] })) : children }));
 }
 export function Td({ num, muted, className, ...td }) {
     return _jsx("td", { ...td, className: cx(num && 'pc-table-num', muted && 'pc-muted', className) || undefined });

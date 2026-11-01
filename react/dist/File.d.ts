@@ -18,7 +18,7 @@ export type FileRowProps = Kind & {
     name: string;
     /** "240 KB". */
     size: ReactNode;
-    /** The file's icon: by default from the name's ending (FilePdf, FileXls, FileImage, FileText, FileIcon). */
+    /** The file's icon: by default from the name's ending (FilePdfIcon, FileXlsIcon, FileImageIcon, FileTextIcon, FileIcon). */
     icon?: ReactNode;
     /** A file the person just added: it grows in, the rows below gliding. Leave it off for what was already on the page. */
     enter?: boolean;

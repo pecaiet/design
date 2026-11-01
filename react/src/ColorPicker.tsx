@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react'
+import { PlusIcon } from '@phosphor-icons/react'
 import { useId, useState, type CSSProperties, type HTMLAttributes } from 'react'
 import { cx } from './cx'
 import type { Labelled } from './Field'
@@ -58,7 +58,7 @@ export function ColorPicker({ label, name, value, defaultValue, onChange, id, cl
           <input type="radio" name={name ?? auto} value={ring} aria-label={`Custom colour ${ring.toUpperCase()}`} checked={chosen === ring} onChange={() => choose(ring)} />
         )}
         <span className="pc-swatch-ring" />
-        <Plus />
+        <PlusIcon />
       </label>
     </div>
   )

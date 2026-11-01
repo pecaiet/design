@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react'
+import { XIcon } from '@phosphor-icons/react'
 import { useLayoutEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode } from 'react'
 import { cx } from './cx'
 import { enter as fadeIn, leave } from './motion'
@@ -37,7 +37,7 @@ export function Chip({ icon, enter, onRemove, removeLabel, children, className, 
       {children}
       {onRemove && (
         <button className="pc-chip-remove" type="button" aria-label={removeLabel} data-pc-tooltip={removeLabel} onClick={remove}>
-          <X />
+          <XIcon />
         </button>
       )}
     </span>

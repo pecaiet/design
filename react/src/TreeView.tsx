@@ -1,5 +1,5 @@
 import { router } from '@inertiajs/react'
-import { CaretRight } from '@phosphor-icons/react'
+import { CaretRightIcon } from '@phosphor-icons/react'
 import { useRef, useState, type ComponentPropsWithRef, type KeyboardEvent, type ReactNode } from 'react'
 import { cx } from './cx'
 import { leave } from './motion'
@@ -129,7 +129,7 @@ export function TreeView({ label, items, expanded, defaultExpanded = [], onExpan
             }}
           >
             {/* At the top level a row with nothing inside keeps an empty caret, so its icon lines up with the folders'. */}
-            {opens ? <span className="pc-tree-caret"><CaretRight /></span> : row.level === 1 && <span className="pc-tree-caret" />}
+            {opens ? <span className="pc-tree-caret"><CaretRightIcon /></span> : row.level === 1 && <span className="pc-tree-caret" />}
             {row.item.icon}
             <span className="pc-tree-label">{row.item.label}</span>
             {row.item.count !== undefined && <span className="pc-tree-count">{row.item.count}</span>}

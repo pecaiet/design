@@ -1,4 +1,4 @@
-import { User } from '@phosphor-icons/react'
+import { UserIcon } from '@phosphor-icons/react'
 import { useState, type HTMLAttributes, type ReactNode } from 'react'
 import { cx } from './cx'
 
@@ -28,7 +28,7 @@ export function Avatar({ initials, src, size, square, online, badge, label, clas
   const look = cx('pc-avatar', size && `pc-avatar-${size}`, nobody && 'pc-avatar-none', square && 'pc-avatar-square', className)
   const inside = (
     <>
-      {photo ? <img src={src} alt="" onError={() => setBroken(src)} /> : nobody ? <User /> : initials}
+      {photo ? <img src={src} alt="" onError={() => setBroken(src)} /> : nobody ? <UserIcon /> : initials}
       {online && <span className="pc-avatar-status" />}
       {badge}
     </>

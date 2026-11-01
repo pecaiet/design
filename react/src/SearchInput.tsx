@@ -1,4 +1,4 @@
-import { MagnifyingGlass, X } from '@phosphor-icons/react'
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react'
 import { useRef, useState, type ComponentPropsWithRef } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -28,7 +28,7 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
   }
   return (
     <div className={cx('pc-input-group', className)} role="search">
-      <MagnifyingGlass />
+      <MagnifyingGlassIcon />
       <input
         {...input}
         ref={element => {
@@ -46,7 +46,7 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
       />
       {(busy || text) && (
         <span className="pc-input-group-end">
-          {busy ? <Spinner label="Searching" /> : <Button variant="ghost" icon={<X />} label="Clear search" data-pc-tooltip-side="left" onClick={clear} />}
+          {busy ? <Spinner label="Searching" /> : <Button variant="ghost" icon={<XIcon />} label="Clear search" data-pc-tooltip-side="left" onClick={clear} />}
         </span>
       )}
     </div>

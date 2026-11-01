@@ -1,4 +1,4 @@
-import { Moon, Sun } from '@phosphor-icons/react'
+import { MoonIcon, SunIcon } from '@phosphor-icons/react'
 import type { ComponentPropsWithRef } from 'react'
 import { cx } from './cx'
 import { useDark } from './shell'
@@ -20,7 +20,7 @@ export function ThemeSwitch({ className, style, ...button }: ThemeSwitchProps) {
       data-pc-tooltip-side="left"
       onClick={() => window.Pecaiet?.setTheme(dark ? 'light' : 'dark')}
     >
-      {dark ? <Sun /> : <Moon />}
+      {dark ? <SunIcon /> : <MoonIcon />}
     </button>
   )
 }

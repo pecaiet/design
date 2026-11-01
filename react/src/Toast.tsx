@@ -1,9 +1,9 @@
-import { CheckCircle, IconContext, Info, Warning, WarningCircle, X, type IconProps } from '@phosphor-icons/react'
+import { CheckCircleIcon, IconContext, InfoIcon, WarningCircleIcon, WarningIcon, XIcon, type IconProps } from '@phosphor-icons/react'
 import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { leave } from './motion'
 
-const ICONS = { success: <CheckCircle />, warning: <Warning />, error: <WarningCircle />, news: <Info /> }
+const ICONS = { success: <CheckCircleIcon />, warning: <WarningIcon />, error: <WarningCircleIcon />, news: <InfoIcon /> }
 
 export type ToastOptions = {
   /** One short sentence: "Task deleted", "Couldn't save". */
@@ -132,7 +132,7 @@ function Toast({ text, tone, action, duration, onDismiss, ref }: ToastOptions & 
       )}
       <Button
         variant="ghost"
-        icon={<X />}
+        icon={<XIcon />}
         label="Dismiss"
         data-pc-dismiss=""
         onClick={event => {

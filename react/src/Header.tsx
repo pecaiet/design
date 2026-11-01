@@ -1,4 +1,4 @@
-import { CaretUpDown } from '@phosphor-icons/react'
+import { CaretUpDownIcon } from '@phosphor-icons/react'
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { AppLogo, PeCaietMark } from './AppLogo'
 import { Avatar } from './Avatar'
@@ -37,7 +37,7 @@ export function Header({ logo, account, style, ...header }: HeaderProps) {
       <DropdownMenu
         align="end"
         trigger={
-          <SidebarItem icon={<Avatar initials={account.email.charAt(0).toUpperCase()} />} iconAfter={<CaretUpDown />}>
+          <SidebarItem icon={<Avatar initials={account.email.charAt(0).toUpperCase()} />} iconAfter={<CaretUpDownIcon />}>
             {account.email}
           </SidebarItem>
         }

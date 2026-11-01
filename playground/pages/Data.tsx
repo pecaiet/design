@@ -20,7 +20,7 @@ import {
   Toolbar,
   ToolbarDivider,
 } from '../../react/src/index'
-import { CalendarDots, DotsThree, SortAscending, TextB, TextItalic } from '@phosphor-icons/react'
+import { CalendarDotsIcon, DotsThreeIcon, SortAscendingIcon, TextBIcon, TextItalicIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 const USERS = [
@@ -70,7 +70,7 @@ export function Data() {
                 </Td>
                 <Td num>{user.sessions}</Td>
                 <TableActions>
-                  <Button variant="ghost" size="small" icon={<DotsThree />} label={`Actions for ${user.email}`} />
+                  <Button variant="ghost" size="small" icon={<DotsThreeIcon />} label={`Actions for ${user.email}`} />
                 </TableActions>
               </tr>
             ))}
@@ -133,7 +133,7 @@ export function Data() {
             {chips.map(label => (
               <Chip
                 key={label}
-                icon={<CalendarDots />}
+                icon={<CalendarDotsIcon />}
                 removeLabel={`Remove reminder ${label}`}
                 onRemove={() => setChips(chips.filter(c => c !== label))}
               >
@@ -146,10 +146,10 @@ export function Data() {
             <Button variant="primary">Save</Button>
           </ButtonGroup>
           <Toolbar>
-            <Button variant="ghost" icon={<TextB />} label="Bold" pressed />
-            <Button variant="ghost" icon={<TextItalic />} label="Italic" pressed={false} />
+            <Button variant="ghost" icon={<TextBIcon />} label="Bold" pressed />
+            <Button variant="ghost" icon={<TextItalicIcon />} label="Italic" pressed={false} />
             <ToolbarDivider />
-            <Button variant="ghost" icon={<SortAscending />} label="Sort" />
+            <Button variant="ghost" icon={<SortAscendingIcon />} label="Sort" />
           </Toolbar>
         </Stack>
       </Card>

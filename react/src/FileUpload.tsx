@@ -1,4 +1,4 @@
-import { Paperclip } from '@phosphor-icons/react'
+import { PaperclipIcon } from '@phosphor-icons/react'
 import { Children, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
 import { FieldMessage, useField } from './Field'
@@ -31,7 +31,7 @@ export function FileUpload({ label, hint, error, optional, buttonLabel, children
         </span>
       )}
       <label className="pc-btn pc-btn-outline pc-file-upload" htmlFor={field.fieldId}>
-        <Paperclip />
+        <PaperclipIcon />
         {buttonLabel ?? (input.multiple ? 'Attach files' : 'Attach file')}
         <input {...input} type="file" id={field.fieldId} aria-describedby={field.describedBy} aria-invalid={field.invalid ?? input['aria-invalid']} />
       </label>

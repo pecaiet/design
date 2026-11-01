@@ -1,4 +1,4 @@
-import { Minus, Plus } from '@phosphor-icons/react'
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import { useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
 import { FieldMessage, useField, type Labelled } from './Field'
@@ -34,7 +34,7 @@ export function Stepper({ label, hint, error, optional, id, className, onChange,
   const stepper = (
     <div className={cx('pc-stepper', !wrapped && className)}>
       <button type="button" tabIndex={-1} aria-label="Fewer" disabled={input.disabled || (input.min !== undefined && current <= input.min)} onClick={() => step(false)}>
-        <Minus />
+        <MinusIcon />
       </button>
       <input
         {...input}
@@ -53,7 +53,7 @@ export function Stepper({ label, hint, error, optional, id, className, onChange,
         }}
       />
       <button type="button" tabIndex={-1} aria-label="More" disabled={input.disabled || (input.max !== undefined && current >= input.max)} onClick={() => step(true)}>
-        <Plus />
+        <PlusIcon />
       </button>
     </div>
   )

@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { TextIndent, TextOutdent } from '@phosphor-icons/react';
+import { TextIndentIcon, TextOutdentIcon } from '@phosphor-icons/react';
 import { createContext, useContext, useId, useRef, useState } from 'react';
 import { AppSwitcher } from './AppSwitcher';
 import { Button } from './Button';
@@ -16,7 +16,7 @@ export function SidebarToggle({ className }) {
     const sidebar = useContext(SidebarContext);
     if (!sidebar)
         return null;
-    return (_jsx(Button, { variant: "ghost", icon: sidebar.open ? _jsx(TextOutdent, {}) : _jsx(TextIndent, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, "data-pc-tooltip-side": "bottom", onClick: sidebar.toggle }));
+    return (_jsx(Button, { variant: "ghost", icon: sidebar.open ? _jsx(TextOutdentIcon, {}) : _jsx(TextIndentIcon, {}), label: sidebar.open ? 'Close sidebar' : 'Open sidebar', className: cx('pc-sidebar-toggle', className), "aria-expanded": sidebar.open, "aria-controls": sidebar.id, "data-pc-tooltip-side": "bottom", onClick: sidebar.toggle }));
 }
 // Desktop: sticky and one screen tall; the rows scroll inside it when they don't fit.
 const FRAME = { position: 'sticky', top: 0, display: 'flex', flexShrink: 0, alignSelf: 'flex-start', height: '100dvh' };

@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useId, useState } from 'react';
 import { cx } from './cx';
 const COLOURS = ['gray', 'red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink'];
@@ -23,7 +23,7 @@ export function ColorPicker({ label, name, value, defaultValue, onChange, id, cl
                             const hex = event.target.value;
                             setCustom(hex);
                             choose(hex);
-                        } }), ring && (_jsx("input", { type: "radio", name: name ?? auto, value: ring, "aria-label": `Custom colour ${ring.toUpperCase()}`, checked: chosen === ring, onChange: () => choose(ring) })), _jsx("span", { className: "pc-swatch-ring" }), _jsx(Plus, {})] })] }));
+                        } }), ring && (_jsx("input", { type: "radio", name: name ?? auto, value: ring, "aria-label": `Custom colour ${ring.toUpperCase()}`, checked: chosen === ring, onChange: () => choose(ring) })), _jsx("span", { className: "pc-swatch-ring" }), _jsx(PlusIcon, {})] })] }));
     if (!label)
         return swatches;
     return (_jsxs("div", { className: cx('pc-field', className), children: [_jsx("span", { className: "pc-label", id: labelId, children: label }), swatches] }));

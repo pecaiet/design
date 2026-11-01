@@ -46,7 +46,7 @@ createRoot(el).render(<ToastProvider><App {...props} /></ToastProvider>)
 
 - `import '@pecaiet/design'` loads `pecaiet.js`. The components need it: the theme switch, closings and what grows in go through it.
 - `ToastProvider`, once around the app, holds the toasts and hides every Phosphor icon from screen readers (one that must be read out takes `aria-hidden={false}`).
-- React, Inertia and Tailwind are peer dependencies: the app installs them. Phosphor comes with design, pinned here: the app imports every icon from `@pecaiet/design/icons` (`import { Trash } from '@pecaiet/design/icons'`) and never installs Phosphor itself.
+- React, Inertia and Tailwind are peer dependencies: the app installs them. Phosphor comes with design, pinned here: the app imports every icon from `@pecaiet/design/icons` by its `…Icon` name (`import { TrashIcon } from '@pecaiet/design/icons'`; the short names, `Trash`, are deprecated) and never installs Phosphor itself.
 - Components, never pages: the app builds its pages from them, sign-in and error pages included. A component has no content of its own: every word, row and picture in it comes from the app. `Navigation` passes (the app gives it the rows, the account and the page); a sign-in page with its own apps and slogan would not.
 
 ## Playground

@@ -1,4 +1,4 @@
-import { Info } from '@phosphor-icons/react'
+import { InfoIcon } from '@phosphor-icons/react'
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { cx } from './cx'
 import { CopyInput } from './InputGroup'
@@ -36,7 +36,7 @@ export type SecretProps = {
 export function Secret({ value, children, className }: SecretProps) {
   return (
     <div className={cx('pc-alert', 'pc-alert-notice', className)} role="status">
-      <Info />
+      <InfoIcon />
       {/* pecaiet.css has no class for this column: the warning over the field, 8px apart, taking the rest of the row. */}
       <div style={{ display: 'grid', gap: 'var(--pc-space-2)', flex: 1, minWidth: 0 }}>
         <span>{children}</span>

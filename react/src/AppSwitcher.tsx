@@ -1,4 +1,4 @@
-import { CaretUpDown, SquaresFour } from '@phosphor-icons/react'
+import { CaretUpDownIcon, SquaresFourIcon } from '@phosphor-icons/react'
 import type { ReactNode } from 'react'
 import { cx } from './cx'
 import { DropdownMenu, MenuLabel, MenuSeparator } from './DropdownMenu'
@@ -40,7 +40,7 @@ export function AppSwitcher({ apps, home, current, className }: AppSwitcherProps
         className="pc-sidebar-apps"
         menuClassName="pc-sidebar-apps-menu"
         trigger={
-          <SidebarItem icon={<span className="pc-app-logo-mark">{here.mark}</span>} iconAfter={<CaretUpDown />}>
+          <SidebarItem icon={<span className="pc-app-logo-mark">{here.mark}</span>} iconAfter={<CaretUpDownIcon />}>
             {here.name}
           </SidebarItem>
         }
@@ -48,7 +48,7 @@ export function AppSwitcher({ apps, home, current, className }: AppSwitcherProps
         <MenuLabel>Switch app</MenuLabel>
         {apps.map(app => row(app))}
         <MenuSeparator />
-        {row(home, <SquaresFour className="pc-menu-end" />)}
+        {row(home, <SquaresFourIcon className="pc-menu-end" />)}
       </DropdownMenu>
     </div>
   )

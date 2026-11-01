@@ -1,5 +1,5 @@
 import { Link as InertiaLink, router } from '@inertiajs/react'
-import { MagnifyingGlass } from '@phosphor-icons/react'
+import { MagnifyingGlassIcon } from '@phosphor-icons/react'
 import { Fragment, useEffect, useId, useState, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -90,7 +90,7 @@ export function SearchWindow({ open, onClose, query, onQueryChange, placeholder,
   return (
     <Dialog kind="dialog" open={open} onClose={onClose} className={cx('pc-search', className)} aria-label="Search">
       <div className="pc-search-field">
-        <MagnifyingGlass />
+        <MagnifyingGlassIcon />
         <input
           type="search"
           value={query}

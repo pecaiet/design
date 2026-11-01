@@ -1,4 +1,4 @@
-import { Play, Video as VideoMark } from '@phosphor-icons/react'
+import { PlayIcon, VideoIcon } from '@phosphor-icons/react'
 import { useEffect, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
 import { assign } from './popup'
@@ -36,7 +36,7 @@ export function Video({ title, duration, caption, src, children, className, ref,
 
   const box = broken || (!src && !children) ? (
     <div className={cx('pc-video', 'pc-video-empty', !caption && className)} role="img" aria-label={`“${title}” can’t play`}>
-      <VideoMark />
+      <VideoIcon />
     </div>
   ) : (
     <div className={cx('pc-video', !caption && className)} data-state={playing ? 'playing' : undefined}>
@@ -68,7 +68,7 @@ export function Video({ title, duration, caption, src, children, className, ref,
           own.current?.play().catch(() => {})
         }}
       >
-        <Play weight="fill" />
+        <PlayIcon weight="fill" />
       </button>
       {duration !== undefined && <span className="pc-video-length" aria-hidden="true">{clock(duration)}</span>}
     </div>

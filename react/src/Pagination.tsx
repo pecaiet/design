@@ -1,4 +1,4 @@
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import { Fragment, type ComponentPropsWithRef, type HTMLAttributes, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -29,7 +29,7 @@ export function Pagination({ page, pages, href, compact: narrow, arrows, numbers
 
   const end = (next: boolean) => {
     const to = next ? page + 1 : page - 1
-    const icon = next ? <CaretRight /> : <CaretLeft />
+    const icon = next ? <CaretRightIcon /> : <CaretLeftIcon />
     const words = next ? 'Next' : 'Previous'
     const off = to < 1 || to > pages
     if (compact || arrows) {

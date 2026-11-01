@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { MagnifyingGlass, X } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -19,7 +19,7 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
         element.dispatchEvent(new Event('input', { bubbles: true }));
         element.focus();
     };
-    return (_jsxs("div", { className: cx('pc-input-group', className), role: "search", children: [_jsx(MagnifyingGlass, {}), _jsx("input", { ...input, ref: element => {
+    return (_jsxs("div", { className: cx('pc-input-group', className), role: "search", children: [_jsx(MagnifyingGlassIcon, {}), _jsx("input", { ...input, ref: element => {
                     own.current = element;
                     if (typeof ref === 'function')
                         ref(element);
@@ -28,5 +28,5 @@ export function SearchInput({ busy, placeholder, onChange, className, ref, ...in
                 }, className: "pc-input", type: "search", placeholder: placeholder ?? input['aria-label'], onChange: event => {
                     setTyped(event.target.value);
                     onChange?.(event);
-                } }), (busy || text) && (_jsx("span", { className: "pc-input-group-end", children: busy ? _jsx(Spinner, { label: "Searching" }) : _jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: "Clear search", "data-pc-tooltip-side": "left", onClick: clear }) }))] }));
+                } }), (busy || text) && (_jsx("span", { className: "pc-input-group-end", children: busy ? _jsx(Spinner, { label: "Searching" }) : _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Clear search", "data-pc-tooltip-side": "left", onClick: clear }) }))] }));
 }

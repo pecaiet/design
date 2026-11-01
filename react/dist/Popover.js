@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { X } from '@phosphor-icons/react';
+import { XIcon } from '@phosphor-icons/react';
 import { useEffect, useId, useRef } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -38,5 +38,5 @@ export function Popover({ trigger, title, label, titleAs: Title = 'h3', text, ch
                 'aria-expanded': open,
                 'aria-controls': `${id}-popover`,
                 onClick: () => setOpen(!open),
-            }), _jsx("div", { className: "pc-popover-backdrop" }), _jsxs("div", { ref: panel, id: `${id}-popover`, className: cx('pc-popover', align === 'end' && 'pc-popover-end', up && 'pc-popover-up'), role: "dialog", "aria-labelledby": title ? `${id}-title` : undefined, "aria-label": label, hidden: !open, children: [title && (_jsxs("div", { className: "pc-popover-head", children: [_jsx(Title, { className: "pc-dialog-title", id: `${id}-title`, children: title }), _jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: "Close", className: "pc-popover-close", onClick: close })] })), text && _jsx("p", { className: "pc-popover-text", children: text }), children, actions && _jsx("div", { className: "pc-dialog-actions", children: actions })] })] }));
+            }), _jsx("div", { className: "pc-popover-backdrop" }), _jsxs("div", { ref: panel, id: `${id}-popover`, className: cx('pc-popover', align === 'end' && 'pc-popover-end', up && 'pc-popover-up'), role: "dialog", "aria-labelledby": title ? `${id}-title` : undefined, "aria-label": label, hidden: !open, children: [title && (_jsxs("div", { className: "pc-popover-head", children: [_jsx(Title, { className: "pc-dialog-title", id: `${id}-title`, children: title }), _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Close", className: "pc-popover-close", onClick: close })] })), text && _jsx("p", { className: "pc-popover-text", children: text }), children, actions && _jsx("div", { className: "pc-dialog-actions", children: actions })] })] }));
 }

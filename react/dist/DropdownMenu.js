@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Link as InertiaLink } from '@inertiajs/react';
-import { Check } from '@phosphor-icons/react';
+import { CheckIcon } from '@phosphor-icons/react';
 import { cloneElement, createContext, useContext, useEffect, useId, useRef, useSyncExternalStore, } from 'react';
 import { cx } from './cx';
 import { moveFocus, typeAhead, useOpen, useOutside, withTrigger } from './popup';
@@ -92,7 +92,7 @@ export function MenuItem({ icon, destructive, end, children, className, ...eleme
     return (_jsxs("button", { ...button, type: type, className: look, role: checked === undefined ? 'menuitem' : 'menuitemradio', "aria-checked": checked, tabIndex: -1, onClick: event => {
             onClick?.(event);
             close();
-        }, children: [icon, children, after, checked && _jsx(Check, { className: "pc-menu-check" })] }));
+        }, children: [icon, children, after, checked && _jsx(CheckIcon, { className: "pc-menu-check" })] }));
 }
 /** A line between groups, from edge to edge. */
 export function MenuSeparator() {

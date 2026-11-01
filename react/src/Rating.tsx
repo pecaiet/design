@@ -1,4 +1,4 @@
-import { Star } from '@phosphor-icons/react'
+import { StarIcon } from '@phosphor-icons/react'
 import { useId, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react'
 import { cx } from './cx'
 import type { Labelled } from './Field'
@@ -25,8 +25,8 @@ export function Rating({ value, count, compact, className, ...span }: RatingProp
           const fill = compact ? 100 : Math.round(Math.min(Math.max(value - star + 1, 0), 1) * 100)
           return (
             <span key={star} className="pc-rating-star" style={fill < 100 ? ({ '--fill': `${fill}%` } as CSSProperties) : undefined}>
-              <Star />
-              <Star weight="fill" />
+              <StarIcon />
+              <StarIcon weight="fill" />
             </span>
           )
         })}
@@ -69,8 +69,8 @@ export function RatingInput({ label, name, value, defaultValue, onChange, descri
               disabled={disabled}
               onChange={() => onChange?.(star)}
             />
-            <Star />
-            <Star weight="fill" />
+            <StarIcon />
+            <StarIcon weight="fill" />
           </label>
         ))}
       </span>

@@ -1,5 +1,5 @@
 import { Link as InertiaLink, type InertiaLinkProps } from '@inertiajs/react'
-import { ArrowSquareOut } from '@phosphor-icons/react'
+import { ArrowSquareOutIcon } from '@phosphor-icons/react'
 import { cloneElement, isValidElement, type ComponentPropsWithRef, type ReactElement, type ReactNode } from 'react'
 import { cx } from './cx'
 
@@ -33,7 +33,7 @@ export function Link({ quiet, icon, iconAfter, children, className, ...element }
       <a {...link} className={look} target="_blank" rel="noopener">
         {lead}
         {children}
-        {iconAfter ?? <ArrowSquareOut />}
+        {iconAfter ?? <ArrowSquareOutIcon />}
         <span className="pc-visually-hidden"> (opens in a new tab)</span>
       </a>
     )

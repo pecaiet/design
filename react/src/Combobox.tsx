@@ -1,4 +1,4 @@
-import { CaretDown, X } from '@phosphor-icons/react'
+import { CaretDownIcon, XIcon } from '@phosphor-icons/react'
 import { useRef, useState } from 'react'
 import { cx } from './cx'
 import { FieldMessage, useField, type Labelled } from './Field'
@@ -132,12 +132,12 @@ function Chips<V extends Value>({
                   box.current?.focus()
                 }}
               >
-                <X />
+                <XIcon />
               </button>
             </span>
           ))}
           <span className="pc-picker-placeholder">{placeholder}</span>
-          <CaretDown />
+          <CaretDownIcon />
         </div>
         <PickerMenu
           menu={menu}

@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react'
+import { CaretDownIcon } from '@phosphor-icons/react'
 import { createContext, useContext, useEffect, useId, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { cx } from './cx'
 import { assign } from './popup'
@@ -57,7 +57,7 @@ export function AccordionItem({ summary, children, open, onOpenChange, disabled,
     >
       <summary tabIndex={disabled ? -1 : undefined} onClick={disabled ? event => event.preventDefault() : undefined}>
         {summary}
-        <CaretDown />
+        <CaretDownIcon />
       </summary>
       {!disabled && <div className="pc-accordion-content">{children}</div>}
     </details>

@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CheckCircle, IconContext, Info, Warning, WarningCircle, X } from '@phosphor-icons/react';
+import { CheckCircleIcon, IconContext, InfoIcon, WarningCircleIcon, WarningIcon, XIcon } from '@phosphor-icons/react';
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from './Button';
 import { leave } from './motion';
-const ICONS = { success: _jsx(CheckCircle, {}), warning: _jsx(Warning, {}), error: _jsx(WarningCircle, {}), news: _jsx(Info, {}) };
+const ICONS = { success: _jsx(CheckCircleIcon, {}), warning: _jsx(WarningIcon, {}), error: _jsx(WarningCircleIcon, {}), news: _jsx(InfoIcon, {}) };
 const Toasts = createContext(null);
 /** toast({ text, tone }) from anywhere under the ToastProvider. */
 export function useToast() {
@@ -77,7 +77,7 @@ function Toast({ text, tone, action, duration, onDismiss, ref }) {
         }, children: [ICONS[tone ?? 'news'], _jsx("span", { className: "pc-toast-text", children: text }), action && (_jsx(Button, { variant: "ghost", onClick: () => {
                     action.onClick();
                     onDismiss();
-                }, children: action.label })), _jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: "Dismiss", "data-pc-dismiss": "", onClick: event => {
+                }, children: action.label })), _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Dismiss", "data-pc-dismiss": "", onClick: event => {
                     // Handled here, so pecaiet.js doesn't remove an element React still owns.
                     event.preventDefault();
                     onDismiss();

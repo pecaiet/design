@@ -1,10 +1,10 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CheckCircle, Warning, WarningCircle, X } from '@phosphor-icons/react';
+import { CheckCircleIcon, WarningCircleIcon, WarningIcon, XIcon } from '@phosphor-icons/react';
 import { useLayoutEffect, useRef } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
 import { enter as grow, leave } from './motion';
-const ICONS = { notice: _jsx(CheckCircle, {}), warning: _jsx(Warning, {}), error: _jsx(WarningCircle, {}) };
+const ICONS = { notice: _jsx(CheckCircleIcon, {}), warning: _jsx(WarningIcon, {}), error: _jsx(WarningCircleIcon, {}) };
 export function Alert({ kind, icon, title, items, action, onDismiss, banner, enter, children, className, ...element }) {
     const ref = useRef(null);
     // Before the first paint, so it never shows at full size first.
@@ -25,7 +25,7 @@ export function Alert({ kind, icon, title, items, action, onDismiss, banner, ent
     };
     const end = (_jsxs(_Fragment, { children: [action && (action.href
                 ? _jsx(Button, { variant: "outline", className: "pc-alert-action", href: action.href, children: action.label })
-                : _jsx(Button, { variant: "outline", className: "pc-alert-action", onClick: action.onClick, children: action.label })), onDismiss && _jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: "Dismiss", className: "pc-alert-close", onClick: dismiss })] }));
+                : _jsx(Button, { variant: "outline", className: "pc-alert-action", onClick: action.onClick, children: action.label })), onDismiss && _jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: "Dismiss", className: "pc-alert-close", onClick: dismiss })] }));
     if (!title && !items && !action && !onDismiss) {
         return (_jsxs("p", { ...attributes, ref: ref, children: [icon ?? ICONS[kind], _jsx("span", { children: children })] }));
     }

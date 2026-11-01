@@ -1,5 +1,5 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretDown, CaretUpDown, Check, MagnifyingGlass } from '@phosphor-icons/react';
+import { CaretDownIcon, CaretUpDownIcon, CheckIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { Fragment, useEffect, useId, useRef, useState } from 'react';
 import { cx } from './cx';
 import { DropdownMenu, MenuItem } from './DropdownMenu';
@@ -33,7 +33,7 @@ export function Select({ label, 'aria-label': ariaLabel, options, value, onChang
                                 event.preventDefault();
                                 setOpen(true);
                             }
-                        }, children: [chosen ? _jsx("span", { children: chosen.label }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder ?? none }), _jsx(CaretDown, {})] }), _jsx(PickerMenu, { menu: menu, id: `${field.fieldId}-menu`, open: open, labelledBy: label ? labelId : undefined, label: ariaLabel, title: title ?? label ?? ariaLabel, options: options, picked: candidate => candidate === value, onPick: option => {
+                        }, children: [chosen ? _jsx("span", { children: chosen.label }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder ?? none }), _jsx(CaretDownIcon, {})] }), _jsx(PickerMenu, { menu: menu, id: `${field.fieldId}-menu`, open: open, labelledBy: label ? labelId : undefined, label: ariaLabel, title: title ?? label ?? ariaLabel, options: options, picked: candidate => candidate === value, onPick: option => {
                             onChange(option.value);
                             close();
                         }, none: none === undefined ? undefined : {
@@ -52,7 +52,7 @@ export function PlaceSelect({ label, 'aria-label': ariaLabel, places, current, t
     const buttonId = id ?? auto;
     const labelId = `${buttonId}-label`;
     const here = places.find(place => place.href === current);
-    return (_jsxs("div", { className: cx('pc-field', className), children: [label && _jsx("span", { className: "pc-label", id: labelId, children: label }), _jsx(DropdownMenu, { places: true, title: title ?? (typeof label === 'string' ? label : ariaLabel), className: "pc-picker", menuClassName: "pc-picker-menu", trigger: _jsxs("button", { id: buttonId, className: "pc-picker-button", type: "button", "aria-labelledby": label ? `${labelId} ${buttonId}` : undefined, "aria-label": ariaLabel && (here ? `${ariaLabel}: ${here.label}` : ariaLabel), children: [_jsx("span", { children: here?.label }), _jsx(CaretUpDown, {})] }), children: places.map(place => (_jsx(MenuItem, { href: place.href, icon: place.icon, current: place.href === current, children: place.label }, place.href))) })] }));
+    return (_jsxs("div", { className: cx('pc-field', className), children: [label && _jsx("span", { className: "pc-label", id: labelId, children: label }), _jsx(DropdownMenu, { places: true, title: title ?? (typeof label === 'string' ? label : ariaLabel), className: "pc-picker", menuClassName: "pc-picker-menu", trigger: _jsxs("button", { id: buttonId, className: "pc-picker-button", type: "button", "aria-labelledby": label ? `${labelId} ${buttonId}` : undefined, "aria-label": ariaLabel && (here ? `${ariaLabel}: ${here.label}` : ariaLabel), children: [_jsx("span", { children: here?.label }), _jsx(CaretUpDownIcon, {})] }), children: places.map(place => (_jsx(MenuItem, { href: place.href, icon: place.icon, current: place.href === current, children: place.label }, place.href))) })] }));
 }
 const choices = (menu) => [...(menu?.querySelectorAll('[role="option"]:not([aria-disabled="true"])') ?? [])];
 /** The list a picker opens: the phone sheet's title, the search, the options in their groups, and the keys that move through them.
@@ -114,11 +114,11 @@ export function PickerMenu({ menu, id, open, labelledBy, label, title, options, 
             field.current?.focus();
         }
     };
-    return (_jsxs(_Fragment, { children: [_jsx("div", { className: "pc-menu-backdrop" }), _jsxs("div", { ref: menu, id: id, className: "pc-menu pc-picker-menu pc-menu-pop", role: "listbox", "aria-labelledby": labelledBy, "aria-label": label, "aria-multiselectable": multiple || undefined, hidden: !open, onKeyDown: keys, children: [_jsx("div", { className: "pc-menu-label pc-menu-title", children: title }), search && (_jsx(InputGroup, { ref: field, icon: _jsx(MagnifyingGlass, {}), type: "search", placeholder: search, "aria-label": search, value: query, onChange: event => setQuery(event.target.value) })), none && !words && (_jsxs("button", { className: "pc-menu-item pc-menu-none", type: "button", role: "option", "aria-selected": none.picked, tabIndex: -1, onClick: none.onPick, children: [none.label, none.picked && _jsx(Check, { className: "pc-menu-check" })] })), shown.map((option, i) => {
+    return (_jsxs(_Fragment, { children: [_jsx("div", { className: "pc-menu-backdrop" }), _jsxs("div", { ref: menu, id: id, className: "pc-menu pc-picker-menu pc-menu-pop", role: "listbox", "aria-labelledby": labelledBy, "aria-label": label, "aria-multiselectable": multiple || undefined, hidden: !open, onKeyDown: keys, children: [_jsx("div", { className: "pc-menu-label pc-menu-title", children: title }), search && (_jsx(InputGroup, { ref: field, icon: _jsx(MagnifyingGlassIcon, {}), type: "search", placeholder: search, "aria-label": search, value: query, onChange: event => setQuery(event.target.value) })), none && !words && (_jsxs("button", { className: "pc-menu-item pc-menu-none", type: "button", role: "option", "aria-selected": none.picked, tabIndex: -1, onClick: none.onPick, children: [none.label, none.picked && _jsx(CheckIcon, { className: "pc-menu-check" })] })), shown.map((option, i) => {
                         const on = picked(option.value);
                         return (_jsxs(Fragment, { children: [option.group && option.group !== shown[i - 1]?.group && _jsx("div", { className: "pc-menu-label", children: option.group }), _jsxs("button", { className: "pc-menu-item", type: "button", role: "option", "aria-selected": on, "aria-disabled": option.disabledReason ? true : undefined, tabIndex: -1, onClick: () => {
                                         if (!option.disabledReason)
                                             onPick(option);
-                                    }, children: [multiple && _jsx("input", { className: "pc-checkbox", type: "checkbox", tabIndex: -1, "aria-hidden": "true", checked: on, readOnly: true }), option.colour && _jsx("span", { className: cx('pc-menu-dot', `pc-colour-${option.colour}`) }), option.icon, option.label, option.disabledReason && _jsx("span", { className: "pc-menu-note", children: option.disabledReason }), !multiple && on && _jsx(Check, { className: "pc-menu-check" })] })] }, option.value));
+                                    }, children: [multiple && _jsx("input", { className: "pc-checkbox", type: "checkbox", tabIndex: -1, "aria-hidden": "true", checked: on, readOnly: true }), option.colour && _jsx("span", { className: cx('pc-menu-dot', `pc-colour-${option.colour}`) }), option.icon, option.label, option.disabledReason && _jsx("span", { className: "pc-menu-note", children: option.disabledReason }), !multiple && on && _jsx(CheckIcon, { className: "pc-menu-check" })] })] }, option.value));
                     }), words && !shown.length && _jsx("p", { className: "pc-menu-empty", children: empty ? empty(typed) : `Nothing matches “${typed}”.` })] })] }));
 }

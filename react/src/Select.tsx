@@ -1,4 +1,4 @@
-import { CaretDown, CaretUpDown, Check, MagnifyingGlass } from '@phosphor-icons/react'
+import { CaretDownIcon, CaretUpDownIcon, CheckIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
 import { Fragment, useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
 import { cx } from './cx'
 import { DropdownMenu, MenuItem } from './DropdownMenu'
@@ -111,7 +111,7 @@ export function Select<V extends Value = string>({
           }}
         >
           {chosen ? <span>{chosen.label}</span> : <span className="pc-picker-placeholder">{placeholder ?? none}</span>}
-          <CaretDown />
+          <CaretDownIcon />
         </button>
         <PickerMenu
           menu={menu}
@@ -179,7 +179,7 @@ export function PlaceSelect({ label, 'aria-label': ariaLabel, places, current, t
             aria-label={ariaLabel && (here ? `${ariaLabel}: ${here.label}` : ariaLabel)}
           >
             <span>{here?.label}</span>
-            <CaretUpDown />
+            <CaretUpDownIcon />
           </button>
         }
       >
@@ -284,7 +284,7 @@ export function PickerMenu<V extends Value>({ menu, id, open, labelledBy, label,
         {search && (
           <InputGroup
             ref={field}
-            icon={<MagnifyingGlass />}
+            icon={<MagnifyingGlassIcon />}
             type="search"
             placeholder={search}
             aria-label={search}
@@ -295,7 +295,7 @@ export function PickerMenu<V extends Value>({ menu, id, open, labelledBy, label,
         {none && !words && (
           <button className="pc-menu-item pc-menu-none" type="button" role="option" aria-selected={none.picked} tabIndex={-1} onClick={none.onPick}>
             {none.label}
-            {none.picked && <Check className="pc-menu-check" />}
+            {none.picked && <CheckIcon className="pc-menu-check" />}
           </button>
         )}
         {shown.map((option, i) => {
@@ -319,7 +319,7 @@ export function PickerMenu<V extends Value>({ menu, id, open, labelledBy, label,
                 {option.icon}
                 {option.label}
                 {option.disabledReason && <span className="pc-menu-note">{option.disabledReason}</span>}
-                {!multiple && on && <Check className="pc-menu-check" />}
+                {!multiple && on && <CheckIcon className="pc-menu-check" />}
               </button>
             </Fragment>
           )

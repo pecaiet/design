@@ -1,5 +1,5 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CalendarDots, X } from '@phosphor-icons/react';
+import { CalendarDotsIcon, XIcon } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -44,7 +44,7 @@ export function DateInput({ label, 'aria-label': ariaLabel, placeholder, childre
                             if (!open)
                                 setOpened(opened + 1);
                             setOpen(!open);
-                        }, children: [_jsx(CalendarDots, {}), shown ? _jsx("span", { children: shown }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder ?? (choice.range ? 'No dates' : 'No date') })] }), shown && !disabled && (_jsx(Button, { variant: "ghost", icon: _jsx(X, {}), label: choice.range ? 'Clear dates' : 'Clear date', "data-pc-tooltip-side": "left", className: "pc-date-clear", onClick: () => {
+                        }, children: [_jsx(CalendarDotsIcon, {}), shown ? _jsx("span", { children: shown }) : _jsx("span", { className: "pc-picker-placeholder", children: placeholder ?? (choice.range ? 'No dates' : 'No date') })] }), shown && !disabled && (_jsx(Button, { variant: "ghost", icon: _jsx(XIcon, {}), label: choice.range ? 'Clear dates' : 'Clear date', "data-pc-tooltip-side": "left", className: "pc-date-clear", onClick: () => {
                             clear();
                             button.current?.focus();
                         } })), _jsx("div", { className: "pc-popover-backdrop" }), _jsxs("div", { ref: panel, id: `${field.fieldId}-popover`, className: "pc-popover", role: "dialog", "aria-labelledby": label ? labelId : undefined, "aria-label": ariaLabel, hidden: !open, children: [choice.range ? (_jsx(Datepicker, { ...calendar, range: true, value: choice.value, onChange: choice.onChange }, opened)) : (_jsx(Datepicker, { ...calendar, value: choice.value, onChange: date => {

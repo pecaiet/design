@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { router } from '@inertiajs/react';
-import { CaretRight } from '@phosphor-icons/react';
+import { CaretRightIcon } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { cx } from './cx';
 import { leave } from './motion';
@@ -92,6 +92,6 @@ export function TreeView({ label, items, expanded, defaultExpanded = [], onExpan
                         toggle(index);
                     else
                         choose(index);
-                }, children: [opens ? _jsx("span", { className: "pc-tree-caret", children: _jsx(CaretRight, {}) }) : row.level === 1 && _jsx("span", { className: "pc-tree-caret" }), row.item.icon, _jsx("span", { className: "pc-tree-label", children: row.item.label }), row.item.count !== undefined && _jsx("span", { className: "pc-tree-count", children: row.item.count })] }, row.item.id));
+                }, children: [opens ? _jsx("span", { className: "pc-tree-caret", children: _jsx(CaretRightIcon, {}) }) : row.level === 1 && _jsx("span", { className: "pc-tree-caret" }), row.item.icon, _jsx("span", { className: "pc-tree-label", children: row.item.label }), row.item.count !== undefined && _jsx("span", { className: "pc-tree-count", children: row.item.count })] }, row.item.id));
         }) }));
 }

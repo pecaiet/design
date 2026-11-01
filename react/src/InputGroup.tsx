@@ -1,4 +1,4 @@
-import { Check, Copy, Eye, EyeSlash } from '@phosphor-icons/react'
+import { CheckIcon, CopyIcon, EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
 import { useEffect, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -83,7 +83,7 @@ export function PasswordInput(props: PasswordInputProps) {
       end={
         <Button
           variant="ghost"
-          icon={shown ? <EyeSlash /> : <Eye />}
+          icon={shown ? <EyeSlashIcon /> : <EyeIcon />}
           label={shown ? 'Hide password' : 'Show password'}
           data-pc-tooltip-side="left"
           onClick={() => setShown(!shown)}
@@ -122,7 +122,7 @@ export function CopyInput({ copyLabel, value, ...props }: CopyInputProps) {
       {...props}
       value={value}
       readOnly
-      end={<Button variant="ghost" icon={copied ? <Check /> : <Copy />} label={copied ? 'Copied' : copyLabel} data-pc-tooltip-side="left" onClick={copy} />}
+      end={<Button variant="ghost" icon={copied ? <CheckIcon /> : <CopyIcon />} label={copied ? 'Copied' : copyLabel} data-pc-tooltip-side="left" onClick={copy} />}
     />
   )
 }

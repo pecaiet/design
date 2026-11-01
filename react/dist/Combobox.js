@@ -1,5 +1,5 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretDown, X } from '@phosphor-icons/react';
+import { CaretDownIcon, XIcon } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { cx } from './cx';
 import { FieldMessage, useField } from './Field';
@@ -67,7 +67,7 @@ function Chips({ label, 'aria-label': ariaLabel, options, value, onChange, place
                                                 return;
                                             remove(option.value);
                                             box.current?.focus();
-                                        }, children: _jsx(X, {}) })] }, option.value))), _jsx("span", { className: "pc-picker-placeholder", children: placeholder }), _jsx(CaretDown, {})] }), _jsx(PickerMenu, { menu: menu, id: `${field.fieldId}-menu`, open: open, labelledBy: label ? labelId : undefined, label: ariaLabel, title: title ?? label ?? ariaLabel, options: options, picked: one => value.includes(one), onPick: option => (value.includes(option.value) ? remove(option.value) : add(option.value)), search: search, empty: empty, multiple: true, onBackspace: () => {
+                                        }, children: _jsx(XIcon, {}) })] }, option.value))), _jsx("span", { className: "pc-picker-placeholder", children: placeholder }), _jsx(CaretDownIcon, {})] }), _jsx(PickerMenu, { menu: menu, id: `${field.fieldId}-menu`, open: open, labelledBy: label ? labelId : undefined, label: ariaLabel, title: title ?? label ?? ariaLabel, options: options, picked: one => value.includes(one), onPick: option => (value.includes(option.value) ? remove(option.value) : add(option.value)), search: search, empty: empty, multiple: true, onBackspace: () => {
                             if (picked.length)
                                 remove(picked[picked.length - 1].value);
                         } }), name && (value.length

@@ -1,6 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Link as InertiaLink, router } from '@inertiajs/react';
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { Fragment, useEffect, useId, useState } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -39,7 +39,7 @@ export function SearchWindow({ open, onClose, query, onQueryChange, placeholder,
         onSelect?.(result);
         onClose();
     };
-    return (_jsxs(Dialog, { kind: "dialog", open: open, onClose: onClose, className: cx('pc-search', className), "aria-label": "Search", children: [_jsxs("div", { className: "pc-search-field", children: [_jsx(MagnifyingGlass, {}), _jsx("input", { type: "search", value: query, placeholder: placeholder, "aria-label": placeholder, role: "combobox", "aria-expanded": results.length > 0, "aria-controls": `${id}-results`, "aria-autocomplete": "list", "aria-activedescendant": current ? `${id}-${current.id}` : undefined, onChange: event => {
+    return (_jsxs(Dialog, { kind: "dialog", open: open, onClose: onClose, className: cx('pc-search', className), "aria-label": "Search", children: [_jsxs("div", { className: "pc-search-field", children: [_jsx(MagnifyingGlassIcon, {}), _jsx("input", { type: "search", value: query, placeholder: placeholder, "aria-label": placeholder, role: "combobox", "aria-expanded": results.length > 0, "aria-controls": `${id}-results`, "aria-autocomplete": "list", "aria-activedescendant": current ? `${id}-${current.id}` : undefined, onChange: event => {
                             setActive(0);
                             onQueryChange(event.target.value);
                         }, onKeyDown: event => {

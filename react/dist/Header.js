@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretUpDown } from '@phosphor-icons/react';
+import { CaretUpDownIcon } from '@phosphor-icons/react';
 import { AppLogo, PeCaietMark } from './AppLogo';
 import { Avatar } from './Avatar';
 import { DropdownMenu } from './DropdownMenu';
@@ -20,5 +20,5 @@ export function Header({ logo, account, style, ...header }) {
             columnGap: 'var(--pc-space-2-5)',
             ...(phone ? { height: '48px', padding: '0 16px', background: 'var(--sidebar)' } : { height: '72px', padding: '0 24px' }),
             ...style,
-        }, children: [logo ?? _jsx(AppLogo, { mark: _jsx(PeCaietMark, {}), children: "pe caiet" }), _jsx(DropdownMenu, { align: "end", trigger: _jsx(SidebarItem, { icon: _jsx(Avatar, { initials: account.email.charAt(0).toUpperCase() }), iconAfter: _jsx(CaretUpDown, {}), children: account.email }), children: _jsx(AccountItems, { ...account }) })] }));
+        }, children: [logo ?? _jsx(AppLogo, { mark: _jsx(PeCaietMark, {}), children: "pe caiet" }), _jsx(DropdownMenu, { align: "end", trigger: _jsx(SidebarItem, { icon: _jsx(Avatar, { initials: account.email.charAt(0).toUpperCase() }), iconAfter: _jsx(CaretUpDownIcon, {}), children: account.email }), children: _jsx(AccountItems, { ...account }) })] }));
 }

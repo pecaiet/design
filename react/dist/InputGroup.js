@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Check, Copy, Eye, EyeSlash } from '@phosphor-icons/react';
+import { CheckIcon, CopyIcon, EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -29,7 +29,7 @@ export function InputGroup({ label, hint, error, optional, mono, icon, end, befo
 /** A password with the eye at its end: it shows the password, and the eye with a slash hides it again. */
 export function PasswordInput(props) {
     const [shown, setShown] = useState(false);
-    return (_jsx(InputGroup, { ...props, type: shown ? 'text' : 'password', end: _jsx(Button, { variant: "ghost", icon: shown ? _jsx(EyeSlash, {}) : _jsx(Eye, {}), label: shown ? 'Hide password' : 'Show password', "data-pc-tooltip-side": "left", onClick: () => setShown(!shown) }) }));
+    return (_jsx(InputGroup, { ...props, type: shown ? 'text' : 'password', end: _jsx(Button, { variant: "ghost", icon: shown ? _jsx(EyeSlashIcon, {}) : _jsx(EyeIcon, {}), label: shown ? 'Hide password' : 'Show password', "data-pc-tooltip-side": "left", onClick: () => setShown(!shown) }) }));
 }
 /** A read-only value (the muted fill, no border) with a copy button at its end. After a click its icon turns into a tick and
  *  its tooltip says "Copied" for two seconds. No toast. */
@@ -48,7 +48,7 @@ export function CopyInput({ copyLabel, value, ...props }) {
         window.clearTimeout(timer.current);
         timer.current = window.setTimeout(() => setCopied(false), 2000);
     };
-    return (_jsx(InputGroup, { ...props, value: value, readOnly: true, end: _jsx(Button, { variant: "ghost", icon: copied ? _jsx(Check, {}) : _jsx(Copy, {}), label: copied ? 'Copied' : copyLabel, "data-pc-tooltip-side": "left", onClick: copy }) }));
+    return (_jsx(InputGroup, { ...props, value: value, readOnly: true, end: _jsx(Button, { variant: "ghost", icon: copied ? _jsx(CheckIcon, {}) : _jsx(CopyIcon, {}), label: copied ? 'Copied' : copyLabel, "data-pc-tooltip-side": "left", onClick: copy }) }));
 }
 /** A field and its button side by side (Invite, Add), 8px apart, each its own shape. The field takes the room: a bare InputGroup or
  *  SearchInput (no label, hint or error). */

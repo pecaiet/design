@@ -1,4 +1,4 @@
-import { CaretLeft, X } from '@phosphor-icons/react'
+import { CaretLeftIcon, XIcon } from '@phosphor-icons/react'
 import { useId, useLayoutEffect, useRef, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -42,10 +42,10 @@ export function Drawer({ title, children, footer, ...props }: DrawerProps) {
     <>
       <div className="pc-drawer-head">
         {props.back && (
-          <Button variant="ghost" icon={<CaretLeft />} label={props.back} className="pc-drawer-back" data-pc-tooltip-side="bottom" onClick={close} />
+          <Button variant="ghost" icon={<CaretLeftIcon />} label={props.back} className="pc-drawer-back" data-pc-tooltip-side="bottom" onClick={close} />
         )}
         <h2 className="pc-drawer-title" id={id}>{title}</h2>
-        <Button variant="ghost" icon={<X />} label="Close" className="pc-drawer-close" data-pc-tooltip-side="bottom" onClick={close} />
+        <Button variant="ghost" icon={<XIcon />} label="Close" className="pc-drawer-close" data-pc-tooltip-side="bottom" onClick={close} />
       </div>
       <div className="pc-drawer-body">{children}</div>
       {footer && <div className="pc-drawer-footer">{footer}</div>}

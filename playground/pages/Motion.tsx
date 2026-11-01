@@ -1,5 +1,5 @@
 import { Alert, Badge, Button, Card, DropdownMenu, leave, Link, MenuItem, Stack, Table, Td, Th, Toggle } from '../../react/src/index'
-import { Info } from '@phosphor-icons/react'
+import { InfoIcon } from '@phosphor-icons/react'
 import { useState, type CSSProperties, type ReactNode } from 'react'
 
 type Row = {
@@ -144,7 +144,7 @@ function Samples() {
                 Task added. Remove it with Play or its ×.
               </Alert>
             )}
-            <Alert kind="notice" icon={<Info />}>
+            <Alert kind="notice" icon={<InfoIcon />}>
               Synced 2 minutes ago.
             </Alert>
           </Stack>

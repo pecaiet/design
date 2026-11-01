@@ -1,4 +1,4 @@
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
@@ -190,7 +190,7 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
       )}
       <div ref={root} className={cx('pc-calendar', className)}>
         <div className="pc-calendar-head">
-          <Button variant="ghost" icon={<CaretLeft />} label={name(before)} onClick={() => {
+          <Button variant="ghost" icon={<CaretLeftIcon />} label={name(before)} onClick={() => {
             setMonth(before)
             setFocus(addMonths(focus, -step))
           }} />
@@ -204,7 +204,7 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
           ) : (
             <span>{names.year.format(month)}</span>
           )}
-          <Button variant="ghost" icon={<CaretRight />} label={name(after)} onClick={() => {
+          <Button variant="ghost" icon={<CaretRightIcon />} label={name(after)} onClick={() => {
             setMonth(after)
             setFocus(addMonths(focus, step))
           }} />

@@ -33,7 +33,7 @@ import {
   useToast,
   Video,
 } from '../../react/src/index'
-import { Archive, CheckSquare, Devices, DotsThree, Folder, ListChecks, PencilSimple, SlidersHorizontal, Trash, UserCircle } from '@phosphor-icons/react'
+import { ArchiveIcon, CheckSquareIcon, DevicesIcon, DotsThreeIcon, FolderIcon, ListChecksIcon, PencilSimpleIcon, SlidersHorizontalIcon, TrashIcon, UserCircleIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 const COLOURS = [
@@ -43,9 +43,9 @@ const COLOURS = [
 ]
 const LABELS = ['Home', 'Work', 'Errands', 'Health'].map(label => ({ value: label.toLowerCase(), label }))
 const SECTIONS = [
-  { label: 'Account', icon: <UserCircle /> },
-  { label: 'Sessions', icon: <Devices /> },
-  { label: 'Preferences', icon: <SlidersHorizontal /> },
+  { label: 'Account', icon: <UserCircleIcon /> },
+  { label: 'Sessions', icon: <DevicesIcon /> },
+  { label: 'Preferences', icon: <SlidersHorizontalIcon /> },
 ]
 
 export function Overlays() {
@@ -74,13 +74,13 @@ export function Overlays() {
             <Link onClick={() => {}}>Hover me</Link>
           </Tooltip>
           <DropdownMenu
-            trigger={<Button variant="ghost" icon={<DotsThree />} label="List actions" />}
+            trigger={<Button variant="ghost" icon={<DotsThreeIcon />} label="List actions" />}
             title="Birthday present"
           >
-            <MenuItem icon={<PencilSimple />} onClick={() => toast({ text: 'Rename' })}>
+            <MenuItem icon={<PencilSimpleIcon />} onClick={() => toast({ text: 'Rename' })}>
               Rename
             </MenuItem>
-            <MenuItem icon={<Archive />} onClick={() => toast({ text: 'Archived', tone: 'success' })}>
+            <MenuItem icon={<ArchiveIcon />} onClick={() => toast({ text: 'Archived', tone: 'success' })}>
               Archive
             </MenuItem>
             <MenuSeparator />
@@ -91,7 +91,7 @@ export function Overlays() {
               </MenuItem>
             ))}
             <MenuSeparator />
-            <MenuItem destructive icon={<Trash />} onClick={() => toast({ text: 'Deleted', tone: 'error' })}>
+            <MenuItem destructive icon={<TrashIcon />} onClick={() => toast({ text: 'Deleted', tone: 'error' })}>
               Delete
             </MenuItem>
           </DropdownMenu>
@@ -297,14 +297,14 @@ export function Overlays() {
               {
                 id: 'home',
                 label: 'Home',
-                icon: <Folder />,
+                icon: <FolderIcon />,
                 count: 3,
                 children: [
-                  { id: 'groceries', label: 'Groceries', icon: <ListChecks />, count: 2 },
-                  { id: 'garden', label: 'Garden', icon: <CheckSquare /> },
+                  { id: 'groceries', label: 'Groceries', icon: <ListChecksIcon />, count: 2 },
+                  { id: 'garden', label: 'Garden', icon: <CheckSquareIcon /> },
                 ],
               },
-              { id: 'work', label: 'Work', icon: <Folder />, count: 1 },
+              { id: 'work', label: 'Work', icon: <FolderIcon />, count: 1 },
             ]}
           />
         </Stack>

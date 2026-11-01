@@ -1,10 +1,10 @@
-import { CheckCircle, Warning, WarningCircle, X } from '@phosphor-icons/react'
+import { CheckCircleIcon, WarningCircleIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
 import { useLayoutEffect, useRef, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
 import { enter as grow, leave } from './motion'
 
-const ICONS = { notice: <CheckCircle />, warning: <Warning />, error: <WarningCircle /> }
+const ICONS = { notice: <CheckCircleIcon />, warning: <WarningIcon />, error: <WarningCircleIcon /> }
 
 export type AlertProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
   /** notice: something worked, or what happens next. warning: needs attention soon, nothing is wrong yet. error: something went wrong. */
@@ -50,7 +50,7 @@ export function Alert({ kind, icon, title, items, action, onDismiss, banner, ent
       {action && (action.href
         ? <Button variant="outline" className="pc-alert-action" href={action.href}>{action.label}</Button>
         : <Button variant="outline" className="pc-alert-action" onClick={action.onClick}>{action.label}</Button>)}
-      {onDismiss && <Button variant="ghost" icon={<X />} label="Dismiss" className="pc-alert-close" onClick={dismiss} />}
+      {onDismiss && <Button variant="ghost" icon={<XIcon />} label="Dismiss" className="pc-alert-close" onClick={dismiss} />}
     </>
   )
 

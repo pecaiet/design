@@ -1,5 +1,5 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from './Button';
 import { cx } from './cx';
@@ -141,13 +141,13 @@ export function Datepicker({ min, max, disabledDays, autoFocus, locale, children
     for (let start = monday(month); start <= last; start = addDays(start, 7))
         weeks.push(Array.from({ length: 7 }, (_, i) => addDays(start, i)));
     const tabbable = sameMonth(focus, month) ? focus : month;
-    return (_jsxs(_Fragment, { children: [choice.quickPicks && (_jsxs(_Fragment, { children: [_jsx("div", { style: PICKS, children: choice.quickPicks.map(quick => (_jsxs("button", { className: "pc-menu-item", type: "button", onClick: () => pick(midnight(quick.date)), children: [quick.label, _jsx("span", { className: "pc-menu-note", children: quick.note ?? (Math.round((midnight(quick.date).getTime() - today.getTime()) / 864e5) < 2 ? names.weekday : names.weekdayDay).format(quick.date) })] }, quick.label))) }), _jsx("div", { className: "pc-menu-separator", style: EDGE })] })), _jsxs("div", { ref: root, className: cx('pc-calendar', className), children: [_jsxs("div", { className: "pc-calendar-head", children: [_jsx(Button, { variant: "ghost", icon: _jsx(CaretLeft, {}), label: name(before), onClick: () => {
+    return (_jsxs(_Fragment, { children: [choice.quickPicks && (_jsxs(_Fragment, { children: [_jsx("div", { style: PICKS, children: choice.quickPicks.map(quick => (_jsxs("button", { className: "pc-menu-item", type: "button", onClick: () => pick(midnight(quick.date)), children: [quick.label, _jsx("span", { className: "pc-menu-note", children: quick.note ?? (Math.round((midnight(quick.date).getTime() - today.getTime()) / 864e5) < 2 ? names.weekday : names.weekdayDay).format(quick.date) })] }, quick.label))) }), _jsx("div", { className: "pc-menu-separator", style: EDGE })] })), _jsxs("div", { ref: root, className: cx('pc-calendar', className), children: [_jsxs("div", { className: "pc-calendar-head", children: [_jsx(Button, { variant: "ghost", icon: _jsx(CaretLeftIcon, {}), label: name(before), onClick: () => {
                                     setMonth(before);
                                     setFocus(addMonths(focus, -step));
                                 } }), view === 'days' ? (_jsx("button", { className: "pc-calendar-title", type: "button", "aria-label": "Choose a month", onClick: () => {
                                     setView('months');
                                     moved.current = true;
-                                }, children: names.monthYear.format(month) })) : (_jsx("span", { children: names.year.format(month) })), _jsx(Button, { variant: "ghost", icon: _jsx(CaretRight, {}), label: name(after), onClick: () => {
+                                }, children: names.monthYear.format(month) })) : (_jsx("span", { children: names.year.format(month) })), _jsx(Button, { variant: "ghost", icon: _jsx(CaretRightIcon, {}), label: name(after), onClick: () => {
                                     setMonth(after);
                                     setFocus(addMonths(focus, step));
                                 } })] }), view === 'days' ? (_jsxs("div", { className: "pc-calendar-grid", role: "grid", "aria-label": names.monthYear.format(month), onKeyDown: dayKeys, onMouseLeave: () => setPreview(null), children: [_jsx("div", { role: "row", style: ROW, children: weeks[0].map(date => (_jsx("span", { className: "pc-calendar-weekday", role: "columnheader", "aria-label": names.weekdayLong.format(date), children: names.weekday.format(date).slice(0, 2) }, date.getDay()))) }), weeks.map(week => (_jsx("div", { role: "row", style: ROW, children: week.map(date => {

@@ -1,5 +1,5 @@
 import { Link as InertiaLink, type InertiaLinkProps } from '@inertiajs/react'
-import { CaretDown, CaretUp } from '@phosphor-icons/react'
+import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react'
 import type { ComponentPropsWithRef, HTMLAttributes, ReactNode } from 'react'
 import { cx } from './cx'
 import { EmptyState, type EmptyStateProps } from './EmptyState'
@@ -28,8 +28,8 @@ export function Th({ num, onSort, sort, children, className, ...th }: ThProps) {
       {onSort ? (
         <button className="pc-table-sort" type="button" onClick={onSort}>
           {children}
-          {sort === 'ascending' && <CaretUp />}
-          {sort === 'descending' && <CaretDown />}
+          {sort === 'ascending' && <CaretUpIcon />}
+          {sort === 'descending' && <CaretDownIcon />}
         </button>
       ) : children}
     </th>

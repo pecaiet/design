@@ -1,4 +1,4 @@
-import { ArrowLeft, CaretDown, Gear, Shield, SignOut } from '@phosphor-icons/react'
+import { ArrowLeftIcon, CaretDownIcon, GearIcon, ShieldIcon, SignOutIcon } from '@phosphor-icons/react'
 import { Avatar } from './Avatar'
 import { cx } from './cx'
 import { DropdownMenu, MenuItem, MenuSeparator } from './DropdownMenu'
@@ -23,13 +23,13 @@ export type Account = {
 export function AccountItems({ settingsHref, signOutHref, adminHref, backHref }: Account) {
   return (
     <>
-      <MenuItem href={settingsHref} icon={<Gear />}>Settings</MenuItem>
-      {adminHref && <MenuItem href={adminHref} icon={<Shield />}>Admin panel</MenuItem>}
+      <MenuItem href={settingsHref} icon={<GearIcon />}>Settings</MenuItem>
+      {adminHref && <MenuItem href={adminHref} icon={<ShieldIcon />}>Admin panel</MenuItem>}
       {backHref && (external(backHref)
-        ? <a className="pc-menu-item" role="menuitem" tabIndex={-1} href={backHref}><ArrowLeft />Back to pe caiet</a>
-        : <MenuItem href={backHref} icon={<ArrowLeft />}>Back to pe caiet</MenuItem>)}
+        ? <a className="pc-menu-item" role="menuitem" tabIndex={-1} href={backHref}><ArrowLeftIcon />Back to pe caiet</a>
+        : <MenuItem href={backHref} icon={<ArrowLeftIcon />}>Back to pe caiet</MenuItem>)}
       <MenuSeparator />
-      <MenuItem href={signOutHref} method="delete" as="button" destructive icon={<SignOut />}>Sign out</MenuItem>
+      <MenuItem href={signOutHref} method="delete" as="button" destructive icon={<SignOutIcon />}>Sign out</MenuItem>
     </>
   )
 }
@@ -47,7 +47,7 @@ export function SidebarAccount({ className, ...account }: SidebarAccountProps) {
       className={cx('pc-sidebar-account', className)}
       menuClassName="pc-sidebar-account-menu"
       trigger={
-        <SidebarItem icon={<Avatar initials={account.email.charAt(0).toUpperCase()} />} iconAfter={<CaretDown />}>
+        <SidebarItem icon={<Avatar initials={account.email.charAt(0).toUpperCase()} />} iconAfter={<CaretDownIcon />}>
           {account.email}
         </SidebarItem>
       }

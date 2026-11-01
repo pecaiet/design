@@ -1,14 +1,14 @@
-import { DownloadSimple, FileIcon, FileImage, FilePdf, FileText, FileXls, X } from '@phosphor-icons/react'
+import { DownloadSimpleIcon, FileIcon, FileImageIcon, FilePdfIcon, FileTextIcon, FileXlsIcon, XIcon } from '@phosphor-icons/react'
 import { useLayoutEffect, useRef, type ComponentPropsWithoutRef, type ComponentPropsWithRef, type HTMLAttributes, type ReactNode, type Ref } from 'react'
 import { Button } from './Button'
 import { cx } from './cx'
 import { enter as grow, leave } from './motion'
 
 const KINDS: [RegExp, ReactNode][] = [
-  [/\.pdf$/i, <FilePdf />],
-  [/\.(xlsx?|csv|ods|numbers)$/i, <FileXls />],
-  [/\.(png|jpe?g|gif|webp|avif|heic|svg)$/i, <FileImage />],
-  [/\.(txt|md|rtf|docx?|odt|pages)$/i, <FileText />],
+  [/\.pdf$/i, <FilePdfIcon />],
+  [/\.(xlsx?|csv|ods|numbers)$/i, <FileXlsIcon />],
+  [/\.(png|jpe?g|gif|webp|avif|heic|svg)$/i, <FileImageIcon />],
+  [/\.(txt|md|rtf|docx?|odt|pages)$/i, <FileTextIcon />],
 ]
 
 export type FilesProps = ComponentPropsWithRef<'div'>
@@ -29,7 +29,7 @@ export type FileRowProps = Kind & {
   name: string
   /** "240 KB". */
   size: ReactNode
-  /** The file's icon: by default from the name's ending (FilePdf, FileXls, FileImage, FileText, FileIcon). */
+  /** The file's icon: by default from the name's ending (FilePdfIcon, FileXlsIcon, FileImageIcon, FileTextIcon, FileIcon). */
   icon?: ReactNode
   /** A file the person just added: it grows in, the rows below gliding. Leave it off for what was already on the page. */
   enter?: boolean
@@ -58,7 +58,7 @@ export function FileRow({ name, size, icon, enter, className, ...element }: File
     return (
       <a {...link} ref={ref as Ref<HTMLAnchorElement>} className={look} download={download}>
         {inner}
-        <DownloadSimple className="pc-file-action" />
+        <DownloadSimpleIcon className="pc-file-action" />
       </a>
     )
   }
@@ -70,7 +70,7 @@ export function FileRow({ name, size, icon, enter, className, ...element }: File
   return (
     <div {...div} ref={ref as Ref<HTMLDivElement>} className={look}>
       {inner}
-      <Button variant="ghost" icon={<X />} label={`Remove ${name}`} onClick={remove} />
+      <Button variant="ghost" icon={<XIcon />} label={`Remove ${name}`} onClick={remove} />
     </div>
   )
 }

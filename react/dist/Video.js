@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Play, Video as VideoMark } from '@phosphor-icons/react';
+import { PlayIcon, VideoIcon } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
 import { cx } from './cx';
 import { assign } from './popup';
@@ -23,7 +23,7 @@ export function Video({ title, duration, caption, src, children, className, ref,
         if (playing)
             own.current?.focus();
     }, [playing]);
-    const box = broken || (!src && !children) ? (_jsx("div", { className: cx('pc-video', 'pc-video-empty', !caption && className), role: "img", "aria-label": `“${title}” can’t play`, children: _jsx(VideoMark, {}) })) : (_jsxs("div", { className: cx('pc-video', !caption && className), "data-state": playing ? 'playing' : undefined, children: [_jsx("video", { preload: "none", playsInline: true, ...video, ref: node => {
+    const box = broken || (!src && !children) ? (_jsx("div", { className: cx('pc-video', 'pc-video-empty', !caption && className), role: "img", "aria-label": `“${title}” can’t play`, children: _jsx(VideoIcon, {}) })) : (_jsxs("div", { className: cx('pc-video', !caption && className), "data-state": playing ? 'playing' : undefined, children: [_jsx("video", { preload: "none", playsInline: true, ...video, ref: node => {
                     own.current = node;
                     assign(ref, node);
                 }, src: src, controls: playing, "aria-label": playing ? title : undefined, onError: event => {
@@ -32,7 +32,7 @@ export function Video({ title, duration, caption, src, children, className, ref,
                 }, children: children }), _jsx("button", { className: "pc-video-play", type: "button", "aria-label": play, "data-pc-tooltip": play, onClick: () => {
                     setPlaying(true);
                     own.current?.play().catch(() => { });
-                }, children: _jsx(Play, { weight: "fill" }) }), duration !== undefined && _jsx("span", { className: "pc-video-length", "aria-hidden": "true", children: clock(duration) })] }));
+                }, children: _jsx(PlayIcon, { weight: "fill" }) }), duration !== undefined && _jsx("span", { className: "pc-video-length", "aria-hidden": "true", children: clock(duration) })] }));
     if (!caption)
         return box;
     return (_jsxs("figure", { className: cx('pc-figure', className), children: [box, _jsx("figcaption", { children: caption })] }));

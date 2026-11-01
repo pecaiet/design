@@ -13,7 +13,7 @@ import {
   Textarea,
   TextInput,
 } from '../../react/src/index'
-import { CaretDown, CaretRight, Copy, DotsThree, DownloadSimple, Plus, TextB } from '@phosphor-icons/react'
+import { CaretDownIcon, CaretRightIcon, CopyIcon, DotsThreeIcon, DownloadSimpleIcon, PlusIcon, TextBIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 export function Basics() {
@@ -50,27 +50,27 @@ export function Basics() {
             <Button variant="outline" size="large">
               Large
             </Button>
-            <Button variant="primary" icon={<Plus />}>
+            <Button variant="primary" icon={<PlusIcon />}>
               New list
             </Button>
-            <Button variant="outline" iconAfter={<CaretDown />}>
+            <Button variant="outline" iconAfter={<CaretDownIcon />}>
               Sort
             </Button>
-            <Button variant="ghost" icon={<DotsThree />} label="More" />
-            <Button variant="outline" icon={<Copy />} label="Copy" />
+            <Button variant="ghost" icon={<DotsThreeIcon />} label="More" />
+            <Button variant="outline" icon={<CopyIcon />} label="Copy" />
           </Stack>
           <Stack row>
             <Button variant="primary" busy={saving} onClick={save}>
               {saving ? 'Saving…' : 'Save (2s)'}
             </Button>
-            <Button variant="ghost" icon={<TextB />} label="Bold" pressed={bold} onClick={() => setBold(!bold)} />
+            <Button variant="ghost" icon={<TextBIcon />} label="Bold" pressed={bold} onClick={() => setBold(!bold)} />
             <Button variant="outline" disabled>
               Disabled
             </Button>
             <Button variant="primary" disabledReason="Fill in your email first">
               Save email
             </Button>
-            <Button variant="outline" href="/" iconAfter={<CaretRight />}>
+            <Button variant="outline" href="/" iconAfter={<CaretRightIcon />}>
               Inertia link to /
             </Button>
           </Stack>
@@ -194,7 +194,7 @@ export function Basics() {
             Forgot your password? <Link href="/">Reset it by email</Link>.
           </p>
           <p>
-            <Link href="/" iconAfter={<CaretRight />}>
+            <Link href="/" iconAfter={<CaretRightIcon />}>
               View all
             </Link>
           </p>
@@ -206,7 +206,7 @@ export function Basics() {
             before you start.
           </p>
           <p>
-            <Link href="/" icon={<DownloadSimple />}>
+            <Link href="/" icon={<DownloadSimpleIcon />}>
               Download as CSV
             </Link>
           </p>
