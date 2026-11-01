@@ -1,11 +1,18 @@
 {
   "v": 3,
   "assetGroups": {
-    "logo": {
+    "appicons": {
       "files": {
-        "pe-caiet.svg": {
+        "accounts.svg": {
+          "blob": "a1fba5cd37a45b657c08669d98ddf4e7",
+          "name": "accounts.svg",
+          "sha256": "3e7732bcbe706bad282cfeae88eef231c7d8978a9ff381c4b6e2c028cf8d8752",
+          "size": 1037,
+          "type": "image/svg+xml"
+        },
+        "pecaiet.svg": {
           "blob": "1deae5d33c6bd839a12aa49403e70a86",
-          "name": "pe-caiet.svg",
+          "name": "pecaiet.svg",
           "sha256": "9b24e2e70e385573090632efcdbe59fe511fc63acddbd7d27f7efa0486cac2fe",
           "size": 1197,
           "type": "image/svg+xml"
@@ -18,7 +25,7 @@
           "type": "image/svg+xml"
         }
       },
-      "name": "logo",
+      "name": "appicons",
       "order": []
     }
   },
@@ -32,13 +39,13 @@
     "sections": []
   },
   "groups": [
-    "logo"
+    "appicons"
   ],
   "lastChange": {
-    "at": "2026-11-01T09:04:00Z",
+    "at": "2026-11-01T12:30:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v2.0.1: a hidden tooltip shrinks to nothing once it has faded, so an unseen tooltip near the edge never widens the page."
+    "note": "Brought up to design v3.0.0: the logo group is now appicons (accounts.svg, pecaiet.svg, todo.svg, named after their apps); icons are Phosphor only, imported from @pecaiet/design/icons; Footer's word is optional."
   },
   "layout": "files",
   "libraries": [],
