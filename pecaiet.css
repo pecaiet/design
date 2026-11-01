@@ -812,19 +812,20 @@
     content: attr(data-pc-tooltip); position: absolute; bottom: calc(100% + var(--pc-space-2)); left: 50%; z-index: var(--pc-layer-tooltip);
     width: max-content; max-width: var(--pc-width-256); padding: var(--pc-space-1-5) var(--pc-space-2); border-radius: var(--pc-radius); white-space: normal;
     background: var(--foreground); color: var(--background); font-size: var(--pc-text-12); font-weight: var(--pc-weight-medium); line-height: var(--pc-line-16);
-    box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%); scale: 0;
-    transition: opacity var(--pc-motion) var(--pc-motion-ease), scale 0s linear var(--pc-motion);
+    box-shadow: var(--pc-raise-lg); opacity: 0; pointer-events: none; transform: translateX(-50%) scale(var(--pc-tooltip-scale, 0));
+    transition: opacity var(--pc-motion) var(--pc-motion-ease), transform 0s linear var(--pc-motion);
   }
   /* Hidden, it also shrinks to nothing once it has faded, so an unseen tooltip at the edge never widens the page. */
+  /* The scale lives inside transform, through --pc-tooltip-scale: a build minifier merges a separate scale: 0 into transform, which hover then can't undo. */
   /* It shows after the pointer rests on it (pc-motion-wait, 120ms, the one motion speed), and at once on keyboard focus. */
-  [data-pc-tooltip]:hover::after { opacity: 1; scale: 1; transition-delay: var(--pc-motion-wait); }
-  [data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:has(:focus-visible)::after { opacity: 1; scale: 1; transition-delay: 0s; }
+  [data-pc-tooltip]:hover::after { opacity: 1; --pc-tooltip-scale: 1; transition-delay: var(--pc-motion-wait); }
+  [data-pc-tooltip]:focus-visible::after, [data-pc-tooltip]:has(:focus-visible)::after { opacity: 1; --pc-tooltip-scale: 1; transition-delay: 0s; }
   /* Above by default; data-pc-tooltip-side="bottom" near the top edge, "left" or "right" where there's no room. */
   [data-pc-tooltip-side="bottom"]::after { top: calc(100% + var(--pc-space-2)); bottom: auto; }
-  [data-pc-tooltip-side="left"]::after { top: 50%; right: calc(100% + var(--pc-space-2)); bottom: auto; left: auto; transform: translateY(-50%); }
-  [data-pc-tooltip-side="right"]::after { top: 50%; left: calc(100% + var(--pc-space-2)); bottom: auto; transform: translateY(-50%); }
+  [data-pc-tooltip-side="left"]::after { top: 50%; right: calc(100% + var(--pc-space-2)); bottom: auto; left: auto; transform: translateY(-50%) scale(var(--pc-tooltip-scale, 0)); }
+  [data-pc-tooltip-side="right"]::after { top: 50%; left: calc(100% + var(--pc-space-2)); bottom: auto; transform: translateY(-50%) scale(var(--pc-tooltip-scale, 0)); }
   /* Escape hides it: the app sets data-pc-tooltip-hidden until the pointer or focus leaves. */
-  [data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; scale: 0; }
+  [data-pc-tooltip][data-pc-tooltip-hidden]::after { opacity: 0; --pc-tooltip-scale: 0; }
 
   /* The sidebar head: the app's logo (optional). */
   .pc-app-logo { display: inline-flex; align-items: center; gap: var(--pc-space-2); font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
