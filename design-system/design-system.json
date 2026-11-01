@@ -42,10 +42,10 @@
     "appicons"
   ],
   "lastChange": {
-    "at": "2026-11-01T17:40:00Z",
+    "at": "2026-11-01T20:30:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v3.3.0: SidebarSection kind=\"group\", a small grey semibold label naming a set of pages (Account), its rows in line with the rows above."
+    "note": "Brought up to design v3.3.1: tooltips show again in apps built with Tailwind and Vite (the scale now sits inside transform, so the minifier can't merge it away)."
   },
   "layout": "files",
   "libraries": [],
