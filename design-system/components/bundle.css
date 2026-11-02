@@ -183,7 +183,9 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: var(--pc-line-24); }
 .pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1; }
 /* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
-.pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) var(--pc-space-1-5); }
+/* Rows: the table's headings start 16px under the description, as a card's fields do (6px here, 2px between rows, 8px
+   above the heading text), and the row pills sit 4px from the card's edge on every side. */
+.pc-card-rows { padding: var(--pc-space-1-5) var(--pc-space-1) var(--pc-space-0-5); }
 /* Phones: a table wider than the screen scrolls sideways inside its card instead of pushing the card past the edge (the card may
      shrink below its table's width, even as a grid or flex item). Its menus and
    lists open as sheets there, outside the scrolling box, so nothing is cut off. */
