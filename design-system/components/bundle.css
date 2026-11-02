@@ -183,9 +183,7 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: var(--pc-line-24); }
 .pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1; }
 /* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
-/* Rows: the table's headings start 16px under the description, as a card's fields do (6px here, 2px between rows, 8px
-   above the heading text), and the row pills sit 4px from the card's edge on every side. */
-.pc-card-rows { padding: var(--pc-space-1-5) var(--pc-space-1) var(--pc-space-0-5); }
+.pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) var(--pc-space-1-5); }
 /* Phones: a table wider than the screen scrolls sideways inside its card instead of pushing the card past the edge (the card may
      shrink below its table's width, even as a grid or flex item). Its menus and
    lists open as sheets there, outside the scrolling box, so nothing is cut off. */
@@ -471,7 +469,8 @@ ol.pc-list { list-style: decimal; }
 .pc-menu-item:hover { background: var(--accent); }
 .pc-menu-item:focus-visible { background: var(--accent); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
 .pc-menu-item-destructive, .pc-menu-item-destructive > svg { color: var(--destructive); }
-.pc-menu-separator { height: var(--pc-border); margin: var(--pc-space-1) calc(-1 * var(--pc-space-1)); background: var(--border); }
+/* The line sits in the menu's own 4px gaps, so it is as far from the items as the menu's edges are. */
+.pc-menu-separator { height: var(--pc-border); margin: 0 calc(-1 * var(--pc-space-1)); background: var(--border); }
 
 .pc-dialog { width: min(var(--pc-width-400), calc(100% - 2 * var(--pc-space-4))); margin: auto; padding: var(--pc-space-4); border: var(--pc-border) solid var(--border); border-radius: var(--pc-radius-lg); background: var(--card); color: var(--foreground); box-shadow: var(--pc-raise-lg); }
 .pc-dialog::backdrop { background: var(--overlay); }
@@ -479,7 +478,7 @@ ol.pc-list { list-style: decimal; }
 /* What sits between the text and the actions (fields, an error, longer text); it scrolls when it doesn't fit, the title and actions stay. */
 /* It scrolls, so it keeps 8px of room inside its edges for a field's focus ring and gives it back with a negative margin. */
 .pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; margin: calc(-1 * var(--pc-space-2)); padding: var(--pc-space-2); overflow-y: auto; }
-.pc-dialog:has(:is(.pc-picker-menu, .pc-popover):not([hidden])), .pc-dialog:has(:is(.pc-picker-menu, .pc-popover):not([hidden])) .pc-dialog-content { overflow: visible; }
+.pc-dialog:has(:is(.pc-picker-menu, .pc-popover):is(:not([hidden]), [data-pc-closing])), .pc-dialog:has(:is(.pc-picker-menu, .pc-popover):is(:not([hidden]), [data-pc-closing])) .pc-dialog-content { overflow: visible; }
 .pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
 .pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
 .pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }

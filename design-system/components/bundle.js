@@ -150,11 +150,13 @@
     // Drawn again, the sheet would start its sliding-in animation over (a flash off screen): hold it off while it slides out.
     bar?.style.setProperty("animation", "none");
     kept.forEach(([k, d]) => k.style.setProperty("display", d, "important"));
+    // Marked while it plays out, so CSS can tell it is still drawn (a window keeps not clipping it).
+    el.setAttribute("data-pc-closing", "");
     const runs = [];
     if (bar) runs.push(play(bar, [{ transform: "translateX(0)" }, { transform: "translateX(-100%)" }], t));
     if (away) runs.push(play(el, [shownFrame, away], t));
     if (shade) runs.push(play(shade, [{ opacity: "1" }, { opacity: "0" }], t));
-    const stop = () => { kept.forEach(([k]) => k.style.removeProperty("display")); bar?.style.removeProperty("animation"); runs.forEach(a => a.cancel()); stops.delete(el); };
+    const stop = () => { kept.forEach(([k]) => k.style.removeProperty("display")); el.removeAttribute("data-pc-closing"); bar?.style.removeProperty("animation"); runs.forEach(a => a.cancel()); stops.delete(el); };
     stops.set(el, stop);
     Promise.all(runs.map(a => a.finished)).then(stop, () => {});
   }
