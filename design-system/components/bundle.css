@@ -181,9 +181,13 @@ button.pc-avatar:focus-visible { outline: var(--pc-focus-outline); outline-offse
 .pc-card-header:last-child { padding-bottom: var(--pc-space-4); }
 .pc-card-header:has(> .pc-card-action) { grid-template-columns: 1fr auto; column-gap: var(--pc-space-3); }
 .pc-card-action { position: relative; z-index: var(--pc-layer-raised); grid-column: 2; grid-row: 1; display: flex; align-items: center; height: var(--pc-line-24); }
-.pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1 / -1; }
+.pc-card-header:has(> .pc-card-action) > .pc-card-description { grid-column: 1; }
 /* Rows inside (a table, a list of rows): they run to 4px from the card's edge. */
 .pc-card-rows { padding: var(--pc-space-2) var(--pc-space-1) var(--pc-space-1-5); }
+/* Phones: a table wider than the screen scrolls sideways inside its card instead of pushing the card past the edge (the card may
+     shrink below its table's width, even as a grid or flex item). Its menus and
+   lists open as sheets there, outside the scrolling box, so nothing is cut off. */
+@media (max-width: 47.99rem) { .pc-card { min-width: 0; } .pc-card-rows { overflow-x: auto; } }
 /* An image on top, edge to edge in the card's corners. */
 .pc-card-media { display: block; width: 100%; aspect-ratio: 5 / 2; object-fit: cover; border-radius: calc(var(--pc-radius-lg) - var(--pc-border)) calc(var(--pc-radius-lg) - var(--pc-border)) 0 0; }
 /* A card you can click: its title is a .pc-card-link that covers the card, as a table row's link does. Under the pointer it
@@ -473,6 +477,7 @@ ol.pc-list { list-style: decimal; }
 /* What sits between the text and the actions (fields, an error, longer text); it scrolls when it doesn't fit, the title and actions stay. */
 /* It scrolls, so it keeps 8px of room inside its edges for a field's focus ring and gives it back with a negative margin. */
 .pc-dialog-content { display: grid; gap: var(--pc-space-3); min-height: 0; margin: calc(-1 * var(--pc-space-2)); padding: var(--pc-space-2); overflow-y: auto; }
+.pc-dialog:has(:is(.pc-picker-menu, .pc-popover):not([hidden])), .pc-dialog:has(:is(.pc-picker-menu, .pc-popover):not([hidden])) .pc-dialog-content { overflow: visible; }
 .pc-dialog-content > p:not([class]) { margin: 0; color: var(--muted-foreground); }
 .pc-dialog-body:has(> .pc-dialog-content) { grid-template-rows: auto minmax(0, 1fr) auto; }
 .pc-dialog-title { margin: 0; font-size: var(--pc-text-16); line-height: var(--pc-line-24); font-weight: var(--pc-weight-semibold); }
@@ -1148,6 +1153,9 @@ dialog.pc-drawer:not([open]) { display: none; }
   .pc-menu-pop .pc-menu-item[aria-current="page"]::before { left: calc(-1 * var(--pc-space-2)); }
   .pc-menu-backdrop:has(+ .pc-menu-pop:not([hidden])) { display: block; position: fixed; inset: 0; z-index: var(--pc-layer-sheet); background: var(--overlay); }
   html:has(.pc-menu-pop:not([hidden])) { overflow: hidden; }
+  /* In a window, itself a sheet on phones, a field's list fills the window instead: the window is its frame, so nothing shows behind it. */
+  .pc-dialog .pc-picker { position: static; }
+  .pc-dialog .pc-menu.pc-menu-pop { position: absolute; inset: 0; max-height: none; border-width: 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
 }
 .pc-menu.pc-menu-sheet { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: var(--pc-layer-sheet); min-width: 0; max-height: var(--pc-height-sheet); overflow-y: auto; padding: var(--pc-space-2) var(--pc-space-2) calc(var(--pc-space-4) + env(safe-area-inset-bottom)); border-width: var(--pc-border) 0 0; border-radius: var(--pc-radius-lg) var(--pc-radius-lg) 0 0; }
 .pc-menu-sheet > .pc-menu-label.pc-menu-title { display: block; }
