@@ -1,10 +1,13 @@
 import { type InertiaLinkProps } from '@inertiajs/react';
 import type { ComponentPropsWithRef, HTMLAttributes, ReactNode } from 'react';
 import { type EmptyStateProps } from './EmptyState';
-export type TableProps = ComponentPropsWithRef<'table'>;
+export type TableProps = ComponentPropsWithRef<'table'> & {
+    /** Every row turns accent under the pointer, not only a row with a RowLink. The cursor stays an arrow. */
+    hover?: boolean;
+};
 /** Rows of records, usually in a Card's content with rows. Write the thead and tbody; a row's cells are Td, TableCheck first and
  *  TableActions last. A picked row has aria-selected="true". */
-export declare function Table({ className, ...table }: TableProps): import("react").JSX.Element;
+export declare function Table({ hover, className, ...table }: TableProps): import("react").JSX.Element;
 export type ThProps = Omit<ComponentPropsWithRef<'th'>, 'aria-sort'> & {
     /** A column of numbers: its header on the right too. */
     num?: boolean;

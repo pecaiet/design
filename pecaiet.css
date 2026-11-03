@@ -559,10 +559,11 @@
 
   .pc-card-footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--pc-space-2); padding: var(--pc-space-3) var(--pc-space-4); border-top: var(--pc-border) solid var(--border); }
   .pc-card-footer-note { margin-right: auto; color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
-  /* Only a row that opens something (a row link) turns accent under the pointer; the others stay still. */
-  .pc-table tbody tr:has(.pc-row-link):hover td { background: var(--accent); }
-  /* On that accent row a ghost button under the pointer turns card, the sidebar's active pill, so it still shows. */
-  .pc-table tbody tr:has(.pc-row-link):hover .pc-btn-ghost:hover { background: var(--card); }
+  /* Only a row that opens something (a row link) turns accent under the pointer; the others stay still. A .pc-table-hover table
+     lights every row, its cursor staying an arrow. */
+  .pc-table tbody tr:has(.pc-row-link):hover td, .pc-table-hover tbody tr:hover td { background: var(--accent); }
+  /* On that accent row a ghost button under the pointer takes the text colour at 12% over it, so it differs from the row and the table. */
+  .pc-table tbody tr:has(.pc-row-link):hover .pc-btn-ghost:hover, .pc-table-hover tbody tr:hover .pc-btn-ghost:hover { background: color-mix(in srgb, var(--foreground) var(--pc-opacity-12), var(--accent)); }
   .pc-table tr:has(.pc-row-link) { position: relative; cursor: pointer; }
   .pc-row-link { color: inherit; font-weight: var(--pc-weight-semibold); text-decoration: none; }
   .pc-row-link::after { content: ""; position: absolute; inset: 0; }
@@ -578,7 +579,9 @@
      ⋯ menu button (.pc-table-actions). Checkboxes and buttons sit above a row link, so they stay clickable. */
   .pc-table .pc-table-check { width: calc(var(--pc-size-16) + var(--pc-space-3)); padding-right: 0; }
   .pc-table .pc-table-num { text-align: right; font-variant-numeric: tabular-nums; }
-  .pc-table .pc-table-actions { width: calc(var(--pc-row) + var(--pc-space-1)); padding: 0 0 0 var(--pc-space-1); text-align: right; }
+  .pc-table .pc-table-actions { width: calc(var(--pc-row-sm) + var(--pc-space-1) + var(--pc-space-0-5)); padding: 0 var(--pc-space-0-5) 0 var(--pc-space-1); text-align: right; }
+  /* The ⋯ sits 2px inside its row (pc-row-sm in pc-row), its corners 2px tighter, as the stepper's buttons do. */
+  .pc-table .pc-table-actions .pc-btn-icon { width: var(--pc-row-sm); height: var(--pc-row-sm); border-radius: calc(var(--pc-radius) - var(--pc-space-0-5)); }
   .pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: var(--pc-layer-raised); vertical-align: middle; }
   /* The cell whose ⋯ menu is open rises to the menu's layer: the raised cells of the rows below stay under the menu. */
   .pc-table .pc-table-actions > :has(.pc-menu:not([hidden])) { z-index: var(--pc-layer-menu); }

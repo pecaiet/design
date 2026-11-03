@@ -5,8 +5,8 @@ import { cx } from './cx';
 import { EmptyState } from './EmptyState';
 /** Rows of records, usually in a Card's content with rows. Write the thead and tbody; a row's cells are Td, TableCheck first and
  *  TableActions last. A picked row has aria-selected="true". */
-export function Table({ className, ...table }) {
-    return _jsx("table", { ...table, className: cx('pc-table', className) });
+export function Table({ hover, className, ...table }) {
+    return _jsx("table", { ...table, className: cx('pc-table', hover && 'pc-table-hover', className) });
 }
 export function Th({ num, onSort, sort, children, className, ...th }) {
     return (_jsx("th", { ...th, className: cx(num && 'pc-table-num', className) || undefined, "aria-sort": sort, children: onSort ? (_jsxs("button", { className: "pc-table-sort", type: "button", onClick: onSort, children: [children, sort === 'ascending' && _jsx(CaretUpIcon, {}), sort === 'descending' && _jsx(CaretDownIcon, {})] })) : children }));

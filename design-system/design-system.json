@@ -42,10 +42,10 @@
     "appicons"
   ],
   "lastChange": {
-    "at": "2026-11-01T20:30:00Z",
+    "at": "2026-11-03T21:27:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v3.3.1: tooltips show again in apps built with Tailwind and Vite (the scale now sits inside transform, so the minifier can't merge it away)."
+    "note": "Brought up to design v3.4.6: a table with pc-table-hover lights every row under the pointer; the row's ⋯ is 28px, 2px inside its row, and on a lit row takes the text colour at 12% over accent. Also carries 3.4.0 to 3.4.5."
   },
   "layout": "files",
   "libraries": [],

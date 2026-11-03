@@ -4,12 +4,15 @@ import type { ComponentPropsWithRef, HTMLAttributes, ReactNode } from 'react'
 import { cx } from './cx'
 import { EmptyState, type EmptyStateProps } from './EmptyState'
 
-export type TableProps = ComponentPropsWithRef<'table'>
+export type TableProps = ComponentPropsWithRef<'table'> & {
+  /** Every row turns accent under the pointer, not only a row with a RowLink. The cursor stays an arrow. */
+  hover?: boolean
+}
 
 /** Rows of records, usually in a Card's content with rows. Write the thead and tbody; a row's cells are Td, TableCheck first and
  *  TableActions last. A picked row has aria-selected="true". */
-export function Table({ className, ...table }: TableProps) {
-  return <table {...table} className={cx('pc-table', className)} />
+export function Table({ hover, className, ...table }: TableProps) {
+  return <table {...table} className={cx('pc-table', hover && 'pc-table-hover', className)} />
 }
 
 export type ThProps = Omit<ComponentPropsWithRef<'th'>, 'aria-sort'> & {
