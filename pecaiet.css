@@ -311,6 +311,7 @@
     width: var(--pc-width-256); flex-shrink: 0; padding: var(--pc-space-2-5) var(--pc-space-2);
     background: var(--sidebar); color: var(--foreground);
     overflow-y: auto;
+    box-shadow: var(--pc-raise);
   }
   .pc-sidebar > *, .pc-sidebar-section > *, .pc-sidebar-sub > * { flex-shrink: 0; }
   .pc-sidebar-section { display: flex; flex-direction: column; gap: var(--pc-space-0-5); margin-top: var(--pc-space-2-5); }
@@ -326,9 +327,9 @@
   .pc-sidebar-item > .pc-avatar:first-child { margin: 0 calc(-1 * var(--pc-space-1)); }
   .pc-sidebar-item > .pc-sidebar-mark:first-child { margin: 0 calc(-1 * var(--pc-space-0-5)); }
   .pc-sidebar-item:hover { background: var(--sidebar-hover); }
-  .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); }
+  .pc-sidebar-item[aria-current="page"] { background: var(--sidebar-active); color: var(--sidebar-active-foreground); box-shadow: var(--pc-focus-inset-none), var(--pc-raise); }
   .pc-sidebar-item:focus-visible { background: var(--sidebar-hover); outline: var(--pc-focus-outline); outline-offset: var(--pc-border); box-shadow: var(--pc-focus-inset); }
-  .pc-sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); }
+  .pc-sidebar-item[aria-current="page"]:focus-visible { background: var(--sidebar-active); box-shadow: var(--pc-focus-inset), var(--pc-raise-none); }
   .pc-sidebar-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pc-sidebar-detail { margin-left: auto; font-size: var(--pc-text-12); line-height: var(--pc-line-16); font-weight: var(--pc-weight-regular); font-variant-numeric: tabular-nums; }
   .pc-sidebar-detail-alert { color: var(--destructive); font-weight: var(--pc-weight-semibold); }
@@ -777,7 +778,7 @@
   .pc-modal:focus { outline: none; }
   .pc-modal-frame { display: flex; }
   .pc-modal-frame > .pc-sheet-backdrop { display: none; }
-  .pc-modal-nav { width: var(--pc-width-256); }
+  .pc-modal-nav { width: var(--pc-width-256); box-shadow: none; }
   .pc-modal-nav-user { display: flex; align-items: center; gap: var(--pc-space-2-5); min-height: var(--pc-row); padding: 0 var(--pc-space-2); color: var(--muted-foreground); font-size: var(--pc-text-12); line-height: var(--pc-line-16); }
   .pc-modal-nav-user > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pc-modal-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }

@@ -10,7 +10,7 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
 - Notices sit on `primary-soft`, warnings on `warning-soft`, errors on `destructive-soft`. An open dialog dims the page with `overlay`.
 - Late dates and counts, and delete actions, are `destructive`.
 - `warning` (amber) is for what needs attention soon but isn't wrong yet: due soon, a session about to end, offline. Like `destructive`, it always comes with an icon or words.
-- The active sidebar row is a `sidebar-active` pill; its text, icon and count keep the same colours as every other row.
+- The active sidebar row is a raised `sidebar-active` pill; its text, icon and count keep the same colours as every other row.
 - Every text pair named in a token's note holds 4.5:1 in both themes; `input` holds 3:1 on every surface (card, page, sidebar, muted), `ring` on `card`.
 
 ## Type
@@ -37,7 +37,7 @@ Pecaiet is the shared look of the Pe caiet apps: **idp** (sign-in and account se
   - Layers (`pc-layer-*`), bottom to top: raised, tooltip, menu, drawer, sheet (a phone sheet and the dimmed page behind it), toast, skip link.
   - Motion (`pc-motion`): 120ms for everything that moves (Motion, below).
 - Corners: `pc-radius-xs` (2px) for focus rings round links and the tab underline, `pc-radius-sm` (5px) for checkboxes and key caps, `pc-radius` (10px) for every row and control (tabs and a rating's stars take `pc-radius-sm`), `pc-radius-lg` (14px) for panels (cards, menus, dialogs, popovers). Avatars, badges, chips and radios are round. Inside a padded container the inner corner is the outer one minus the gap: menus keep 4px around 10px rows (14 = 10 + 4).
-- Shadows: `pc-raise` for cards, the raised pill (a toolbar tool under the pointer, the chosen segment), the slider's handle and a switch's knob; `pc-raise-lg` for what opens over the page (menus, dialogs, popovers, drawers, toasts, tooltips) and a video's play button. The active sidebar row is a flat pill: its fill alone marks it. Each shadow has a `-none` twin, the same shape invisible, which a control has at rest, so a ring or lift fades in instead of growing.
+- Shadows, by how far something sits above the page: nothing for the page itself (rows, fields, buttons at rest); `pc-raise` for what sits on it (cards, the raised pill: the active sidebar row, a toolbar tool under the pointer, the chosen segment; the panels docked to the screen's edge: the sidebar on desktop and an app's own side panel, such as todo's open task; the slider's handle and a switch's knob); `pc-raise-lg` for what opens over it (menus, dialogs, popovers, drawers, toasts, tooltips, the sidebar as a phone sheet) and a video's play button. A focused row isn't lifted: its ring takes the lift's place. Each shadow has a `-none` twin, the same shape invisible, which a control has at rest, so a ring or lift fades in instead of growing.
 
 ## Motion
 
