@@ -315,6 +315,13 @@ button.pc-link { padding: 0 var(--pc-space-0-5); border: 0; background: none; fo
 .pc-table .pc-table-check > *, .pc-table .pc-table-actions > * { position: relative; z-index: var(--pc-layer-raised); vertical-align: middle; }
 /* The cell whose ⋯ menu is open rises to the menu's layer: the raised cells of the rows below stay under the menu. */
 .pc-table .pc-table-actions > :has(.pc-menu:not([hidden])) { z-index: var(--pc-layer-menu); }
+/* A row's ⋯ outside a table, in a list of rows with 8px at their sides (todo's items): .pc-row-actions at the row's end.
+   As in a table: 28px, 2px inside its row, corners 2px tighter, above a row link; its hover a step darker than accent, so it
+   shows on a lit row too. Its open menu rises to the menu's layer, over the rows below. */
+.pc-row-actions { position: relative; z-index: var(--pc-layer-raised); display: flex; flex-shrink: 0; margin-right: calc(var(--pc-space-0-5) - var(--pc-space-2)); }
+.pc-row-actions:has(.pc-menu:not([hidden])) { z-index: var(--pc-layer-menu); }
+.pc-row-actions .pc-btn-icon { width: var(--pc-row-sm); height: var(--pc-row-sm); border-radius: calc(var(--pc-radius) - var(--pc-space-0-5)); }
+.pc-row-actions .pc-btn-ghost:hover:not(:disabled, [aria-disabled="true"]) { background: color-mix(in srgb, var(--foreground) var(--pc-opacity-12), var(--accent)); }
 .pc-table tbody tr[aria-selected="true"] td { background: var(--primary-soft); }
 .pc-table-sort { display: inline-flex; align-items: center; gap: var(--pc-space-1); padding: 0; border: 0; border-radius: var(--pc-radius-sm); background: none; color: inherit; font: inherit; cursor: pointer; }
 .pc-table-sort > svg { width: var(--pc-size-12); height: var(--pc-size-12); }

@@ -9,6 +9,7 @@ Rows of records, usually inside a card.
 - Sorting: a column people can sort holds a `<button class="pc-table-sort">` in its `th`, with `aria-sort` on the `th` (`ascending` or `descending`) and a Phosphor caret, up for A to Z, down for Z to A. Sort one column at a time.
 - Numbers sit on the right (`.pc-table-num`), with their header, in even-width figures. Dates and other quiet values are `.pc-muted`.
 - A row's own actions: a ⋯ ghost icon button (`aria-label`, `aria-haspopup="menu"`) in the last column (`.pc-table-actions`), opening a Dropdown menu. It is 28px (`pc-row-sm`), 2px inside its row, corners 2px tighter; on a lit row, under the pointer it takes the text colour at 12% over `accent`. The header cell names it for screen readers only.
+- The same ⋯ in a list of rows that isn't a table (todo's items, 8px at their sides): wrap it in `.pc-row-actions` at the row's end. It sits 2px inside the row, 28px with corners 2px tighter, above a row link, and its hover is a step darker than `accent`, so it shows on a row that is lit too.
 - Checkboxes and buttons in a row stay clickable over a row link.
 - Empty: one row with a cell spanning all columns holding `.pc-empty` (an `.pc-empty-title` and a `.pc-empty-description` about what will appear).
 - Motion: a row just added (`Pecaiet.enter(row)`, or a Turbo stream that adds it) fades in (a table row can't grow), and a table drawn again shows at once; `Pecaiet.leave(row)` fades one out before it goes (a Turbo remove does it by itself). A sort arrow fades in when the order changes (pecaiet.js).

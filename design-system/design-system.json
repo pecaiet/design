@@ -42,10 +42,10 @@
     "appicons"
   ],
   "lastChange": {
-    "at": "2026-11-06T19:30:00Z",
+    "at": "2026-11-06T20:00:00Z",
     "by": "Alexandru Clapou",
     "via": "Claude Code",
-    "note": "Brought up to design v3.5.0: shadows back where they were taken out, and on the panels docked to the edge. The active sidebar row is a raised pill again (pc-raise; not while focused), and the desktop sidebar sits a little above the page with pc-raise (not inside a Navigation modal). Guidelines, Sidebar item, Navigation and the shadow tokens say so."
+    "note": "Brought up to design v3.5.1: a row's ⋯ outside a table (.pc-row-actions): 28px, 2px inside its row, corners 2px tighter, above a row link, its hover a step darker than accent so it shows on a lit row. Table guidelines say so."
   },
   "layout": "files",
   "libraries": [],
